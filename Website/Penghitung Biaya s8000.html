@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Penghitung Biaya</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#0f141b;
+      --panel:#18212c;
+      --panel2:#0f1720;
+      --garis:#2b394a;
+      --garis2:#334155;
+      --teks:#fff;
+      --muted:#94a3b8;
+      --muted2:#cbd5e1;
+      --accent:#5b9dff;
+      --hijau:#7ee2a8;
+      --merah:#ff6b6b;
+      --bayangan:0 12px 35px rgba(0,0,0,.25);
+      --radius:18px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      font-family:'Inter', Arial, sans-serif;
+      background:linear-gradient(180deg, #0d1117 0%, var(--bg) 100%);
+      color:var(--teks);
+      display:flex;
+      justify-content:center;
+      padding:18px;
+    }
+
+    .app{
+      width:100%;
+      max-width:560px;
+    }
+
+    .card{
+      width:100%;
+      background:var(--panel);
+      border:1px solid var(--garis);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:var(--bayangan);
+    }
+
+    h1{
+      font-size:20px;
+      margin:0 0 12px;
+    }
+
+    .subjudul{
+      font-size:13px;
+      color:var(--muted2);
+      margin-top:-4px;
+      margin-bottom:14px;
+      line-height:1.5;
+    }
+
+    .tabs{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-bottom:12px;
+    }
+
+    .tab-btn{
+      border:none;
+      border-radius:14px;
+      padding:13px 12px;
+      cursor:pointer;
+      font-size:14px;
+      font-weight:700;
+      background:#223042;
+      color:#dbeafe;
+      transition:.2s ease;
+    }
+
+    .tab-btn.active{
+      background:var(--accent);
+      color:white;
+      box-shadow:0 10px 20px rgba(91,157,255,.25);
+    }
+
+    .section{
+      display:none;
+    }
+
+    .section.active{
+      display:block;
+    }
+
+    .box{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      background:var(--panel2);
+      border:1px solid var(--garis2);
+      border-radius:14px;
+      padding:12px;
+      margin-bottom:12px;
+    }
+
+    .box-kiri{
+      flex:1;
+      min-width:0;
+    }
+
+    .box-title{
+      font-size:14px;
+      font-weight:700;
+      margin-bottom:4px;
+      color:#fff;
+    }
+
+    .box-desc{
+      font-size:12px;
+      color:var(--muted2);
+      line-height:1.5;
+    }
+
+    .row{
+      margin-bottom:12px;
+    }
+
+    label{
+      display:block;
+      margin-bottom:6px;
+      font-size:14px;
+      color:var(--muted2);
+    }
+
+    .label-inline{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .hint{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:500;
+    }
+
+    .input-grup{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:8px;
+      align-items:center;
+    }
+
+    input[type="text"]{
+      width:100%;
+      padding:13px;
+      border-radius:12px;
+      border:1px solid var(--garis2);
+      background:var(--panel2);
+      color:#fff;
+      font-size:16px;
+      outline:none;
+    }
+
+    input[type="text"]:focus{
+      border-color:var(--accent);
+    }
+
+    .btn-mini{
+      border:none;
+      border-radius:12px;
+      padding:12px 12px;
+      font-size:13px;
+      cursor:pointer;
+      background:#223042;
+      color:#fff;
+      min-width:80px;
+      white-space:nowrap;
+    }
+
+    .btn{
+      width:100%;
+      border:none;
+      border-radius:12px;
+      padding:13px;
+      font-size:15px;
+      cursor:pointer;
+      margin-top:8px;
+      font-weight:bold;
+    }
+
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+    }
+
+    .btn-secondary{
+      background:#223042;
+      color:#fff;
+    }
+
+    .btn-hitung{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+
+    .btn-satuan-gede{
+      margin-top:6px;
+      width:100%;
+      padding:16px 14px;
+      font-size:18px;
+      font-weight:800;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+
+    .biaya-switch-box{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      background:var(--panel2);
+      border:1px solid var(--garis2);
+      border-radius:14px;
+      padding:13px 14px;
+      margin-bottom:12px;
+    }
+
+    .biaya-switch-info{
+      flex:1;
+      min-width:0;
+    }
+
+    .biaya-switch-title{
+      font-size:14px;
+      font-weight:700;
+      color:#fff;
+      margin-bottom:4px;
+    }
+
+    .biaya-switch-status{
+      font-size:12px;
+      color:var(--muted2);
+      line-height:1.45;
+    }
+
+    .switch-toggle{
+      position:relative;
+      display:inline-block;
+      width:54px;
+      height:30px;
+      margin:0;
+      flex-shrink:0;
+    }
+
+    .switch-toggle input{
+      position:absolute;
+      width:1px;
+      height:1px;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .switch-slider{
+      position:absolute;
+      inset:0;
+      cursor:pointer;
+      background:#3a4656;
+      border:1px solid #536174;
+      border-radius:999px;
+      transition:.25s ease;
+    }
+
+    .switch-slider::before{
+      content:"";
+      position:absolute;
+      width:22px;
+      height:22px;
+      left:3px;
+      top:3px;
+      background:#fff;
+      border-radius:50%;
+      box-shadow:0 2px 7px rgba(0,0,0,.35);
+      transition:.25s ease;
+    }
+
+    .switch-toggle input:checked + .switch-slider{
+      background:var(--accent);
+      border-color:var(--accent);
+      box-shadow:0 0 0 4px rgba(91,157,255,.13);
+    }
+
+    .switch-toggle input:checked + .switch-slider::before{
+      transform:translateX(24px);
+    }
+
+    .switch-toggle input:focus-visible + .switch-slider{
+      outline:3px solid rgba(91,157,255,.3);
+      outline-offset:3px;
+    }
+
+    .hasil{
+      margin-top:14px;
+      background:var(--panel2);
+      border:1px solid var(--garis2);
+      border-radius:14px;
+      padding:14px;
+      line-height:1.7;
+    }
+
+    .hasil-item{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 0;
+      border-bottom:1px solid rgba(148,163,184,.16);
+    }
+
+    .hasil-item:last-child{
+      border-bottom:none;
+      padding-bottom:0;
+    }
+
+    .hasil-kiri{
+      min-width:0;
+      flex:1;
+    }
+
+    .teks{
+      color:var(--muted2);
+      font-size:14px;
+    }
+
+    .angka{
+      font-size:30px;
+      font-weight:bold;
+      color:var(--hijau);
+      word-break:break-word;
+      line-height:1.2;
+      margin-top:2px;
+    }
+
+    .angka.small{
+      font-size:24px;
+    }
+
+    .hasil-aksi{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .preview-wrap{
+      margin-top:14px;
+      background:var(--panel2);
+      border:1px solid var(--garis2);
+      border-radius:14px;
+      padding:14px;
+    }
+
+    .preview-title{
+      font-size:14px;
+      color:var(--muted2);
+      margin-bottom:10px;
+    }
+
+    .preview-box{
+      width:100%;
+      height:220px;
+      border:1px dashed #4b5b70;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(91,157,255,.06), rgba(255,255,255,0));
+      position:relative;
+    }
+
+    .preview-item{
+      min-width:36px;
+      min-height:36px;
+      max-width:90%;
+      max-height:90%;
+      border:2px solid var(--hijau);
+      background:rgba(126,226,168,.12);
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:10px;
+      color:#d9fbe4;
+      font-size:13px;
+      line-height:1.4;
+      overflow:hidden;
+      word-break:break-word;
+    }
+
+    .preview-info{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--muted2);
+      line-height:1.6;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:11px;
+      margin-top:12px;
+      line-height:1.6;
+    }
+
+    .footer a{
+      color:#dbeafe;
+      text-decoration:underline;
+    }
+
+    .warning{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      background:#2a1e16;
+      border:1px solid rgba(255,193,7,.24);
+      color:#ffd6a5;
+      border-radius:14px;
+      padding:12px;
+      margin-bottom:12px;
+      line-height:1.5;
+      font-size:13px;
+    }
+
+    .warning i{
+      color:#ffbf69;
+      margin-top:2px;
+    }
+
+    .calc-panel{
+      background:var(--panel2);
+      border:1px solid var(--garis2);
+      border-radius:14px;
+      padding:14px;
+    }
+
+    .calc-display{
+      background:#0b1118;
+      border:1px solid var(--garis2);
+      border-radius:14px;
+      padding:14px;
+      margin-bottom:12px;
+    }
+
+    .calc-ekspresi{
+      color:var(--muted2);
+      font-size:13px;
+      min-height:20px;
+      word-break:break-all;
+      text-align:right;
+    }
+
+    .calc-hasil{
+      margin-top:6px;
+      color:var(--hijau);
+      font-size:28px;
+      font-weight:700;
+      text-align:right;
+      word-break:break-all;
+    }
+
+    .calc-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:10px;
+    }
+
+    .calc-btn{
+      border:none;
+      border-radius:14px;
+      padding:15px 10px;
+      font-size:18px;
+      font-weight:700;
+      cursor:pointer;
+      background:#223042;
+      color:#fff;
+      min-height:54px;
+    }
+
+    .calc-btn.op{
+      background:#31445b;
+    }
+
+    .calc-btn.ac{
+      background:#5f2b2b;
+    }
+
+    .calc-btn.equals{
+      background:var(--accent);
+    }
+
+    .calc-btn.del{
+      background:#3a3f4d;
+    }
+
+    .calc-wide{
+      grid-column:span 2;
+    }
+
+    .history{
+      margin-top:14px;
+      background:#0b1118;
+      border:1px solid var(--garis2);
+      border-radius:14px;
+      padding:14px;
+    }
+
+    .history-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    .history-title{
+      color:var(--muted2);
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .history-list{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      max-height:220px;
+      overflow:auto;
+    }
+
+    .history-item{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      padding:10px;
+      border-radius:12px;
+      background:#121a24;
+      border:1px solid rgba(148,163,184,.12);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .history-exp{
+      color:#dbeafe;
+      word-break:break-all;
+    }
+
+    .history-res{
+      color:var(--hijau);
+      word-break:break-all;
+    }
+
+    .history-empty{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(2,6,23,.66);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:999;
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-card{
+      width:min(560px, 100%);
+      max-height:85vh;
+      overflow:auto;
+      background:var(--panel);
+      border:1px solid var(--garis);
+      border-radius:18px;
+      box-shadow:0 22px 60px rgba(0,0,0,.5);
+      padding:14px;
+    }
+
+    .modal-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .modal-title{
+      font-size:16px;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .close-btn{
+      border:none;
+      border-radius:12px;
+      padding:10px 12px;
+      background:#223042;
+      color:#fff;
+      cursor:pointer;
+      font-size:14px;
+    }
+
+    @media (max-width:420px){
+      .tabs{
+        grid-template-columns:1fr;
+      }
+
+      .calc-grid{
+        gap:8px;
+      }
+
+      .calc-btn{
+        font-size:16px;
+        padding:14px 8px;
+      }
+
+      .angka{
+        font-size:26px;
+      }
+
+      .btn-mini{
+        min-width:72px;
+      }
+
+      .btn-hitung{
+        font-size:14px;
+      }
+
+      .btn-satuan-gede{
+        font-size:15px;
+        padding:14px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <h1>Penghitung Biaya</h1>
+      <div class="subjudul">Pratinjau berada di bawah hasil, tombol satuan dibuat besar, dan kalkulator dibuat lebih stabil.</div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="biaya">
+          <i class="fa-solid fa-ruler-combined"></i> Tab Biaya
+        </button>
+        <button class="tab-btn" data-tab="kalkulator">
+          <i class="fa-solid fa-calculator"></i> Tab Kalkulator
+        </button>
+      </div>
+
+      <section id="tabBiaya" class="section active">
+        <div class="row">
+          <label for="xInput" class="label-inline">
+            <span>X (lebar)</span>
+            <span id="satuanX">meter</span>
+            <span class="hint">Tekan Enter untuk turun ke Y</span>
+          </label>
+          <div class="input-grup">
+            <input type="text" id="xInput" placeholder="Masukkan lebar" inputmode="decimal" />
+            <button class="btn-mini" data-copy="xInput">
+              <i class="fa-regular fa-copy"></i> Salin
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="yInput" class="label-inline">
+            <span>Y (tinggi)</span>
+            <span id="satuanY">meter</span>
+            <span class="hint">Tekan Enter untuk kembali ke X</span>
+          </label>
+          <div class="input-grup">
+            <input type="text" id="yInput" placeholder="Masukkan tinggi" inputmode="decimal" />
+            <button class="btn-mini" data-copy="yInput">
+              <i class="fa-regular fa-copy"></i> Salin
+            </button>
+          </div>
+        </div>
+
+        <div class="biaya-switch-box">
+          <div class="biaya-switch-info">
+            <div class="biaya-switch-title">Biaya desain +Rp 10.000</div>
+            <div id="labelBiaya" class="biaya-switch-status">Nonaktif</div>
+          </div>
+
+          <label class="switch-toggle" for="toggleBiaya">
+            <input
+              type="checkbox"
+              id="toggleBiaya"
+              role="switch"
+              aria-label="Aktifkan biaya desain"
+            />
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+
+        <div class="row">
+          <button class="btn btn-secondary btn-satuan-gede" id="btnSatuan">
+            <i class="fa-solid fa-right-left"></i> Meter
+          </button>
+        </div>
+
+        <button class="btn btn-primary btn-hitung" id="btnHitung">
+          <i class="fa-solid fa-calculator"></i> Hitung
+        </button>
+
+        <div class="hasil">
+          <div class="hasil-item">
+            <div class="hasil-kiri">
+              <div class="teks">Luas</div>
+              <div class="angka small" id="hasilLuas">0</div>
+            </div>
+            <div class="hasil-aksi">
+              <button class="btn-mini" data-copy-result="luas">
+                <i class="fa-regular fa-copy"></i> Salin
+              </button>
+            </div>
+          </div>
+
+          <div class="hasil-item">
+            <div class="hasil-kiri">
+              <div class="teks">Total biaya</div>
+              <div class="angka" id="hasilHarga">0</div>
+            </div>
+            <div class="hasil-aksi">
+              <button class="btn-mini" data-copy-result="total">
+                <i class="fa-regular fa-copy"></i> Salin
+              </button>
+            </div>
+          </div>
+
+          <div class="teks muted" id="catatan" style="margin-top:8px;">
+            Rumus: harga = X × Y × 40.000
+          </div>
+        </div>
+
+        <div class="preview-wrap">
+          <div class="preview-title">Pratinjau ukuran</div>
+          <div class="preview-box">
+            <div id="previewItem" class="preview-item">Masukkan X dan Y</div>
+          </div>
+          <div class="preview-info" id="previewInfo">Ukuran belum diisi.</div>
+        </div>
+      </section>
+
+      <section id="tabKalkulator" class="section">
+        <div class="warning">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>Peringatan: mungkin kalkulator ini tidak akurat kalau ketinggian.</div>
+        </div>
+
+        <div class="calc-panel">
+          <div class="calc-display">
+            <div class="calc-ekspresi" id="calcEkspresi">0</div>
+            <div class="calc-hasil" id="calcHasil">0</div>
+          </div>
+
+          <div class="calc-grid" id="calcGrid">
+            <button class="calc-btn ac" data-calc="AC">AC</button>
+            <button class="calc-btn del" data-calc="DEL">DEL</button>
+            <button class="calc-btn op" data-calc="÷">÷</button>
+            <button class="calc-btn op" data-calc="×">×</button>
+
+            <button class="calc-btn" data-calc="7">7</button>
+            <button class="calc-btn" data-calc="8">8</button>
+            <button class="calc-btn" data-calc="9">9</button>
+            <button class="calc-btn op" data-calc="-">−</button>
+
+            <button class="calc-btn" data-calc="4">4</button>
+            <button class="calc-btn" data-calc="5">5</button>
+            <button class="calc-btn" data-calc="6">6</button>
+            <button class="calc-btn op" data-calc="+">+</button>
+
+            <button class="calc-btn" data-calc="1">1</button>
+            <button class="calc-btn" data-calc="2">2</button>
+            <button class="calc-btn" data-calc="3">3</button>
+            <button class="calc-btn equals" data-calc="=">=</button>
+
+            <button class="calc-btn calc-wide" data-calc="0">0</button>
+            <button class="calc-btn" data-calc=".">.</button>
+            <button class="calc-btn op" data-calc="(">(</button>
+            <button class="calc-btn op" data-calc=")">)</button>
+          </div>
+
+          <button class="btn btn-secondary" id="btnRiwayatPopup">
+            Buka riwayat kalkulasi
+          </button>
+
+          <div class="history">
+            <div class="history-head">
+              <div class="history-title">Riwayat kalkulasi singkat</div>
+              <button class="btn-mini" id="btnBersihkanRiwayat" style="min-width:auto;padding:9px 12px;">
+                Bersihkan
+              </button>
+            </div>
+            <div id="historyList" class="history-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        <div>Website dibuat oleh AHMAD RIJANI</div>
+        <div>
+          <a href="https://ahmadrijani.github.io/ahmadrijaniofficial/" target="_blank" rel="noopener noreferrer">
+            website ahmad rijani: klik di sini
+          </a>
+        </div>
+        <div>5-8-2026</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalRiwayat" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div class="modal-title">Riwayat kalkulasi</div>
+        <button class="close-btn" id="btnTutupModal">
+          <i class="fa-solid fa-xmark"></i> Tutup
+        </button>
+      </div>
+      <div id="historyPopupList" class="history-list"></div>
+    </div>
+  </div>
+
+  <script>
+    const xInput = document.getElementById("xInput");
+    const yInput = document.getElementById("yInput");
+    const btnSatuan = document.getElementById("btnSatuan");
+    const btnHitung = document.getElementById("btnHitung");
+    const toggleBiaya = document.getElementById("toggleBiaya");
+    const labelBiaya = document.getElementById("labelBiaya");
+    const satuanX = document.getElementById("satuanX");
+    const satuanY = document.getElementById("satuanY");
+    const hasilLuas = document.getElementById("hasilLuas");
+    const hasilHarga = document.getElementById("hasilHarga");
+    const catatan = document.getElementById("catatan");
+    const previewItem = document.getElementById("previewItem");
+    const previewInfo = document.getElementById("previewInfo");
+
+    const tabs = document.querySelectorAll(".tab-btn");
+    const tabBiaya = document.getElementById("tabBiaya");
+    const tabKalkulator = document.getElementById("tabKalkulator");
+
+    const calcEkspresi = document.getElementById("calcEkspresi");
+    const calcHasil = document.getElementById("calcHasil");
+    const calcGrid = document.getElementById("calcGrid");
+    const historyList = document.getElementById("historyList");
+    const historyPopupList = document.getElementById("historyPopupList");
+    const btnBersihkanRiwayat = document.getElementById("btnBersihkanRiwayat");
+    const btnRiwayatPopup = document.getElementById("btnRiwayatPopup");
+    const modalRiwayat = document.getElementById("modalRiwayat");
+    const btnTutupModal = document.getElementById("btnTutupModal");
+
+    let satuanAktif = "m";
+    let ekspresiCalc = "";
+    let hasilCalc = "0";
+    let riwayatCalc = JSON.parse(localStorage.getItem("riwayatKalkulasi") || "[]");
+
+    function formatRupiah(angka) {
+      return new Intl.NumberFormat("id-ID").format(Math.round(angka || 0));
+    }
+
+    function formatAngkaMurni(angka) {
+      if (!isFinite(angka)) return "0";
+      const pembulatan = Math.round(angka);
+      const aman = Math.abs(angka - pembulatan) < 1e-12 ? pembulatan : angka;
+      let teks = String(aman);
+
+      if (teks.includes("e") || teks.includes("E")) {
+        teks = Number(aman).toFixed(10);
+      }
+
+      teks = teks.replace(/\.?0+$/, "");
+      return teks;
+    }
+
+    function bersihkanInputManual(teks) {
+      if (teks === null || teks === undefined) return "";
+
+      let s = String(teks).replace(/[^\d,]/g, "");
+      const bagian = s.split(",");
+
+      if (bagian.length > 1) {
+        s = bagian.shift() + "," + bagian.join("");
+      }
+
+      return s;
+    }
+
+    function parseAngkaIndonesia(teks) {
+      if (!teks) return 0;
+      const bersih = String(teks).replace(/\./g, "").replace(/,/g, ".");
+      const angka = Number(bersih);
+      return Number.isFinite(angka) ? angka : 0;
+    }
+
+    function formatAngkaInput(angka) {
+      if (!isFinite(angka)) return "";
+
+      let teks = Number(angka).toFixed(4);
+      teks = teks.replace(/\.?0+$/, "");
+
+      return teks.replace(".", ",");
+    }
+
+    function bacaNilai(el) {
+      return parseAngkaIndonesia(el.value);
+    }
+
+    function ubahTampilanSatuan() {
+      satuanX.textContent = satuanAktif === "m" ? "meter" : "cm";
+      satuanY.textContent = satuanAktif === "m" ? "meter" : "cm";
+
+      btnSatuan.innerHTML = satuanAktif === "m"
+        ? '<i class="fa-solid fa-right-left"></i> Meter'
+        : '<i class="fa-solid fa-right-left"></i> CM';
+    }
+
+    function updatePreview() {
+      const x = bacaNilai(xInput);
+      const y = bacaNilai(yInput);
+
+      if (x === 0 || y === 0) {
+        previewItem.style.width = "40%";
+        previewItem.style.height = "40%";
+        previewItem.textContent = "Masukkan X dan Y";
+        previewInfo.textContent = "Ukuran belum diisi.";
+        return;
+      }
+
+      const xTampil = xInput.value || "0";
+      const yTampil = yInput.value || "0";
+      const max = Math.max(x, y);
+      const lebarPercent = Math.max(12, (x / max) * 90);
+      const tinggiPercent = Math.max(12, (y / max) * 90);
+
+      previewItem.style.width = lebarPercent + "%";
+      previewItem.style.height = tinggiPercent + "%";
+      previewItem.textContent = `${xTampil} ${satuanAktif} × ${yTampil} ${satuanAktif}`;
+      previewInfo.textContent = `Pratinjau: ${xTampil} ${satuanAktif} × ${yTampil} ${satuanAktif}`;
+    }
+
+    function hitungBiaya() {
+      const x = bacaNilai(xInput);
+      const y = bacaNilai(yInput);
+
+      labelBiaya.textContent = toggleBiaya.checked
+        ? "Aktif · ditambahkan ke total biaya"
+        : "Nonaktif";
+
+      if (x === 0 || y === 0) {
+        hasilLuas.textContent = "0";
+        hasilHarga.textContent = "0";
+        catatan.textContent = "Rumus: harga = X × Y × 40.000";
+        updatePreview();
+        return;
+      }
+
+      let xMeter = x;
+      let yMeter = y;
+
+      if (satuanAktif === "cm") {
+        xMeter = x / 100;
+        yMeter = y / 100;
+      }
+
+      const luasMeter = xMeter * yMeter;
+      const hargaDasar = luasMeter * 40000;
+      const biayaDesain = toggleBiaya.checked ? 10000 : 0;
+      const total = hargaDasar + biayaDesain;
+
+      const luasTampil = satuanAktif === "m"
+        ? luasMeter
+        : luasMeter * 10000;
+
+      hasilLuas.textContent = formatAngkaMurni(luasTampil);
+      hasilHarga.textContent = formatRupiah(total);
+
+      catatan.textContent =
+        "Rumus: harga = X × Y × 40.000" +
+        (toggleBiaya.checked ? " + biaya desain Rp 10.000" : "");
+
+      updatePreview();
+    }
+
+    function ubahSatuanDanKonversi() {
+      const x = bacaNilai(xInput);
+      const y = bacaNilai(yInput);
+
+      if (x !== 0) {
+        const baruX = satuanAktif === "m" ? x * 100 : x / 100;
+        xInput.value = formatAngkaInput(baruX);
+      }
+
+      if (y !== 0) {
+        const baruY = satuanAktif === "m" ? y * 100 : y / 100;
+        yInput.value = formatAngkaInput(baruY);
+      }
+
+      satuanAktif = satuanAktif === "m" ? "cm" : "m";
+      ubahTampilanSatuan();
+      hitungBiaya();
+    }
+
+    async function salinTeks(teks, tombol = null) {
+      try {
+        await navigator.clipboard.writeText(String(teks));
+
+        if (tombol) {
+          const htmlAwal = tombol.innerHTML;
+          tombol.innerHTML = '<i class="fa-solid fa-check"></i> Tersalin';
+
+          setTimeout(() => {
+            tombol.innerHTML = htmlAwal;
+          }, 900);
+        }
+      } catch (err) {
+        alert("Gagal menyalin.");
+      }
+    }
+
+    function updateRiwayat() {
+      localStorage.setItem(
+        "riwayatKalkulasi",
+        JSON.stringify(riwayatCalc.slice(0, 20))
+      );
+
+      if (!riwayatCalc.length) {
+        const kosong = '<div class="history-empty">Belum ada riwayat kalkulasi.</div>';
+        historyList.innerHTML = kosong;
+        historyPopupList.innerHTML = kosong;
+        return;
+      }
+
+      const htmlRiwayat = riwayatCalc.map((item) => `
+        <div class="history-item">
+          <div class="history-exp">${item.exp}</div>
+          <div class="history-res">${item.hasil}</div>
+        </div>
+      `).join("");
+
+      historyList.innerHTML = htmlRiwayat;
+      historyPopupList.innerHTML = htmlRiwayat;
+    }
+
+    function normalisasiEkspresi(input) {
+      return input
+        .replace(/×/g, "*")
+        .replace(/÷/g, "/")
+        .replace(/−/g, "-")
+        .replace(/\s+/g, "");
+    }
+
+    function tokenisasi(exp) {
+      const token = [];
+      let i = 0;
+
+      while (i < exp.length) {
+        const ch = exp[i];
+
+        if (/\d|\./.test(ch)) {
+          let num = ch;
+          i++;
+
+          while (i < exp.length && /[\d.]/.test(exp[i])) {
+            num += exp[i++];
+          }
+
+          if ((num.match(/\./g) || []).length > 1) {
+            throw new Error("angka salah");
+          }
+
+          token.push({
+            type:"num",
+            value:Number(num)
+          });
+
+          continue;
+        }
+
+        if ("+-*/()".includes(ch)) {
+          if (
+            ch === "-" &&
+            (
+              token.length === 0 ||
+              ["op", "lp"].includes(token[token.length - 1].type)
+            )
+          ) {
+            token.push({
+              type:"num",
+              value:0
+            });
+          }
+
+          token.push({
+            type:ch === "(" ? "lp" : ch === ")" ? "rp" : "op",
+            value:ch
+          });
+
+          i++;
+          continue;
+        }
+
+        throw new Error("karakter tidak valid");
+      }
+
+      return token;
+    }
+
+    function precedence(op) {
+      if (op === "+" || op === "-") return 1;
+      if (op === "*" || op === "/") return 2;
+      return 0;
+    }
+
+    function applyOp(a, b, op) {
+      if (op === "+") return a + b;
+      if (op === "-") return a - b;
+      if (op === "*") return a * b;
+
+      if (op === "/") {
+        if (b === 0) throw new Error("bagi nol");
+        return a / b;
+      }
+
+      throw new Error("operator tidak dikenal");
+    }
+
+    function evaluasiEkspresi(exp) {
+      const tokens = tokenisasi(exp);
+      const values = [];
+      const ops = [];
+
+      for (const t of tokens) {
+        if (t.type === "num") {
+          values.push(t.value);
+          continue;
+        }
+
+        if (t.type === "lp") {
+          ops.push("(");
+          continue;
+        }
+
+        if (t.type === "rp") {
+          while (ops.length && ops[ops.length - 1] !== "(") {
+            if (values.length < 2) throw new Error("ekspresi salah");
+
+            const op = ops.pop();
+            const b = values.pop();
+            const a = values.pop();
+
+            values.push(applyOp(a, b, op));
+          }
+
+          if (!ops.length || ops.pop() !== "(") {
+            throw new Error("kurung salah");
+          }
+
+          continue;
+        }
+
+        if (t.type === "op") {
+          while (
+            ops.length &&
+            ops[ops.length - 1] !== "(" &&
+            precedence(ops[ops.length - 1]) >= precedence(t.value)
+          ) {
+            if (values.length < 2) throw new Error("ekspresi salah");
+
+            const op = ops.pop();
+            const b = values.pop();
+            const a = values.pop();
+
+            values.push(applyOp(a, b, op));
+          }
+
+          ops.push(t.value);
+        }
+      }
+
+      while (ops.length) {
+        const op = ops.pop();
+
+        if (op === "(") throw new Error("kurung salah");
+        if (values.length < 2) throw new Error("ekspresi salah");
+
+        const b = values.pop();
+        const a = values.pop();
+
+        values.push(applyOp(a, b, op));
+      }
+
+      if (values.length !== 1) {
+        throw new Error("ekspresi salah");
+      }
+
+      return values[0];
+    }
+
+    function hitungKalkulator() {
+      try {
+        const expr = normalisasiEkspresi(ekspresiCalc);
+
+        if (!expr) {
+          hasilCalc = "0";
+          calcHasil.textContent = hasilCalc;
+          calcEkspresi.textContent = "0";
+          return;
+        }
+
+        const value = evaluasiEkspresi(expr);
+
+        if (!Number.isFinite(value)) {
+          throw new Error("hasil tidak valid");
+        }
+
+        hasilCalc = formatAngkaMurni(value);
+        calcHasil.textContent = hasilCalc;
+        calcEkspresi.textContent = ekspresiCalc || "0";
+      } catch (e) {
+        hasilCalc = "Error";
+        calcHasil.textContent = hasilCalc;
+        calcEkspresi.textContent = ekspresiCalc || "0";
+      }
+    }
+
+    function simpanRiwayat() {
+      const expr = ekspresiCalc.trim();
+
+      if (!expr || hasilCalc === "Error") return;
+
+      riwayatCalc.unshift({
+        exp:expr + " =",
+        hasil:hasilCalc
+      });
+
+      riwayatCalc = riwayatCalc.slice(0, 20);
+      updateRiwayat();
+    }
+
+    function prosesTombolKalkulator(isi) {
+      if (isi === "AC") {
+        ekspresiCalc = "";
+        hasilCalc = "0";
+        calcEkspresi.textContent = "0";
+        calcHasil.textContent = "0";
+        return;
+      }
+
+      if (isi === "DEL") {
+        ekspresiCalc = ekspresiCalc.slice(0, -1);
+        hitungKalkulator();
+        return;
+      }
+
+      if (isi === "=") {
+        const lama = ekspresiCalc.trim();
+        hitungKalkulator();
+
+        if (hasilCalc !== "Error" && lama) {
+          simpanRiwayat();
+          ekspresiCalc = hasilCalc;
+          calcEkspresi.textContent = lama + " =";
+        } else {
+          calcEkspresi.textContent = lama || "0";
+        }
+
+        return;
+      }
+
+      ekspresiCalc += isi;
+      calcEkspresi.textContent = ekspresiCalc || "0";
+      hitungKalkulator();
+    }
+
+    function gantiTab(namaTab) {
+      tabs.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.tab === namaTab);
+      });
+
+      tabBiaya.classList.toggle("active", namaTab === "biaya");
+      tabKalkulator.classList.toggle("active", namaTab === "kalkulator");
+    }
+
+    xInput.addEventListener("input", () => {
+      xInput.value = bersihkanInputManual(xInput.value);
+      hitungBiaya();
+    });
+
+    yInput.addEventListener("input", () => {
+      yInput.value = bersihkanInputManual(yInput.value);
+      hitungBiaya();
+    });
+
+    xInput.addEventListener("blur", () => {
+      xInput.value = bersihkanInputManual(xInput.value);
+      hitungBiaya();
+    });
+
+    yInput.addEventListener("blur", () => {
+      yInput.value = bersihkanInputManual(yInput.value);
+      hitungBiaya();
+    });
+
+    xInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        yInput.focus();
+        yInput.select?.();
+      }
+    });
+
+    yInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        xInput.focus();
+        xInput.select?.();
+      }
+    });
+
+    toggleBiaya.addEventListener("change", hitungBiaya);
+    btnSatuan.addEventListener("click", ubahSatuanDanKonversi);
+    btnHitung.addEventListener("click", hitungBiaya);
+
+    document.querySelectorAll("[data-copy]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-copy");
+        const input = document.getElementById(id);
+        const nilai = String(input.value || "").replace(/[^\d.,-]/g, "");
+
+        if (nilai) {
+          salinTeks(nilai, btn);
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-copy-result]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const jenis = btn.getAttribute("data-copy-result");
+
+        const nilai = jenis === "luas"
+          ? hasilLuas.textContent.replace(/[^\d.,-]/g, "")
+          : hasilHarga.textContent.replace(/[^\d.-]/g, "");
+
+        salinTeks(nilai, btn);
+      });
+    });
+
+    tabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        gantiTab(btn.dataset.tab);
+      });
+    });
+
+    calcGrid.addEventListener("click", (e) => {
+      const tombol = e.target.closest("[data-calc]");
+
+      if (!tombol) return;
+
+      prosesTombolKalkulator(tombol.dataset.calc);
+    });
+
+    btnBersihkanRiwayat.addEventListener("click", () => {
+      riwayatCalc = [];
+      updateRiwayat();
+    });
+
+    function bukaModalRiwayat() {
+      updateRiwayat();
+      modalRiwayat.classList.add("show");
+      modalRiwayat.setAttribute("aria-hidden", "false");
+    }
+
+    function tutupModalRiwayat() {
+      modalRiwayat.classList.remove("show");
+      modalRiwayat.setAttribute("aria-hidden", "true");
+    }
+
+    btnRiwayatPopup.addEventListener("click", bukaModalRiwayat);
+    btnTutupModal.addEventListener("click", tutupModalRiwayat);
+
+    modalRiwayat.addEventListener("click", (e) => {
+      if (e.target === modalRiwayat) {
+        tutupModalRiwayat();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        tutupModalRiwayat();
+      }
+
+      if (!tabKalkulator.classList.contains("active")) return;
+
+      const key = e.key;
+
+      if (/^[0-9]$/.test(key)) {
+        prosesTombolKalkulator(key);
+      } else if (key === "+") {
+        prosesTombolKalkulator("+");
+      } else if (key === "-") {
+        prosesTombolKalkulator("-");
+      } else if (key === "*") {
+        prosesTombolKalkulator("×");
+      } else if (key === "/") {
+        prosesTombolKalkulator("÷");
+      } else if (key === ".") {
+        prosesTombolKalkulator(".");
+      } else if (key === "(") {
+        prosesTombolKalkulator("(");
+      } else if (key === ")") {
+        prosesTombolKalkulator(")");
+      } else if (key === "Enter") {
+        e.preventDefault();
+        prosesTombolKalkulator("=");
+      } else if (key === "Backspace") {
+        prosesTombolKalkulator("DEL");
+      }
+    });
+
+    ubahTampilanSatuan();
+    hitungBiaya();
+    updateRiwayat();
+  </script>
+</body>
+</html>

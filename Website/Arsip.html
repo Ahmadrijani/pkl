@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0d10" />
+  <title>Arsip PKL — Ahmad Rijani</title>
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --panel: #11151a;
+      --panel-2: #151a20;
+      --line: #252c34;
+      --text: #eef2f6;
+      --muted: #9aa4af;
+      --accent: #ffffff;
+      --shadow: 0 12px 30px rgba(0,0,0,.25);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #151a20 0, var(--bg) 38%, #080a0d 100%);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(900px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 22px 0 40px;
+    }
+
+    header { margin-bottom: 22px; }
+    h1 { margin: 0; font-size: clamp(1.35rem, 4vw, 1.8rem); letter-spacing: -.025em; }
+    .section-title { margin: 0 0 12px; }
+    .section-title h2 { margin: 0; font-size: 1.05rem; }
+    .count { color: var(--muted); font-size: .82rem; }
+
+    .grid { display: grid; gap: 9px; }
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .card:hover { border-color: #3a444f; }
+    .thumb-link { flex: 0 0 132px; }
+    .thumb-wrap {
+      position: relative;
+      width: 132px;
+      aspect-ratio: 16 / 9;
+      background: #0a0c0f;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .no-thumb { width: 100%; height: 100%; place-items: center; color: var(--muted); font-size: .9rem; }
+    .play {
+      position: absolute; right: 6px; bottom: 6px; width: 28px; height: 28px; border-radius: 50%;
+      display: grid; place-items: center; background: rgba(0,0,0,.72); border: 1px solid rgba(255,255,255,.16); font-size: .72rem;
+    }
+    .content { min-width: 0; flex: 1; padding: 2px 4px 2px 0; }
+    .title { margin: 0; font-size: .95rem; line-height: 1.28; font-weight: 650; }
+    .watch { display: block; margin-top: 6px; color: var(--muted); font-size: .76rem; }
+
+    .asset-icon {
+      flex: 0 0 132px; width: 132px; aspect-ratio: 16 / 9; border-radius: 8px;
+      display: grid; place-items: center; background: #0a0c0f; color: #c8d0d8;
+      font-size: .8rem; font-weight: 700; letter-spacing: .06em; border: 1px solid #1d232a;
+    }
+    .external { margin-left: auto; color: var(--muted); font-size: .9rem; }
+    .disabled-card { opacity: .5; }
+    footer { margin-top: 22px; color: var(--muted); font-size: .76rem; text-align: center; }
+
+    @media (max-width: 520px) {
+      .container { width: min(100% - 14px, 900px); padding-top: 16px; }
+      .thumb-link { flex-basis: 112px; }
+      .thumb-wrap, .asset-icon { width: 112px; }
+      .title { font-size: .88rem; }
+      .watch { font-size: .72rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header><h1>Arsip PKL Ahmad Rijani</h1></header>
+    <section class="grid" id="videoGrid"></section>
+  </main>
+
+  <script>
+    const items = [
+      { type:'video', id:'RQjHYXaPaZw' },
+      { type:'video', id:'XXUjxQzFJxQ' },
+      { type:'video', id:'48fpnlzdrPc' },
+      { type:'video', id:'VOrxCY01vUI' },
+      { type:'video', id:'uxcgfwLGwv4' },
+      { type:'video', id:'KTBWHINfLoU' },
+      { type:'video', id:'foPxTrJ9oJc' },
+      { type:'video', id:'Uy0S_-om0w8' },
+      { type:'video', id:'Fxjp_o2gHb0' },
+      { type:'video', id:'MT1tUgoyjTY' },
+      { type:'video', id:'ZRoUXq1q5lw', manualTitle:'Dokuemntasi keyboard,dokumentasi Pengujian komponen dan lain lain' },
+      { type:'file', title:'WARKOP SENJA.pdf', href:'https://ahmadrijani.github.io/pkl/file/WARKOP%20SENJA.pdf', icon:'PDF' },
+      { type:'link', title:'Playlist PKL di YouTube', href:'https://www.youtube.com/playlist?list=PLcB9YfP3-OL8', icon:'▶' },
+      { type:'link', title:'Dokumentasi Foto PKL', href:'https://ahmadrijaniofficial.blogspot.com/2026/07/PKL-AHMAD-RIJANI.html', icon:'IMG' },
+      { type:'link', title:'Jurnal PKL — Tidak tersedia', disabled:true, icon:'—' },
+      { type:'link', title:'Laporan PKL versi digital — Belum tersedia', disabled:true, icon:'—' }
+    ];
+
+    const grid=document.getElementById('videoGrid');
+
+    function createVideo(item){
+      const yt=`https://www.youtube.com/watch?v=${item.id}`;
+      return `<article class="card">
+        <a class="thumb-link" href="${yt}" target="_blank" rel="noopener noreferrer">
+          <div class="thumb-wrap">
+            <img class="thumb" src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-thumb');this.remove()">
+            <span class="play">▶</span>
+          </div>
+        </a>
+        <div class="content">
+          <a href="${yt}" target="_blank" rel="noopener noreferrer"><h3 class="title" data-title="${item.id}">${item.manualTitle || 'Memuat judul…'}</h3></a>
+        </div>
+      </article>`;
+    }
+
+    function createFileOrLink(item){
+      const icon = item.icon || 'LINK';
+      if(item.disabled){
+        return `<article class="card disabled-card">
+          <div class="asset-icon">${icon}</div>
+          <div class="content"><h3 class="title">${item.title}</h3></div>
+        </article>`;
+      }
+      return `<article class="card">
+        <a class="thumb-link" href="${item.href}" target="_blank" rel="noopener noreferrer" aria-label="${item.title}">
+          <div class="asset-icon">${icon}</div>
+        </a>
+        <div class="content">
+          <a href="${item.href}" target="_blank" rel="noopener noreferrer"><h3 class="title">${item.title}</h3></a>
+        </div>
+        <span class="external">↗</span>
+      </article>`;
+    }
+
+    grid.innerHTML=items.map(item=>item.type==='video'?createVideo(item):createFileOrLink(item)).join('');
+
+    async function autoTitle(item){
+      if(item.type!=='video' || item.manualTitle) return;
+      const el=document.querySelector(`[data-title="${item.id}"]`);
+      if(!el) return;
+      try{
+        const r=await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${item.id}`)}&format=json`);
+        if(r.ok){ const d=await r.json(); if(d.title) el.textContent=d.title; }
+      }catch(e){}
+    }
+    items.forEach(autoTitle);
+  </script>
+</body>
+</html>

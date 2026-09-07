@@ -1,0 +1,47 @@
+[
+  { "type": "video", "id": "RQjHYXaPaZw" },
+  { "type": "video", "id": "XXUjxQzFJxQ" },
+  { "type": "video", "id": "48fpnlzdrPc" },
+  { "type": "video", "id": "VOrxCY01vUI" },
+  { "type": "video", "id": "uxcgfwLGwv4" },
+  { "type": "video", "id": "KTBWHINfLoU" },
+  { "type": "video", "id": "foPxTrJ9oJc" },
+  { "type": "video", "id": "Uy0S_-om0w8" },
+  { "type": "video", "id": "Fxjp_o2gHb0" },
+  { "type": "video", "id": "MT1tUgoyjTY" },
+  {
+    "type": "video",
+    "id": "ZRoUXq1q5lw",
+    "manualTitle": "Dokuemntasi keyboard,dokumentasi Pengujian komponen dan lain lain"
+  },
+  {
+    "type": "file",
+    "title": "WARKOP SENJA.pdf",
+    "href": "/file/WARKOP%20SENJA.pdf",
+    "icon": "PDF"
+  },
+  {
+    "type": "link",
+    "title": "Playlist PKL di YouTube",
+    "href": "https://www.youtube.com/playlist?list=PLcB9YfP3-OL8",
+    "icon": "▶"
+  },
+  {
+    "type": "link",
+    "title": "Dokumentasi Foto PKL",
+    "href": "https://ahmadrijaniofficial.blogspot.com/2026/07/PKL-AHMAD-RIJANI.html",
+    "icon": "IMG"
+  },
+  {
+    "type": "link",
+    "title": "Jurnal PKL — Tidak tersedia",
+    "disabled": true,
+    "icon": "—"
+  },
+  {
+    "type": "link",
+    "title": "Laporan PKL versi digital — Belum tersedia",
+    "disabled": true,
+    "icon": "—"
+  }
+]

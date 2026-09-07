@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b0d10">
-  <title>Arsip PKL — Ahmad Rijani</title>
+  <title>Dokumentasi Utama — Ahmad Rijani</title>
 
   <style>
     :root {
@@ -14,9 +14,7 @@
       --line: #252c34;
       --text: #eef2f6;
       --muted: #9aa4af;
-      --accent: #ffffff;
-      --shadow: 0 12px 30px rgba(0,0,0,.25);
-      --radius: 16px;
+      --white: #ffffff;
     }
 
     * {
@@ -89,7 +87,6 @@
 
     .section-title h2 {
       font-size: 1.05rem;
-      margin: 0;
     }
 
     .section-title span {
@@ -146,15 +143,6 @@
       display: block;
     }
 
-    .no-thumb {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      place-items: center;
-      color: var(--muted);
-      font-size: .9rem;
-    }
-
     .play {
       position: absolute;
       right: 6px;
@@ -167,6 +155,21 @@
       background: rgba(0,0,0,.72);
       border: 1px solid rgba(255,255,255,.16);
       font-size: .72rem;
+    }
+
+    .asset-icon {
+      flex: 0 0 132px;
+      width: 132px;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: #0a0c0f;
+      color: #c8d0d8;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      border: 1px solid #1d232a;
     }
 
     .content {
@@ -188,21 +191,6 @@
       margin-top: 5px;
       color: var(--muted);
       font-size: .73rem;
-    }
-
-    .asset-icon {
-      flex: 0 0 132px;
-      width: 132px;
-      aspect-ratio: 16 / 9;
-      border-radius: 8px;
-      display: grid;
-      place-items: center;
-      background: #0a0c0f;
-      color: #c8d0d8;
-      font-size: .8rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      border: 1px solid #1d232a;
     }
 
     .external {
@@ -227,6 +215,12 @@
       text-align: center;
     }
 
+    .error strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
     footer {
       margin-top: 30px;
       text-align: center;
@@ -234,7 +228,89 @@
       font-size: .72rem;
     }
 
+
+    /* ============================== */
+    /* JAVASCRIPT WARNING             */
+    /* ============================== */
+
+    .js-warning {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background:
+        radial-gradient(
+          circle at top,
+          #151a20 0,
+          #0b0d10 45%,
+          #080a0d 100%
+        );
+    }
+
+    .js-warning-box {
+      width: min(430px, 100%);
+      padding: 28px;
+      text-align: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
+
+    .js-warning-icon {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .js-warning-box h2 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .js-warning-box p {
+      margin: 8px 0;
+      color: var(--muted);
+      font-size: .85rem;
+      line-height: 1.6;
+    }
+
+    .js-buttons {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .js-button {
+      appearance: none;
+      border: 0;
+      border-radius: 9px;
+      padding: 10px 16px;
+      background: var(--white);
+      color: #111;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: .82rem;
+    }
+
+    .js-button.secondary {
+      background: #1d232a;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .browser-info {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: .7rem;
+    }
+
+
     @media (max-width: 520px) {
+
       .container {
         width: min(100% - 14px, 900px);
         padding-top: 16px;
@@ -260,56 +336,117 @@
       .section {
         margin-top: 24px;
       }
+
     }
   </style>
 </head>
 
+
 <body>
+
+
+  <!--
+    Kalau JavaScript benar-benar mati,
+    bagian ini tetap akan muncul.
+  -->
+
+  <noscript>
+
+    <div class="js-warning">
+
+      <div class="js-warning-box">
+
+        <div class="js-warning-icon">
+          ⚠️
+        </div>
+
+        <h2>
+          JavaScript Tidak Aktif
+        </h2>
+
+        <p>
+          Dokumentasi utama membutuhkan JavaScript
+          untuk membaca data arsip.
+        </p>
+
+        <p>
+          Aktifkan JavaScript pada pengaturan browser,
+          kemudian tekan tombol muat ulang.
+        </p>
+
+        <div class="js-buttons">
+
+          <button
+            class="js-button"
+            onclick="window.location.reload()"
+          >
+            ↻ Muat Ulang
+          </button>
+
+          <button
+            class="js-button secondary"
+            onclick="tampilkanPanduanJS()"
+          >
+            ⚙ Nyalakan JavaScript
+          </button>
+
+        </div>
+
+        <div
+          class="browser-info"
+          id="browserInfo"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </noscript>
+
+
 
   <main class="container">
 
     <header>
-      <h1>Arsip PKL Ahmad Rijani</h1>
+
+      <h1>
+        Dokumentasi Utama Ahmad Rijani
+      </h1>
+
       <div class="subtitle">
-        Dokumentasi kegiatan, video, dan berkas PKL
+        Dokumentasi, video, dan berkas PKL
       </div>
+
     </header>
 
-    <!-- ========================= -->
-    <!-- PUSAT VIDEO PRINTER -->
-    <!-- ========================= -->
 
-    <section class="section" id="printerSection">
-
-      <div class="section-title">
-        <h2>🎥 Pusat Video Printer</h2>
-        <span>Video dokumentasi dan penggunaan printer</span>
-      </div>
-
-      <div class="grid" id="printerGrid">
-        <div class="loading">
-          Memuat video printer…
-        </div>
-      </div>
-
-    </section>
-
-
-    <!-- ========================= -->
-    <!-- ARSIP PKL -->
-    <!-- ========================= -->
-
-    <section class="section" id="pklSection">
+    <section
+      class="section"
+      id="dokumentasiSection"
+    >
 
       <div class="section-title">
-        <h2>📁 Arsip PKL</h2>
-        <span>Dokumentasi dan berkas PKL Ahmad Rijani</span>
+
+        <h2>
+          📁 Dokumentasi Utama
+        </h2>
+
+        <span>
+          Seluruh dokumentasi yang tersedia
+        </span>
+
       </div>
 
-      <div class="grid" id="pklGrid">
+
+      <div
+        class="grid"
+        id="dokumentasiGrid"
+      >
+
         <div class="loading">
-          Memuat arsip PKL…
+          Memuat dokumentasi…
         </div>
+
       </div>
 
     </section>
@@ -322,30 +459,69 @@
   </main>
 
 
+
   <script>
 
-    const printerGrid = document.getElementById('printerGrid');
-    const pklGrid = document.getElementById('pklGrid');
+
+    /* ====================================== */
+    /* KONFIGURASI SUMBER DATA                */
+    /* ====================================== */
+
+    const SUMBER_ARSIP = [
+
+      "/file/arsip.json",
+
+      "./file/arsip.json",
+
+      "https://raw.githubusercontent.com/Ahmadrijani/pkl/refs/heads/main/file/arsip.json"
+
+    ];
 
 
-    /*
-     * Membuat kartu video
-     */
+    const dokumentasiGrid =
+      document.getElementById(
+        "dokumentasiGrid"
+      );
+
+
+
+    /* ====================================== */
+    /* ESCAPE HTML                            */
+    /* ====================================== */
+
+    function escapeHTML(nilai) {
+
+      return String(nilai ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+
+    /* ====================================== */
+    /* VIDEO                                  */
+    /* ====================================== */
+
     function createVideo(item) {
 
-      const yt =
+      const link =
         item.href ||
         `https://www.youtube.com/watch?v=${item.id}`;
 
       const judul =
         item.title ||
         item.manualTitle ||
-        'Memuat judul…';
+        "Memuat judul…";
 
 
       if (item.disabled) {
 
         return `
+
           <article class="card disabled-card">
 
             <div class="asset-icon">
@@ -365,16 +541,19 @@
             </div>
 
           </article>
+
         `;
+
       }
 
 
       return `
+
         <article class="card">
 
           <a
             class="thumb-link"
-            href="${yt}"
+            href="${link}"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="${escapeHTML(judul)}"
@@ -384,12 +563,11 @@
 
               <img
                 class="thumb"
-                src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg"
+                src="https://img.youtube.com/vi/${encodeURIComponent(item.id)}/hqdefault.jpg"
                 alt=""
                 loading="lazy"
                 onerror="
-                  this.parentElement.classList.add('no-thumb');
-                  this.remove();
+                  this.style.display='none';
                 "
               >
 
@@ -405,7 +583,7 @@
           <div class="content">
 
             <a
-              href="${yt}"
+              href="${link}"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -423,23 +601,28 @@
           </div>
 
         </article>
+
       `;
+
     }
 
 
-    /*
-     * Membuat kartu file / link
-     */
+
+    /* ====================================== */
+    /* FILE DAN LINK                          */
+    /* ====================================== */
+
     function createFileOrLink(item) {
 
       const icon =
         item.icon ||
-        'LINK';
+        "LINK";
 
 
       if (item.disabled) {
 
         return `
+
           <article class="card disabled-card">
 
             <div class="asset-icon">
@@ -449,17 +632,23 @@
             <div class="content">
 
               <h3 class="title">
-                ${escapeHTML(item.title || 'Tidak tersedia')}
+                ${escapeHTML(
+                  item.title ||
+                  "Tidak tersedia"
+                )}
               </h3>
 
             </div>
 
           </article>
+
         `;
+
       }
 
 
       return `
+
         <article class="card">
 
           <a
@@ -467,7 +656,10 @@
             href="${item.href}"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="${escapeHTML(item.title || 'Link')}"
+            aria-label="${escapeHTML(
+              item.title ||
+              "Link"
+            )}"
           >
 
             <div class="asset-icon">
@@ -486,7 +678,10 @@
             >
 
               <h3 class="title">
-                ${escapeHTML(item.title || 'Tanpa judul')}
+                ${escapeHTML(
+                  item.title ||
+                  "Tanpa judul"
+                )}
               </h3>
 
             </a>
@@ -499,51 +694,153 @@
           </span>
 
         </article>
+
       `;
-    }
-
-
-    /*
-     * Escape HTML supaya teks dari JSON
-     * tidak langsung menjadi HTML.
-     */
-    function escapeHTML(value) {
-
-      return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
 
     }
 
 
-    /*
-     * Mengambil judul YouTube otomatis
-     * hanya untuk video yang belum mempunyai
-     * title/manualTitle.
-     */
+
+    /* ====================================== */
+    /* MENCARI SUMBER ARSIP                   */
+    /* ====================================== */
+
+    async function ambilArsip() {
+
+      let errorTerakhir = null;
+
+
+      for (
+        const sumber of SUMBER_ARSIP
+      ) {
+
+        try {
+
+          const response =
+            await fetch(
+              sumber,
+              {
+                cache: "no-cache"
+              }
+            );
+
+
+          if (!response.ok) {
+
+            throw new Error(
+              `HTTP ${response.status}`
+            );
+
+          }
+
+
+          const data =
+            await response.json();
+
+
+          if (!Array.isArray(data)) {
+
+            throw new Error(
+              "Format JSON harus berupa array"
+            );
+
+          }
+
+
+          console.log(
+            "Arsip berhasil dimuat dari:",
+            sumber
+          );
+
+
+          return data;
+
+
+        } catch (error) {
+
+          console.warn(
+            "Sumber gagal:",
+            sumber,
+            error
+          );
+
+          errorTerakhir = error;
+
+        }
+
+      }
+
+
+      throw errorTerakhir ||
+        new Error(
+          "Semua sumber arsip gagal"
+        );
+
+    }
+
+
+
+    /* ====================================== */
+    /* RENDER                                 */
+    /* ====================================== */
+
+    function renderDokumentasi(items) {
+
+      if (
+        !items ||
+        items.length === 0
+      ) {
+
+        dokumentasiGrid.innerHTML = `
+
+          <div class="empty">
+            Belum ada dokumentasi.
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      dokumentasiGrid.innerHTML =
+        items
+          .map(item => {
+
+            if (
+              item.type === "video"
+            ) {
+
+              return createVideo(item);
+
+            }
+
+
+            return createFileOrLink(item);
+
+          })
+          .join("");
+
+    }
+
+
+
+    /* ====================================== */
+    /* AUTO JUDUL YOUTUBE                     */
+    /* ====================================== */
+
     async function autoTitle(item) {
 
       if (
-        item.type !== 'video' ||
+        item.type !== "video" ||
         item.title ||
         item.manualTitle ||
         item.disabled
       ) {
+
         return;
-      }
 
-
-      const el =
-        document.querySelector(
-          `[data-title="${item.id}"]`
-        );
-
-
-      if (!el) {
-        return;
       }
 
 
@@ -566,179 +863,156 @@
           await response.json();
 
 
-        if (data.title) {
-          el.textContent = data.title;
+        const elemen =
+          document.querySelector(
+            `[data-title="${item.id}"]`
+          );
+
+
+        if (
+          elemen &&
+          data.title
+        ) {
+
+          elemen.textContent =
+            data.title;
+
         }
 
 
       } catch (error) {
 
-        el.textContent =
-          'Judul video tidak tersedia';
+        console.warn(
+          "Judul YouTube gagal diambil:",
+          item.id
+        );
 
       }
 
     }
 
 
-    /*
-     * Memuat arsip.json
-     */
+
+    /* ====================================== */
+    /* ERROR                                  */
+    /* ====================================== */
+
+    function tampilkanError(error) {
+
+      dokumentasiGrid.innerHTML = `
+
+        <div class="error">
+
+          <strong>
+            ⚠️ Gagal memuat dokumentasi
+          </strong>
+
+          <div>
+            Semua sumber arsip tidak dapat diakses.
+          </div>
+
+          <div style="margin-top:8px;">
+            Silakan periksa koneksi internet,
+            kemudian muat ulang halaman.
+          </div>
+
+          <div style="margin-top:14px;">
+
+            <button
+              class="js-button"
+              onclick="window.location.reload()"
+            >
+              ↻ Coba Lagi
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+      console.error(
+        "Arsip gagal dimuat:",
+        error
+      );
+
+    }
+
+
+
+    /* ====================================== */
+    /* LOAD UTAMA                             */
+    /* ====================================== */
+
     async function loadArchive() {
 
       try {
 
-        const response =
-          await fetch(
-            '/file/arsip.json',
-            {
-              cache: 'no-cache'
-            }
-          );
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            `HTTP ${response.status}`
-          );
-
-        }
-
-
         const items =
-          await response.json();
+          await ambilArsip();
 
 
-        if (!Array.isArray(items)) {
-
-          throw new Error(
-            'Format arsip.json tidak valid'
-          );
-
-        }
+        renderDokumentasi(items);
 
 
         /*
-         * Item printer
+         * Judul YouTube otomatis.
          */
-        const printerItems =
-          items.filter(
-            item =>
-              item.category === 'printer'
-          );
-
-
-        /*
-         * Item PKL
-         *
-         * Semua item yang bukan printer
-         * akan masuk ke bagian arsip PKL.
-         */
-        const pklItems =
-          items.filter(
-            item =>
-              item.category !== 'printer'
-          );
-
-
-        /*
-         * Render printer
-         */
-        if (printerItems.length === 0) {
-
-          printerGrid.innerHTML = `
-            <div class="empty">
-              Belum ada video printer.
-            </div>
-          `;
-
-        } else {
-
-          printerGrid.innerHTML =
-            printerItems
-              .map(item => {
-
-                if (item.type === 'video') {
-                  return createVideo(item);
-                }
-
-                return createFileOrLink(item);
-
-              })
-              .join('');
-
-        }
-
-
-        /*
-         * Render arsip PKL
-         */
-        if (pklItems.length === 0) {
-
-          pklGrid.innerHTML = `
-            <div class="empty">
-              Belum ada arsip PKL.
-            </div>
-          `;
-
-        } else {
-
-          pklGrid.innerHTML =
-            pklItems
-              .map(item => {
-
-                if (item.type === 'video') {
-                  return createVideo(item);
-                }
-
-                return createFileOrLink(item);
-
-              })
-              .join('');
-
-        }
-
-
-        /*
-         * Coba mengambil judul YouTube
-         * untuk video yang tidak mempunyai
-         * title di JSON.
-         */
-        items.forEach(autoTitle);
+        items.forEach(
+          item => autoTitle(item)
+        );
 
 
       } catch (error) {
 
-        console.error(
-          'Gagal memuat arsip:',
-          error
-        );
-
-
-        printerGrid.innerHTML = `
-          <div class="error">
-            Gagal memuat
-            <b>/file/arsip.json</b>
-          </div>
-        `;
-
-
-        pklGrid.innerHTML = `
-          <div class="error">
-            Gagal memuat
-            <b>/file/arsip.json</b>
-          </div>
-        `;
+        tampilkanError(error);
 
       }
 
     }
 
 
-    /*
-     * Jalankan
-     */
+
+    /* ====================================== */
+    /* PANDUAN JAVASCRIPT                     */
+    /* ====================================== */
+
+    function tampilkanPanduanJS() {
+
+      const pesan = `
+
+JavaScript tidak dapat dinyalakan
+langsung oleh sebuah halaman web.
+
+Silakan buka pengaturan browser,
+aktifkan JavaScript untuk situs ini,
+kemudian kembali ke halaman ini
+dan tekan "Muat Ulang".
+
+Chrome / Chromium:
+Pengaturan → Privasi dan keamanan
+→ Setelan situs → JavaScript
+
+Edge:
+Pengaturan → Cookie dan izin situs
+→ JavaScript
+
+Firefox:
+JavaScript biasanya aktif secara default.
+
+      `;
+
+
+      alert(pesan);
+
+    }
+
+
+
+    /* ====================================== */
+    /* START                                  */
+    /* ====================================== */
+
     loadArchive();
 
   </script>

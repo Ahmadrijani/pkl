@@ -1,14 +1,77 @@
 [
-  { "type": "video", "id": "RQjHYXaPaZw" },
-  { "type": "video", "id": "XXUjxQzFJxQ" },
-  { "type": "video", "id": "48fpnlzdrPc" },
-  { "type": "video", "id": "VOrxCY01vUI" },
-  { "type": "video", "id": "uxcgfwLGwv4" },
-  { "type": "video", "id": "KTBWHINfLoU" },
-  { "type": "video", "id": "foPxTrJ9oJc" },
-  { "type": "video", "id": "Uy0S_-om0w8" },
-  { "type": "video", "id": "Fxjp_o2gHb0" },
-  { "type": "video", "id": "MT1tUgoyjTY" },
+  {
+    "type": "video",
+    "id": "foPxTrJ9oJc",
+    "title": "⚙️ Cara Setting",
+    "href": "https://youtu.be/foPxTrJ9oJc?si=RynqC_drWScPbWvw&t=1670"
+  },
+  {
+    "type": "video",
+    "id": "foPxTrJ9oJc",
+    "title": "🧹 Membersihkan Printer",
+    "href": "https://youtu.be/foPxTrJ9oJc?si=f2X2YL4cvaKbAt4J"
+  },
+  {
+    "type": "video",
+    "id": "foPxTrJ9oJc",
+    "title": "🖨️ Proses Mencetak & Hidupkan Kipas",
+    "href": "https://youtu.be/foPxTrJ9oJc?si=EXHob4TZ-hRkncJV&t=1930"
+  },
+  {
+    "type": "video",
+    "id": "foPxTrJ9oJc",
+    "title": "✂️ Proses Ngegunting (Link belum diisi)",
+    "href": "#",
+    "disabled": true
+  },
+  {
+    "type": "video",
+    "id": "foPxTrJ9oJc",
+    "title": "📍 Origin X (Link belum diisi)",
+    "href": "#",
+    "disabled": true
+  },
+
+  {
+    "type": "video",
+    "id": "RQjHYXaPaZw"
+  },
+  {
+    "type": "video",
+    "id": "XXUjxQzFJxQ"
+  },
+  {
+    "type": "video",
+    "id": "48fpnlzdrPc"
+  },
+  {
+    "type": "video",
+    "id": "VOrxCY01vUI"
+  },
+  {
+    "type": "video",
+    "id": "uxcgfwLGwv4"
+  },
+  {
+    "type": "video",
+    "id": "KTBWHINfLoU"
+  },
+  {
+    "type": "video",
+    "id": "foPxTrJ9oJc"
+  },
+  {
+    "type": "video",
+    "id": "Uy0S_-om0w8"
+  },
+  {
+    "type": "video",
+    "id": "Fxjp_o2gHb0"
+  },
+  {
+    "type": "video",
+    "id": "MT1tUgoyjTY"
+  },
   {
     "type": "video",
     "id": "ZRoUXq1q5lw",

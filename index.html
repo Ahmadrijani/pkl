@@ -2,12 +2,23 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0d10">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <title>Dokumentasi Utama — Ahmad Rijani</title>
+  <meta
+    name="theme-color"
+    content="#0b0d10"
+  >
+
+  <title>
+    Dokumentasi Utama — Ahmad Rijani
+  </title>
+
 
   <style>
+
     :root {
       --bg: #0b0d10;
       --panel: #11151a;
@@ -18,15 +29,18 @@
       --white: #ffffff;
     }
 
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
+
 
     body {
       min-height: 100vh;
@@ -52,20 +66,37 @@
       line-height: 1.5;
     }
 
+
     a {
       color: inherit;
       text-decoration: none;
     }
 
+
     button {
       font-family: inherit;
     }
 
+
+    /* ============================== */
+    /* CONTAINER                      */
+    /* ============================== */
+
     .container {
-      width: min(900px, calc(100% - 24px));
+      width:
+        min(
+          900px,
+          calc(100% - 24px)
+        );
+
       margin: 0 auto;
-      padding: 22px 0 40px;
+
+      padding:
+        22px
+        0
+        40px;
     }
+
 
     /* ============================== */
     /* HEADER                         */
@@ -75,16 +106,26 @@
       margin-bottom: 26px;
     }
 
+
     h1 {
-      font-size: clamp(1.35rem, 4vw, 1.8rem);
+      font-size:
+        clamp(
+          1.35rem,
+          4vw,
+          1.8rem
+        );
+
       letter-spacing: -.025em;
+
       margin-bottom: 5px;
     }
+
 
     .subtitle {
       color: var(--muted);
       font-size: .82rem;
     }
+
 
     /* ============================== */
     /* SECTION                        */
@@ -94,25 +135,28 @@
       margin-top: 28px;
     }
 
-    .section:first-of-type {
-      margin-top: 0;
-    }
 
     .section-title {
       margin-bottom: 12px;
     }
+
 
     .section-title h2 {
       font-size: 1.05rem;
       margin: 0;
     }
 
+
     .section-title span {
       display: block;
+
       color: var(--muted);
+
       font-size: .76rem;
+
       margin-top: 2px;
     }
+
 
     /* ============================== */
     /* GRID                           */
@@ -123,18 +167,22 @@
       gap: 9px;
     }
 
+
     /* ============================== */
     /* CARD                           */
     /* ============================== */
 
     .card {
       display: flex;
+
       align-items: center;
+
       gap: 12px;
 
       padding: 8px;
 
-      border: 1px solid var(--line);
+      border:
+        1px solid var(--line);
 
       background: var(--panel);
 
@@ -148,24 +196,32 @@
         background .2s ease;
     }
 
+
     .card:hover {
       border-color: #3a444f;
+
       background: var(--panel-2);
-      transform: translateY(-1px);
+
+      transform:
+        translateY(-1px);
     }
+
 
     /* ============================== */
     /* THUMBNAIL                      */
     /* ============================== */
 
     .thumb-link {
-      flex: 0 0 132px;
+      flex:
+        0 0 132px;
     }
+
 
     .thumb-wrap {
       position: relative;
 
       width: 132px;
+
       aspect-ratio: 16 / 9;
 
       background: #0a0c0f;
@@ -174,8 +230,10 @@
 
       overflow: hidden;
 
-      border: 1px solid #1d232a;
+      border:
+        1px solid #1d232a;
     }
+
 
     .thumb {
       width: 100%;
@@ -185,6 +243,7 @@
 
       display: block;
     }
+
 
     .play {
       position: absolute;
@@ -198,15 +257,19 @@
       border-radius: 50%;
 
       display: grid;
+
       place-items: center;
 
-      background: rgba(0,0,0,.72);
+      background:
+        rgba(0,0,0,.72);
 
       border:
-        1px solid rgba(255,255,255,.16);
+        1px solid
+        rgba(255,255,255,.16);
 
       font-size: .72rem;
     }
+
 
     /* ============================== */
     /* CONTENT                        */
@@ -224,6 +287,7 @@
         0;
     }
 
+
     .title {
       margin: 0;
 
@@ -236,6 +300,7 @@
       word-break: break-word;
     }
 
+
     .watch {
       display: block;
 
@@ -246,8 +311,14 @@
       font-size: .73rem;
     }
 
+
+    .loading-title {
+      color: var(--muted);
+    }
+
+
     /* ============================== */
-    /* FILE / LINK ICON               */
+    /* FILE / LINK                    */
     /* ============================== */
 
     .asset-icon {
@@ -261,6 +332,7 @@
       border-radius: 8px;
 
       display: grid;
+
       place-items: center;
 
       background: #0a0c0f;
@@ -277,6 +349,7 @@
         1px solid #1d232a;
     }
 
+
     .external {
       margin-left: auto;
 
@@ -287,6 +360,7 @@
       padding-right: 4px;
     }
 
+
     /* ============================== */
     /* DISABLED                       */
     /* ============================== */
@@ -295,8 +369,9 @@
       opacity: .5;
     }
 
+
     /* ============================== */
-    /* LOADING / ERROR                */
+    /* STATUS                         */
     /* ============================== */
 
     .loading,
@@ -316,6 +391,7 @@
       text-align: center;
     }
 
+
     .error strong {
       display: block;
 
@@ -324,22 +400,9 @@
       margin-bottom: 6px;
     }
 
-    /* ============================== */
-    /* FOOTER                         */
-    /* ============================== */
-
-    footer {
-      margin-top: 30px;
-
-      text-align: center;
-
-      color: var(--muted);
-
-      font-size: .72rem;
-    }
 
     /* ============================== */
-    /* NOSCRIPT                       */
+    /* JAVASCRIPT WARNING             */
     /* ============================== */
 
     .js-warning {
@@ -364,8 +427,13 @@
         );
     }
 
+
     .js-warning-box {
-      width: min(430px, 100%);
+      width:
+        min(
+          430px,
+          100%
+        );
 
       padding: 28px;
 
@@ -379,8 +447,10 @@
       border-radius: 18px;
 
       box-shadow:
-        0 20px 50px rgba(0,0,0,.35);
+        0 20px 50px
+        rgba(0,0,0,.35);
     }
+
 
     .js-warning-icon {
       font-size: 42px;
@@ -388,11 +458,13 @@
       margin-bottom: 12px;
     }
 
+
     .js-warning-box h2 {
       margin-bottom: 10px;
 
       font-size: 1.2rem;
     }
+
 
     .js-warning-box p {
       margin: 8px 0;
@@ -403,6 +475,7 @@
 
       line-height: 1.6;
     }
+
 
     .js-buttons {
       display: flex;
@@ -416,6 +489,7 @@
       margin-top: 18px;
     }
 
+
     .js-button {
       appearance: none;
 
@@ -423,7 +497,9 @@
 
       border-radius: 9px;
 
-      padding: 10px 16px;
+      padding:
+        10px
+        16px;
 
       background: var(--white);
 
@@ -436,6 +512,7 @@
       font-size: .82rem;
     }
 
+
     .js-button.secondary {
       background: #1d232a;
 
@@ -444,6 +521,22 @@
       border:
         1px solid var(--line);
     }
+
+
+    /* ============================== */
+    /* FOOTER                         */
+    /* ============================== */
+
+    footer {
+      margin-top: 30px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: .72rem;
+    }
+
 
     /* ============================== */
     /* MOBILE                         */
@@ -461,32 +554,40 @@
         padding-top: 16px;
       }
 
+
       .thumb-link {
         flex-basis: 112px;
       }
+
 
       .thumb-wrap,
       .asset-icon {
         width: 112px;
       }
 
+
       .title {
         font-size: .88rem;
       }
 
+
       .watch {
-        font-size: .7rem;
+        font-size: .70rem;
       }
+
 
       .section {
         margin-top: 24px;
       }
+
     }
+
   </style>
 </head>
 
 
 <body>
+
 
   <!-- ================================= -->
   <!-- JAVASCRIPT MATI                   -->
@@ -502,19 +603,23 @@
           ⚠️
         </div>
 
+
         <h2>
           JavaScript Tidak Aktif
         </h2>
 
+
         <p>
           Dokumentasi utama membutuhkan
-          JavaScript untuk membaca data arsip.
+          JavaScript untuk membaca arsip.
         </p>
+
 
         <p>
           Aktifkan JavaScript pada pengaturan
           browser, kemudian muat ulang halaman.
         </p>
+
 
         <div class="js-buttons">
 
@@ -526,13 +631,17 @@
             ↻ Muat Ulang
           </button>
 
+
           <button
             class="js-button secondary"
             type="button"
-            onclick="alert(
-              'JavaScript tidak dapat dinyalakan otomatis oleh halaman web.\\n\\n' +
-              'Buka pengaturan browser dan aktifkan JavaScript untuk situs ini, lalu kembali ke halaman dan tekan Muat Ulang.'
-            )"
+            onclick="
+              alert(
+                'JavaScript tidak dapat dinyalakan otomatis oleh halaman web.\\n\\n' +
+                'Buka pengaturan browser dan aktifkan JavaScript untuk situs ini, ' +
+                'kemudian kembali ke halaman dan tekan Muat Ulang.'
+              )
+            "
           >
             ⚙ Nyalakan JavaScript
           </button>
@@ -546,17 +655,20 @@
   </noscript>
 
 
+
   <!-- ================================= -->
   <!-- KONTEN                           -->
   <!-- ================================= -->
 
   <main class="container">
 
+
     <header>
 
       <h1>
         Dokumentasi Utama Ahmad Rijani
       </h1>
+
 
       <div class="subtitle">
         Dokumentasi, video, dan berkas PKL
@@ -565,14 +677,12 @@
     </header>
 
 
-    <!-- ================================= -->
-    <!-- DOKUMENTASI UTAMA                 -->
-    <!-- ================================= -->
 
     <section
       class="section"
       id="dokumentasiSection"
     >
+
 
       <div class="section-title">
 
@@ -580,11 +690,13 @@
           📁 Dokumentasi Utama
         </h2>
 
+
         <span>
           Seluruh dokumentasi yang tersedia
         </span>
 
       </div>
+
 
 
       <div
@@ -598,12 +710,15 @@
 
       </div>
 
+
     </section>
+
 
 
     <footer>
       Arsip PKL Ahmad Rijani
     </footer>
+
 
   </main>
 
@@ -611,20 +726,10 @@
 
   <script>
 
-    /*
-     * ==========================================
-     * SUMBER DATA
-     * ==========================================
-     *
-     * Sistem mencoba sumber secara berurutan.
-     *
-     * 1. /file/arsip.json
-     * 2. ./file/arsip.json
-     * 3. GitHub Raw
-     *
-     * Jika sumber pertama gagal,
-     * otomatis mencoba sumber berikutnya.
-     */
+
+    /* ========================================= */
+    /* SUMBER ARSIP                              */
+    /* ========================================= */
 
     const SUMBER_ARSIP = [
 
@@ -644,11 +749,9 @@
 
 
 
-    /*
-     * ==========================================
-     * ESCAPE HTML
-     * ==========================================
-     */
+    /* ========================================= */
+    /* ESCAPE HTML                               */
+    /* ========================================= */
 
     function escapeHTML(nilai) {
 
@@ -678,35 +781,119 @@
 
 
 
-    /*
-     * ==========================================
-     * BUAT VIDEO
-     * ==========================================
-     */
+    /* ========================================= */
+    /* VIDEO ID                                   */
+    /* ========================================= */
 
-    function createVideo(item) {
+    function getVideoId(item) {
+
+      if (item.id) {
+        return item.id;
+      }
+
+
+      if (!item.href) {
+        return "";
+      }
+
+
+      try {
+
+        const url =
+          new URL(
+            item.href
+          );
+
+
+        if (
+          url.hostname === "youtu.be"
+        ) {
+
+          return url.pathname
+            .replace("/", "")
+            .trim();
+
+        }
+
+
+        if (
+          url.hostname.includes(
+            "youtube.com"
+          )
+        ) {
+
+          return (
+            url.searchParams.get(
+              "v"
+            ) || ""
+          );
+
+        }
+
+      } catch (error) {
+
+        console.warn(
+          "URL video tidak valid:",
+          item.href
+        );
+
+      }
+
+
+      return "";
+
+    }
+
+
+
+    /* ========================================= */
+    /* BUAT VIDEO                                 */
+    /* ========================================= */
+
+    function createVideo(
+      item,
+      index
+    ) {
+
+      const videoId =
+        getVideoId(item);
+
 
       const link =
         item.href ||
-        `https://www.youtube.com/watch?v=${encodeURIComponent(item.id)}`;
+        (
+          videoId
+            ? `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`
+            : "#"
+        );
+
+
+      const sudahAdaJudul =
+        Boolean(
+          item.title ||
+          item.manualTitle
+        );
 
 
       const judul =
         item.title ||
         item.manualTitle ||
-        "Tanpa judul";
+        "Memuat judul…";
 
 
-      /*
-       * Video belum tersedia
-       */
+      /* -------------------------------------- */
+      /* VIDEO DISABLED                         */
+      /* -------------------------------------- */
 
       if (item.disabled) {
 
         return `
 
           <article
-            class="card disabled-card"
+            class="
+              card
+              disabled-card
+            "
           >
 
             <div class="asset-icon">
@@ -719,6 +906,7 @@
               <h3 class="title">
                 ${escapeHTML(judul)}
               </h3>
+
 
               <span class="watch">
                 Link belum tersedia
@@ -733,9 +921,48 @@
       }
 
 
-      /*
-       * Video normal
-       */
+      /* -------------------------------------- */
+      /* VIDEO TANPA ID                         */
+      /* -------------------------------------- */
+
+      if (!videoId) {
+
+        return `
+
+          <article class="card">
+
+            <div class="asset-icon">
+              VIDEO
+            </div>
+
+
+            <div class="content">
+
+              <h3 class="title">
+                ${escapeHTML(
+                  judul === "Memuat judul…"
+                    ? "Video tidak valid"
+                    : judul
+                )}
+              </h3>
+
+
+              <span class="watch">
+                ID video tidak ditemukan
+              </span>
+
+            </div>
+
+          </article>
+
+        `;
+
+      }
+
+
+      /* -------------------------------------- */
+      /* VIDEO NORMAL                           */
+      /* -------------------------------------- */
 
       return `
 
@@ -753,13 +980,14 @@
 
               <img
                 class="thumb"
-                src="https://img.youtube.com/vi/${encodeURIComponent(item.id)}/hqdefault.jpg"
+                src="https://img.youtube.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg"
                 alt=""
                 loading="lazy"
                 onerror="
                   this.style.display='none';
                 "
               >
+
 
               <span class="play">
                 ▶
@@ -770,6 +998,7 @@
           </a>
 
 
+
           <div class="content">
 
             <a
@@ -778,9 +1007,19 @@
               rel="noopener noreferrer"
             >
 
-              <h3 class="title">
+              <h3
+                class="
+                  title
+                  ${sudahAdaJudul
+                    ? ""
+                    : "loading-title"
+                  }
+                "
+                data-title-index="${index}"
+              >
                 ${escapeHTML(judul)}
               </h3>
+
 
               <span class="watch">
                 Tonton di YouTube ↗
@@ -798,13 +1037,13 @@
 
 
 
-    /*
-     * ==========================================
-     * BUAT FILE / LINK
-     * ==========================================
-     */
+    /* ========================================= */
+    /* FILE / LINK                               */
+    /* ========================================= */
 
-    function createFileOrLink(item) {
+    function createFileOrLink(
+      item
+    ) {
 
       const icon =
         item.icon ||
@@ -816,16 +1055,15 @@
         "Tanpa judul";
 
 
-      /*
-       * Item disabled
-       */
-
       if (item.disabled) {
 
         return `
 
           <article
-            class="card disabled-card"
+            class="
+              card
+              disabled-card
+            "
           >
 
             <div class="asset-icon">
@@ -847,10 +1085,6 @@
 
       }
 
-
-      /*
-       * Item normal
-       */
 
       return `
 
@@ -883,6 +1117,7 @@
                 ${escapeHTML(judul)}
               </h3>
 
+
               <span class="watch">
                 Buka dokumentasi ↗
               </span>
@@ -904,15 +1139,14 @@
 
 
 
-    /*
-     * ==========================================
-     * AMBIL DATA DARI SEMUA SUMBER
-     * ==========================================
-     */
+    /* ========================================= */
+    /* AMBIL ARSIP                              */
+    /* ========================================= */
 
     async function ambilArsip() {
 
-      let errorTerakhir = null;
+      let errorTerakhir =
+        null;
 
 
       for (
@@ -923,7 +1157,7 @@
         try {
 
           console.log(
-            "Mencoba sumber:",
+            "Mencoba:",
             sumber
           );
 
@@ -955,20 +1189,19 @@
           ) {
 
             throw new Error(
-              "Format arsip.json tidak valid"
+              "arsip.json harus berupa array"
             );
 
           }
 
 
           console.log(
-            "Arsip berhasil dimuat dari:",
+            "Arsip berhasil:",
             sumber
           );
 
 
           return data;
-
 
         } catch (error) {
 
@@ -990,7 +1223,7 @@
       throw (
         errorTerakhir ||
         new Error(
-          "Semua sumber arsip gagal"
+          "Semua sumber gagal"
         )
       );
 
@@ -998,13 +1231,133 @@
 
 
 
-    /*
-     * ==========================================
-     * RENDER DOKUMENTASI
-     * ==========================================
-     */
+    /* ========================================= */
+    /* AMBIL JUDUL YOUTUBE                       */
+    /* ========================================= */
 
-    function renderDokumentasi(items) {
+    async function ambilJudulYouTube(
+      item,
+      index
+    ) {
+
+      /*
+       * Kalau JSON sudah punya title,
+       * tidak perlu meminta YouTube.
+       */
+
+      if (
+        item.title ||
+        item.manualTitle ||
+        item.disabled
+      ) {
+
+        return;
+
+      }
+
+
+      const videoId =
+        getVideoId(item);
+
+
+      if (!videoId) {
+        return;
+      }
+
+
+      const elemen =
+        document.querySelector(
+          `[data-title-index="${index}"]`
+        );
+
+
+      if (!elemen) {
+        return;
+      }
+
+
+      try {
+
+        const youtubeUrl =
+          `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`;
+
+
+        const endpoint =
+          `https://www.youtube.com/oembed?url=${encodeURIComponent(youtubeUrl)}&format=json`;
+
+
+        const response =
+          await fetch(
+            endpoint
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            `HTTP ${response.status}`
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          data &&
+          data.title
+        ) {
+
+          elemen.textContent =
+            data.title;
+
+          elemen.classList.remove(
+            "loading-title"
+          );
+
+        } else {
+
+          elemen.textContent =
+            "Judul tidak tersedia";
+
+          elemen.classList.remove(
+            "loading-title"
+          );
+
+        }
+
+      } catch (error) {
+
+        console.warn(
+          "Gagal mengambil judul YouTube:",
+          videoId,
+          error
+        );
+
+
+        elemen.textContent =
+          "Judul tidak tersedia";
+
+
+        elemen.classList.remove(
+          "loading-title"
+        );
+
+      }
+
+    }
+
+
+
+    /* ========================================= */
+    /* RENDER                                    */
+    /* ========================================= */
+
+    function renderDokumentasi(
+      items
+    ) {
 
       if (
         !items ||
@@ -1027,14 +1380,18 @@
       dokumentasiGrid.innerHTML =
         items
           .map(
-            item => {
+            (
+              item,
+              index
+            ) => {
 
               if (
                 item.type === "video"
               ) {
 
                 return createVideo(
-                  item
+                  item,
+                  index
                 );
 
               }
@@ -1048,22 +1405,47 @@
           )
           .join("");
 
+
+      /*
+       * Setelah semua kartu dibuat,
+       * ambil judul video yang belum
+       * mempunyai title.
+       */
+
+      items.forEach(
+        (
+          item,
+          index
+        ) => {
+
+          if (
+            item.type === "video"
+          ) {
+
+            ambilJudulYouTube(
+              item,
+              index
+            );
+
+          }
+
+        }
+      );
+
     }
 
 
 
-    /*
-     * ==========================================
-     * ERROR
-     * ==========================================
-     */
+    /* ========================================= */
+    /* ERROR                                     */
+    /* ========================================= */
 
     function tampilkanError(
       error
     ) {
 
       console.error(
-        "Gagal memuat arsip:",
+        "Gagal memuat dokumentasi:",
         error
       );
 
@@ -1076,19 +1458,22 @@
             ⚠️ Gagal memuat dokumentasi
           </strong>
 
+
           <div>
             Semua sumber arsip tidak dapat
             diakses.
           </div>
+
 
           <div
             style="
               margin-top:8px;
             "
           >
-            Silakan periksa koneksi internet
+            Periksa koneksi internet,
             kemudian coba lagi.
           </div>
+
 
           <div
             style="
@@ -1114,11 +1499,9 @@
 
 
 
-    /*
-     * ==========================================
-     * LOAD UTAMA
-     * ==========================================
-     */
+    /* ========================================= */
+    /* LOAD                                      */
+    /* ========================================= */
 
     async function loadArchive() {
 
@@ -1154,11 +1537,9 @@
 
 
 
-    /*
-     * ==========================================
-     * MULAI
-     * ==========================================
-     */
+    /* ========================================= */
+    /* MULAI                                     */
+    /* ========================================= */
 
     loadArchive();
 

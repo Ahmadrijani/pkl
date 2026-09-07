@@ -106,6 +106,18 @@
     "title": "Laporan PKL versi digital — Belum tersedia",
     "disabled": true,
     "icon": "—"
+  },
+
+  {
+    "type": "link",
+    "title": "HASIL DESAIN",
+    "href": "#hasil-desain",
+    "icon": "DESIGN"
+  },
+  {
+    "type": "video",
+    "id": "l_zHUXb3t6k",
+    "href": "https://youtu.be/l_zHUXb3t6k?si=fg2LN62-tIZTGT9J",
+    "title": "Memuat judul dari YouTube"
   }
 ]
-

@@ -1,0 +1,3445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Jadwal Asia Print Baru</title>
+
+    <!-- html2canvas untuk Download Image -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --merah: #ff2400;
+            --merah-gelap: #760b00;
+            --oranye: #ff6a00;
+            --emas: #ffb000;
+            --kuning: #ffd15c;
+            --hitam: #020202;
+            --abu: #111111;
+            --abu2: #1a1a1a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            padding: 10px;
+
+            color: white;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 50% -15%,
+                    rgba(255, 65, 0, 0.25),
+                    transparent 38%
+                ),
+                radial-gradient(
+                    circle at 100% 100%,
+                    rgba(255, 30, 0, 0.12),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    145deg,
+                    #020202,
+                    #080808 50%,
+                    #130504
+                );
+
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: -2;
+
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 28px 28px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 90%
+                );
+        }
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            top: 17%;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 2px;
+
+            pointer-events: none;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--merah),
+                    var(--kuning),
+                    var(--merah),
+                    transparent
+                );
+
+            box-shadow:
+                0 0 12px var(--merah);
+
+            opacity: 0.65;
+
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+
+            max-width: 1250px;
+
+            margin: auto;
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .header {
+            position: relative;
+
+            padding:
+                20px 12px 18px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #060606,
+                    #171717 50%,
+                    #080808
+                );
+
+            border:
+                2px solid var(--merah);
+
+            clip-path:
+                polygon(
+                    3% 0,
+                    97% 0,
+                    100% 16%,
+                    100% 84%,
+                    97% 100%,
+                    3% 100%,
+                    0 84%,
+                    0 16%
+                );
+
+            box-shadow:
+                0 0 14px
+                rgba(255, 40, 0, 0.7),
+
+                inset 0 0 35px
+                rgba(255, 35, 0, 0.08);
+        }
+
+        .header::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 5px;
+
+            pointer-events: none;
+
+            border:
+                1px solid
+                rgba(255, 150, 0, 0.7);
+        }
+
+        .header::after {
+            content: "";
+
+            position: absolute;
+
+            left: 12%;
+            right: 12%;
+            bottom: 5px;
+
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--merah),
+                    var(--emas),
+                    var(--merah),
+                    transparent
+                );
+
+            box-shadow:
+                0 0 10px
+                var(--merah);
+        }
+
+        .judul-kecil {
+            color: #8f8f8f;
+
+            font-size:
+                clamp(
+                    8px,
+                    1.5vw,
+                    13px
+                );
+
+            letter-spacing:
+                clamp(
+                    2px,
+                    0.7vw,
+                    7px
+                );
+
+            font-weight: 800;
+
+            margin-bottom: 4px;
+        }
+
+        .judul-utama {
+            line-height: 0.95;
+
+            font-size:
+                clamp(
+                    29px,
+                    7vw,
+                    65px
+                );
+
+            font-weight: 1000;
+
+            font-style: italic;
+
+            letter-spacing:
+                clamp(
+                    1px,
+                    0.5vw,
+                    5px
+                );
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 5%,
+                    #dddddd 45%,
+                    #858585 100%
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+
+            filter:
+                drop-shadow(
+                    3px 4px 0 #000
+                );
+        }
+
+        .judul-utama span {
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffd34f,
+                    #ff7b00 35%,
+                    #ff2600 73%,
+                    #8f0000 100%
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .label-baru {
+            display: inline-block;
+
+            margin-top: 12px;
+
+            padding:
+                5px 28px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #4a4a4a,
+                    #111
+                );
+
+            border:
+                2px solid
+                var(--oranye);
+
+            font-size:
+                clamp(
+                    16px,
+                    3vw,
+                    25px
+                );
+
+            font-weight: 1000;
+
+            font-style: italic;
+
+            letter-spacing: 3px;
+
+            clip-path:
+                polygon(
+                    8% 0,
+                    92% 0,
+                    100% 30%,
+                    100% 70%,
+                    92% 100%,
+                    8% 100%,
+                    0 70%,
+                    0 30%
+                );
+
+            box-shadow:
+                0 0 10px
+                rgba(255, 90, 0, 0.6);
+        }
+
+
+        /* =========================================================
+           CONTROL
+        ========================================================= */
+
+        .control-panel {
+            margin:
+                14px 0;
+
+            padding:
+                14px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #141414,
+                    #070707
+                );
+
+            border:
+                1px solid
+                #672015;
+
+            box-shadow:
+                inset 0 0 25px
+                rgba(255, 40, 0, 0.04);
+        }
+
+        .kombinasi-info {
+            margin-bottom: 10px;
+
+            color: #9f9f9f;
+
+            font-size: 14px;
+        }
+
+        .kombinasi-info strong {
+            color: #ff8500;
+
+            font-size: 22px;
+
+            text-shadow:
+                0 0 10px
+                rgba(255, 100, 0, 0.7);
+        }
+
+        .download-area {
+            margin-bottom: 9px;
+        }
+
+        .tombol-container {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+        button {
+            min-height: 42px;
+
+            padding:
+                10px 16px;
+
+            border:
+                1px solid
+                var(--oranye);
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #292929,
+                    #090909
+                );
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            font-weight: 1000;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.15s,
+                box-shadow 0.15s,
+                opacity 0.15s;
+        }
+
+        button:hover {
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 0 14px
+                rgba(255, 70, 0, 0.55);
+        }
+
+        button:active {
+            transform:
+                scale(0.97);
+        }
+
+        button:disabled {
+            opacity: 0.55;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+        .btn-download {
+            width:
+                min(
+                    100%,
+                    330px
+                );
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ff7000,
+                    #ba1800
+                );
+
+            border-color:
+                #ffc000;
+
+            box-shadow:
+                0 0 14px
+                rgba(255, 65, 0, 0.5);
+        }
+
+        .btn-acak {
+            background:
+                linear-gradient(
+                    180deg,
+                    #ff4700,
+                    #890d00
+                );
+
+            border-color:
+                #ff9800;
+
+            min-width:
+                145px;
+        }
+
+
+        /* =========================================================
+           AREA DOWNLOAD
+        ========================================================= */
+
+        #areaDownload {
+            padding:
+                10px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #040404,
+                    #101010 52%,
+                    #0d0303
+                );
+
+            border:
+                2px solid
+                var(--merah);
+
+            box-shadow:
+                0 0 22px
+                rgba(255, 35, 0, 0.35),
+
+                inset 0 0 40px
+                rgba(255, 30, 0, 0.03);
+        }
+
+        .garis-atas {
+            height: 4px;
+
+            margin-bottom: 9px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #ff2100,
+                    #ffb000,
+                    #ff2100,
+                    transparent
+                );
+
+            box-shadow:
+                0 0 10px
+                #ff3500;
+        }
+
+
+        /* =========================================================
+           JADWAL
+        ========================================================= */
+
+        .jadwal {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    6,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+
+            gap: 6px;
+        }
+
+        .hari {
+            position: relative;
+
+            min-width: 0;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #161616,
+                    #050505
+                );
+
+            border:
+                1.5px solid
+                #ee4218;
+
+            box-shadow:
+                0 0 7px
+                rgba(255, 55, 0, 0.28),
+
+                inset 0 0 14px
+                rgba(255, 35, 0, 0.04);
+
+            clip-path:
+                polygon(
+                    8% 0,
+                    92% 0,
+                    100% 6%,
+                    100% 94%,
+                    92% 100%,
+                    8% 100%,
+                    0 94%,
+                    0 6%
+                );
+        }
+
+        .hari::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            height: 4px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff1900,
+                    #ffb000,
+                    #ff1900
+                );
+
+            box-shadow:
+                0 0 8px
+                #ff3300;
+        }
+
+        .hari-header {
+            margin-top: 4px;
+
+            padding:
+                10px 2px 8px;
+
+            text-align: center;
+
+            font-size:
+                clamp(
+                    11px,
+                    1.35vw,
+                    18px
+                );
+
+            font-weight: 1000;
+
+            font-style: italic;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ff4a00,
+                    #9c1100
+                );
+
+            border-bottom:
+                1px solid
+                #ffa000;
+
+            text-shadow:
+                2px 2px 0
+                #5b0000;
+        }
+
+        .orang {
+            display: flex;
+
+            align-items: center;
+
+            min-height: 46px;
+
+            margin: 5px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #191919,
+                    #080808
+                );
+
+            border:
+                1px solid
+                #414141;
+        }
+
+        .nomor {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 37px;
+
+            min-width: 37px;
+
+            min-height: 46px;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: 1000;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ff4700,
+                    #960b00
+                );
+
+            border-right:
+                1px solid
+                #ff8100;
+
+            text-shadow:
+                1px 1px 0
+                #450000;
+        }
+
+        .nama {
+            padding:
+                5px 6px;
+
+            font-size:
+                clamp(
+                    10px,
+                    1.1vw,
+                    16px
+                );
+
+            line-height: 1.05;
+
+            font-weight: 800;
+
+            overflow-wrap:
+                anywhere;
+        }
+
+        .hiasan-bawah {
+            width: 58%;
+
+            height: 7px;
+
+            margin:
+                9px auto 7px;
+
+            background:
+                repeating-linear-gradient(
+                    135deg,
+                    #ff4300 0 8px,
+                    transparent 8px 13px
+                );
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .footer-download {
+            margin-top: 12px;
+
+            padding:
+                9px 5px 2px;
+
+            text-align: left;
+
+            color: #9c9c9c;
+
+            font-size:
+                clamp(
+                    9px,
+                    1.2vw,
+                    13px
+                );
+
+            line-height: 1.5;
+
+            letter-spacing:
+                0.5px;
+
+            border-top:
+                1px solid
+                #5e170d;
+        }
+
+        .footer-download strong {
+            color: white;
+        }
+
+        .footer-tanggal {
+            color: #717171;
+
+            font-size:
+                0.9em;
+        }
+
+
+        /* =========================================================
+           OVERLAY
+        ========================================================= */
+
+        .overlay {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 5000;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 15px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255, 50, 0, 0.10),
+                    rgba(0, 0, 0, 0.96) 68%
+                );
+
+            backdrop-filter:
+                blur(7px);
+        }
+
+        .overlay.aktif {
+            display: flex;
+        }
+
+
+        /* =========================================================
+           ANIMASI SPIN BIASA
+        ========================================================= */
+
+        .spin-box {
+            width:
+                min(
+                    370px,
+                    92vw
+                );
+
+            text-align: center;
+        }
+
+        .roulette-wrapper {
+            position: relative;
+
+            width: 230px;
+
+            height: 230px;
+
+            margin: auto;
+        }
+
+        .roulette {
+            position: absolute;
+
+            inset: 7px;
+
+            border-radius: 50%;
+
+            background:
+                conic-gradient(
+                    #ff1700 0deg 35deg,
+                    #240704 35deg 60deg,
+                    #ff8a00 60deg 100deg,
+                    #100404 100deg 135deg,
+                    #ff2b00 135deg 180deg,
+                    #240704 180deg 220deg,
+                    #ff8f00 220deg 255deg,
+                    #100404 255deg 300deg,
+                    #ff2900 300deg 360deg
+                );
+
+            box-shadow:
+                0 0 18px
+                #ff2700,
+
+                0 0 55px
+                rgba(255, 40, 0, 0.55);
+
+            animation:
+                rouletteSpin
+                0.5s
+                linear
+                infinite;
+        }
+
+        .roulette::before {
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 50%;
+
+            width: 150px;
+
+            height: 150px;
+
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                );
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #262626,
+                    #050505 70%
+                );
+
+            border:
+                3px solid
+                #ff8300;
+
+            box-shadow:
+                inset 0 0 22px
+                #000;
+        }
+
+        .roulette::after {
+            content: "🎲";
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 50%;
+
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                );
+
+            font-size: 62px;
+
+            filter:
+                drop-shadow(
+                    0 0 10px
+                    rgba(
+                        255,
+                        80,
+                        0,
+                        0.8
+                    )
+                );
+        }
+
+        .roulette-pointer {
+            position: absolute;
+
+            top: -2px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            width: 0;
+
+            height: 0;
+
+            border-left:
+                12px solid transparent;
+
+            border-right:
+                12px solid transparent;
+
+            border-top:
+                25px solid
+                #ffd000;
+
+            filter:
+                drop-shadow(
+                    0 0 7px
+                    #ff5a00
+                );
+
+            z-index: 5;
+        }
+
+        @keyframes rouletteSpin {
+            from {
+                transform:
+                    rotate(0deg);
+            }
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+        }
+
+
+        /* =========================================================
+           METEOR
+        ========================================================= */
+
+        .meteor-stage {
+            position: relative;
+
+            width:
+                min(
+                    430px,
+                    94vw
+                );
+
+            height: 420px;
+
+            overflow: hidden;
+
+            margin: auto;
+        }
+
+        .meteor {
+            position: absolute;
+
+            top: -120px;
+
+            left: 50%;
+
+            width: 30px;
+
+            height: 30px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 30% 30%,
+                    #fff,
+                    #ffd000 20%,
+                    #ff6500 45%,
+                    #ff1b00 70%,
+                    transparent 72%
+                );
+
+            box-shadow:
+                0 0 12px #fff,
+                0 0 25px #ffb000,
+                0 0 50px #ff3b00;
+
+            transform:
+                translateX(-50%);
+
+            animation:
+                meteorJatuh
+                1.3s
+                cubic-bezier(
+                    .55,
+                    .03,
+                    .82,
+                    .32
+                )
+                forwards;
+        }
+
+        .meteor::before {
+            content: "";
+
+            position: absolute;
+
+            right: 20px;
+
+            top: 8px;
+
+            width: 130px;
+
+            height: 16px;
+
+            border-radius: 50%;
+
+            transform:
+                rotate(-18deg);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(
+                        255,
+                        220,
+                        120,
+                        0.3
+                    ),
+                    #ff4a00
+                );
+
+            filter:
+                blur(4px);
+        }
+
+        .meteor::after {
+            content: "";
+
+            position: absolute;
+
+            right: 6px;
+
+            top: 13px;
+
+            width: 95px;
+
+            height: 5px;
+
+            transform:
+                rotate(-18deg);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    white,
+                    #ff8a00,
+                    transparent
+                );
+
+            filter:
+                blur(2px);
+        }
+
+        @keyframes meteorJatuh {
+            0% {
+                top: -120px;
+
+                transform:
+                    translateX(-50%)
+                    rotate(0deg)
+                    scale(0.65);
+
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            88% {
+                opacity: 1;
+            }
+
+            100% {
+                top: 245px;
+
+                transform:
+                    translateX(-50%)
+                    rotate(360deg)
+                    scale(1.15);
+
+                opacity: 1;
+            }
+        }
+
+        .impact-ring {
+            position: absolute;
+
+            left: 50%;
+
+            top: 245px;
+
+            width: 25px;
+
+            height: 25px;
+
+            transform:
+                translate(-50%, -50%)
+                scale(0);
+
+            border-radius: 50%;
+
+            border:
+                4px solid
+                #ffb000;
+
+            box-shadow:
+                0 0 15px #fff,
+                0 0 35px #ff5300;
+
+            animation:
+                impactRing
+                0.8s
+                1.28s
+                ease-out
+                forwards;
+        }
+
+        @keyframes impactRing {
+            0% {
+                opacity: 1;
+
+                transform:
+                    translate(-50%, -50%)
+                    scale(0);
+            }
+
+            100% {
+                opacity: 0;
+
+                transform:
+                    translate(-50%, -50%)
+                    scale(13);
+            }
+        }
+
+
+        /* =========================================================
+           EXPLOSION
+        ========================================================= */
+
+        .explosion {
+            position: absolute;
+
+            left: 50%;
+
+            top: 245px;
+
+            width: 45px;
+
+            height: 45px;
+
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                );
+
+            border-radius: 50%;
+
+            opacity: 0;
+
+            background:
+                radial-gradient(
+                    circle,
+                    white 0 8%,
+                    #fff000 9% 20%,
+                    #ff7b00 21% 40%,
+                    #ff2700 41% 58%,
+                    transparent 60%
+                );
+
+            box-shadow:
+                0 0 20px white,
+                0 0 60px #ff5a00;
+
+            animation:
+                ledakanUtama
+                0.9s
+                1.28s
+                ease-out
+                forwards;
+        }
+
+        @keyframes ledakanUtama {
+            0% {
+                opacity: 0;
+
+                transform:
+                    translate(
+                        -50%,
+                        -50%
+                    )
+                    scale(0.1);
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+
+                transform:
+                    translate(
+                        -50%,
+                        -50%
+                    )
+                    scale(7);
+            }
+        }
+
+
+        /* =========================================================
+           PARTIKEL LEDAKAN
+        ========================================================= */
+
+        .partikel {
+            position: absolute;
+
+            left: 50%;
+
+            top: 245px;
+
+            width: 8px;
+
+            height: 8px;
+
+            border-radius: 50%;
+
+            background:
+                #ffb000;
+
+            opacity: 0;
+
+            animation:
+                partikelLedak
+                1s
+                1.28s
+                ease-out
+                forwards;
+        }
+
+        .partikel:nth-child(1) {
+            --x: -160px;
+            --y: -105px;
+        }
+
+        .partikel:nth-child(2) {
+            --x: -115px;
+            --y: -145px;
+        }
+
+        .partikel:nth-child(3) {
+            --x: -70px;
+            --y: -175px;
+        }
+
+        .partikel:nth-child(4) {
+            --x: 0px;
+            --y: -195px;
+        }
+
+        .partikel:nth-child(5) {
+            --x: 70px;
+            --y: -175px;
+        }
+
+        .partikel:nth-child(6) {
+            --x: 125px;
+            --y: -135px;
+        }
+
+        .partikel:nth-child(7) {
+            --x: 160px;
+            --y: -65px;
+        }
+
+        .partikel:nth-child(8) {
+            --x: 175px;
+            --y: 5px;
+        }
+
+        .partikel:nth-child(9) {
+            --x: 150px;
+            --y: 80px;
+        }
+
+        .partikel:nth-child(10) {
+            --x: 90px;
+            --y: 140px;
+        }
+
+        .partikel:nth-child(11) {
+            --x: 20px;
+            --y: 175px;
+        }
+
+        .partikel:nth-child(12) {
+            --x: -60px;
+            --y: 160px;
+        }
+
+        .partikel:nth-child(13) {
+            --x: -125px;
+            --y: 115px;
+        }
+
+        .partikel:nth-child(14) {
+            --x: -170px;
+            --y: 40px;
+        }
+
+        @keyframes partikelLedak {
+            0% {
+                opacity: 0;
+
+                transform:
+                    translate(
+                        -50%,
+                        -50%
+                    )
+                    scale(0.2);
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+
+                transform:
+                    translate(
+                        calc(-50% + var(--x)),
+                        calc(-50% + var(--y))
+                    )
+                    scale(1.7);
+            }
+        }
+
+        .meteor-text {
+            position: absolute;
+
+            bottom: 10px;
+
+            left: 0;
+
+            right: 0;
+
+            text-align: center;
+
+            font-size:
+                clamp(
+                    18px,
+                    5vw,
+                    27px
+                );
+
+            font-weight: 1000;
+
+            font-style: italic;
+
+            text-shadow:
+                0 0 10px #ff3400,
+                0 0 25px #ff3400;
+        }
+
+
+        /* =========================================================
+           POPUP HASIL
+        ========================================================= */
+
+        .hasil-box {
+            width:
+                min(
+                    820px,
+                    95vw
+                );
+
+            padding:
+                clamp(
+                    18px,
+                    4vw,
+                    30px
+                );
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #151515,
+                    #050505
+                );
+
+            border:
+                2px solid
+                #ff3d00;
+
+            box-shadow:
+                0 0 28px
+                rgba(255, 40, 0, 0.7);
+
+            animation:
+                hasilMasuk
+                0.55s
+                cubic-bezier(
+                    .2,
+                    .9,
+                    .2,
+                    1
+                );
+        }
+
+        @keyframes hasilMasuk {
+            0% {
+                opacity: 0;
+
+                transform:
+                    scale(0.45)
+                    rotate(-7deg);
+            }
+
+            65% {
+                transform:
+                    scale(1.04)
+                    rotate(1deg);
+            }
+
+            100% {
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    rotate(0);
+            }
+        }
+
+        .hasil-judul {
+            font-size:
+                clamp(
+                    28px,
+                    7vw,
+                    48px
+                );
+
+            font-weight: 1000;
+
+            font-style: italic;
+
+            line-height: 1;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    white,
+                    #888
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hasil-subjudul {
+            margin:
+                7px 0 18px;
+
+            color:
+                #ff7b00;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+        .hasil-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap: 12px;
+        }
+
+        .hasil-hari {
+            padding: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1c1c1c,
+                    #070707
+                );
+
+            border:
+                2px solid
+                #ff4100;
+
+            box-shadow:
+                0 0 14px
+                rgba(255, 55, 0, 0.35);
+
+            animation:
+                hasilKartu
+                0.6s
+                ease
+                backwards;
+        }
+
+        .hasil-hari:nth-child(2) {
+            animation-delay:
+                0.15s;
+        }
+
+        @keyframes hasilKartu {
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(30px)
+                    scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        .hasil-hari h3 {
+            margin-bottom: 12px;
+
+            color:
+                #ff7200;
+
+            font-size: 25px;
+
+            font-style: italic;
+        }
+
+        .hasil-nama {
+            margin-top: 7px;
+
+            padding: 10px;
+
+            background:
+                #090909;
+
+            border-left:
+                5px solid
+                #ff3900;
+
+            font-size:
+                clamp(
+                    15px,
+                    3vw,
+                    21px
+                );
+
+            font-weight: 1000;
+        }
+
+        .btn-lanjut {
+            margin-top: 20px;
+
+            min-width: 170px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ff6500,
+                    #a31000
+                );
+        }
+
+
+        /* =========================================================
+           POPUP KOMBINASI
+        ========================================================= */
+
+        .kombinasi-box {
+            width:
+                min(
+                    800px,
+                    95vw
+                );
+
+            max-height: 88vh;
+
+            overflow-y: auto;
+
+            padding: 19px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #111,
+                    #050505
+                );
+
+            border:
+                2px solid
+                #ff3d00;
+
+            box-shadow:
+                0 0 25px
+                rgba(255, 40, 0, 0.6);
+        }
+
+        .kombinasi-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+        }
+
+        .kombinasi-header h2 {
+            font-size:
+                clamp(
+                    20px,
+                    5vw,
+                    27px
+                );
+        }
+
+        .btn-tutup {
+            width: 39px;
+
+            min-width: 39px;
+
+            height: 39px;
+
+            min-height: 39px;
+
+            padding: 0;
+
+            border-radius: 50%;
+
+            font-size: 22px;
+        }
+
+        .list-kombinasi {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap: 10px;
+        }
+
+        .kombinasi-item {
+            padding: 13px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #191919,
+                    #080808
+                );
+
+            border:
+                1px solid
+                #4e241c;
+
+            cursor: pointer;
+
+            transition:
+                0.2s;
+        }
+
+        .kombinasi-item:hover {
+            transform:
+                translateY(-2px);
+
+            border-color:
+                #ff4e00;
+
+            box-shadow:
+                0 0 12px
+                rgba(255, 65, 0, 0.3);
+        }
+
+        .kombinasi-item.aktif {
+            border:
+                2px solid
+                #ff7000;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #2a120b,
+                    #090707
+                );
+
+            box-shadow:
+                0 0 15px
+                rgba(255, 50, 0, 0.35);
+        }
+
+        .kombinasi-nomor {
+            color:
+                #ff7600;
+
+            font-size:
+                16px;
+
+            font-weight:
+                1000;
+
+            margin-bottom:
+                7px;
+        }
+
+        .kombinasi-detail {
+            color:
+                #ddd;
+
+            line-height:
+                1.65;
+
+            font-size:
+                14px;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1050px) {
+
+            .jadwal {
+                grid-template-columns:
+                    repeat(
+                        3,
+                        minmax(
+                            0,
+                            1fr
+                        )
+                    );
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                padding:
+                    7px;
+            }
+
+            .header {
+                padding:
+                    18px 9px 17px;
+            }
+
+            .jadwal {
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(
+                            0,
+                            1fr
+                        )
+                    );
+
+                gap: 6px;
+            }
+
+            .hari-header {
+                font-size:
+                    13px;
+            }
+
+            .orang {
+                margin:
+                    4px;
+            }
+
+            .nomor {
+                width:
+                    34px;
+
+                min-width:
+                    34px;
+
+                min-height:
+                    43px;
+            }
+
+            .nama {
+                font-size:
+                    11px;
+            }
+
+            .hasil-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .list-kombinasi {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .meteor-stage {
+                height:
+                    360px;
+            }
+        }
+
+        @media (max-width: 400px) {
+
+            .tombol-container {
+                display:
+                    grid;
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        1fr
+                    );
+            }
+
+            .btn-acak {
+                grid-column:
+                    span 2;
+            }
+
+            .tombol-container button {
+                width:
+                    100%;
+            }
+
+            .hari-header {
+                font-size:
+                    12px;
+            }
+
+            .nama {
+                font-size:
+                    10px;
+            }
+
+            .nomor {
+                width:
+                    31px;
+
+                min-width:
+                    31px;
+            }
+
+            .meteor-stage {
+                height:
+                    320px;
+            }
+
+            .meteor {
+                transform:
+                    translateX(-50%)
+                    scale(0.8);
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <div class="header">
+
+        <div class="judul-kecil">
+            SISTEM PENJADWALAN
+        </div>
+
+        <div class="judul-utama">
+            JADWAL <span>ASIA PRINT</span>
+        </div>
+
+        <div class="label-baru">
+            BARU
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CONTROL
+    ====================================================== -->
+
+    <div class="control-panel">
+
+        <div class="kombinasi-info">
+            KOMBINASI AKTIF:
+            <strong id="kombinasiAktif">
+                1
+            </strong>
+        </div>
+
+
+        <div class="download-area">
+
+            <button
+                class="btn-download"
+                id="btnDownload"
+                onclick="downloadImage()">
+
+                ⬇ DOWNLOAD IMAGE
+
+            </button>
+
+        </div>
+
+
+        <div class="tombol-container">
+
+            <button
+                class="btn-acak"
+                id="btnAcak"
+                onclick="acakKombinasi()">
+
+                🎲 ACAK JADWAL
+
+            </button>
+
+
+            <button
+                onclick="resetDefault()">
+
+                ↩ DEFAULT
+
+            </button>
+
+
+            <button
+                onclick="bukaDaftar()">
+
+                ☰ KOMBINASI
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         AREA DOWNLOAD
+    ====================================================== -->
+
+    <div id="areaDownload">
+
+        <div class="garis-atas"></div>
+
+
+        <div class="jadwal">
+
+
+            <!-- SENIN -->
+
+            <div class="hari">
+
+                <div class="hari-header">
+                    SENIN
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        1
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="senin1">
+                    </div>
+
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        2
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="senin2">
+                    </div>
+
+                </div>
+
+                <div class="hiasan-bawah"></div>
+
+            </div>
+
+
+            <!-- SELASA -->
+
+            <div class="hari">
+
+                <div class="hari-header">
+                    SELASA
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        1
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="selasa1">
+                    </div>
+
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        2
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="selasa2">
+                    </div>
+
+                </div>
+
+                <div class="hiasan-bawah"></div>
+
+            </div>
+
+
+            <!-- RABU -->
+
+            <div class="hari">
+
+                <div class="hari-header">
+                    RABU
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        1
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="rabu1">
+                    </div>
+
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        2
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="rabu2">
+                    </div>
+
+                </div>
+
+                <div class="hiasan-bawah"></div>
+
+            </div>
+
+
+            <!-- KAMIS -->
+
+            <div class="hari">
+
+                <div class="hari-header">
+                    KAMIS
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        1
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="kamis1">
+                    </div>
+
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        2
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="kamis2">
+                    </div>
+
+                </div>
+
+                <div class="hiasan-bawah"></div>
+
+            </div>
+
+
+            <!-- JUMAT -->
+
+            <div class="hari">
+
+                <div class="hari-header">
+                    JUM'AT
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        1
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="jumat1">
+                    </div>
+
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        2
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="jumat2">
+                    </div>
+
+                </div>
+
+                <div class="hiasan-bawah"></div>
+
+            </div>
+
+
+            <!-- SABTU -->
+
+            <div class="hari">
+
+                <div class="hari-header">
+                    SABTU
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        1
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="sabtu1">
+                    </div>
+
+                </div>
+
+                <div class="orang">
+
+                    <div class="nomor">
+                        2
+                    </div>
+
+                    <div
+                        class="nama"
+                        id="sabtu2">
+                    </div>
+
+                </div>
+
+                <div class="hiasan-bawah"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER IKUT DOWNLOAD
+        ================================================== -->
+
+        <div class="footer-download">
+
+            Website dibuat oleh:
+            <strong>Ahmad Rijani</strong>
+
+            <br>
+
+            <span class="footer-tanggal">
+                10/09/2026
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     OVERLAY SPIN BIASA
+========================================================= -->
+
+<div
+    class="overlay"
+    id="spinOverlay">
+
+    <div class="spin-box">
+
+        <div class="roulette-wrapper">
+
+            <div class="roulette-pointer"></div>
+
+            <div class="roulette"></div>
+
+        </div>
+
+        <div class="spin-text">
+            MENGACAK JADWAL...
+        </div>
+
+        <div class="spin-subtext">
+            HASIL SEDANG DIPILIH
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     OVERLAY METEOR
+========================================================= -->
+
+<div
+    class="overlay"
+    id="meteorOverlay">
+
+    <div class="meteor-stage">
+
+
+        <!-- Meteor -->
+
+        <div class="meteor"></div>
+
+
+        <!-- Cincin benturan -->
+
+        <div
+            class="impact-ring">
+        </div>
+
+
+        <!-- Ledakan -->
+
+        <div
+            class="explosion">
+        </div>
+
+
+        <!-- Partikel -->
+
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+        <div class="partikel"></div>
+
+
+        <div class="meteor-text">
+            IMPACT!
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     POPUP HASIL
+========================================================= -->
+
+<div
+    class="overlay"
+    id="hasilOverlay">
+
+    <div class="hasil-box">
+
+        <div class="hasil-judul">
+            SIAPA YANG MASUK?
+        </div>
+
+        <div class="hasil-subjudul">
+            HASIL ACAK JADWAL
+        </div>
+
+
+        <div class="hasil-grid">
+
+
+            <div class="hasil-hari">
+
+                <h3>
+                    SENIN
+                </h3>
+
+                <div
+                    class="hasil-nama"
+                    id="hasilSenin1">
+                </div>
+
+                <div
+                    class="hasil-nama"
+                    id="hasilSenin2">
+                </div>
+
+            </div>
+
+
+            <div class="hasil-hari">
+
+                <h3>
+                    SELASA
+                </h3>
+
+                <div
+                    class="hasil-nama"
+                    id="hasilSelasa1">
+                </div>
+
+                <div
+                    class="hasil-nama"
+                    id="hasilSelasa2">
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <button
+            class="btn-lanjut"
+            onclick="tutupHasil()">
+
+            LANJUTKAN →
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     POPUP KOMBINASI
+========================================================= -->
+
+<div
+    class="overlay"
+    id="kombinasiOverlay">
+
+    <div class="kombinasi-box">
+
+        <div class="kombinasi-header">
+
+            <h2>
+                6 KOMBINASI UNIK
+            </h2>
+
+            <button
+                class="btn-tutup"
+                onclick="tutupDaftar()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="list-kombinasi"
+            id="listKombinasi">
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+    /* =========================================================
+       DATA 6 KOMBINASI UNIK
+    ========================================================== */
+
+    const semuaKombinasi = [
+
+        {
+            senin: [
+                "Diang",
+                "Ahmad Rijani"
+            ],
+
+            selasa: [
+                "Fikri",
+                "Ferdi"
+            ]
+        },
+
+
+        {
+            senin: [
+                "Fikri",
+                "Ferdi"
+            ],
+
+            selasa: [
+                "Diang",
+                "Ahmad Rijani"
+            ]
+        },
+
+
+        {
+            senin: [
+                "Diang",
+                "Fikri"
+            ],
+
+            selasa: [
+                "Ahmad Rijani",
+                "Ferdi"
+            ]
+        },
+
+
+        {
+            senin: [
+                "Ahmad Rijani",
+                "Ferdi"
+            ],
+
+            selasa: [
+                "Diang",
+                "Fikri"
+            ]
+        },
+
+
+        {
+            senin: [
+                "Diang",
+                "Ferdi"
+            ],
+
+            selasa: [
+                "Ahmad Rijani",
+                "Fikri"
+            ]
+        },
+
+
+        {
+            senin: [
+                "Ahmad Rijani",
+                "Fikri"
+            ],
+
+            selasa: [
+                "Diang",
+                "Ferdi"
+            ]
+        }
+
+    ];
+
+
+    /* =========================================================
+       STATE
+    ========================================================== */
+
+    let kombinasiAktif = 0;
+
+    let sedangMengacak = false;
+
+
+    /* =========================================================
+       UPDATE JADWAL
+    ========================================================== */
+
+    function updateJadwal() {
+
+        const data =
+            semuaKombinasi[
+                kombinasiAktif
+            ];
+
+
+        const senin =
+            data.senin;
+
+        const selasa =
+            data.selasa;
+
+
+        /*
+            SENIN
+        */
+
+        isi(
+            "senin1",
+            senin[0]
+        );
+
+        isi(
+            "senin2",
+            senin[1]
+        );
+
+
+        /*
+            SELASA
+        */
+
+        isi(
+            "selasa1",
+            selasa[0]
+        );
+
+        isi(
+            "selasa2",
+            selasa[1]
+        );
+
+
+        /*
+            RABU = SENIN
+        */
+
+        isi(
+            "rabu1",
+            senin[0]
+        );
+
+        isi(
+            "rabu2",
+            senin[1]
+        );
+
+
+        /*
+            KAMIS = SELASA
+        */
+
+        isi(
+            "kamis1",
+            selasa[0]
+        );
+
+        isi(
+            "kamis2",
+            selasa[1]
+        );
+
+
+        /*
+            JUMAT = SENIN
+        */
+
+        isi(
+            "jumat1",
+            senin[0]
+        );
+
+        isi(
+            "jumat2",
+            senin[1]
+        );
+
+
+        /*
+            SABTU = SELASA
+        */
+
+        isi(
+            "sabtu1",
+            selasa[0]
+        );
+
+        isi(
+            "sabtu2",
+            selasa[1]
+        );
+
+
+        document
+            .getElementById(
+                "kombinasiAktif"
+            )
+            .textContent =
+            kombinasiAktif + 1;
+
+
+        tandaiKombinasi();
+
+    }
+
+
+    function isi(
+        id,
+        nama
+    ) {
+
+        document
+            .getElementById(id)
+            .textContent =
+            nama;
+
+    }
+
+
+    /* =========================================================
+       ACAK
+       
+       50% SPIN BIASA
+       50% METEOR
+    ========================================================== */
+
+    function acakKombinasi() {
+
+        if (sedangMengacak) {
+            return;
+        }
+
+
+        sedangMengacak =
+            true;
+
+
+        const tombol =
+            document.getElementById(
+                "btnAcak"
+            );
+
+
+        tombol.disabled =
+            true;
+
+
+        tombol.textContent =
+            "🎲 MENGACAK...";
+
+
+        /*
+            Pilih hasil yang berbeda
+        */
+
+        let hasilBaru;
+
+        do {
+
+            hasilBaru =
+                Math.floor(
+                    Math.random()
+                    *
+                    semuaKombinasi.length
+                );
+
+        } while (
+            hasilBaru ===
+            kombinasiAktif
+        );
+
+
+        /*
+            50 / 50 animasi
+        */
+
+        const gunakanMeteor =
+            Math.random() <
+            0.5;
+
+
+        if (gunakanMeteor) {
+
+            animasiMeteor(
+                hasilBaru
+            );
+
+        } else {
+
+            animasiSpinBiasa(
+                hasilBaru
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       SPIN BIASA
+    ========================================================== */
+
+    function animasiSpinBiasa(
+        hasilBaru
+    ) {
+
+        const overlay =
+            document.getElementById(
+                "spinOverlay"
+            );
+
+
+        overlay.classList.add(
+            "aktif"
+        );
+
+
+        setTimeout(
+            () => {
+
+                kombinasiAktif =
+                    hasilBaru;
+
+
+                updateJadwal();
+
+
+                overlay.classList.remove(
+                    "aktif"
+                );
+
+
+                tampilkanHasil();
+
+            },
+            2200
+        );
+
+    }
+
+
+    /* =========================================================
+       METEOR
+    ========================================================== */
+
+    function animasiMeteor(
+        hasilBaru
+    ) {
+
+        const overlay =
+            document.getElementById(
+                "meteorOverlay"
+            );
+
+
+        /*
+            Reset animasi
+        */
+
+        const semuaObjek =
+            overlay.querySelectorAll(
+                ".meteor, .impact-ring, .explosion, .partikel"
+            );
+
+
+        semuaObjek.forEach(
+            objek => {
+
+                objek.style.animation =
+                    "none";
+
+            }
+        );
+
+
+        void overlay.offsetWidth;
+
+
+        semuaObjek.forEach(
+            (objek, index) => {
+
+                if (
+                    objek.classList.contains(
+                        "meteor"
+                    )
+                ) {
+
+                    objek.style.animation =
+                        "meteorJatuh 1.3s cubic-bezier(.55,.03,.82,.32) forwards";
+
+                }
+
+                else if (
+                    objek.classList.contains(
+                        "impact-ring"
+                    )
+                ) {
+
+                    objek.style.animation =
+                        "impactRing .8s 1.28s ease-out forwards";
+
+                }
+
+                else if (
+                    objek.classList.contains(
+                        "explosion"
+                    )
+                ) {
+
+                    objek.style.animation =
+                        "ledakanUtama .9s 1.28s ease-out forwards";
+
+                }
+
+                else {
+
+                    const jeda =
+                        1.28 +
+                        (index * 0.008);
+
+                    objek.style.animation =
+                        `partikelLedak 1s ${jeda}s ease-out forwards`;
+
+                }
+
+            }
+        );
+
+
+        overlay.classList.add(
+            "aktif"
+        );
+
+
+        /*
+            Setelah ledakan selesai,
+            tampilkan hasil
+        */
+
+        setTimeout(
+            () => {
+
+                overlay.classList.remove(
+                    "aktif"
+                );
+
+
+                kombinasiAktif =
+                    hasilBaru;
+
+
+                updateJadwal();
+
+
+                tampilkanHasil();
+
+            },
+            2450
+        );
+
+    }
+
+
+    /* =========================================================
+       POPUP HASIL
+    ========================================================== */
+
+    function tampilkanHasil() {
+
+        const data =
+            semuaKombinasi[
+                kombinasiAktif
+            ];
+
+
+        document.getElementById(
+            "hasilSenin1"
+        ).textContent =
+            data.senin[0];
+
+
+        document.getElementById(
+            "hasilSenin2"
+        ).textContent =
+            data.senin[1];
+
+
+        document.getElementById(
+            "hasilSelasa1"
+        ).textContent =
+            data.selasa[0];
+
+
+        document.getElementById(
+            "hasilSelasa2"
+        ).textContent =
+            data.selasa[1];
+
+
+        const overlay =
+            document.getElementById(
+                "hasilOverlay"
+            );
+
+
+        const box =
+            overlay.querySelector(
+                ".hasil-box"
+            );
+
+
+        /*
+            Reset animasi popup
+        */
+
+        box.style.animation =
+            "none";
+
+
+        void box.offsetWidth;
+
+
+        box.style.animation =
+            "hasilMasuk .55s cubic-bezier(.2,.9,.2,1)";
+
+
+        overlay.classList.add(
+            "aktif"
+        );
+
+
+        selesaiAcak();
+
+    }
+
+
+    function tutupHasil() {
+
+        document
+            .getElementById(
+                "hasilOverlay"
+            )
+            .classList.remove(
+                "aktif"
+            );
+
+    }
+
+
+    /* =========================================================
+       SELESAI ACAK
+    ========================================================== */
+
+    function selesaiAcak() {
+
+        const tombol =
+            document.getElementById(
+                "btnAcak"
+            );
+
+
+        tombol.disabled =
+            false;
+
+
+        tombol.textContent =
+            "🎲 ACAK JADWAL";
+
+
+        sedangMengacak =
+            false;
+
+    }
+
+
+    /* =========================================================
+       DEFAULT
+    ========================================================== */
+
+    function resetDefault() {
+
+        if (sedangMengacak) {
+            return;
+        }
+
+
+        kombinasiAktif =
+            0;
+
+
+        updateJadwal();
+
+    }
+
+
+    /* =========================================================
+       POPUP KOMBINASI
+    ========================================================== */
+
+    function bukaDaftar() {
+
+        if (sedangMengacak) {
+            return;
+        }
+
+
+        document
+            .getElementById(
+                "kombinasiOverlay"
+            )
+            .classList.add(
+                "aktif"
+            );
+
+
+        tandaiKombinasi();
+
+    }
+
+
+    function tutupDaftar() {
+
+        document
+            .getElementById(
+                "kombinasiOverlay"
+            )
+            .classList.remove(
+                "aktif"
+            );
+
+    }
+
+
+    document
+        .getElementById(
+            "kombinasiOverlay"
+        )
+        .addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    this
+                ) {
+
+                    tutupDaftar();
+
+                }
+
+            }
+        );
+
+
+    /* =========================================================
+       BUAT DAFTAR KOMBINASI
+    ========================================================== */
+
+    function buatDaftarKombinasi() {
+
+        const container =
+            document.getElementById(
+                "listKombinasi"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        semuaKombinasi.forEach(
+            (
+                kombinasi,
+                index
+            ) => {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "kombinasi-item";
+
+
+                item.dataset.index =
+                    index;
+
+
+                item.innerHTML = `
+
+                    <div class="kombinasi-nomor">
+                        KOMBINASI ${index + 1}
+                    </div>
+
+                    <div class="kombinasi-detail">
+
+                        <b>SENIN:</b>
+                        ${kombinasi.senin[0]}
+                        +
+                        ${kombinasi.senin[1]}
+
+                        <br>
+
+                        <b>SELASA:</b>
+                        ${kombinasi.selasa[0]}
+                        +
+                        ${kombinasi.selasa[1]}
+
+                    </div>
+
+                `;
+
+
+                item.addEventListener(
+                    "click",
+                    function() {
+
+                        if (
+                            sedangMengacak
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        kombinasiAktif =
+                            index;
+
+
+                        updateJadwal();
+
+
+                        tutupDaftar();
+
+                    }
+                );
+
+
+                container.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       TANDAI AKTIF
+    ========================================================== */
+
+    function tandaiKombinasi() {
+
+        document
+            .querySelectorAll(
+                ".kombinasi-item"
+            )
+            .forEach(
+                item => {
+
+                    const index =
+                        Number(
+                            item.dataset.index
+                        );
+
+
+                    item.classList.toggle(
+                        "aktif",
+                        index ===
+                        kombinasiAktif
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* =========================================================
+       DOWNLOAD IMAGE
+    ========================================================== */
+
+    async function downloadImage() {
+
+        if (sedangMengacak) {
+            return;
+        }
+
+
+        const area =
+            document.getElementById(
+                "areaDownload"
+            );
+
+
+        const tombol =
+            document.getElementById(
+                "btnDownload"
+            );
+
+
+        const teksLama =
+            tombol.innerHTML;
+
+
+        tombol.disabled =
+            true;
+
+
+        tombol.innerHTML =
+            "⏳ MEMBUAT IMAGE...";
+
+
+        try {
+
+            const canvas =
+                await html2canvas(
+                    area,
+                    {
+                        backgroundColor:
+                            "#050505",
+
+                        scale:
+                            Math.min(
+                                window.devicePixelRatio ||
+                                2,
+                                3
+                            ),
+
+                        useCORS:
+                            true,
+
+                        logging:
+                            false
+                    }
+                );
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.download =
+                `jadwal_asia_print_kombinasi_${kombinasiAktif + 1}.png`;
+
+
+            link.href =
+                canvas.toDataURL(
+                    "image/png"
+                );
+
+
+            link.click();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                error
+            );
+
+
+            alert(
+                "Gagal membuat gambar."
+            );
+
+        }
+
+
+        tombol.innerHTML =
+            teksLama;
+
+
+        tombol.disabled =
+            false;
+
+    }
+
+
+    /* =========================================================
+       MULAI
+    ========================================================== */
+
+    buatDaftarKombinasi();
+
+    updateJadwal();
+
+</script>
+
+</body>
+</html>

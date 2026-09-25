@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TKJ & DKV Countdown</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 30px 15px;
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: white;
+        }
+
+        .container {
+            width: min(1000px, 100%);
+            margin: auto;
+        }
+
+        /* GAMBAR GIF */
+        .gambar {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 25px;
+            border-radius: 20px;
+        }
+
+        /* BOX NAMA */
+        .countdown {
+            margin-bottom: 25px;
+            padding: 25px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+        }
+
+        .judul {
+            font-size: clamp(28px, 5vw, 45px);
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 5px;
+        }
+
+        .tanggal {
+            text-align: center;
+            font-size: 15px;
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .box {
+            padding: 18px 8px;
+            text-align: center;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .angka {
+            font-size: clamp(22px, 4vw, 42px);
+            font-weight: bold;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .label {
+            margin-top: 5px;
+            font-size: 11px;
+            opacity: 0.65;
+        }
+
+        @media (max-width: 650px) {
+            .timer {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .box:last-child {
+                grid-column: span 2;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- GIF DI ATAS -->
+    <img
+        class="gambar"
+        src="https://blogger.googleusercontent.com/img/a/AVvXsEhap-ApBVsJpvedPayzWA88TeGvQfF63a6nt7DwS8vZQfVy25KlNYcakruqx2j7VJy6iVcVOhlUOnAJ0jQWL7b_LEEzsd8VvsQm3OrcQEkztCTQc1YPGtsCZu7Yarbr7Y10JPzCodxbygW-BgyKCX_v2DiBHP53MBAx4x-A55yv4tUXbbY1mmUb3ZrcUrA"
+        alt="GIF">
+    
+    <!-- TKJ -->
+    <div class="countdown">
+
+        <div class="judul">TKJ</div>
+        <div class="tanggal">15 NOVEMBER 2026</div>
+
+        <div class="timer">
+            <div class="box">
+                <div class="angka" id="tkj-hari">00</div>
+                <div class="label">HARI</div>
+            </div>
+
+            <div class="box">
+                <div class="angka" id="tkj-jam">00</div>
+                <div class="label">JAM</div>
+            </div>
+
+            <div class="box">
+                <div class="angka" id="tkj-menit">00</div>
+                <div class="label">MENIT</div>
+            </div>
+
+            <div class="box">
+                <div class="angka" id="tkj-detik">00</div>
+                <div class="label">DETIK</div>
+            </div>
+
+            <div class="box">
+                <div class="angka" id="tkj-milidetik">000</div>
+                <div class="label">MILIDETIK</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DKV -->
+    <div class="countdown">
+
+        <div class="judul">DKV</div>
+        <div class="tanggal">30 NOVEMBER 2026</div>
+
+        <div class="timer">
+            <div class="box">
+                <div class="angka" id="dkv-hari">00</div>
+                <div class="label">HARI</div>
+            </div>
+
+            <div class="box">
+                <div class="angka" id="dkv-jam">00</div>
+                <div class="label">JAM</div>
+            </div>
+
+            <div class="box">
+                <div class="angka" id="dkv-menit">00</div>
+                <div class="label">MENIT</div>
+            </div>
+
+            <div class="box">
+                <div class="angka" id="dkv-detik">00</div>
+                <div class="label">DETIK</div>
+            </div>
+
+            <div class="box">
+                <div class="angka" id="dkv-milidetik">000</div>
+                <div class="label">MILIDETIK</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const targetTKJ = new Date("2026-11-15T00:00:00+07:00").getTime();
+    const targetDKV = new Date("2026-11-30T00:00:00+07:00").getTime();
+
+    function updateCountdown(prefix, target) {
+
+        let selisih = target - Date.now();
+
+        if (selisih <= 0) {
+            selisih = 0;
+        }
+
+        const hari = Math.floor(selisih / 86400000);
+        selisih %= 86400000;
+
+        const jam = Math.floor(selisih / 3600000);
+        selisih %= 3600000;
+
+        const menit = Math.floor(selisih / 60000);
+        selisih %= 60000;
+
+        const detik = Math.floor(selisih / 1000);
+        const milidetik = selisih % 1000;
+
+        document.getElementById(prefix + "-hari").textContent =
+            String(hari).padStart(2, "0");
+
+        document.getElementById(prefix + "-jam").textContent =
+            String(jam).padStart(2, "0");
+
+        document.getElementById(prefix + "-menit").textContent =
+            String(menit).padStart(2, "0");
+
+        document.getElementById(prefix + "-detik").textContent =
+            String(detik).padStart(2, "0");
+
+        document.getElementById(prefix + "-milidetik").textContent =
+            String(milidetik).padStart(3, "0");
+    }
+
+    function update() {
+        updateCountdown("tkj", targetTKJ);
+        updateCountdown("dkv", targetDKV);
+    }
+
+    update();
+
+    setInterval(update, 10);
+</script>
+
+</body>
+</html>

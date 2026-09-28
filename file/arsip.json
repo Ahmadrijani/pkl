@@ -1,5 +1,41 @@
 [
   {
+    "type": "link",
+    "title": "PKL",
+    "href": "https://ahmadrijaniofficial.blogspot.com/search/label/pkl",
+    "icon": "▶"
+  },
+  {
+    "type": "link",
+    "title": "Playlist PKL di YouTube",
+    "href": "https://www.youtube.com/playlist?list=PLcB9YfP3-OL8",
+    "icon": "▶"
+  },
+  {
+    "type": "link",
+    "title": "Dokumentasi Foto PKL",
+    "href": "https://ahmadrijaniofficial.blogspot.com/2026/07/PKL-AHMAD-RIJANI.html",
+    "icon": "IMG"
+  },
+  {
+    "type": "link",
+    "title": "Jurnal PKL — Tidak tersedia",
+    "disabled": true,
+    "icon": "—"
+  },
+  {
+    "type": "link",
+    "title": "Laporan PKL versi digital — Belum tersedia",
+    "disabled": true,
+    "icon": "—"
+  },
+  {
+    "type": "link",
+    "title": "HASIL DESAIN",
+    "href": "#hasil-desain",
+    "icon": "DESIGN"
+  },
+  {
     "type": "video",
     "id": "foPxTrJ9oJc",
     "title": "⚙️ Cara Setting",
@@ -20,18 +56,17 @@
   {
     "type": "video",
     "id": "foPxTrJ9oJc",
-    "title": "✂️ Proses Ngegunting (Link belum diisi)",
-    "href": "#",
-    "disabled": true
+    "title": "✂️ Proses Ngegunting",
+    "href": "https://www.youtube.com/watch?v=foPxTrJ9oJc&t=813s",
+    "disabled": false
   },
   {
     "type": "video",
     "id": "foPxTrJ9oJc",
-    "title": "📍 Origin X (Link belum diisi)",
-    "href": "#",
-    "disabled": true
+    "title": "📍 Origin X",
+    "href": "https://youtu.be/foPxTrJ9oJc?si=vJT3HoRIkOZLJ38b&t=1598",
+    "disabled": false
   },
-
   {
     "type": "video",
     "id": "RQjHYXaPaZw"
@@ -85,69 +120,62 @@
   },
   {
     "type": "link",
-    "title": "Playlist PKL di YouTube",
-    "href": "https://www.youtube.com/playlist?list=PLcB9YfP3-OL8",
+    "title": "Penghitung Biaya S8000",
+    "href": "https://ahmadrijani.github.io/pkl/Website/Penghitung-Biaya-s8000.html",
     "icon": "▶"
   },
   {
     "type": "link",
-    "title": "Dokumentasi Foto PKL",
-    "href": "https://ahmadrijaniofficial.blogspot.com/2026/07/PKL-AHMAD-RIJANI.html",
-    "icon": "IMG"
+    "title": "Jadwal Lama",
+    "href": "https://ahmadrijani.github.io/pkl/Website/JADWAL_LAMA.html",
+    "icon": "▶"
   },
   {
     "type": "link",
-    "title": "Jurnal PKL — Tidak tersedia",
-    "disabled": true,
-    "icon": "—"
+    "title": "Jadwal",
+    "href": "https://ahmadrijani.github.io/pkl/Website/JADWAL.html",
+    "icon": "▶"
   },
   {
     "type": "link",
-    "title": "Laporan PKL versi digital — Belum tersedia",
-    "disabled": true,
-    "icon": "—"
+    "title": "Malas Buat SW",
+    "href": "https://ahmadrijani.github.io/pkl/Website/malas%20buat%20sw.html",
+    "icon": "▶"
   },
-
   {
     "type": "link",
-    "title": "HASIL DESAIN",
-    "href": "#hasil-desain",
-    "icon": "DESIGN"
+    "title": "Arsip",
+    "href": "https://ahmadrijani.github.io/pkl/Website/Arsip.html",
+    "icon": "▶"
   },
   {
-        "type": "link",
-        "title": "Penghitung Biaya S8000",
-        "href": "https://ahmadrijani.github.io/pkl/Website/Penghitung-Biaya-s8000.html",
-        "icon": "▶"
-    },
-    {
-        "type": "link",
-        "title": "Jadwal Lama",
-        "href": "https://ahmadrijani.github.io/pkl/Website/JADWAL_LAMA.html",
-        "icon": "▶"
-    },
-    {
-        "type": "link",
-        "title": "Jadwal",
-        "href": "https://ahmadrijani.github.io/pkl/Website/JADWAL.html",
-        "icon": "▶"
-    },
-    {
-        "type": "link",
-        "title": "Malas Buat SW",
-        "href": "https://ahmadrijani.github.io/pkl/Website/malas%20buat%20sw.html",
-        "icon": "▶"
-    },
-    {
-        "type": "link",
-        "title": "Arsip",
-        "href": "https://ahmadrijani.github.io/pkl/Website/Arsip.html",
-        "icon": "▶"
-    },
-    {
-        "type": "video",
-        "id": "l_zHUXb3t6k",
-        "href": "https://youtu.be/l_zHUXb3t6k?si=fg2LN62-tIZTGT9J",
-        "title": "Memuat judul dari YouTube"
-    }
+    "type": "video",
+    "id": "l_zHUXb3t6k",
+    "href": "https://youtu.be/l_zHUXb3t6k?si=fg2LN62-tIZTGT9J",
+    "title": "Memuat judul dari YouTube"
+  },
+  {
+    "type": "video",
+    "id": "gcdf93mNIHQ",
+    "title": "Memuat judul dari YouTube",
+    "href": "https://youtu.be/gcdf93mNIHQ?si=5HJYPX6h3kNdp3ct"
+  },
+  {
+    "type": "video",
+    "id": "34QMPS-2COk",
+    "title": "Memuat judul dari YouTube",
+    "href": "https://youtu.be/34QMPS-2COk?si=B4KmKe9WvTfSMzH3"
+  },
+  {
+    "type": "video",
+    "id": "foPxTrJ9oJc",
+    "title": "contoh",
+    "href": "https://youtu.be/foPxTrJ9oJc?si=f2X2YL4cvaKbAt4J"
+  },
+  {
+    "type": "video",
+    "id": "gcdf93mNIHQ",
+    "title": "Memuat judul dari YouTube",
+    "href": "https://youtu.be/gcdf93mNIHQ?si=ZEdFPYaZWXDVn2E_"
+  }
 ]

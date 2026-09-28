@@ -115,9 +115,39 @@
     "icon": "DESIGN"
   },
   {
-    "type": "video",
-    "id": "l_zHUXb3t6k",
-    "href": "https://youtu.be/l_zHUXb3t6k?si=fg2LN62-tIZTGT9J",
-    "title": "Memuat judul dari YouTube"
-  }
+        "type": "link",
+        "title": "Penghitung Biaya S8000",
+        "href": "https://ahmadrijani.github.io/pkl/Website/Penghitung-Biaya-s8000.html",
+        "icon": "▶"
+    },
+    {
+        "type": "link",
+        "title": "Jadwal Lama",
+        "href": "https://ahmadrijani.github.io/pkl/Website/JADWAL_LAMA.html",
+        "icon": "▶"
+    },
+    {
+        "type": "link",
+        "title": "Jadwal",
+        "href": "https://ahmadrijani.github.io/pkl/Website/JADWAL.html",
+        "icon": "▶"
+    },
+    {
+        "type": "link",
+        "title": "Malas Buat SW",
+        "href": "https://ahmadrijani.github.io/pkl/Website/malas%20buat%20sw.html",
+        "icon": "▶"
+    },
+    {
+        "type": "link",
+        "title": "Arsip",
+        "href": "https://ahmadrijani.github.io/pkl/Website/Arsip.html",
+        "icon": "▶"
+    },
+    {
+        "type": "video",
+        "id": "l_zHUXb3t6k",
+        "href": "https://youtu.be/l_zHUXb3t6k?si=fg2LN62-tIZTGT9J",
+        "title": "Memuat judul dari YouTube"
+    }
 ]

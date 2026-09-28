@@ -35,6 +35,24 @@
             border-radius: 20px;
         }
 
+        /* PERINGATAN */
+        .peringatan {
+            margin-bottom: 25px;
+            padding: 14px 18px;
+            text-align: center;
+            border-radius: 16px;
+            background: rgba(255, 180, 0, 0.08);
+            border: 1px solid rgba(255, 180, 0, 0.25);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .peringatan span {
+            font-weight: bold;
+            color: white;
+        }
+
         /* BOX NAMA */
         .countdown {
             margin-bottom: 25px;
@@ -85,12 +103,63 @@
             opacity: 0.65;
         }
 
+        /* VERSI 3 HARI SEMINGGU */
+        .versi-3-hari {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .versi-judul {
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            opacity: 0.75;
+            margin-bottom: 12px;
+        }
+
+        .timer-3-hari {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .box-3-hari {
+            padding: 15px 8px;
+            text-align: center;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .angka-3-hari {
+            font-size: clamp(20px, 3.5vw, 34px);
+            font-weight: bold;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .label-3-hari {
+            margin-top: 5px;
+            font-size: 10px;
+            opacity: 0.6;
+        }
+
         @media (max-width: 650px) {
             .timer {
                 grid-template-columns: repeat(2, 1fr);
             }
 
             .box:last-child {
+                grid-column: span 2;
+            }
+
+            .timer-3-hari {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .box-3-hari:last-child {
                 grid-column: span 2;
             }
         }
@@ -106,14 +175,24 @@
         class="gambar"
         src="https://blogger.googleusercontent.com/img/a/AVvXsEhap-ApBVsJpvedPayzWA88TeGvQfF63a6nt7DwS8vZQfVy25KlNYcakruqx2j7VJy6iVcVOhlUOnAJ0jQWL7b_LEEzsd8VvsQm3OrcQEkztCTQc1YPGtsCZu7Yarbr7Y10JPzCodxbygW-BgyKCX_v2DiBHP53MBAx4x-A55yv4tUXbbY1mmUb3ZrcUrA"
         alt="GIF">
-    
+
+    <!-- PERINGATAN -->
+    <div class="peringatan">
+        <span>⚠ PERINGATAN:</span>
+        Versi "3 hari seminggu" adalah perkiraan.
+        Hasil dapat berbeda karena tidak memperhitungkan hari libur,
+        perubahan jadwal, atau hari aktif sebenarnya.
+    </div>
+
     <!-- TKJ -->
     <div class="countdown">
 
         <div class="judul">TKJ</div>
         <div class="tanggal">15 NOVEMBER 2026</div>
 
+        <!-- COUNTDOWN BIASA -->
         <div class="timer">
+
             <div class="box">
                 <div class="angka" id="tkj-hari">00</div>
                 <div class="label">HARI</div>
@@ -138,6 +217,45 @@
                 <div class="angka" id="tkj-milidetik">000</div>
                 <div class="label">MILIDETIK</div>
             </div>
+
+        </div>
+
+        <!-- VERSI 3 HARI -->
+        <div class="versi-3-hari">
+
+            <div class="versi-judul">
+                VERSI HANYA 3 HARI SEMINGGU
+            </div>
+
+            <div class="timer-3-hari">
+
+                <div class="box-3-hari">
+                    <div class="angka-3-hari" id="tkj-3hari">00</div>
+                    <div class="label-3-hari">HARI</div>
+                </div>
+
+                <div class="box-3-hari">
+                    <div class="angka-3-hari" id="tkj-3jam">00</div>
+                    <div class="label-3-hari">JAM</div>
+                </div>
+
+                <div class="box-3-hari">
+                    <div class="angka-3-hari" id="tkj-3menit">00</div>
+                    <div class="label-3-hari">MENIT</div>
+                </div>
+
+                <div class="box-3-hari">
+                    <div class="angka-3-hari" id="tkj-3detik">00</div>
+                    <div class="label-3-hari">DETIK</div>
+                </div>
+
+                <div class="box-3-hari">
+                    <div class="angka-3-hari" id="tkj-3milidetik">000</div>
+                    <div class="label-3-hari">MILIDETIK</div>
+                </div>
+
+            </div>
+
         </div>
 
     </div>
@@ -148,7 +266,9 @@
         <div class="judul">DKV</div>
         <div class="tanggal">30 NOVEMBER 2026</div>
 
+        <!-- COUNTDOWN BIASA -->
         <div class="timer">
+
             <div class="box">
                 <div class="angka" id="dkv-hari">00</div>
                 <div class="label">HARI</div>
@@ -173,6 +293,45 @@
                 <div class="angka" id="dkv-milidetik">000</div>
                 <div class="label">MILIDETIK</div>
             </div>
+
+        </div>
+
+        <!-- VERSI 3 HARI -->
+        <div class="versi-3-hari">
+
+            <div class="versi-judul">
+                VERSI HANYA 3 HARI SEMINGGU
+            </div>
+
+            <div class="timer-3-hari">
+
+                <div class="box-3-hari">
+                    <div class="angka-3-hari" id="dkv-3hari">00</div>
+                    <div class="label-3-hari">HARI</div>
+                </div>
+
+                <div class="box-3-hari">
+                    <div class="angka-3-hari" id="dkv-3jam">00</div>
+                    <div class="label-3-hari">JAM</div>
+                </div>
+
+                <div class="box-3-hari">
+                    <div class="angka-3-hari" id="dkv-3menit">00</div>
+                    <div class="label-3-hari">MENIT</div>
+                </div>
+
+                <div class="box-3-hari">
+                    <div class="angka-3-hari" id="dkv-3detik">00</div>
+                    <div class="label-3-hari">DETIK</div>
+                </div>
+
+                <div class="box-3-hari">
+                    <div class="angka-3-hari" id="dkv-3milidetik">000</div>
+                    <div class="label-3-hari">MILIDETIK</div>
+                </div>
+
+            </div>
+
         </div>
 
     </div>
@@ -183,6 +342,81 @@
     const targetTKJ = new Date("2026-11-15T00:00:00+07:00").getTime();
     const targetDKV = new Date("2026-11-30T00:00:00+07:00").getTime();
 
+    const SATU_HARI = 86400000;
+    const SATU_JAM = 3600000;
+    const SATU_MENIT = 60000;
+    const SATU_DETIK = 1000;
+
+    function hitungVersi3HariSeminggu(selisih) {
+
+        /*
+            7 hari kalender = 3 hari aktif
+
+            Contoh:
+            47 hari
+            47 / 7 = 6 minggu sisa 5 hari
+
+            6 minggu = 18 hari aktif
+            sisa 5 hari = maksimal 3 hari aktif
+
+            total = 21 hari aktif
+        */
+
+        const mingguPenuh = Math.floor(selisih / (7 * SATU_HARI));
+
+        let sisaWaktu = selisih % (7 * SATU_HARI);
+
+        const sisaHariKalender = Math.floor(sisaWaktu / SATU_HARI);
+
+        const hariAktifDariMinggu = mingguPenuh * 3;
+
+        const hariAktifDariSisa =
+            Math.min(sisaHariKalender, 3);
+
+        let totalHariAktif =
+            hariAktifDariMinggu + hariAktifDariSisa;
+
+        /*
+            Ambil waktu di luar bagian hari kalender.
+            Ini tetap dipakai sebagai jam, menit, detik,
+            dan milidetik.
+        */
+
+        const waktuSisaHarian =
+            sisaWaktu % SATU_HARI;
+
+        const jam =
+            Math.floor(waktuSisaHarian / SATU_JAM);
+
+        const menit =
+            Math.floor(
+                (waktuSisaHarian % SATU_JAM) / SATU_MENIT
+            );
+
+        const detik =
+            Math.floor(
+                (waktuSisaHarian % SATU_MENIT) / SATU_DETIK
+            );
+
+        const milidetik =
+            Math.floor(
+                waktuSisaHarian % SATU_DETIK
+            );
+
+        /*
+            Kalau sisa hari kalender lebih dari 3,
+            kelebihannya dianggap hari tidak aktif.
+        */
+
+        return {
+            hari: totalHariAktif,
+            jam: jam,
+            menit: menit,
+            detik: detik,
+            milidetik: milidetik
+        };
+    }
+
     function updateCountdown(prefix, target) {
 
         let selisih = target - Date.now();
@@ -191,17 +425,28 @@
             selisih = 0;
         }
 
-        const hari = Math.floor(selisih / 86400000);
-        selisih %= 86400000;
+        /* =========================
+           COUNTDOWN NORMAL
+        ========================= */
 
-        const jam = Math.floor(selisih / 3600000);
-        selisih %= 3600000;
+        const hari = Math.floor(
+            selisih / SATU_HARI
+        );
 
-        const menit = Math.floor(selisih / 60000);
-        selisih %= 60000;
+        const jam = Math.floor(
+            (selisih % SATU_HARI) / SATU_JAM
+        );
 
-        const detik = Math.floor(selisih / 1000);
-        const milidetik = selisih % 1000;
+        const menit = Math.floor(
+            (selisih % SATU_JAM) / SATU_MENIT
+        );
+
+        const detik = Math.floor(
+            (selisih % SATU_MENIT) / SATU_DETIK
+        );
+
+        const milidetik =
+            selisih % SATU_DETIK;
 
         document.getElementById(prefix + "-hari").textContent =
             String(hari).padStart(2, "0");
@@ -217,6 +462,29 @@
 
         document.getElementById(prefix + "-milidetik").textContent =
             String(milidetik).padStart(3, "0");
+
+
+        /* =========================
+           VERSI 3 HARI SEMINGGU
+        ========================= */
+
+        const versi3Hari =
+            hitungVersi3HariSeminggu(selisih);
+
+        document.getElementById(prefix + "-3hari").textContent =
+            String(versi3Hari.hari).padStart(2, "0");
+
+        document.getElementById(prefix + "-3jam").textContent =
+            String(versi3Hari.jam).padStart(2, "0");
+
+        document.getElementById(prefix + "-3menit").textContent =
+            String(versi3Hari.menit).padStart(2, "0");
+
+        document.getElementById(prefix + "-3detik").textContent =
+            String(versi3Hari.detik).padStart(2, "0");
+
+        document.getElementById(prefix + "-3milidetik").textContent =
+            String(versi3Hari.milidetik).padStart(3, "0");
     }
 
     function update() {

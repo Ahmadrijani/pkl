@@ -504,6 +504,31 @@
       word-break: break-word;
     }
 
+    .js-settings-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 34px;
+      padding: 7px 12px;
+      border: 1px solid #555;
+      border-radius: 3px;
+      background: linear-gradient(#303030, #121212);
+      color: #eee;
+      text-decoration: none !important;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .js-settings-button:hover {
+      background: linear-gradient(#3a3a3a, #181818);
+      border-color: #6a6a6a;
+    }
+
+    .js-settings-button:active { transform: translateY(1px); }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
     /* JS DISABLED OVERLAY */
@@ -833,20 +858,160 @@
       .help-grid { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 410px) {
-      .card { display: block; }
+    /* =========================================================
+       MOBILE FIX — cegah thumbnail menimpa teks
+       ========================================================= */
+    @media (max-width: 760px) {
+      .page {
+        width: calc(100% - 10px);
+        margin: 5px auto 18px;
+      }
+
+      .topbar { display: none; }
+
+      .header-panel {
+        padding: 5px;
+        background: #000;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .toolbar {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 5px;
+        width: 100%;
+        margin: 0;
+      }
+
+      .search-box {
+        flex: 1 1 auto;
+        width: auto;
+        min-width: 0;
+      }
+
+      .search-box input {
+        width: 100%;
+        height: 34px;
+        padding: 6px 38px 6px 30px;
+        font-size: 13px;
+        border-radius: 4px;
+      }
+
+      .search-icon {
+        left: 9px;
+        right: auto;
+        top: 8px;
+      }
+
+      .search-clear {
+        right: 5px;
+        top: 4px;
+      }
+
+      .toolbar > .button {
+        display: none;
+      }
+
+      .summary { display: none; }
+
+      .section {
+        margin-top: 5px;
+        border-radius: 3px;
+      }
+
+      .section-head {
+        flex-direction: row;
+        align-items: center;
+        padding: 6px 8px;
+        gap: 6px;
+      }
+
+      .section-head h2 {
+        min-width: 0;
+        white-space: nowrap;
+      }
+
+      .section-head span {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        padding: 6px;
+      }
+
+      .card {
+        display: grid;
+        grid-template-columns: 96px minmax(0, 1fr);
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        min-width: 0;
+        padding: 5px;
+      }
+
       .thumb-link,
       .asset-icon,
       .skeleton-thumb {
         display: block;
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 8px;
+        flex: none;
+        width: 96px;
+        max-width: 96px;
+        min-width: 0;
+        aspect-ratio: 16 / 9;
+        margin: 0;
       }
 
-      .thumb-wrap { width: 100%; }
-      .content { width: 100%; }
+      .thumb-wrap {
+        width: 96px;
+        max-width: 96px;
+      }
+
+      .content {
+        width: auto;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      .title {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      .watch {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
       .external { display: none; }
+
+      .help-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 380px) {
+      .page { width: calc(100% - 6px); }
+      .grid { padding: 4px; }
+      .card {
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 7px;
+      }
+      .thumb-link,
+      .asset-icon,
+      .skeleton-thumb,
+      .thumb-wrap {
+        width: 82px;
+        max-width: 82px;
+      }
+      .title { font-size: 12px; }
+      .watch { font-size: 9px; }
     }
   </style>
 </head>
@@ -856,7 +1021,15 @@
     <div class="noscript-box">
       <strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> JavaScript sedang mati.</strong><br>
       Halaman ini membutuhkan JavaScript untuk membaca arsip, pencarian, dan memuat daftar dokumentasi.
-      Aktifkan JavaScript pada browser, lalu muat ulang halaman.
+      Aktifkan JavaScript pada pengaturan browser, lalu muat ulang halaman.
+      <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+        <a class="js-settings-button" href="https://support.google.com/chrome/answer/95346" target="_blank" rel="noopener">
+          <i class="fa-solid fa-gear" aria-hidden="true"></i> Cara Aktifkan JavaScript
+        </a>
+        <a class="js-settings-button" href="https://support.microsoft.com/id-id/sharepoint/legacy/enable-javascript" target="_blank" rel="noopener">
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Panduan Browser
+        </a>
+      </div>
     </div>
   </noscript>
 
@@ -1341,7 +1514,7 @@
             <button class="button primary" type="button" onclick="loadArchive()"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Coba Lagi</button>
             <button class="button" type="button" onclick="window.location.reload()"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Muat Ulang</button>
             <button class="button" type="button" onclick="cekKoneksi()"><i class="fa-solid fa-globe" aria-hidden="true"></i> Cek Internet</button>
-            <button class="button" type="button" onclick="nyalakanJavaScript()"><i class="fa-solid fa-code" aria-hidden="true"></i> Bantuan JavaScript</button>
+            <button class="button" type="button" onclick="bukaPengaturanJavaScript()"><i class="fa-solid fa-gear" aria-hidden="true"></i> Buka Pengaturan JavaScript</button>
           </div>
 
           <div class="details">
@@ -1354,12 +1527,26 @@
       sectionHint.textContent = "Terjadi error";
     }
 
+    function bukaPengaturanJavaScript() {
+      const ua = navigator.userAgent || "";
+      let settingsUrl = "";
+
+      if (/Edg\\//i.test(ua)) {
+        settingsUrl = "edge://settings/content/javascript";
+      } else if (/Chrome\\//i.test(ua)) {
+        settingsUrl = "chrome://settings/content/javascript";
+      }
+
+      if (settingsUrl) {
+        const tab = window.open(settingsUrl, "_blank");
+        if (tab) return;
+      }
+
+      window.open("https://support.google.com/chrome/answer/95346", "_blank", "noopener");
+    }
+
     function nyalakanJavaScript() {
-      alert(
-        "JavaScript tidak dapat dinyalakan otomatis dari halaman web.\\n\\n" +
-        "Chrome/Edge: buka Pengaturan → Privasi & keamanan / Setelan situs → JavaScript → Izinkan.\\n\\n" +
-        "Setelah itu, muat ulang halaman."
-      );
+      bukaPengaturanJavaScript();
     }
 
     async function cekKoneksi() {

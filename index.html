@@ -858,6 +858,96 @@
       .help-grid { grid-template-columns: 1fr; }
     }
 
+    .help-mobile-button {
+      white-space: nowrap;
+    }
+
+    .help-panel {
+      margin: 7px 0 0;
+      border: 1px solid #292929;
+      background: linear-gradient(#121212, #090909);
+      color: #aaa;
+      border-radius: 3px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.45);
+    }
+
+    .help-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 9px;
+      border-bottom: 1px solid #242424;
+      color: #ddd;
+      background: linear-gradient(#171717, #0d0d0d);
+    }
+
+    .help-close {
+      width: 26px;
+      height: 26px;
+      border: 1px solid #333;
+      border-radius: 3px;
+      background: #101010;
+      color: #aaa;
+      cursor: pointer;
+    }
+
+    .help-close:hover { color: #fff; border-color: #555; }
+
+    .help-panel-body { padding: 8px; }
+
+    .help-note {
+      margin: 0 0 6px;
+      padding: 7px 8px;
+      border: 1px solid #252525;
+      background: #0c0c0c;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .help-note b { color: #ddd; }
+
+    .help-panel-actions,
+    .noscript-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .help-panel-actions .button,
+    .js-settings-button { text-decoration: none; }
+
+    .noscript-box p { margin: 7px 0 0; }
+
+    .noscript-note {
+      display: block;
+      margin-top: 9px;
+      color: #8a7e62;
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .js-settings-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid #454545;
+      border-radius: 3px;
+      background: linear-gradient(#242424, #111111);
+      color: #eee;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .js-settings-button:hover {
+      background: linear-gradient(#2d2d2d, #151515);
+      border-color: #5a5a5a;
+      text-decoration: none;
+    }
+
     /* =========================================================
        MOBILE FIX — cegah thumbnail menimpa teks
        ========================================================= */
@@ -909,9 +999,19 @@
         top: 4px;
       }
 
-      .toolbar > .button {
-        display: none;
+      #retryTop,
+      .help-mobile-button {
+        display: inline-flex;
+        flex: 0 0 34px;
+        width: 34px;
+        height: 34px;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
       }
+
+      .help-mobile-button .help-label { display: none; }
 
       .summary { display: none; }
 
@@ -1019,17 +1119,18 @@
 <body>
   <noscript>
     <div class="noscript-box">
-      <strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> JavaScript sedang mati.</strong><br>
-      Halaman ini membutuhkan JavaScript untuk membaca arsip, pencarian, dan memuat daftar dokumentasi.
-      Aktifkan JavaScript pada pengaturan browser, lalu muat ulang halaman.
-      <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
-        <a class="js-settings-button" href="https://support.google.com/chrome/answer/95346" target="_blank" rel="noopener">
-          <i class="fa-solid fa-gear" aria-hidden="true"></i> Cara Aktifkan JavaScript
+      <strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> JavaScript sedang mati.</strong>
+      <p>Halaman ini membutuhkan JavaScript untuk membaca arsip, pencarian, dan memuat daftar dokumentasi.</p>
+      <p><b><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Untuk HP:</b> buka pengaturan browser dan izinkan JavaScript untuk situs ini, lalu kembali ke halaman ini dan muat ulang.</p>
+      <div class="noscript-actions">
+        <a class="js-settings-button" href="chrome://settings/content/javascript">
+          <i class="fa-solid fa-gear" aria-hidden="true"></i> Buka Pengaturan JavaScript
         </a>
-        <a class="js-settings-button" href="https://support.microsoft.com/id-id/sharepoint/legacy/enable-javascript" target="_blank" rel="noopener">
-          <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Panduan Browser
+        <a class="js-settings-button" href="https://support.google.com/chrome/answer/95346" target="_blank" rel="noopener">
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Bantuan / Panduan HP
         </a>
       </div>
+      <small class="noscript-note">JavaScript tidak bisa dinyalakan otomatis oleh halaman web; browser harus mengizinkannya.</small>
     </div>
   </noscript>
 
@@ -1061,9 +1162,13 @@
             <i class="fa-solid fa-xmark" aria-hidden="true"></i>
           </button>
         </label>
-        <button class="button primary" id="retryTop" type="button">
+        <button class="button primary" id="retryTop" type="button" aria-label="Muat ulang" title="Muat ulang">
           <i class="fa-solid fa-rotate" aria-hidden="true"></i>
           <span class="sr-only">Muat ulang</span>
+        </button>
+        <button class="button help-mobile-button" id="helpButton" type="button" aria-controls="helpPanel" aria-expanded="false" title="Bantuan JavaScript">
+          <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+          <span class="help-label">Bantuan</span>
         </button>
       </div>
 
@@ -1074,7 +1179,31 @@
     </header>
 
     <main>
-      <section class="section" id="dokumentasiSection">
+      <div class="help-panel" id="helpPanel" hidden role="dialog" aria-modal="false" aria-labelledby="helpTitle">
+      <div class="help-panel-head">
+        <strong id="helpTitle"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Bantuan</strong>
+        <button class="help-close" id="helpClose" type="button" aria-label="Tutup bantuan" title="Tutup bantuan">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="help-panel-body">
+        <div class="help-note">
+          <b><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> HP:</b> bila JavaScript tidak aktif, buka pengaturan browser dan izinkan JavaScript untuk situs ini. Setelah itu kembali ke halaman ini dan tekan Muat Ulang.
+        </div>
+        <div class="help-note">
+          <b><i class="fa-solid fa-desktop" aria-hidden="true"></i> PC:</b> pada Chrome/Edge, gunakan tombol pengaturan untuk membuka menu JavaScript.
+        </div>
+        <div class="help-note js-permission-note">
+          <b><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Penting:</b> halaman web tidak dapat meminta izin JavaScript secara otomatis. Tombol ini hanya membuka pengaturan atau panduan browser.
+        </div>
+        <div class="help-panel-actions">
+          <button class="button primary" id="helpSettings" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i> Buka Pengaturan JavaScript</button>
+          <a class="button" href="https://support.google.com/chrome/answer/95346" target="_blank" rel="noopener"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Bantuan HP</a>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" id="dokumentasiSection">
         <div class="section-head">
           <h2><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Arsip</h2>
           <span id="sectionHint">Memuat arsip…</span>
@@ -1103,6 +1232,10 @@
 
     const dokumentasiGrid = document.getElementById("dokumentasiGrid");
     const searchInput = document.getElementById("searchInput");
+    const helpButton = document.getElementById("helpButton");
+    const helpPanel = document.getElementById("helpPanel");
+    const helpClose = document.getElementById("helpClose");
+    const helpSettings = document.getElementById("helpSettings");
     const clearSearch = document.getElementById("clearSearch");
     const retryTop = document.getElementById("retryTop");
     const resultCount = document.getElementById("resultCount");
@@ -1476,6 +1609,16 @@
       throw err;
     }
 
+    function setHelpOpen(open) {
+      if (!helpPanel || !helpButton) return;
+      helpPanel.hidden = !open;
+      helpButton.setAttribute("aria-expanded", String(open));
+    }
+
+    function tampilkanBantuan() {
+      setHelpOpen(true);
+    }
+
     /* =========================================================
        ERROR HELPER
        ========================================================= */
@@ -1505,7 +1648,7 @@
 
           <div class="help-grid">
             <div class="help-item"><b>🌐 Internet:</b> pastikan Wi‑Fi/data aktif lalu tekan <b>Coba Lagi</b>.</div>
-            <div class="help-item"><b>⚙ JavaScript:</b> pastikan JavaScript diizinkan untuk halaman ini.</div>
+            <div class="help-item"><b><i class="fa-solid fa-code" aria-hidden="true"></i> JavaScript:</b> bila JavaScript diblokir, buka pengaturan browser lalu izinkan untuk situs ini. Gunakan tombol <b>Buka Pengaturan JavaScript</b> di bawah.</div>
             <div class="help-item"><b>🔄 Browser:</b> muat ulang halaman (Ctrl+R) setelah memperbaiki koneksi.</div>
             <div class="help-item"><b>📂 Lokal:</b> bila dibuka dari file, jalankan melalui web server lokal agar fetch JSON diizinkan.</div>
           </div>
@@ -1515,6 +1658,7 @@
             <button class="button" type="button" onclick="window.location.reload()"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Muat Ulang</button>
             <button class="button" type="button" onclick="cekKoneksi()"><i class="fa-solid fa-globe" aria-hidden="true"></i> Cek Internet</button>
             <button class="button" type="button" onclick="bukaPengaturanJavaScript()"><i class="fa-solid fa-gear" aria-hidden="true"></i> Buka Pengaturan JavaScript</button>
+            <button class="button" type="button" onclick="tampilkanBantuan()"><i class="fa-solid fa-circle-question" aria-hidden="true"></i> Bantuan HP</button>
           </div>
 
           <div class="details">
@@ -1529,17 +1673,29 @@
 
     function bukaPengaturanJavaScript() {
       const ua = navigator.userAgent || "";
+      const isAndroid = /Android/i.test(ua);
+      const isIOS = /iPhone|iPad|iPod/i.test(ua);
+      const isEdge = /Edg\//i.test(ua);
+      const isChrome = /Chrome\//i.test(ua) && !isEdge;
       let settingsUrl = "";
 
-      if (/Edg\\//i.test(ua)) {
+      if (isEdge) {
         settingsUrl = "edge://settings/content/javascript";
-      } else if (/Chrome\\//i.test(ua)) {
+      } else if (isChrome) {
         settingsUrl = "chrome://settings/content/javascript";
       }
 
       if (settingsUrl) {
         const tab = window.open(settingsUrl, "_blank");
         if (tab) return;
+      }
+
+      if (isAndroid) {
+        alert("Untuk HP Android:\n\nChrome: ⋮ → Setelan → Setelan situs → JavaScript → Izinkan.\nSetelah itu kembali ke halaman ini dan tekan Muat Ulang.\n\nHalaman web tidak bisa menyalakan JavaScript sendiri.");
+      } else if (isIOS) {
+        alert("Untuk iPhone/iPad:\n\nBuka Pengaturan → Apps → Safari → Advanced → JavaScript, lalu aktifkan.\nSetelah itu kembali ke halaman ini dan muat ulang.");
+      } else {
+        alert("JavaScript tidak bisa dinyalakan otomatis oleh halaman web.\n\nBuka pengaturan browser, izinkan JavaScript untuk situs ini, lalu muat ulang halaman.");
       }
 
       window.open("https://support.google.com/chrome/answer/95346", "_blank", "noopener");
@@ -1610,6 +1766,18 @@
     /* =========================================================
        EVENT
        ========================================================= */
+    if (helpButton) {
+      helpButton.addEventListener("click", () => setHelpOpen(helpPanel ? helpPanel.hidden : true));
+    }
+
+    if (helpClose) {
+      helpClose.addEventListener("click", () => setHelpOpen(false));
+    }
+
+    if (helpSettings) {
+      helpSettings.addEventListener("click", bukaPengaturanJavaScript);
+    }
+
     searchInput.addEventListener("input", filterDokumentasi);
 
     function hapusPencarianDanTampilkanSemua() {

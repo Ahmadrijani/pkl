@@ -185,6 +185,38 @@ body.dragging-mobile-window #desktopEnvironment .taskbar{position:fixed;left:0;r
 @media(max-width:600px){.shutdown-card,.power-card{padding:27px 18px}.shutdown-title{font-size:20px}}
 
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Smooth Aero sliders: keep the same input node alive while dragging. */
+.odds-row input[type="range"]{
+ -webkit-appearance:none;appearance:none;display:block;width:100%;height:30px;min-height:30px;margin:0;padding:0;border:0;border-radius:0;
+ background:transparent;box-shadow:none;accent-color:transparent;cursor:ew-resize;touch-action:pan-y;-webkit-tap-highlight-color:transparent;
+ --nilai:25%;
+}
+.odds-row input[type="range"]:focus{outline:none;box-shadow:none}
+.odds-row input[type="range"]::-webkit-slider-runnable-track{
+ height:8px;border:1px solid #a8cfe5;border-radius:99px;
+ background:linear-gradient(90deg,#0879bf 0%,#6bd7ff var(--nilai),#dceef8 var(--nilai),#edf8ff 100%);
+ box-shadow:inset 0 1px 2px #174d6a25,0 1px 0 #fff;
+}
+.odds-row input[type="range"]::-moz-range-track{
+ height:8px;border:1px solid #a8cfe5;border-radius:99px;background:#edf8ff;box-shadow:inset 0 1px 2px #174d6a25,0 1px 0 #fff;
+}
+.odds-row input[type="range"]::-moz-range-progress{height:8px;border:1px solid #a8cfe5;border-right:0;border-radius:99px 0 0 99px;background:linear-gradient(90deg,#0879bf,#6bd7ff)}
+.odds-row input[type="range"]::-webkit-slider-thumb{
+ -webkit-appearance:none;appearance:none;width:20px;height:20px;margin-top:-7px;border:1px solid #fff;border-radius:50%;
+ background:radial-gradient(circle at 35% 25%,#fff 0%,#e7faff 22%,#8ddcff 43%,#168bd1 68%,#075b9b 100%);
+ box-shadow:0 0 0 1px #287eae,0 2px 5px #124c7060,inset 0 1px 1px #fff;transition:box-shadow .12s ease,filter .12s ease;
+}
+.odds-row input[type="range"]::-moz-range-thumb{
+ width:18px;height:18px;border:1px solid #fff;border-radius:50%;
+ background:radial-gradient(circle at 35% 25%,#fff 0%,#e7faff 22%,#8ddcff 43%,#168bd1 68%,#075b9b 100%);
+ box-shadow:0 0 0 1px #287eae,0 2px 5px #124c7060,inset 0 1px 1px #fff;transition:box-shadow .12s ease,filter .12s ease;
+}
+.odds-row input[type="range"]:hover::-webkit-slider-thumb,.odds-row input[type="range"]:focus-visible::-webkit-slider-thumb,.odds-row input[type="range"]:active::-webkit-slider-thumb{box-shadow:0 0 0 3px #63c8ff55,0 2px 7px #124c7080,inset 0 1px 1px #fff;filter:brightness(1.06)}
+.odds-row input[type="range"]:hover::-moz-range-thumb,.odds-row input[type="range"]:focus-visible::-moz-range-thumb,.odds-row input[type="range"]:active::-moz-range-thumb{box-shadow:0 0 0 3px #63c8ff55,0 2px 7px #124c7080,inset 0 1px 1px #fff;filter:brightness(1.06)}
+.odds-row input[type="range"]:focus-visible{outline:2px solid #55b9f2;outline-offset:3px;border-radius:5px}
+.odds-track i{transition:width .08s linear}
+
 </style>
 </head>
 <body>
@@ -366,20 +398,46 @@ function renderDaftarNama(){
 function renderPengaturan(){
  const wadah=$('daftarPeluang');wadah.innerHTML='';
  if(!namaNama.length){const p=document.createElement('p');p.className='hint';p.textContent='Belum ada peserta. Tambahkan nama di tab Nama.';wadah.append(p);$('totalPeluang').textContent='0%';$('totalPeluang').className='odds-total invalid';$('pesanPeluang').textContent='Belum ada peserta.';return}
- namaNama.forEach((nama,i)=>{
-  const row=document.createElement('div');row.className='odds-row';const nam=document.createElement('div');nam.className='odds-name';nam.textContent=nama;const small=document.createElement('small');small.textContent=`Peluang aktif ${Number(peluangNama[nama]||0)}%`;nam.append(small);
-  const slider=document.createElement('input');slider.type='range';slider.min='0';slider.max='100';slider.step='1';slider.value=Number.isFinite(Number(draftPeluang[nama]))?draftPeluang[nama]:0;slider.setAttribute('aria-label',`Slider persentase peluang ${nama}`);slider.disabled=sedangPutar;
-  const input=document.createElement('input');input.type='number';input.className='odds-number';input.min='0';input.max='100';input.step='1';input.inputMode='decimal';input.value=slider.value;input.setAttribute('aria-label',`Persentase peluang ${nama}`);input.disabled=sedangPutar;
+ namaNama.forEach((nama)=>{
+  const nilaiAwal=Math.max(0,Math.min(100,Math.round((Number(draftPeluang[nama])||0)*10)/10));
+  const row=document.createElement('div');row.className='odds-row';row.dataset.nama=nama;
+  const nam=document.createElement('div');nam.className='odds-name';nam.textContent=nama;
+  const small=document.createElement('small');small.textContent=`Rancangan peluang ${nilaiAwal.toLocaleString('id-ID')}%`;nam.append(small);
+  const slider=document.createElement('input');slider.type='range';slider.min='0';slider.max='100';slider.step='0.1';slider.value=nilaiAwal;slider.style.setProperty('--nilai',`${nilaiAwal}%`);slider.setAttribute('aria-label',`Slider persentase peluang ${nama}`);slider.disabled=sedangPutar;
+  const input=document.createElement('input');input.type='number';input.className='odds-number';input.min='0';input.max='100';input.step='0.1';input.inputMode='decimal';input.value=nilaiAwal;input.setAttribute('aria-label',`Persentase peluang ${nama}`);input.disabled=sedangPutar;
   const sign=document.createElement('span');sign.className='odds-sign';sign.textContent='%';
-  const track=document.createElement('div');track.className='odds-track';const fill=document.createElement('i');fill.style.width=`${Math.max(0,Math.min(100,Number(input.value)||0))}%`;track.append(fill);
-  function aturSlider(nilai){nilai=Math.max(0,Math.min(100,Math.round(Number(nilai)||0)));const lain=namaNama.filter(x=>x!==nama);const sisa=100-nilai;const totalLain=lain.reduce((sum,x)=>sum+Math.max(0,Number(draftPeluang[x])||0),0);draftPeluang[nama]=nilai;
-   if(lain.length){let sudah=0;lain.forEach((x,i)=>{let v=i===lain.length-1?Math.round((sisa-sudah)*10)/10:(totalLain>0?Math.round((sisa*(Math.max(0,Number(draftPeluang[x])||0)/totalLain))*10)/10:Math.round((sisa/lain.length)*10)/10);draftPeluang[x]=Math.max(0,v);sudah+=draftPeluang[x]})}
-   // Koreksi pembulatan supaya jumlah selalu tepat 100%.
-   if(lain.length){const koreksi=Math.round((100-jumlahPeluang(draftPeluang))*10)/10;draftPeluang[lain[lain.length-1]]=Math.max(0,Math.round((draftPeluang[lain[lain.length-1]]+koreksi)*10)/10)}
-   renderPengaturan();
+  const track=document.createElement('div');track.className='odds-track';const fill=document.createElement('i');fill.style.width=`${nilaiAwal}%`;track.append(fill);
+  function aturSlider(nilai){
+   if(nilai===''||nilai===null||!Number.isFinite(Number(nilai)))return;
+   const unitDipilih=Math.max(0,Math.min(1000,Math.round(Number(nilai)*10)));
+   const lain=namaNama.filter(x=>x!==nama);draftPeluang[nama]=unitDipilih/10;
+   if(lain.length){
+    const sisa=1000-unitDipilih;
+    const bobot=lain.map(x=>Math.max(0,Math.round((Number(draftPeluang[x])||0)*10)));
+    let jumlahBobot=bobot.reduce((a,b)=>a+b,0);
+    const bobotEfektif=jumlahBobot>0?bobot:lain.map(()=>1);
+    jumlahBobot=bobotEfektif.reduce((a,b)=>a+b,0);
+    const hasilUnit=bobotEfektif.map(b=>Math.floor(sisa*b/jumlahBobot));
+    let sisaUnit=sisa-hasilUnit.reduce((a,b)=>a+b,0);
+    const urutan=bobotEfektif.map((b,i)=>({i,sisa:(sisa*b/jumlahBobot)-hasilUnit[i]})).sort((a,b)=>b.sisa-a.sisa||a.i-b.i);
+    for(let j=0;j<sisaUnit;j++)hasilUnit[urutan[j%urutan.length].i]++;
+    lain.forEach((x,i)=>draftPeluang[x]=hasilUnit[i]/10);
+   }
+   // Perbarui elemen yang sudah ada: jangan render ulang slider saat sedang digeser.
+   wadah.querySelectorAll('.odds-row').forEach(baris=>{
+    const namaBaris=baris.dataset.nama;const v=Math.max(0,Math.min(100,Math.round((Number(draftPeluang[namaBaris])||0)*10)/10));
+    const r=baris.querySelector('input[type="range"]');const n=baris.querySelector('input[type="number"]');
+    if(r){if(r!==document.activeElement)r.value=String(v);r.style.setProperty('--nilai',`${v}%`);}
+    if(n&&n!==document.activeElement)n.value=String(v);
+    const label=baris.querySelector('.odds-name small');if(label)label.textContent=`Rancangan peluang ${v.toLocaleString('id-ID')}%`;
+    const isi=baris.querySelector('.odds-track i');if(isi)isi.style.width=`${v}%`;
+   });
+   syncRingkasanPeluang();
   }
-  slider.addEventListener('input',()=>aturSlider(slider.value));input.addEventListener('input',()=>aturSlider(input.value));
-  row.append(nam,sign,slider,input,track);wadah.append(row)
+  slider.addEventListener('input',()=>aturSlider(slider.value));
+  input.addEventListener('input',()=>aturSlider(input.value));
+  input.addEventListener('change',()=>{input.value=String(Math.round((Number(draftPeluang[nama])||0)*10)/10)});
+  row.append(nam,sign,slider,input,track);wadah.append(row);
  });syncRingkasanPeluang();
 }
 function syncRingkasanPeluang(){

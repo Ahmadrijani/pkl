@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#278ac7">
+<title>Spin Nama dengan Persentase — Aero Glass</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+/* Aero Glass Window — diadaptasi dari CSS yang diberikan, dengan layout responsif. */
+:root{--hue:210;--radius:8px;--glass-opacity:.6;--glass:hsl(var(--hue) 65% 52% / var(--glass-opacity));--frame:9px;--ink:#1b1b1b;--blue:#087fc3;--line:#9bd5f0;--pale:#edf8ff}
+*{box-sizing:border-box}
+html{min-height:100%;background:#4aa7d7}
+body{margin:0;min-height:100vh;padding:10px 10px 58px;font-family:"Segoe UI",Tahoma,Geneva,Verdana,system-ui,sans-serif;font-size:13px;color:var(--ink);background:radial-gradient(ellipse at 18% 4%,rgba(255,255,255,.85),transparent 24%),radial-gradient(ellipse at 85% 14%,rgba(255,255,255,.65),transparent 19%),linear-gradient(180deg,#53bdf2 0%,#b7efff 50%,#e7faff 65%,#7fce78 66%,#398e50 100%);background-attachment:fixed;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:-1;left:-12%;width:125%;border-radius:50%;transform:rotate(-10deg)}
+body:before{height:34vh;top:47%;background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(113,222,255,.22) 42%,rgba(20,135,202,.18));box-shadow:0 -3px 12px #fff7}
+body:after{height:32vh;top:65%;background:linear-gradient(180deg,rgba(190,255,165,.4),rgba(44,145,73,.8));transform:rotate(7deg)}
+.aero-window{--hue:210;--radius:8px;--glass-opacity:.6;--glass:hsl(var(--hue) 65% 52% / var(--glass-opacity));--frame:9px;position:relative;isolation:isolate;width:min(1040px,calc(100vw - 20px));margin:6px auto 14px;border-radius:var(--radius);font-family:"Segoe UI",Tahoma,Geneva,Verdana,system-ui,sans-serif;font-size:12px;color:#1b1b1b;box-shadow:0 18px 44px rgba(0,0,0,.38),0 0 26px hsl(var(--hue) 90% 58% / .28),0 0 0 1px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.95),inset 0 0 30px rgba(255,255,255,.25)}
+.aero-window:before{content:"";position:absolute;inset:0;z-index:-1;border-radius:var(--radius);background:linear-gradient(104deg,transparent 26%,rgba(255,255,255,.32) 42%,rgba(255,255,255,.05) 50%,transparent 64%),linear-gradient(to bottom,rgba(255,255,255,.68),rgba(255,255,255,.2) 42%,rgba(255,255,255,0) 54%),linear-gradient(to bottom,rgba(255,255,255,.12),rgba(0,0,0,.12)),var(--glass)}
+.aero-window:after{content:"";position:absolute;inset:0;z-index:-2;border-radius:var(--radius);-webkit-backdrop-filter:blur(18px) saturate(1.9);backdrop-filter:blur(18px) saturate(1.9)}
+.aero-titlebar{display:flex;align-items:flex-start;gap:5px;padding:0 6px;min-height:34px;border-radius:var(--radius) var(--radius) 0 0;background:repeating-linear-gradient(108deg,rgba(255,255,255,.05) 0 1px,transparent 1px 5px)}
+.aero-titlebar-icon{width:16px;height:16px;margin:8px 1px 0 2px;flex:none;font-size:14px;line-height:16px;color:#087ec2;text-shadow:0 0 4px white}
+.aero-titlebar-text{flex:1;min-width:0;margin-top:8px;line-height:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#0b0b0b;text-shadow:0 0 4px #fff,0 0 4px #fff,0 0 7px #fff,0 0 10px #fff;font-weight:600}
+.aero-caption{display:flex;flex:none;border:1px solid rgba(0,0,0,.35);border-top:0;border-radius:0 0 4px 4px;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.9),1px 0 0 rgba(255,255,255,.7),-1px 0 0 rgba(255,255,255,.7)}
+.aero-caption button{appearance:none;-webkit-appearance:none;display:flex;align-items:center;justify-content:center;min-width:29px;height:20px;margin:0;padding:0;border:0;border-right:1px solid rgba(0,0,0,.28);border-radius:0;color:rgba(0,0,0,.68);cursor:pointer;background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.28) 46%,rgba(0,0,0,.08) 50%,rgba(0,0,0,.08) 78%,rgba(255,255,255,.4));box-shadow:none;transition:box-shadow .12s ease,background .12s ease,color .12s ease}
+.aero-caption button:last-child{border-right:0;min-width:46px}
+.aero-caption .min:before{content:"";width:10px;height:2px;margin-top:6px;background:currentColor;box-shadow:0 1px 0 rgba(255,255,255,.4)}
+.aero-caption .max:before{content:"";width:11px;height:9px;border:1px solid currentColor;border-top-width:2px}
+.aero-caption .restore:before{content:"❐";font-size:13px;line-height:1;border:0;width:auto;height:auto}
+.aero-caption .close:before{content:"\2715";font-size:11px;line-height:1}
+.aero-caption button:not(.close):hover{color:#fff;background:radial-gradient(120% 90% at 50% 130%,#3fd0e6,transparent 60%),linear-gradient(#c3e3f4 48%,#1f79b0 50%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 0 8px 2px rgba(93,196,240,.65)}
+.aero-caption .close{color:#fff;background:radial-gradient(circle at -30% 50%,rgba(0,0,0,.4) 6%,transparent 55%),radial-gradient(circle at 130% 50%,rgba(0,0,0,.4) 6%,transparent 55%),linear-gradient(#e6a99f,#d16b5b 48%,#cf4b34 50%,#d8654c)}
+.aero-caption .close:hover{background:radial-gradient(120% 90% at 50% 130%,#ff9a86,transparent 60%),linear-gradient(#ffc0b5 48%,#d40a0a 50%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 0 8px 2px rgba(255,80,48,.7)}
+.aero-menubar{display:flex;align-items:stretch;gap:0;margin:0 var(--frame);background:linear-gradient(#fff 0%,#eef2f9 45%,#dbe3f1 55%,#e9eef8 100%);border:1px solid rgba(0,0,0,.35);border-bottom:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.9);overflow-x:auto;scrollbar-width:none}
+.aero-menubar::-webkit-scrollbar{display:none}
+.aero-menubar .tab-btn{flex:none;margin:0;padding:7px 16px;border:0;border-radius:3px 3px 0 0;background:transparent;box-shadow:none;color:#1b1b1b;font:12px "Segoe UI",Tahoma,sans-serif;white-space:nowrap;cursor:pointer}
+.aero-menubar .tab-btn:hover{background:linear-gradient(#eaf4fd,#cfe8fb);box-shadow:inset 0 0 0 1px #b5dcfb}
+.aero-menubar .tab-btn[aria-selected="true"]{background:linear-gradient(#fff,#f6fbff 55%,#d9efff);box-shadow:inset 0 2px 0 #fff,inset 0 0 0 1px #a6d5f4;color:#075e9c;font-weight:700}
+.aero-body{margin:0 var(--frame);padding:14px;min-height:340px;background:linear-gradient(145deg,#f8fcff,#e9f4fb);color:#1b1b1b;border:1px solid rgba(0,0,0,.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.7);white-space:normal;overflow:auto;max-height:calc(100dvh - 150px)}
+.tab-page[hidden]{display:none!important}
+.intro{text-align:center;margin:0 auto 14px;padding:2px 4px 8px}
+.intro h1{margin:0;color:#075f9e;font-size:clamp(25px,4vw,36px);font-weight:650;letter-spacing:-.7px;text-shadow:0 1px #fff,0 2px 3px #ffffffbb}
+.intro p{margin:5px auto 0;color:#326788;font-size:13px;max-width:590px}
+.play-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(260px,.95fr);gap:13px;align-items:stretch}
+.panel{min-width:0;background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(222,243,255,.86));border:1px solid #c0dff1;border-radius:6px;padding:14px;box-shadow:inset 0 1px 0 white,0 1px 3px rgba(39,105,148,.18)}
+.wheel-panel{display:flex;flex-direction:column;align-items:center;gap:12px}
+.wheel-box{position:relative;width:min(100%,390px);aspect-ratio:1;display:grid;place-items:center;filter:drop-shadow(0 7px 6px #174a6b3c)}
+#roda{display:block;width:100%;height:100%;border-radius:50%;touch-action:manipulation}
+.pointer{position:absolute;top:-2px;left:50%;transform:translateX(-50%);z-index:2;width:0;height:0;border-left:17px solid transparent;border-right:17px solid transparent;border-bottom:34px solid #ffe16c;filter:drop-shadow(0 2px 2px #614a27);pointer-events:none}
+.wheel-rim{position:absolute;inset:0;border:8px solid #f8fdff;border-radius:50%;box-shadow:inset 0 0 0 3px #2d8fc5,0 0 0 2px #fff;pointer-events:none}
+button{font:600 14px "Segoe UI",Tahoma,sans-serif;border:1px solid #7ebce4;border-radius:4px;padding:9px 13px;color:#16496c;background:linear-gradient(#fff 0%,#e7f5ff 47%,#cae7f9 50%,#d9f0ff 100%);box-shadow:inset 0 1px 0 white,0 1px 2px #16537b22;cursor:pointer;transition:filter .1s,box-shadow .1s}
+button:hover{border-color:#40a8e6;background:linear-gradient(#fff,#e7f7ff 43%,#b3e2ff 50%,#d8f1ff);box-shadow:inset 0 0 0 1px #d9f5ff,0 0 4px #35a9f055}
+button:active{background:linear-gradient(#b9def5,#e2f4ff);box-shadow:inset 0 1px 3px #4b98c755}
+button:disabled{opacity:.55;cursor:not-allowed!important;filter:grayscale(.15)}
+button.primary{color:#fff;border-color:#1768a7;background:linear-gradient(#65caff 0%,#138fe1 43%,#0770bf 50%,#42a8ec 100%);text-shadow:0 1px 1px #075c94;box-shadow:inset 0 1px 0 #ffffffbb,0 2px 4px #15537b38}
+button.primary:hover{background:linear-gradient(#9be0ff,#38aaf1 43%,#087dc9 50%,#73caff);border-color:#d6f3ff}
+button.gold{color:#654506;border-color:#d69c23;background:linear-gradient(#fff6c9,#ffdb66 47%,#f3b92c 50%,#ffe69c);box-shadow:inset 0 1px 0 white,0 1px 2px #8f671d40}
+#putar{font-size:18px;padding:13px 35px;min-height:46px;min-width:175px;border-radius:5px}
+.result{width:100%;text-align:center;min-height:76px;border-radius:5px;padding:12px;background:linear-gradient(#fff,#f4fbff 55%,#e0f4ff);border:1px solid #badff5;box-shadow:inset 0 1px 0 white}
+.result small{display:block;color:#5483a2;font-weight:700;letter-spacing:1.5px;font-size:10px}
+#hasil{font-size:clamp(20px,3vw,27px);font-weight:700;color:#047abd;overflow-wrap:anywhere;margin-top:5px;text-shadow:0 1px white}
+#hasil.empty{font-size:17px;font-weight:500;color:#6a90a8}
+.odds-result{font-size:12px;color:#527c96;margin-top:4px}
+.name-reel{width:100%;min-width:0;padding:9px 10px;border:1px solid #77b6db;border-radius:6px;background:linear-gradient(145deg,#faffff,#c8e8fa);box-shadow:inset 0 1px 0 #fff,0 2px 5px #16537b20;position:relative;overflow:hidden}
+.name-reel:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,#fff9,transparent 34%,transparent 68%,#fff5)}
+.reel-head,.reel-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative;z-index:1}
+.reel-head{font-size:10px;font-weight:800;letter-spacing:1.1px;color:#326f96;margin-bottom:7px}
+.lamps{display:flex;gap:5px}.lamps i{display:block;width:7px;height:7px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#fff8c2,#ffb920 55%,#c77b00);box-shadow:0 0 4px #ffbf3870}
+.name-reel.is-spinning .lamps i{animation:lampPulse .35s alternate infinite}.name-reel.is-spinning .lamps i:nth-child(2){animation-delay:.12s}.name-reel.is-spinning .lamps i:nth-child(3){animation-delay:.24s}
+.name-display{height:104px;display:grid;grid-template-rows:1fr 1.35fr 1fr;overflow:hidden;position:relative;border:2px solid #e8f8ff;border-radius:4px;background:linear-gradient(180deg,#12466e,#0c6397 48%,#12466e);box-shadow:inset 0 0 0 1px #438cb3,inset 0 0 15px #002d4f,0 1px 2px #194e6e}
+.name-display:after{content:"";position:absolute;inset:33% 0 33%;border-top:1px solid #ffe68cbd;border-bottom:1px solid #ffe68cbd;pointer-events:none}
+.name-row{display:flex;align-items:center;justify-content:center;min-width:0;padding:0 8px;text-align:center;color:#a6d9f2a6;font-weight:650;font-size:clamp(11px,2vw,14px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 2px #001e35}
+.name-row.current{font-size:clamp(14px,2.7vw,21px);font-weight:800;color:#fff;background:linear-gradient(90deg,transparent,#64caff37,transparent);text-shadow:0 0 8px #70d2ff,0 2px 2px #002742}
+.name-row.current.tick{animation:nameFlip .15s ease-out}
+.reel-foot{font-size:9px;letter-spacing:.7px;font-weight:800;color:#4b7b97;margin-top:7px;flex-wrap:wrap}
+.reel-status{color:#0579b8}
+@keyframes lampPulse{from{filter:brightness(.75);opacity:.6}to{filter:brightness(1.4);opacity:1}}
+@keyframes nameFlip{0%{transform:translateY(-9px);filter:blur(2px);opacity:.45}65%{transform:translateY(3px);filter:blur(.5px);opacity:.9}100%{transform:translateY(0);filter:blur(0);opacity:1}}
+.spin-side{display:flex;flex-direction:column;gap:12px}
+h2{font-size:18px;font-weight:650;margin:0 0 13px;color:#15547e;text-shadow:0 1px white;border-bottom:1px solid #c1e5f8;padding-bottom:8px}
+h3{font-size:15px;color:#165c83;margin:0 0 8px}
+label{font-weight:600;display:block;margin-bottom:7px;font-size:13px;color:#255b7c}
+.input-row{display:flex;gap:7px}
+input[type="text"],input[type="number"]{width:100%;min-width:0;border:1px solid #9bcbe5;border-radius:3px;padding:10px 11px;font:14px "Segoe UI",Tahoma,sans-serif;color:#173c58;background:#fff;outline:none;box-shadow:inset 0 1px 3px #5a9ac21e}
+input:focus{border-color:#39a9eb;box-shadow:0 0 0 2px #65c8ff4d,inset 0 1px 3px #5a9ac21e}
+.hint{font-size:12px;color:#5a7f96;margin:6px 0 15px;line-height:1.45}
+.templates,.actions{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.names{display:flex;flex-wrap:wrap;gap:7px;min-height:48px;padding:10px;background:#ffffffab;border:1px solid #c0e3f5;border-radius:4px}
+.chip{display:flex;align-items:center;gap:7px;background:linear-gradient(#fff,#dcefff);border:1px solid #afd6ee;border-radius:4px;padding:5px 6px 5px 9px;font-weight:600;color:#18577c;max-width:100%;font-size:13px;box-shadow:0 1px 1px #458ab11a}
+.chip span{overflow-wrap:anywhere}
+.chip button{flex:none;padding:0;width:24px;height:24px;border-radius:3px;font-size:16px;line-height:16px;color:#fff;background:linear-gradient(#f8a99f,#dd3229);box-shadow:inset 0 1px 0 #fff8;border:1px solid #cc493b}
+.status{font-size:12px;color:#426f8c;margin-top:10px;min-height:18px;line-height:1.4}
+.log{margin-top:5px}
+#riwayat{padding-left:22px;margin:8px 0 0;max-height:210px;overflow:auto;color:#315c79;font-size:13px}
+#riwayat li{padding:5px 0;border-bottom:1px solid #d8eefa;overflow-wrap:anywhere}
+.settings-intro{max-width:760px;margin-bottom:14px;color:#456e86;line-height:1.5}
+.odds-list{display:grid;gap:8px}
+.odds-row{display:grid;grid-template-columns:minmax(0,1fr) 78px;align-items:center;gap:8px;padding:9px;background:linear-gradient(#fff,#f0f9ff);border:1px solid #c0deef;border-radius:4px}
+.odds-name{min-width:0;font-weight:700;color:#205b7d;overflow-wrap:anywhere}
+.odds-name small{display:block;font-weight:400;color:#6a8da3;font-size:11px;margin-top:2px}
+.odds-row input[type="number"]{padding:8px;font-variant-numeric:tabular-nums}.odds-row input[type="range"]{width:100%;min-width:0;padding:0;accent-color:#1688d0;grid-column:1;cursor:pointer}.odds-row .odds-number{width:100%;min-width:0;padding:7px 4px;text-align:center;grid-column:2}.odds-row .odds-name{grid-column:1/-1}.odds-row .odds-sign{display:none}
+.odds-sign{color:#32799f;font-weight:700}
+.odds-track{grid-column:1/-1;height:7px;background:#dceef8;border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 2px #1d5e821c}
+.odds-track i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1688d0,#70d7ff);border-radius:99px;transition:width .15s}
+.odds-summary{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:13px 0;padding:10px;background:#e7f5fd;border:1px solid #b7dbef;border-radius:4px;color:#205979}
+.odds-total{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.odds-total.invalid{color:#c53b32}.odds-total.valid{color:#168052}
+
+.start-menu{position:fixed;z-index:100;left:8px;bottom:47px;width:min(360px,calc(100vw - 16px));padding:10px;background:linear-gradient(135deg,#e8f8ffed,#8dcdf4f2 48%,#eaf8ffed);border:1px solid #fff;border-radius:7px;box-shadow:0 8px 30px #002f5266,inset 0 0 0 1px #5eaddb;backdrop-filter:blur(18px)}
+.start-menu[hidden],.browser-window[hidden]{display:none!important}.start-user{display:flex;align-items:center;gap:10px;padding:8px 9px 12px;border-bottom:1px solid #75b4da;margin-bottom:7px;color:#164d72}.user-icon{width:35px;height:35px;display:grid;place-items:center;border-radius:5px;background:linear-gradient(#fff,#b5ddf7);border:1px solid #fff;font-size:20px}.start-item{display:flex;width:100%;align-items:center;gap:12px;text-align:left;border:1px solid transparent;background:transparent;box-shadow:none;padding:12px 10px;color:#164d72}.start-item i{width:23px;text-align:center;font-size:18px;color:#087ec2}.start-item:hover{background:linear-gradient(#fff9,#9cdbff9c);border-color:#81c6f2}.start-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #75b4da;margin-top:7px;padding:8px 2px 0;color:#376b89;font-size:11px}.browser-window{position:fixed;z-index:80;left:clamp(5px,8vw,120px);top:clamp(5px,7vh,70px);width:min(900px,calc(100vw - 20px));height:min(650px,calc(100dvh - 70px));min-width:0;min-height:250px;border:1px solid #fff;border-radius:7px;background:#d9effb;box-shadow:0 18px 44px #00274488,inset 0 0 0 1px #78bde5;overflow:hidden;resize:both}.browser-window.maximized{inset:6px 6px 49px!important;width:auto!important;height:auto!important;resize:none}.browser-window.minimized{display:none}.browser-titlebar{height:34px;display:flex;align-items:center;gap:9px;padding:0 5px 0 10px;background:linear-gradient(#e9fbff,#9edbfa 40%,#288ac8 78%,#a2ddf6);color:#103c5d;text-shadow:0 1px #fff;cursor:move;user-select:none}.browser-titlebar>span{flex:1;font-weight:600}.browser-titlebar>i{font-size:17px;color:#087fc3}.browser-captions{display:flex;align-self:flex-start}.browser-captions button{height:24px;min-width:31px;padding:0;border-radius:0 0 4px 4px;font-size:17px;line-height:1;background:linear-gradient(#fff9,#7cb9e1);border:1px solid #ffffffa8}.browser-captions button:last-child{background:linear-gradient(#eeb4a8,#d53025);color:white;min-width:42px}.browser-toolbar{display:flex;gap:4px;align-items:center;padding:7px;background:linear-gradient(#f8fdff,#d7e8f5);border-bottom:1px solid #a2c8e0}.browser-toolbar button{flex:none;padding:8px 10px}.browser-toolbar input{flex:1;width:10px;min-width:0;padding:8px;border:1px solid #8db6d2;border-radius:3px;font:12px 'Segoe UI',sans-serif}.browser-view{position:relative;height:calc(100% - 75px);background:#fff}.browser-view iframe{width:100%;height:100%;border:0;background:#fff}.frame-note{position:absolute;bottom:0;left:0;right:0;padding:10px;background:#fff4cf;border-top:1px solid #e4c66c;color:#604d17;font-size:12px}.frame-note[hidden]{display:none}.browser-window iframe{touch-action:pan-x pan-y}
+@media(max-width:600px){.browser-window{left:4px;top:4px;width:calc(100vw - 8px);height:calc(100dvh - 52px);resize:none;border-radius:5px}.browser-window.maximized{inset:4px 4px 45px!important}.browser-toolbar{gap:3px;padding:5px}.browser-toolbar button{padding:8px}.browser-titlebar{height:35px}.start-menu{bottom:43px}.taskbar{gap:5px}.task-app{padding:5px 8px;font-size:11px;max-width:140px}}
+
+.app-footer{text-align:center;font-size:11px;color:#527c96;margin:14px 0 0;line-height:1.45}
+.aero-statusbar{display:flex;align-items:center;gap:8px;margin:0 var(--frame) var(--frame);padding:4px 8px;min-height:26px;font-size:11px;color:#1b1b1b;background:linear-gradient(#f7f9fc,#e4e9f2);border:1px solid rgba(0,0,0,.4);border-top:0;border-radius:0 0 3px 3px;box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
+.aero-status-grow{flex:1;min-width:0;overflow-wrap:anywhere}
+.aero-gripper{width:12px;height:12px;flex:none;background:radial-gradient(circle 1px at 2px 10px,rgba(0,0,0,.35) 99%,transparent),radial-gradient(circle 1px at 6px 10px,rgba(0,0,0,.35) 99%,transparent),radial-gradient(circle 1px at 10px 10px,rgba(0,0,0,.35) 99%,transparent),radial-gradient(circle 1px at 6px 6px,rgba(0,0,0,.35) 99%,transparent),radial-gradient(circle 1px at 10px 6px,rgba(0,0,0,.35) 99%,transparent),radial-gradient(circle 1px at 10px 2px,rgba(0,0,0,.35) 99%,transparent)}
+.taskbar{position:fixed;left:0;right:0;bottom:0;height:43px;z-index:50;padding:4px max(8px,calc((100vw - 1040px)/2));display:flex;align-items:center;gap:9px;background:linear-gradient(180deg,rgba(211,243,255,.58),rgba(18,91,146,.83) 32%,rgba(5,54,101,.92));border-top:1px solid #e1f7ffb8;box-shadow:0 -2px 8px #11466b38;backdrop-filter:blur(15px)}
+.start-orb{width:36px;height:36px;display:grid;place-items:center;flex:none;padding:0;overflow:hidden;border:1px solid #e9fff7;border-radius:50%;background:radial-gradient(circle at 35% 25%,#bbffb1,#54c44d 40%,#1679ad 72%,#003f75);box-shadow:inset 0 1px 2px white,0 0 0 1px #164f83,0 1px 3px #002b4d;font-size:18px;color:white;text-shadow:0 1px 2px #22596b}.start-orb img{width:29px;height:29px;object-fit:contain;filter:drop-shadow(0 1px 2px #123)}
+.task-app{padding:5px 12px;height:31px;color:#fff;background:linear-gradient(#91d7fa90,#207dc0c9);border:1px solid #b4e9ff8c;border-radius:4px;box-shadow:inset 0 1px 0 #fff8;display:none;max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 2px #123f65}
+.task-app.visible{display:block}.task-app:hover{background:linear-gradient(#b5e9ff,#47a9e8)}
+.clock{margin-left:auto;color:#fff;text-align:right;font-size:11px;line-height:1.2;white-space:pre-line;text-shadow:0 1px 2px #002e52;padding:0 6px}
+.aero-window.minimized,.aero-window.closed{display:none}
+.aero-window.maximized{position:fixed;inset:7px 7px 51px;width:auto;height:auto;margin:0;z-index:40;border-radius:8px;overflow:auto}
+.aero-window.maximized .aero-body{max-height:calc(100dvh - 165px)}
+@media(max-width:760px){
+ body{padding:5px 5px 0}
+ .aero-window{width:calc(100vw - 10px);margin:3px auto 10px;--frame:5px}
+ .aero-titlebar{min-height:33px}.aero-titlebar-icon{margin-top:8px}.aero-titlebar-text{margin-top:8px;font-size:12px}
+ .aero-caption button{min-width:28px;height:21px}.aero-caption button:last-child{min-width:39px}
+ .aero-menubar .tab-btn{padding:8px 14px;font-size:12px;flex:1}
+ .aero-body{padding:9px;min-height:0;max-height:none}
+ .play-layout{grid-template-columns:minmax(0,1fr);gap:10px}
+ .panel{padding:11px}
+ .wheel-box{width:min(80vw,340px)}
+ .intro{margin-bottom:8px}.intro h1{font-size:27px}.intro p{font-size:12px}
+ .wheel-panel{gap:10px}
+ #putar{width:100%;max-width:330px}
+ .name-display{height:94px}
+ .odds-row{grid-template-columns:minmax(0,1fr) 68px;gap:6px;padding:8px}
+ .aero-statusbar{gap:5px;font-size:10px;flex-wrap:wrap}
+ .aero-window.maximized{position:relative;inset:auto;width:calc(100vw - 10px);height:auto;margin:3px auto 10px;overflow:visible}.aero-window.maximized .aero-body{max-height:none}
+ .taskbar{position:relative;left:auto;right:auto;bottom:auto;height:39px;margin:8px -5px 0;padding:3px 8px;box-shadow:inset 0 1px 0 #ffffff75,0 0 6px #11466b38}
+}
+@media(max-width:380px){
+ .aero-titlebar-text{font-size:11px}.aero-caption button{min-width:25px}.aero-caption button:last-child{min-width:34px}
+ .aero-menubar .tab-btn{padding:8px 8px;font-size:11px}
+ .wheel-box{width:min(78vw,300px)}
+ .reel-foot{font-size:8px;letter-spacing:.4px}
+ .odds-row{grid-template-columns:minmax(0,1fr) 62px;font-size:12px}
+ .odds-row input{font-size:13px;padding:7px}
+}
+/* Wallpaper switcher, smooth draggable windows, and simulated PC power states */
+body.using-wallpaper:before,body.using-wallpaper:after{display:none!important}
+body.pc-is-off{background:#02060b!important;padding:0!important;overflow:hidden!important}
+body.pc-is-off:before,body.pc-is-off:after{display:none!important}
+#desktopEnvironment{position:relative;min-height:100vh}
+#desktopEnvironment[hidden]{display:none!important}
+.aero-titlebar,.browser-titlebar{touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.aero-titlebar:active,.browser-titlebar:active{cursor:grabbing}
+.aero-window.dragging-window,.browser-window.dragging-window{will-change:left,top;transition:none!important}
+.aero-window.mobile-floating{position:fixed!important;inset:auto!important;margin:0!important;width:calc(100vw - 10px)!important;height:calc(100dvh - 52px)!important;max-height:calc(100dvh - 52px);overflow:hidden;display:flex;flex-direction:column;z-index:60;border-radius:7px}
+.aero-window.mobile-floating .aero-menubar{flex:none}
+.aero-window.mobile-floating .aero-body{flex:1;min-height:0;max-height:none;overflow:auto}
+.aero-window.mobile-floating .aero-statusbar{flex:none}
+body.dragging-mobile-window #desktopEnvironment .taskbar{position:fixed;left:0;right:0;bottom:0;height:39px;margin:0;padding:3px 8px;z-index:70}
+.wallpaper-pick{display:none!important}
+.shutdown-screen{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at center,#123e63 0%,#061727 48%,#02060b 100%);color:#f4fbff;font-family:"Segoe UI",Tahoma,sans-serif;text-align:center}
+.shutdown-screen[hidden]{display:none!important}
+.shutdown-card,.power-card{width:min(390px,100%);padding:30px 24px;border:1px solid #7abbe8;border-radius:12px;background:linear-gradient(145deg,#e8f8ff20,#8ccdf316);box-shadow:0 20px 60px #0008,inset 0 1px #fff5;backdrop-filter:blur(12px)}
+.shutdown-spinner{width:52px;height:52px;margin:0 auto 22px;border:4px solid #bdeeff45;border-top-color:#f4fcff;border-right-color:#7ad6ff;border-radius:50%;animation:pcSpin .8s linear infinite;box-shadow:0 0 18px #5fcaff6b}
+@keyframes pcSpin{to{transform:rotate(360deg)}}
+.shutdown-title{font-size:22px;font-weight:600;letter-spacing:.2px;margin-bottom:8px;text-shadow:0 1px 5px #0008}
+.shutdown-subtitle{font-size:13px;color:#c4e6f7;line-height:1.5}
+.power-card .power-symbol{font-size:49px;color:#94dfff;text-shadow:0 0 22px #3fafff88;margin-bottom:12px}
+.power-card h1{font-size:25px;font-weight:600;margin:0 0 7px}
+.power-card p{font-size:13px;line-height:1.5;color:#c4e6f7;margin:0 0 22px}
+.power-card button{min-width:190px;padding:12px 18px;color:#fff;border-color:#8edbff;background:linear-gradient(#74ccf8,#167fbe 50%,#0d609e);box-shadow:inset 0 1px #fff9,0 3px 0 #073f6a;font-size:14px}
+#shutdownPC{color:#fff;background:linear-gradient(#e99a91,#d84c3e 50%,#a92d29);border-color:#f2b5ac;box-shadow:inset 0 1px #fff8,0 1px 2px #681b1b50}
+.start-bottom{gap:8px;flex-wrap:wrap}
+.start-bottom #shutdownPC{padding:7px 10px;font-size:12px}
+@media(max-width:600px){.shutdown-card,.power-card{padding:27px 18px}.shutdown-title{font-size:20px}}
+
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="desktopEnvironment">
+<main class="aero-window" id="jendela">
+  <header class="aero-titlebar">
+    <div class="aero-titlebar-icon" aria-hidden="true"><i class="fa-solid fa-dharmachakra"></i></div>
+    <div class="aero-titlebar-text">Spin Nama dengan Persentase</div>
+    <div class="aero-caption" aria-label="Kontrol jendela">
+      <button class="min" id="minimize" aria-label="Minimize" title="Minimize"></button>
+      <button class="max" id="maximize" aria-label="Maximize" title="Maximize"></button>
+      <button class="close" id="close" aria-label="Close" title="Close"></button>
+    </div>
+  </header>
+  <nav class="aero-menubar" aria-label="Tab aplikasi">
+    <button class="tab-btn" data-tab="putar" aria-selected="true">🎡 Putar</button>
+    <button class="tab-btn" data-tab="nama" aria-selected="false">👥 Nama</button>
+    <button class="tab-btn" data-tab="pengaturan" aria-selected="false">⚙ Pengaturan</button>
+  </nav>
+  <section class="aero-body" id="windowBody">
+    <section class="tab-page" id="tab-putar">
+      <header class="intro"><h1>Spin Nama dengan Persentase</h1><p>Putar roda, lihat nama hampir berhenti, lalu saksikan putaran cepat terakhir menentukan pemenang.</p></header>
+      <div class="play-layout">
+        <section class="panel wheel-panel">
+          <div class="wheel-box"><div class="pointer"></div><canvas id="roda" width="900" height="900" aria-label="Roda undian nama"></canvas><div class="wheel-rim"></div></div>
+          <button id="putar" class="primary">◉ PUTAR!</button>
+          <div class="result"><small>HASIL GACHA</small><div id="hasil" class="empty">Siap berputar?</div><div id="peluangHasil" class="odds-result">Atur peluang di tab Pengaturan.</div></div>
+          <button id="unduh" class="gold">▧ Download Hasil sebagai PNG</button>
+        </section>
+        <section class="panel spin-side">
+          <div class="name-reel" id="nameReel" aria-live="polite">
+            <div class="reel-head"><span>✦ ANIMASI NAMA</span><span class="lamps" aria-hidden="true"><i></i><i></i><i></i></span></div>
+            <div class="name-display"><div class="name-row" id="namePrev">DIANG</div><div class="name-row current" id="nameCurrent">AHMAD RIJANI</div><div class="name-row" id="nameNext">FIKRI</div></div>
+            <div class="reel-foot"><span>CEPAT · LAMBAT · PUTAR LAGI</span><span class="reel-status" id="nameStatus">SIAP</span><span id="jumlahSektor">32 SEKTOR</span></div>
+          </div>
+          <div class="panel log">
+            <h2>Riwayat Hasil</h2>
+            <ol id="riwayat"></ol>
+            <div class="actions"><button id="hapusRiwayat">Hapus Riwayat</button></div>
+          </div>
+          <div class="status" id="statusPutar">4 peserta tersedia. Setiap nama awalnya memiliki peluang 25%.</div>
+        </section>
+      </div>
+    </section>
+
+    <section class="tab-page" id="tab-nama" hidden>
+      <h2>Daftar Peserta</h2>
+      <label for="nama">Tambah nama (tekan Enter)</label>
+      <div class="input-row"><input type="text" id="nama" placeholder="Ketik nama lalu tekan Enter…" maxlength="80" autocomplete="off"><button id="tambah">Tambah</button></div>
+      <p class="hint">Nama awal hanya empat peserta. Roda mengulang nama-nama ini di banyak petak agar putarannya lebih ramai.</p>
+      <div class="templates"><button id="template">Pakai Nama Awal</button><button id="acak">Acak Urutan</button><button id="hapus">Hapus Semua</button></div>
+      <div id="daftar" class="names"></div>
+      <div class="status" id="statusNama">Persentase dibagi rata sesuai jumlah peserta.</div>
+      <p class="hint">Catatan: menambah atau menghapus peserta akan membagi peluang secara rata lagi. Kamu bisa mengubah persentasenya di tab Pengaturan.</p>
+    </section>
+
+    <section class="tab-page" id="tab-pengaturan" hidden>
+      <h2>Pengaturan Peluang</h2>
+      <div class="settings-intro">Geser slider satu peserta; persentase peserta lain otomatis menyesuaikan agar total tetap <strong>100%</strong>. Roda membagi setiap peluang ke beberapa petak, jadi bentuk roda dan peluang gacha tetap selaras.</div>
+      <div class="odds-list" id="daftarPeluang"></div>
+      <div class="odds-summary"><span>Total peluang:</span><span class="odds-total valid" id="totalPeluang">100%</span><span id="pesanPeluang">Siap disimpan.</span></div>
+      <div class="actions"><button id="bagiRata">Bagi Rata</button><button class="primary" id="simpanPeluang">Simpan Pengaturan</button></div>
+      <p class="hint">Slider mengatur satu nama dan membagi sisa persentase secara proporsional ke nama lain. Nama dengan peluang 0% tidak akan terpilih saat gacha.</p>
+    </section>
+    <div class="app-footer">Aero Glass • Berjalan secara lokal di browser • Hasil dapat diunduh sebagai PNG</div>
+  </section>
+  <footer class="aero-statusbar"><span class="aero-status-grow" id="statusAplikasi">Siap digunakan.</span><span>Web ini dibuat 21-10-2026</span><span class="aero-gripper" aria-hidden="true"></span></footer>
+</main>
+<div class="taskbar">
+  <button class="start-orb" id="startOrb" title="Start Menu Windows" aria-label="Buka Start Menu"><img src="https://e7.pngegg.com/pngimages/520/166/png-clipart-windows-microsoft-logo-windows-7-windows-vista-logo-microsoft-windows-logos-computer-computer-wallpaper.png" alt="Windows" onerror="this.style.display='none';this.parentElement.textContent='⊞'"></button>
+  <button id="restoreTask" class="task-app visible" title="Tampilkan Spin Nama"><i class="fa-solid fa-dharmachakra"></i> Spin Nama</button>
+  <button id="browserTask" class="task-app visible" title="Buka browser"><i class="fa-solid fa-globe"></i> Browser</button>
+  <div class="clock" id="jam"></div>
+</div>
+<div class="start-menu" id="startMenu" hidden>
+ <div class="start-user"><div class="user-icon"><i class="fa-solid fa-user"></i></div><strong>Pengguna</strong></div>
+ <button class="start-item" id="startSpin"><i class="fa-solid fa-dharmachakra"></i> Spin Nama dengan Persentase</button>
+ <button class="start-item" id="startBrowser"><i class="fa-solid fa-globe"></i> Browser</button>
+ <button class="start-item" id="startWallpaper"><i class="fa-solid fa-image"></i> Ganti wallpaper...</button>
+ <button class="start-item" id="startDefaultWallpaper"><i class="fa-solid fa-arrow-rotate-left"></i> Wallpaper bawaan Windows</button>
+ <input class="wallpaper-pick" id="wallpaperFile" type="file" accept="image/*" aria-label="Pilih gambar wallpaper">
+ <div class="start-bottom"><span>Windows 7 Aero Style</span><button id="startClose">Tutup</button><button id="shutdownPC"><i class="fa-solid fa-power-off"></i> Shut down</button></div>
+</div>
+<section class="browser-window" id="browserWindow" aria-label="Browser mini" hidden>
+ <header class="browser-titlebar" id="browserDrag"><i class="fa-brands fa-internet-explorer"></i><span>Browser — Jadwal</span><div class="browser-captions"><button id="browserMin" title="Minimize">−</button><button id="browserMax" title="Maximize">□</button><button id="browserClose" title="Close">×</button></div></header>
+ <div class="browser-toolbar"><button id="browserBack" title="Kembali"><i class="fa-solid fa-arrow-left"></i></button><button id="browserForward" title="Maju"><i class="fa-solid fa-arrow-right"></i></button><button id="browserRefresh" title="Refresh"><i class="fa-solid fa-rotate-right"></i></button><button id="browserHome" title="Beranda"><i class="fa-solid fa-house"></i></button><input id="browserAddress" value="https://ahmadrijani.github.io/pkl/Website/JADWAL.html" aria-label="Alamat situs"><button id="browserGo" title="Buka alamat"><i class="fa-solid fa-arrow-right"></i></button></div>
+ <div class="browser-view"><iframe id="browserFrame" title="Jadwal PKL" src="about:blank" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="frame-note" id="frameNote" hidden>Situs mungkin menolak ditampilkan di dalam iframe. <button id="openExternal">Buka di tab baru</button></div></div>
+</section>
+</div><!-- /desktopEnvironment -->
+<div class="shutdown-screen" id="shutdownOverlay" hidden aria-live="polite">
+ <div class="shutdown-card"><div class="shutdown-spinner" aria-hidden="true"></div><div class="shutdown-title" id="shutdownTitle">Mematikan Windows...</div><div class="shutdown-subtitle" id="shutdownSubtitle">Harap tunggu sebentar.</div></div>
+</div>
+<div class="shutdown-screen" id="powerScreen" hidden>
+ <div class="power-card"><div class="power-symbol"><i class="fa-solid fa-power-off"></i></div><h1>PC telah dimatikan</h1><p>Desktop simulasi sedang mati. Tekan tombol di bawah untuk menyalakannya kembali.</p><button id="powerOn"><i class="fa-solid fa-power-off"></i> Hidupkan PC</button></div>
+</div>
+<script>
+'use strict';
+const templateNama=['AHMAD RIJANI','DIANG','FIKRI','PERGY'];
+const ULANGI_SEKTOR_PER_PESERTA=8;
+const TAU=Math.PI*2;
+const warna=['#168fcd','#ffbd35','#2fb77c','#ed6678','#8276db','#27b7c5','#f58a39','#397ed4','#de68b1','#76b94f'];
+let namaNama=[...templateNama];
+let peluangNama=bagiRata(namaNama);
+let draftPeluang={...peluangNama};
+let putaran=0, sedangPutar=false, riwayat=[], hasilTerakhir=null, maximizeAktif=false, reelIndex=0, wheelSpinSectors=null;
+const jendela=document.getElementById('jendela');
+const kanvas=document.getElementById('roda'),ctx=kanvas.getContext('2d');
+const elNama=document.getElementById('nama'),elDaftar=document.getElementById('daftar'),elHasil=document.getElementById('hasil'),elRiwayat=document.getElementById('riwayat');
+const elNamePrev=document.getElementById('namePrev'),elNameCurrent=document.getElementById('nameCurrent'),elNameNext=document.getElementById('nameNext'),elNameStatus=document.getElementById('nameStatus'),elNameReel=document.getElementById('nameReel');
+const $=id=>document.getElementById(id);
+function bagiRata(daftar){
+ const hasil={};if(!daftar.length)return hasil;
+ const totalSatuan=1000,bagian=Math.floor(totalSatuan/daftar.length),sisa=totalSatuan-bagian*daftar.length;
+ daftar.forEach((nama,i)=>hasil[nama]=(bagian+(i<sisa?1:0))/10);return hasil;
+}
+function jumlahPeluang(obj){return Object.values(obj).reduce((sum,v)=>sum+(Number.isFinite(Number(v))?Number(v):0),0)}
+function peluangSah(obj){return Math.abs(jumlahPeluang(obj)-100)<0.051&&namaNama.filter(n=>(Number(obj[n])||0)>0).length>=2}
+function normSudut(a){return ((a%TAU)+TAU)%TAU}
+function selisihMaju(dari,ke){return normSudut(ke-normSudut(dari))}
+function buatSektorRoda(daftar=namaNama,odds=peluangNama){
+ // Setiap peserta memiliki delapan petak; besar total busurnya mengikuti persentase peluang.
+ const hasil=[];
+ for(let ulang=0;ulang<ULANGI_SEKTOR_PER_PESERTA;ulang++){
+  daftar.forEach((nama,indeks)=>{
+   const persen=Math.max(0,Number(odds[nama])||0);if(persen<=0)return;
+   hasil.push({nama,indeksPeserta:indeks,ulang,peluang:persen,sudut:TAU*(persen/100/ULANGI_SEKTOR_PER_PESERTA)});
+  });
+ }
+ // Kurangi akumulasi pembulatan agar satu putaran selalu tepat 2π.
+ if(hasil.length){const jumlah=hasil.reduce((s,x)=>s+x.sudut,0);hasil[hasil.length-1].sudut+=TAU-jumlah;}
+ return hasil;
+}
+function tengahSektor(indeks,sektor){let awal=0;for(let i=0;i<indeks;i++)awal+=sektor[i].sudut;return normSudut(-(awal+sektor[indeks].sudut/2))}
+function indeksUntukNama(sektor,nama){const cocok=[];sektor.forEach((x,i)=>{if(x.nama===nama)cocok.push(i)});return cocok.length?cocok[Math.floor(Math.random()*cocok.length)]:-1}
+function pilihPemenangTertimbang(daftar,odds){const nilai=Math.random()*100;let jalan=0;for(const nama of daftar){jalan+=Number(odds[nama])||0;if(nilai<jalan)return nama}return daftar[daftar.length-1]}
+function gambarRoda(){
+ const c=kanvas.width/2,r=c-27;ctx.clearRect(0,0,kanvas.width,kanvas.height);
+ const sektor=wheelSpinSectors||buatSektorRoda();
+ if(!sektor.length){ctx.beginPath();ctx.arc(c,c,r,0,TAU);ctx.fillStyle='#e5f6ff';ctx.fill();ctx.fillStyle='#4d7896';ctx.font='bold 34px Segoe UI';ctx.textAlign='center';ctx.fillText('Tambah nama dulu',c,c);return}
+ let awalTerkumpul=0;
+ sektor.forEach((item,i)=>{
+  const awal=putaran+awalTerkumpul-Math.PI/2,akhir=awal+item.sudut;
+  ctx.beginPath();ctx.moveTo(c,c);ctx.arc(c,c,r,awal,akhir);ctx.closePath();ctx.fillStyle=warna[item.indeksPeserta%warna.length];ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.stroke();
+  // Label berputar mengikuti petak; ukuran disesuaikan supaya tetap nyaman di layar kecil.
+  const ukuran=Math.max(6,Math.min(14,(r-65)*item.sudut*.45));
+  ctx.save();ctx.translate(c,c);ctx.rotate(awal+item.sudut/2);ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillStyle='#fff';ctx.shadowColor='#124466bb';ctx.shadowBlur=3;ctx.font=`bold ${ukuran}px Segoe UI`;
+  let teks=item.nama;const batas=item.sudut<.09?7:item.sudut<.15?10:15;while((ctx.measureText(teks).width>r*.56||teks.length>batas)&&teks.length>4)teks=teks.slice(0,-2)+'…';
+  ctx.fillText(teks,r-38,0);ctx.restore();awalTerkumpul+=item.sudut;
+ });
+ ctx.beginPath();ctx.arc(c,c,47,0,TAU);ctx.fillStyle='#f7fcff';ctx.fill();ctx.strokeStyle='#2188c4';ctx.lineWidth=9;ctx.stroke();ctx.beginPath();ctx.arc(c,c,21,0,TAU);ctx.fillStyle='#168fd0';ctx.fill();
+}
+function isiAnimasiNama(daftar,index,animasi=false){
+ if(!daftar.length){elNamePrev.textContent='•••';elNameCurrent.textContent='TAMBAH NAMA';elNameNext.textContent='•••';return}
+ const i=((index%daftar.length)+daftar.length)%daftar.length;
+ elNamePrev.textContent=daftar[(i-1+daftar.length)%daftar.length];elNameCurrent.textContent=daftar[i];elNameNext.textContent=daftar[(i+1)%daftar.length];
+ if(animasi){elNameCurrent.classList.remove('tick');void elNameCurrent.offsetWidth;elNameCurrent.classList.add('tick')}
+}
+function jumlahPesertaText(){return `${namaNama.length} peserta • ${buatSektorRoda().length} petak pada roda`}
+function setStatus(teks){$('statusAplikasi').textContent=teks}
+function resetPeluangRata(pesan='Peluang peserta dibagi rata lagi.'){
+ peluangNama=bagiRata(namaNama);draftPeluang={...peluangNama};renderPengaturan();gambarRoda();perbaruiStatus();setStatus(pesan)
+}
+function perbaruiStatus(){
+ $('statusNama').textContent=namaNama.length?`${jumlahPesertaText()}. Peluang total ${jumlahPeluang(peluangNama).toFixed(1)}%.`:'Daftar kosong. Tambahkan peserta terlebih dahulu.';
+ $('statusPutar').textContent=namaNama.length?`${jumlahPesertaText()}. ${namaNama.map(n=>`${n} ${Number(peluangNama[n]||0)}%`).join(' · ')}`:'Tambahkan nama di tab Nama untuk mulai.';
+ $('jumlahSektor').textContent=`${buatSektorRoda().length} PETAK`;
+ const p=hasilTerakhir?Number(peluangNama[hasilTerakhir.nama]||0):null;
+ $('peluangHasil').textContent=hasilTerakhir?`Peluang saat gacha: ${p}%`:'Atur peluang di tab Pengaturan.';
+ if(!sedangPutar){reelIndex=namaNama.length?reelIndex%namaNama.length:0;isiAnimasiNama(namaNama,reelIndex,false);elNameStatus.textContent=namaNama.length?'SIAP':'KOSONG'}
+}
+function renderDaftarNama(){
+ elDaftar.innerHTML='';
+ namaNama.forEach((nama,i)=>{
+  const chip=document.createElement('div');chip.className='chip';const span=document.createElement('span');span.textContent=nama;
+  const b=document.createElement('button');b.textContent='×';b.title='Hapus '+nama;b.setAttribute('aria-label','Hapus '+nama);b.disabled=sedangPutar;
+  b.addEventListener('click',()=>{if(sedangPutar)return;namaNama.splice(i,1);resetPeluangRata('Daftar peserta berubah; peluang dibagi rata lagi.');renderDaftarNama()});chip.append(span,b);elDaftar.append(chip)
+ });perbaruiStatus();
+}
+function renderPengaturan(){
+ const wadah=$('daftarPeluang');wadah.innerHTML='';
+ if(!namaNama.length){const p=document.createElement('p');p.className='hint';p.textContent='Belum ada peserta. Tambahkan nama di tab Nama.';wadah.append(p);$('totalPeluang').textContent='0%';$('totalPeluang').className='odds-total invalid';$('pesanPeluang').textContent='Belum ada peserta.';return}
+ namaNama.forEach((nama,i)=>{
+  const row=document.createElement('div');row.className='odds-row';const nam=document.createElement('div');nam.className='odds-name';nam.textContent=nama;const small=document.createElement('small');small.textContent=`Peluang aktif ${Number(peluangNama[nama]||0)}%`;nam.append(small);
+  const slider=document.createElement('input');slider.type='range';slider.min='0';slider.max='100';slider.step='1';slider.value=Number.isFinite(Number(draftPeluang[nama]))?draftPeluang[nama]:0;slider.setAttribute('aria-label',`Slider persentase peluang ${nama}`);slider.disabled=sedangPutar;
+  const input=document.createElement('input');input.type='number';input.className='odds-number';input.min='0';input.max='100';input.step='1';input.inputMode='decimal';input.value=slider.value;input.setAttribute('aria-label',`Persentase peluang ${nama}`);input.disabled=sedangPutar;
+  const sign=document.createElement('span');sign.className='odds-sign';sign.textContent='%';
+  const track=document.createElement('div');track.className='odds-track';const fill=document.createElement('i');fill.style.width=`${Math.max(0,Math.min(100,Number(input.value)||0))}%`;track.append(fill);
+  function aturSlider(nilai){nilai=Math.max(0,Math.min(100,Math.round(Number(nilai)||0)));const lain=namaNama.filter(x=>x!==nama);const sisa=100-nilai;const totalLain=lain.reduce((sum,x)=>sum+Math.max(0,Number(draftPeluang[x])||0),0);draftPeluang[nama]=nilai;
+   if(lain.length){let sudah=0;lain.forEach((x,i)=>{let v=i===lain.length-1?Math.round((sisa-sudah)*10)/10:(totalLain>0?Math.round((sisa*(Math.max(0,Number(draftPeluang[x])||0)/totalLain))*10)/10:Math.round((sisa/lain.length)*10)/10);draftPeluang[x]=Math.max(0,v);sudah+=draftPeluang[x]})}
+   // Koreksi pembulatan supaya jumlah selalu tepat 100%.
+   if(lain.length){const koreksi=Math.round((100-jumlahPeluang(draftPeluang))*10)/10;draftPeluang[lain[lain.length-1]]=Math.max(0,Math.round((draftPeluang[lain[lain.length-1]]+koreksi)*10)/10)}
+   renderPengaturan();
+  }
+  slider.addEventListener('input',()=>aturSlider(slider.value));input.addEventListener('input',()=>aturSlider(input.value));
+  row.append(nam,sign,slider,input,track);wadah.append(row)
+ });syncRingkasanPeluang();
+}
+function syncRingkasanPeluang(){
+ const total=namaNama.reduce((sum,n)=>sum+(Number(draftPeluang[n])||0),0),totalBulat=Math.round(total*10)/10,el=$('totalPeluang');el.textContent=`${totalBulat.toLocaleString('id-ID')}%`;
+ const valid=Math.abs(totalBulat-100)<.051&&namaNama.filter(n=>(Number(draftPeluang[n])||0)>0).length>=2;
+ el.className='odds-total '+(valid?'valid':'invalid');$('pesanPeluang').textContent=valid?'Total sudah 100%. Tekan Simpan Pengaturan.':Math.abs(totalBulat-100)>=.051?'Sesuaikan agar total tepat 100%.':'Sisakan peluang lebih dari 0% untuk minimal dua peserta.';
+ $('simpanPeluang').disabled=sedangPutar;
+ // Update bar width is handled by each input; don't silently apply draft values to the current spin odds.
+}
+function tambahNama(){
+ if(sedangPutar)return;const nama=elNama.value.trim();if(!nama)return;
+ if(namaNama.some(n=>n.toLocaleLowerCase()===nama.toLocaleLowerCase())){setStatus('Nama itu sudah ada.');return}
+ namaNama.push(nama);elNama.value='';resetPeluangRata('Peserta ditambahkan; peluang dibagi rata ulang.');renderDaftarNama();renderPengaturan();elNama.focus()
+}
+$('tambah').addEventListener('click',tambahNama);elNama.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();tambahNama()}});
+$('template').addEventListener('click',()=>{if(sedangPutar)return;namaNama=[...templateNama];resetPeluangRata('Nama awal dimuat kembali; peluang dibagi rata.');renderDaftarNama();renderPengaturan()});
+$('hapus').addEventListener('click',()=>{if(sedangPutar)return;namaNama=[];resetPeluangRata('Semua peserta dihapus.');renderDaftarNama();renderPengaturan();elHasil.textContent='Belum ada peserta';elHasil.classList.add('empty')});
+$('acak').addEventListener('click',()=>{if(sedangPutar)return;for(let i=namaNama.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[namaNama[i],namaNama[j]]=[namaNama[j],namaNama[i]]}draftPeluang={...peluangNama};renderDaftarNama();renderPengaturan();gambarRoda();setStatus('Urutan nama diacak. Peluang tiap nama tetap sama.')});
+$('bagiRata').addEventListener('click',()=>{if(sedangPutar)return;draftPeluang=bagiRata(namaNama);renderPengaturan();setStatus('Peluang diratakan sebagai rancangan. Tekan Simpan Pengaturan untuk menerapkan.')});
+$('simpanPeluang').addEventListener('click',()=>{
+ if(sedangPutar)return;const total=namaNama.reduce((sum,n)=>sum+(Number(draftPeluang[n])||0),0);const lebihDua=namaNama.filter(n=>(Number(draftPeluang[n])||0)>0).length>=2;
+ if(Math.abs(total-100)>.05){setStatus(`Belum disimpan: total peluang sekarang ${total.toLocaleString('id-ID')}%, harus 100%.`);$('pesanPeluang').textContent='Total harus tepat 100%.';return}
+ if(!lebihDua){setStatus('Minimal dua peserta harus memiliki peluang di atas 0%.');return}
+ peluangNama={};namaNama.forEach(n=>peluangNama[n]=Math.round((Number(draftPeluang[n])||0)*10)/10);
+ // Koreksi nilai pembulatan kecil agar penjumlahan aktif tepat 100%.
+ const koreksi=100-jumlahPeluang(peluangNama);if(namaNama.length)peluangNama[namaNama[0]]=Math.round((peluangNama[namaNama[0]]+koreksi)*10)/10;
+ draftPeluang={...peluangNama};renderPengaturan();gambarRoda();perbaruiStatus();setStatus('Pengaturan peluang berhasil disimpan. Peluang roda dan gacha sudah sinkron.');
+});
+function gantiTab(namaTab){
+ if(sedangPutar)return;
+ document.querySelectorAll('.tab-btn').forEach(btn=>btn.setAttribute('aria-selected',String(btn.dataset.tab===namaTab)));
+ document.querySelectorAll('.tab-page').forEach(page=>page.hidden=page.id!==`tab-${namaTab}`);
+}
+document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>gantiTab(btn.dataset.tab)));
+function lockControls(aktif){
+ document.querySelectorAll('.tab-btn').forEach(b=>b.disabled=aktif);
+ ['tambah','template','acak','hapus','bagiRata','simpanPeluang','hapusRiwayat'].forEach(id=>{if($(id))$(id).disabled=aktif});
+ elNama.disabled=aktif;document.querySelectorAll('.chip button').forEach(b=>b.disabled=aktif);document.querySelectorAll('.odds-row input').forEach(i=>i.disabled=aktif);
+ $('putar').disabled=aktif;
+}
+$('hapusRiwayat').addEventListener('click',()=>{riwayat=[];hasilTerakhir=null;elRiwayat.innerHTML='';elHasil.textContent='Siap berputar?';elHasil.classList.add('empty');$('peluangHasil').textContent='Atur peluang di tab Pengaturan.';setStatus('Riwayat gacha telah dihapus.')});
+$('putar').addEventListener('click',()=>{
+ if(sedangPutar)return;
+ if(namaNama.length<2){setStatus('Tambahkan minimal dua peserta sebelum memutar.');gantiTab('nama');return}
+ if(!peluangSah(peluangNama)){setStatus('Atur peluang hingga total 100% dan setidaknya dua peserta memiliki peluang.');gantiTab('pengaturan');return}
+ const namaSpin=[...namaNama],oddsSpin={...peluangNama},sektorSpin=buatSektorRoda(namaSpin,oddsSpin);
+ const pemenang=pilihPemenangTertimbang(namaSpin,oddsSpin),indeksPemenang=indeksUntukNama(sektorSpin,pemenang);
+ const pilihanUmpan=sektorSpin.map((s,i)=>({s,i})).filter(x=>x.s.nama!==pemenang);
+ if(indeksPemenang<0||!pilihanUmpan.length){setStatus('Pastikan minimal dua peserta memiliki peluang positif.');return}
+ const umpanEntry=pilihanUmpan[Math.floor(Math.random()*pilihanUmpan.length)],namaUmpan=umpanEntry.s.nama,indeksUmpan=umpanEntry.i;
+ sedangPutar=true;lockControls(true);wheelSpinSectors=sektorSpin;
+ elHasil.textContent='Sedang mengacak…';elHasil.classList.remove('empty');$('peluangHasil').textContent='Animasi sedang berlangsung…';elNameReel.classList.add('is-spinning');elNameStatus.textContent='BERPUTAR';
+ const awal=normSudut(putaran),targetUmpan=tengahSektor(indeksUmpan,sektorSpin),deltaLambat=TAU*(7+Math.random()*2)+selisihMaju(awal,targetUmpan),sudutUmpan=awal+deltaLambat;
+ const targetMenang=tengahSektor(indeksPemenang,sektorSpin);
+ const durasiLambat=3500,durasiJeda=1000,burstDurasi=190,cruiseDurasi=760,slowDurasi=2150,durasiAkhir=burstDurasi+cruiseDurasi+slowDurasi,mulai=performance.now();
+ const lompatanPetak=Math.random()<.5?2:3;
+ const lebarRata=TAU/sektorSpin.length,jarakLoncatan=lebarRata*lompatanPetak;
+ const setelahBurst=sudutUmpan+jarakLoncatan;
+ const putaranCepat=TAU*(2.6+Math.random()*.55);
+ const sisaPerlambatan=TAU+selisihMaju(setelahBurst,targetMenang);
+ const deltaAkhir=jarakLoncatan+putaranCepat+sisaPerlambatan;
+ let fase='awal',nextNamaAt=mulai;
+ const easeOut=t=>1-Math.pow(1-t,4.6),easeInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+ function selesai(){
+  sedangPutar=false;wheelSpinSectors=null;elNameReel.classList.remove('is-spinning');elNameStatus.textContent='MENANG ✓';lockControls(false);renderDaftarNama();renderPengaturan();gambarRoda();
+ }
+ function animasi(now){
+  const lewat=now-mulai;
+  if(lewat<durasiLambat){
+   const t=Math.max(0,lewat/durasiLambat);putaran=awal+deltaLambat*easeOut(t);gambarRoda();
+   if(now>=nextNamaAt){reelIndex=Math.floor(Math.random()*namaSpin.length);isiAnimasiNama(namaSpin,reelIndex,true);nextNamaAt=now+24+Math.pow(t,4.1)*510}
+  }else if(lewat<durasiLambat+durasiJeda){
+   putaran=sudutUmpan;gambarRoda();
+   if(fase!=='umpan'){fase='umpan';isiAnimasiNama(namaSpin,namaSpin.indexOf(namaUmpan),true);elNameStatus.textContent='HAMPIR BERHENTI…';elHasil.textContent='Hampir terpilih…';setStatus(`Roda berhenti sejenak pada ${namaUmpan}…`)}
+  }else{
+   const t=Math.min(1,(lewat-durasiLambat-durasiJeda)/durasiAkhir);
+   if(fase!=='putaran-kedua'){fase='putaran-kedua';nextNamaAt=now;elNameStatus.textContent='PUTAR LAGI!';setStatus(`Tunggu… roda melompat ${lompatanPetak} petak, lalu berputar cepat kembali.`)}
+   let maju=0;
+   if(t*durasiAkhir<burstDurasi){const u=Math.min(1,(t*durasiAkhir)/burstDurasi);maju=jarakLoncatan*easeOut(u)}
+   else if(t*durasiAkhir<burstDurasi+cruiseDurasi){const u=(t*durasiAkhir-burstDurasi)/cruiseDurasi;maju=jarakLoncatan+putaranCepat*u}
+   else{const u=(t*durasiAkhir-burstDurasi-cruiseDurasi)/slowDurasi;maju=jarakLoncatan+putaranCepat+sisaPerlambatan*easeOut(Math.min(1,u))}
+   putaran=sudutUmpan+maju;gambarRoda();
+   if(now>=nextNamaAt&&t<1){reelIndex=Math.floor(Math.random()*namaSpin.length);isiAnimasiNama(namaSpin,reelIndex,true);nextNamaAt=now+22+Math.pow(t,4.2)*410}
+   if(t>=1){
+    putaran=targetMenang;gambarRoda();selesai();isiAnimasiNama(namaSpin,namaSpin.indexOf(pemenang),false);
+    const waktu=new Date().toLocaleString('id-ID');hasilTerakhir={nama:pemenang,waktu,peluang:oddsSpin[pemenang]};elHasil.textContent='✦ '+pemenang;elHasil.classList.remove('empty');$('peluangHasil').textContent=`Peluang saat gacha: ${oddsSpin[pemenang]}%`;
+    riwayat.unshift({nama:pemenang,waktu,peluang:oddsSpin[pemenang]});const li=document.createElement('li');li.textContent=`${pemenang} — ${oddsSpin[pemenang]}% — ${waktu}`;elRiwayat.prepend(li);
+    setStatus(`Pemenang: ${pemenang}. Roda sempat berhenti pada ${namaUmpan}, lalu melompat ${lompatanPetak} petak dan spin lagi.`);perbaruiStatus();isiAnimasiNama(namaSpin,namaSpin.indexOf(pemenang),false);elNameStatus.textContent='MENANG ✓';$('peluangHasil').textContent=`Peluang saat gacha: ${hasilTerakhir.peluang}%`;return;
+   }
+  }
+  requestAnimationFrame(animasi);
+ }
+ requestAnimationFrame(animasi);
+});
+function gambarBulat(ctx,x,y,r){ctx.beginPath();ctx.arc(x,y,r,0,TAU)}
+function buatGambarHasil(){
+ const w=1200,h=850,c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');
+ let bg=g.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#c6edff');bg.addColorStop(.45,'#edfaff');bg.addColorStop(1,'#80c8ee');g.fillStyle=bg;g.fillRect(0,0,w,h);
+ g.save();g.globalAlpha=.42;g.fillStyle='#fff';g.beginPath();g.ellipse(180,90,340,160,-.3,0,TAU);g.fill();g.fillStyle='#48a6df';g.beginPath();g.ellipse(1040,800,440,190,-.2,0,TAU);g.fill();g.restore();
+ const x=52,y=40,ww=1096,hh=770;g.shadowColor='rgba(10,60,95,.38)';g.shadowBlur=28;g.shadowOffsetY=12;g.fillStyle='rgba(255,255,255,.82)';g.beginPath();g.roundRect(x,y,ww,hh,18);g.fill();g.shadowColor='transparent';g.strokeStyle='rgba(255,255,255,.98)';g.lineWidth=3;g.stroke();
+ let bar=g.createLinearGradient(0,y,0,y+72);bar.addColorStop(0,'#dff7ff');bar.addColorStop(.14,'#8cd7fc');bar.addColorStop(.5,'#168bd3');bar.addColorStop(1,'#419dd7');g.fillStyle=bar;g.beginPath();g.roundRect(x+2,y+2,ww-4,70,[16,16,0,0]);g.fill();
+ g.fillStyle='#fff';gambarBulat(g,x+33,y+35,17);g.fill();g.fillStyle='#0787c9';g.font='bold 22px Segoe UI';g.textAlign='center';g.textBaseline='middle';g.fillText('◉',x+33,y+35);
+ g.textAlign='left';g.fillStyle='#fff';g.font='600 25px Segoe UI';g.shadowColor='#174d77';g.shadowBlur=2;g.fillText('Spin Wheel — HASIL GACHA',x+66,y+42);g.shadowBlur=0;
+ g.textAlign='center';g.fillStyle='#165579';g.font='700 24px Segoe UI';g.fillText('SELAMAT KEPADA',w/2,160);
+ let ribbon=g.createLinearGradient(170,0,1030,0);ribbon.addColorStop(0,'#1598dc');ribbon.addColorStop(.5,'#6ed4ff');ribbon.addColorStop(1,'#1686cf');g.fillStyle=ribbon;g.beginPath();g.roundRect(120,208,960,188,28);g.fill();g.strokeStyle='#fff';g.lineWidth=5;g.stroke();
+ const winner=hasilTerakhir?hasilTerakhir.nama:'BELUM ADA HASIL';g.fillStyle='#fff';g.font='bold 64px Segoe UI';let ukuran=64;while(g.measureText(winner).width>850&&ukuran>30){ukuran-=4;g.font=`bold ${ukuran}px Segoe UI`}g.fillText(winner,600,283);g.font='600 22px Segoe UI';g.fillText('PEMENANG SPIN WHEEL',600,342);
+ g.fillStyle='#165579';g.font='700 21px Segoe UI';g.fillText(`Peluang saat gacha: ${hasilTerakhir?hasilTerakhir.peluang:0}%`,600,438);
+ g.fillStyle='#215d7e';g.font='600 22px Segoe UI';g.fillText('Riwayat undian terbaru',600,487);
+ const items=riwayat.slice(0,6);items.forEach((item,i)=>{const yy=535+i*34;g.fillStyle=i===0?'#fff':'rgba(255,255,255,.58)';g.beginPath();g.roundRect(145,yy-21,910,29,8);g.fill();g.fillStyle='#195a80';g.textAlign='left';g.font='600 18px Segoe UI';g.fillText(`${i+1}. ${item.nama} (${item.peluang}%)`,168,yy);g.textAlign='right';g.font='16px Segoe UI';g.fillStyle='#527d97';g.fillText(item.waktu,1030,yy)});
+ g.textAlign='center';g.fillStyle='#356a8a';g.font='16px Segoe UI';g.fillText(hasilTerakhir?`Waktu hasil: ${hasilTerakhir.waktu}`:'Belum ada undian',600,766);g.fillStyle='#6096b2';g.font='14px Segoe UI';g.fillText('Aero Glass • Web ini dibuat 21-10-2026',600,790);
+ return c;
+}
+$('unduh').addEventListener('click',()=>{if(!hasilTerakhir||!riwayat.length){setStatus('Putar roda dulu supaya ada hasil yang bisa diunduh.');return}const c=buatGambarHasil();c.toBlob(blob=>{if(!blob){setStatus('Gagal membuat gambar PNG.');return}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='hasil-gacha.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);setStatus('Gambar PNG hasil gacha berhasil diunduh.')},'image/png')});
+// Tombol jendela bergaya Windows: simulasi minimize, maximize/restore, dan close di halaman web.
+$('minimize').addEventListener('click',()=>{jendela.classList.add('minimized');jendela.classList.remove('closed');$('restoreTask').classList.add('visible');$('restoreTask').textContent='◉ Spin Wheel (minimized)'});
+let gayaJendelaSebelumMaksimalkan=null;
+function simpanGayaPosisiJendela(){const o={};['position','left','top','right','bottom','width','height','margin','transform'].forEach(k=>o[k]=jendela.style[k]);o.mobileFloating=jendela.classList.contains('mobile-floating');o.mobileBar=document.body.classList.contains('dragging-mobile-window');return o}
+function pulihkanGayaPosisiJendela(o){if(!o)return;['position','left','top','right','bottom','width','height','margin','transform'].forEach(k=>jendela.style[k]=o[k]||'');jendela.classList.toggle('mobile-floating',!!o.mobileFloating);document.body.classList.toggle('dragging-mobile-window',!!o.mobileBar)}
+$('maximize').addEventListener('click',()=>{
+ maximizeAktif=!maximizeAktif;
+ if(maximizeAktif){
+  gayaJendelaSebelumMaksimalkan=simpanGayaPosisiJendela();
+  ['position','left','top','right','bottom','width','height','margin','transform'].forEach(k=>jendela.style[k]='');
+  jendela.classList.remove('mobile-floating');document.body.classList.remove('dragging-mobile-window');
+ }else{pulihkanGayaPosisiJendela(gayaJendelaSebelumMaksimalkan);gayaJendelaSebelumMaksimalkan=null}
+ jendela.classList.toggle('maximized',maximizeAktif);$('maximize').title=maximizeAktif?'Restore':'Maximize';$('maximize').setAttribute('aria-label',maximizeAktif?'Restore':'Maximize');$('maximize').classList.toggle('max',!maximizeAktif);$('maximize').classList.toggle('restore',maximizeAktif)
+});
+$('close').addEventListener('click',()=>{jendela.classList.add('closed');$('restoreTask').classList.add('visible');$('restoreTask').textContent='◉ Buka Spin Wheel'});
+$('restoreTask').addEventListener('click',()=>{jendela.classList.remove('closed','minimized');$('restoreTask').textContent='◉ Spin Wheel';$('restoreTask').classList.add('visible')});
+function jam(){const d=new Date();$('jam').textContent=d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})+'\n'+d.toLocaleDateString('id-ID',{day:'2-digit',month:'2-digit',year:'numeric'})}jam();setInterval(jam,30000);
+
+// Start menu Windows 7 dan mini-browser.
+const startMenu=$('startMenu'),browserWindow=$('browserWindow'),browserFrame=$('browserFrame'),browserAddress=$('browserAddress');
+const URL_JADWAL='https://ahmadrijani.github.io/pkl/Website/JADWAL.html';let browserMax=false,browserHistory=[URL_JADWAL],browserHistoryIndex=0;
+function bukaBrowser(){startMenu.hidden=true;browserWindow.hidden=false;browserWindow.classList.remove('minimized');$('browserTask').classList.add('visible');if(browserFrame.src==='about:blank'||browserFrame.src==='')muatAlamat(URL_JADWAL)}
+function muatAlamat(url){try{const u=new URL(url);if(!/^https?:$/.test(u.protocol))throw new Error();browserAddress.value=u.href;browserFrame.src=u.href;$('frameNote').hidden=true;browserHistory=browserHistory.slice(0,browserHistoryIndex+1);browserHistory.push(u.href);browserHistoryIndex=browserHistory.length-1}catch(e){browserAddress.value=URL_JADWAL}}
+$('startOrb').addEventListener('click',()=>{startMenu.hidden=!startMenu.hidden});$('startClose').addEventListener('click',()=>startMenu.hidden=true);$('startSpin').addEventListener('click',()=>{startMenu.hidden=true;jendela.classList.remove('closed','minimized')});$('startBrowser').addEventListener('click',bukaBrowser);$('browserTask').addEventListener('click',()=>{if(browserWindow.hidden||browserWindow.classList.contains('minimized'))bukaBrowser();else browserWindow.focus()});$('browserGo').addEventListener('click',()=>muatAlamat(browserAddress.value));browserAddress.addEventListener('keydown',e=>{if(e.key==='Enter')muatAlamat(browserAddress.value)});$('browserRefresh').addEventListener('click',()=>{browserFrame.src=browserAddress.value});$('browserHome').addEventListener('click',()=>muatAlamat(URL_JADWAL));$('browserBack').addEventListener('click',()=>{if(browserHistoryIndex>0){browserHistoryIndex--;browserAddress.value=browserHistory[browserHistoryIndex];browserFrame.src=browserAddress.value}});$('browserForward').addEventListener('click',()=>{if(browserHistoryIndex<browserHistory.length-1){browserHistoryIndex++;browserAddress.value=browserHistory[browserHistoryIndex];browserFrame.src=browserAddress.value}});$('browserMin').addEventListener('click',()=>browserWindow.classList.add('minimized'));$('browserMax').addEventListener('click',()=>{browserMax=!browserMax;browserWindow.classList.toggle('maximized',browserMax);$('browserMax').textContent=browserMax?'❐':'□'});$('browserClose').addEventListener('click',()=>{browserWindow.hidden=true});$('openExternal').addEventListener('click',()=>window.open(browserAddress.value,'_blank','noopener'));
+browserFrame.addEventListener('load',()=>{if(browserFrame.src!=='about:blank')setTimeout(()=>{$('frameNote').hidden=false},1800)});
+// Drag & drop jendela dengan pointer yang halus di PC maupun layar sentuh.
+function aktifkanDrag(win,handle){
+ let drag=null;handle.style.touchAction='none';
+ handle.addEventListener('pointerdown',e=>{
+  if(e.target.closest('button,input,a'))return;
+  if(e.pointerType==='mouse'&&e.button!==0)return;
+  if(win.classList.contains('maximized'))return;
+  const r=win.getBoundingClientRect();
+  const mainWindow=win===jendela;
+  const isMobile=mainWindow&&window.matchMedia('(max-width: 760px)').matches;
+  drag={pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,left:r.left,top:r.top,moved:false,isMobile};
+  win.style.position='fixed';win.style.margin='0';win.style.left=r.left+'px';win.style.top=r.top+'px';win.style.right='auto';win.style.bottom='auto';win.style.transform='none';
+  if(isMobile){
+   win.classList.add('mobile-floating');document.body.classList.add('dragging-mobile-window');
+   win.style.width=Math.max(220,window.innerWidth-10)+'px';win.style.height=Math.max(300,window.innerHeight-52)+'px';
+  }else if(mainWindow){win.style.width=r.width+'px'}
+  win.classList.add('dragging-window');
+  try{handle.setPointerCapture(e.pointerId)}catch(_){/* Pointer capture bisa tidak tersedia di browser lama. */}
+ });
+ handle.addEventListener('pointermove',e=>{
+  if(!drag||e.pointerId!==drag.pointerId)return;
+  const dx=e.clientX-drag.startX,dy=e.clientY-drag.startY;
+  if(Math.abs(dx)+Math.abs(dy)>2)drag.moved=true;
+  const width=win.getBoundingClientRect().width,height=win.getBoundingClientRect().height;
+  // Sisakan bagian title bar di dalam layar supaya jendela selalu bisa ditarik kembali.
+  const minLeft=Math.min(0,80-width),maxLeft=Math.max(0,window.innerWidth-80);
+  const left=Math.max(minLeft,Math.min(maxLeft,drag.left+dx));
+  const top=Math.max(0,Math.min(Math.max(0,window.innerHeight-38),drag.top+dy));
+  win.style.left=left+'px';win.style.top=top+'px';
+ });
+ const selesai=e=>{if(drag&&(!e||e.pointerId===drag.pointerId)){drag=null;win.classList.remove('dragging-window')}};
+ ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>handle.addEventListener(ev,selesai));
+}
+aktifkanDrag(jendela,jendela.querySelector('.aero-titlebar'));aktifkanDrag(browserWindow,$('browserDrag'));
+
+// Wallpaper bawaan, wallpaper lokal, dan mode Aero klasik.
+const WALLPAPER_BAWAAN='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyrApi-eDm0nhW7MTF8ZYL_AI6GVUJ_DKkjvS4YtmZLzsMqOL7tL-h4Sl7&s=10';
+const WALLPAPER_KEY='spinNamaAeroWallpaperV1';
+function terapkanWallpaper(value){
+ const body=document.body;body.classList.add('using-wallpaper');
+ if(value==='aero'){
+  body.classList.remove('using-wallpaper');body.style.backgroundImage='';body.style.backgroundSize='';body.style.backgroundPosition='';body.style.backgroundRepeat='';body.style.backgroundAttachment='';return;
+ }
+ // Lapisan gradasi menjadi fallback jika gambar daring tidak tersedia.
+ body.style.backgroundImage=`url("${value}"), radial-gradient(ellipse at 20% 0%,#fff 0,#dff7ff 32%,#8dcff5 70%,#5a9fd7 100%)`;
+ body.style.backgroundSize='cover,cover';body.style.backgroundPosition='center center,center center';body.style.backgroundRepeat='no-repeat,no-repeat';body.style.backgroundAttachment='fixed,fixed';
+}
+function simpanPilihanWallpaper(value){try{localStorage.setItem(WALLPAPER_KEY,value)}catch(_){/* Beberapa mode file:// membatasi localStorage; perubahan tetap berlaku sampai halaman ditutup. */}}
+$('startWallpaper').addEventListener('click',()=>{startMenu.hidden=true;$('wallpaperFile').click()});
+$('startDefaultWallpaper').addEventListener('click',()=>{startMenu.hidden=true;terapkanWallpaper(WALLPAPER_BAWAAN);simpanPilihanWallpaper(WALLPAPER_BAWAAN);$('statusAplikasi').textContent='Wallpaper bawaan Windows diterapkan.'});
+$('wallpaperFile').addEventListener('change',e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ if(!file.type.startsWith('image/')){alert('Pilih file gambar untuk wallpaper.');e.target.value='';return}
+ const reader=new FileReader();reader.onload=()=>{
+  const img=new Image();img.onload=()=>{
+   const scale=Math.min(1,1920/img.naturalWidth,1200/img.naturalHeight),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));
+   const c=canvas.getContext('2d');c.drawImage(img,0,0,canvas.width,canvas.height);
+   let data=reader.result;try{data=canvas.toDataURL('image/jpeg',.82)}catch(_){/* Gunakan data asli jika encoding tidak didukung. */}
+   terapkanWallpaper(data);simpanPilihanWallpaper(data);$('statusAplikasi').textContent='Wallpaper baru diterapkan.';
+   try{localStorage.setItem(WALLPAPER_KEY,data)}catch(_){$('statusAplikasi').textContent='Wallpaper diterapkan, tetapi browser tidak mengizinkan penyimpanan permanen.'}
+  };img.onerror=()=>{$('statusAplikasi').textContent='Gambar tidak dapat dibuka sebagai wallpaper.'};img.src=reader.result;
+ };reader.readAsDataURL(file);e.target.value='';
+});
+try{const tersimpan=localStorage.getItem(WALLPAPER_KEY);terapkanWallpaper(tersimpan||WALLPAPER_BAWAAN)}catch(_){terapkanWallpaper(WALLPAPER_BAWAAN)}
+
+// Shutdown/startup simulasi: tidak mematikan komputer sungguhan.
+const desktopEnvironment=$('desktopEnvironment'),shutdownOverlay=$('shutdownOverlay'),powerScreen=$('powerScreen');let powerTimer=null;
+$('shutdownPC').addEventListener('click',()=>{
+ startMenu.hidden=true;shutdownOverlay.hidden=false;powerScreen.hidden=true;
+ $('shutdownTitle').textContent='Mematikan Windows...';$('shutdownSubtitle').textContent='Harap tunggu sebentar.';
+ clearTimeout(powerTimer);powerTimer=setTimeout(()=>{desktopEnvironment.hidden=true;shutdownOverlay.hidden=true;powerScreen.hidden=false;document.body.classList.add('pc-is-off')},1900);
+});
+$('powerOn').addEventListener('click',()=>{
+ powerScreen.hidden=true;shutdownOverlay.hidden=false;$('shutdownTitle').textContent='Memulai Windows...';$('shutdownSubtitle').textContent='Menyiapkan desktop Aero.';
+ clearTimeout(powerTimer);powerTimer=setTimeout(()=>{document.body.classList.remove('pc-is-off');desktopEnvironment.hidden=false;shutdownOverlay.hidden=true;startMenu.hidden=true},1700);
+});
+
+renderDaftarNama();renderPengaturan();gambarRoda();isiAnimasiNama(namaNama,0,false);perbaruiStatus();
+</script>
+</body>
+</html>

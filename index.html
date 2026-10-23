@@ -532,6 +532,9 @@
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
     /* JS DISABLED OVERLAY */
+    #metadataWarning[hidden] { display: none !important; }
+    #metadataWarning { display: block; }
+
     .noscript-box {
       padding: 13px;
       margin: 12px auto;
@@ -1394,6 +1397,21 @@
         </div>
 </div>
 </header>
+<noscript>
+  <div class="noscript-box" role="alert">
+    <strong>JavaScript browser sedang mati.</strong> Data arsip tetap ditampilkan karena tersimpan langsung di HTML. Namun, judul YouTube tidak dapat diperbarui otomatis. Cek koneksi internet Anda atau nyalakan JavaScript di browser.
+    <div class="noscript-actions">
+      <a class="js-settings-button" href="https://www.google.com/search?q=cara+menyalakan+JavaScript+di+browser+PC+atau+HP" rel="noopener">Cari di Google: cara menyalakan JavaScript di PC atau HP</a>
+    </div>
+  </div>
+</noscript>
+<div class="noscript-box" id="metadataWarning" role="status" aria-live="polite" hidden>
+  <strong>Judul video YouTube belum berhasil dimuat.</strong> Cek koneksi internet Anda. Jika JavaScript dimatikan, nyalakan JavaScript di browser. Data arsip tetap tersedia di halaman ini.
+  <div class="noscript-actions">
+    <a class="js-settings-button" href="https://www.google.com/search?q=cara+menyalakan+JavaScript+di+browser+PC+atau+HP" rel="noopener">Cari di Google: cara menyalakan JavaScript di PC atau HP</a>
+  </div>
+</div>
+
 
     <main>
 <section class="section archive-loading-section" id="archiveLoading" aria-live="polite">
@@ -1423,7 +1441,7 @@
        DATA ARSIP — EDIT LANGSUNG HTML DI BAGIAN BAWAH INI
        Tambah/ubah kartu di dalam header bagiannya. Tidak memakai JSON.
        ========================================================= -->
-  <template id="arsipHTMLData">
+  
       <section class="section archive-category" id="kategori-dokumentasi-pkl">
         <div class="section-head">
           <h2><img class="category-title-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjz2I65w6TZM15oo12UhMFUTXJtyDINCNuCzODGhJl1Q&amp;s=10" alt="Ikon website" loading="lazy"> DOKUMENTASI PKL</h2>
@@ -1648,7 +1666,7 @@
       <section class="section archive-category" id="kategori-dokumentasi-video">
         <div class="section-head">
           <h2><img class="category-title-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjz2I65w6TZM15oo12UhMFUTXJtyDINCNuCzODGhJl1Q&amp;s=10" alt="Ikon website" loading="lazy"> DOKUMENTASI VIDEO</h2>
-          <span>18 item</span>
+          <span>17 item</span>
         </div>
         <div class="grid">
           <article class="card">
@@ -1891,21 +1909,7 @@
             </a>
           </div>
         </article>
-          <article class="card">
-          <a class="thumb-link" href="https://youtu.be/XvqGu2pUP6A?si=ZjhdFCkQTpSObSWQ" aria-label="Dokumentasi video 17">
-            <div class="thumb-wrap">
-              <img class="thumb" src="https://img.youtube.com/vi/XvqGu2pUP6A/hqdefault.jpg" alt="" loading="lazy">
-              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
-              <span class="play">▶</span>
-            </div>
-          </a>
-          <div class="content">
-            <a href="https://youtu.be/XvqGu2pUP6A?si=ZjhdFCkQTpSObSWQ">
-              <h3 class="title">Dokumentasi video 17</h3>
-              <span class="watch">Tonton di YouTube</span>
-            </a>
-          </div>
-        </article>
+          
           <article class="card">
           <a class="thumb-link" href="https://youtu.be/_zFxnmMqXFY?si=4PVFVsDwv1SRuShQ" aria-label="Dokumentasi video 18">
             <div class="thumb-wrap">
@@ -2006,18 +2010,50 @@
         </div>
       </section>
 
-  </template>
+  
 
   <script>
-    // JavaScript hanya menampilkan data HTML lokal dan mengakhiri animasi memuat.
-    const archiveContainer = document.getElementById("dokumentasiSection");
-    const archiveTemplate = document.getElementById("arsipHTMLData");
-    if (archiveContainer && archiveTemplate) {
-      archiveContainer.append(archiveTemplate.content.cloneNode(true));
-    }
+    // Semua data arsip sudah berada langsung di HTML. JavaScript hanya untuk efek memuat
+    // singkat dan mencoba memperbarui judul video dari metadata YouTube.
     window.setTimeout(() => {
       document.documentElement.classList.remove("archive-loading");
     }, 320);
+
+    (async function loadYoutubeTitles() {
+      const warning = document.getElementById("metadataWarning");
+      const cards = Array.from(document.querySelectorAll(".archive-category article.card"))
+        .filter(card => {
+          const a = card.querySelector(".thumb-link[href]");
+          return a && /youtube\.com|youtu\.be/i.test(a.href);
+        });
+      let failed = 0;
+      await Promise.all(cards.map(async (card) => {
+        const link = card.querySelector(".content a[href], .thumb-link[href]");
+        const title = card.querySelector("h3.title");
+        if (!link || !title) return;
+        let videoId = "";
+        try {
+          const u = new URL(link.href);
+          if (u.hostname === "youtu.be") videoId = u.pathname.split("/").filter(Boolean)[0] || "";
+          else videoId = u.searchParams.get("v") || (u.pathname.match(/\/(?:shorts|embed|live)\/([^/?]+)/) || [])[1] || "";
+        } catch (_) {}
+        if (!videoId) return;
+        try {
+          const endpoint = "https://www.youtube.com/oembed?format=json&url=" + encodeURIComponent("https://www.youtube.com/watch?v=" + videoId);
+          const response = await fetch(endpoint, { method: "GET", mode: "cors", cache: "no-cache" });
+          if (!response.ok) throw new Error("Metadata tidak tersedia");
+          const data = await response.json();
+          if (data && typeof data.title === "string" && data.title.trim()) {
+            title.textContent = data.title.trim();
+            const thumb = card.querySelector(".thumb-link");
+            if (thumb) thumb.setAttribute("aria-label", data.title.trim());
+          } else throw new Error("Judul kosong");
+        } catch (_) {
+          failed++;
+        }
+      }));
+      if (failed && warning) warning.hidden = false;
+    })();
   </script>
 </body>
 </html>

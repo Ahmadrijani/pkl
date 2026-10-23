@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#000000">
-  <title>Arsip Ahmad Rijani</title>
+  <title>Dokumentasi PKL AHMAD RIJANI DI ASIA PRINT TAMIANG LAYANG 2026</title>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -781,9 +781,6 @@
 
     footer { color: #555; text-shadow: none; }
 
-    /* Saat pencarian aktif, footer dan area tambahan tidak perlu ditampilkan. */
-    body.searching footer { display: none; }
-
     .no-result-actions {
       margin-top: 12px;
       display: flex;
@@ -1113,104 +1110,308 @@
       .title { font-size: 12px; }
       .watch { font-size: 9px; }
     }
+
+
+    /* HEADER ARSIP — navigasi sederhana tanpa kolom pencarian/filter */
+    .archive-header {
+      position: static;
+      margin-bottom: 8px;
+      overflow: hidden;
+      border: 1px solid #292929;
+      border-radius: 5px;
+      color: #f4f4f4;
+      background: #080808;
+      box-shadow: 0 4px 14px rgba(0,0,0,.48);
+    }
+
+    .archive-header-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 13px 15px;
+      background: linear-gradient(135deg, #171717, #080808 72%);
+    }
+
+    .archive-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .archive-brand-mark {
+      display: grid;
+      place-items: center;
+      flex: 0 0 43px;
+      width: 43px;
+      height: 43px;
+      border: 1px solid #505050;
+      border-radius: 5px;
+      color: #fff;
+      background: linear-gradient(#303030, #111);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.09);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      overflow: hidden;
+    }
+    .archive-brand-mark img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .asset-icon img { width: 100%; height: 100%; display: block; object-fit: contain; padding: 7px; }
+
+    .archive-brand-text { min-width: 0; }
+    .archive-eyebrow {
+      display: block;
+      margin-bottom: 2px;
+      color: #a7a7a7;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .16em;
+    }
+
+    .archive-brand-text h1 {
+      margin: 0;
+      color: #f7f7f7;
+      font-size: 19px;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+
+    .archive-brand-text p {
+      margin: 4px 0 0;
+      color: #8b8b8b;
+      font-size: 11px;
+    }
+
+    .archive-header-tools {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .archive-status,
+    .archive-count {
+      display: inline-flex;
+      align-items: center;
+      min-height: 29px;
+      padding: 0 9px;
+      border: 1px solid #303030;
+      border-radius: 4px;
+      color: #aaa;
+      background: #101010;
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .archive-count {
+      color: #ededed;
+      border-color: #414141;
+      background: #191919;
+      font-weight: 700;
+    }
+
+    .archive-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 31px;
+      padding: 0 10px;
+      border: 1px solid #3b3b3b;
+      border-radius: 4px;
+      color: #ededed;
+      background: linear-gradient(#242424, #111);
+      font: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .archive-action:hover {
+      border-color: #5a5a5a;
+      background: linear-gradient(#303030, #171717);
+    }
+
+    .archive-action:active { transform: translateY(1px); }
+    .archive-action:disabled { opacity: .55; cursor: wait; }
+
+    .archive-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 37px;
+      padding: 0 15px;
+      border-top: 1px solid #242424;
+      background: #0d0d0d;
+    }
+
+    .archive-nav-link {
+      display: inline-flex;
+      align-items: center;
+      align-self: stretch;
+      gap: 7px;
+      padding: 0 3px;
+      border-bottom: 2px solid #bdbdbd;
+      color: #f4f4f4;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .archive-nav-link:hover { color: #fff; text-decoration: none; }
+    .archive-nav-note { color: #686868; font-size: 10px; }
+
+    @media (max-width: 760px) {
+      .archive-header { position: static; margin-bottom: 6px; }
+      .archive-header-main { align-items: flex-start; flex-direction: column; gap: 11px; padding: 11px; }
+      .archive-brand-mark { flex-basis: 37px; width: 37px; height: 37px; }
+      .archive-brand-text h1 { font-size: 17px; }
+      .archive-brand-text p { font-size: 10px; }
+      .archive-header-tools { width: 100%; justify-content: flex-start; }
+      .archive-status { margin-right: auto; }
+      .archive-nav { min-height: 34px; padding: 0 11px; }
+      .archive-nav-note { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    }
+
+    @media (max-width: 420px) {
+      .archive-header-tools { gap: 5px; }
+      .archive-status, .archive-count { min-height: 28px; padding: 0 7px; font-size: 9px; }
+      .archive-action { min-height: 29px; padding: 0 8px; font-size: 10px; }
+      .archive-action span { display: none; }
+      .archive-nav-note { font-size: 9px; }
+    }
+
+
+
+    /* Pemuatan singkat untuk arsip HTML lokal; isi tidak diambil dari jaringan. */
+    #archiveLoading { display: none; }
+    html.archive-loading #archiveLoading { display: block; }
+    html.archive-loading .archive-groups { display: none; }
+  
+
+    /* HEADER TENGAH DAN KATEGORI ARSIP BERGAYA DARK */
+    .archive-header-main {
+      justify-content: center;
+      text-align: center;
+      padding: 18px 14px;
+    }
+    .archive-brand {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+    }
+    .archive-brand-text { text-align: center; }
+    .archive-eyebrow {
+      color: #bcbcbc;
+      font-weight: 800;
+      letter-spacing: .22em;
+    }
+    .archive-brand-text h1 {
+      color: #fff;
+      font-size: clamp(15px, 2.1vw, 22px);
+      font-weight: 900;
+      line-height: 1.35;
+      letter-spacing: .015em;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+    .archive-brand-text p { text-align: center; }
+
+    .archive-category {
+      overflow: hidden;
+      border-radius: 4px;
+      background: #080808;
+    }
+    .archive-category .section-head {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 45px;
+      padding: 10px 12px;
+      text-align: center;
+      border-bottom-width: 1px;
+    }
+    .category-title-icon { width: 22px; height: 22px; object-fit: contain; vertical-align: middle; margin-right: 7px; }
+    .archive-category .section-head h2 {
+      width: 100%;
+      margin: 0;
+      color: #f5f5f5;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.35;
+      letter-spacing: .07em;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(0,0,0,.65);
+    }
+    .archive-category .section-head span {
+      position: absolute;
+      right: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #b0b0b0;
+      font-size: 10px;
+    }
+
+    .archive-category:nth-child(1) { border-color: #27394c; background: #080b10; }
+    .archive-category:nth-child(1) .section-head { background: linear-gradient(#1b2a3b, #101923); border-bottom-color: #30445b; }
+    .archive-category:nth-child(2) { border-color: #3e304b; background: #0c0910; }
+    .archive-category:nth-child(2) .section-head { background: linear-gradient(#30213d, #1a1222); border-bottom-color: #493556; }
+    .archive-category:nth-child(3) { border-color: #2d4537; background: #080d0a; }
+    .archive-category:nth-child(3) .section-head { background: linear-gradient(#1d3326, #102017); border-bottom-color: #34523f; }
+    .archive-category:nth-child(4) { border-color: #4a3928; background: #100c08; }
+    .archive-category:nth-child(4) .section-head { background: linear-gradient(#382919, #21170e); border-bottom-color: #57412a; }
+    .archive-category:nth-child(5) { border-color: #4a2e30; background: #100909; }
+    .archive-category:nth-child(5) .section-head { background: linear-gradient(#382022, #211214); border-bottom-color: #583538; }
+    .archive-category:nth-child(6) { border-color: #343b42; background: #090b0d; }
+    .archive-category:nth-child(6) .section-head { background: linear-gradient(#292f36, #171b20); border-bottom-color: #414a54; }
+
+    @media (max-width: 760px) {
+      .archive-header-main { padding: 14px 9px; }
+      .archive-brand { flex-direction: column; gap: 8px; }
+      .archive-brand-text h1 { font-size: 19px; }
+      .archive-category .section-head { min-height: 42px; padding: 9px 8px; }
+      .archive-category .section-head h2 { font-size: 12px; letter-spacing: .045em; }
+      .archive-category .section-head span { right: 7px; font-size: 9px; }
+    }
+
   </style>
+  <script>document.documentElement.classList.add("archive-loading");</script>
 </head>
 
 <body>
-  <noscript>
-    <div class="noscript-box">
-      <strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> JavaScript sedang mati.</strong>
-      <p>Halaman ini membutuhkan JavaScript untuk membaca arsip, pencarian, dan memuat daftar dokumentasi.</p>
-      <p><b><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Untuk HP:</b> buka pengaturan browser dan izinkan JavaScript untuk situs ini, lalu kembali ke halaman ini dan muat ulang.</p>
-      <div class="noscript-actions">
-        <a class="js-settings-button" href="chrome://settings/content/javascript">
-          <i class="fa-solid fa-gear" aria-hidden="true"></i> Buka Pengaturan JavaScript
-        </a>
-        <a class="js-settings-button" href="https://support.google.com/chrome/answer/95346" target="_blank" rel="noopener">
-          <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Bantuan / Panduan HP
-        </a>
-      </div>
-      <small class="noscript-note">JavaScript tidak bisa dinyalakan otomatis oleh halaman web; browser harus mengizinkannya.</small>
-    </div>
-  </noscript>
-
-  <div class="page">
-    <div class="topbar">
-      <div class="topbar-inner">
-        <div class="brand-mark">AR</div>
-        <div class="brand">
-          <strong>Dokumentasi Utama Ahmad Rijani</strong>
-          <small>Arsip dokumentasi, video, dan berkas PKL</small>
+<div class="page">
+    <header class="archive-header" aria-label="Header arsip">
+      <div class="archive-header-main">
+        <div class="archive-brand">
+          <div class="archive-brand-mark"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjz2I65w6TZM15oo12UhMFUTXJtyDINCNuCzODGhJl1Q&amp;s=10" alt="Ikon website"></div>
+          <div class="archive-brand-text">
+            <h1>Dokumentasi PKL AHMAD RIJANI DI ASIA PRINT TAMIANG LAYANG 2026</h1>
+          </div>
         </div>
-        <div class="status-pill" id="connectionStatus">● memeriksa koneksi…</div>
-      </div>
-    </div>
-
-    <header class="header-panel" aria-label="Pencarian arsip">
-      <div class="toolbar">
-        <label class="search-box" aria-label="Cari dokumentasi">
-          <span class="search-icon"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
-          <input
-            id="searchInput"
-            type="search"
-            autocomplete="off"
-            enterkeyhint="search"
-            placeholder="Cari arsip…"
-            disabled
-          >
-          <button class="search-clear" id="clearSearch" type="button" aria-label="Hapus pencarian" title="Hapus pencarian" disabled>
-            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-          </button>
-        </label>
-        <button class="button primary" id="retryTop" type="button" aria-label="Muat ulang" title="Muat ulang">
-          <i class="fa-solid fa-rotate" aria-hidden="true"></i>
-          <span class="sr-only">Muat ulang</span>
-        </button>
-        <button class="button help-mobile-button" id="helpButton" type="button" aria-controls="helpPanel" aria-expanded="false" title="Bantuan JavaScript">
-          <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
-          <span class="help-label">Bantuan</span>
-        </button>
-      </div>
-
-      <div class="summary">
-        <span class="info-badge" id="resultCount">Belum dimuat</span>
-        <span class="status-text">Tip: tekan <span class="kbd">Ctrl</span> + <span class="kbd">F</span> untuk fokus pencarian.</span>
-      </div>
-    </header>
+</div>
+</header>
 
     <main>
-      <div class="help-panel" id="helpPanel" hidden role="dialog" aria-modal="false" aria-labelledby="helpTitle">
-      <div class="help-panel-head">
-        <strong id="helpTitle"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Bantuan</strong>
-        <button class="help-close" id="helpClose" type="button" aria-label="Tutup bantuan" title="Tutup bantuan">
-          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div class="help-panel-body">
-        <div class="help-note">
-          <b><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> HP:</b> bila JavaScript tidak aktif, buka pengaturan browser dan izinkan JavaScript untuk situs ini. Setelah itu kembali ke halaman ini dan tekan Muat Ulang.
-        </div>
-        <div class="help-note">
-          <b><i class="fa-solid fa-desktop" aria-hidden="true"></i> PC:</b> pada Chrome/Edge, gunakan tombol pengaturan untuk membuka menu JavaScript.
-        </div>
-        <div class="help-note js-permission-note">
-          <b><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Penting:</b> halaman web tidak dapat meminta izin JavaScript secara otomatis. Tombol ini hanya membuka pengaturan atau panduan browser.
-        </div>
-        <div class="help-panel-actions">
-          <button class="button primary" id="helpSettings" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i> Buka Pengaturan JavaScript</button>
-          <a class="button" href="https://support.google.com/chrome/answer/95346" target="_blank" rel="noopener"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Bantuan HP</a>
-        </div>
-      </div>
-    </div>
-
-    <section class="section" id="dokumentasiSection">
+<section class="section archive-loading-section" id="archiveLoading" aria-live="polite">
         <div class="section-head">
-          <h2><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Arsip</h2>
-          <span id="sectionHint">Memuat arsip…</span>
+          <h2><img class="category-title-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjz2I65w6TZM15oo12UhMFUTXJtyDINCNuCzODGhJl1Q&amp;s=10" alt="Ikon website" loading="lazy"> Arsip</h2>
+          <span>Memuat arsip…</span>
         </div>
-
-        <div class="grid" id="dokumentasiGrid" aria-live="polite"></div>
+        <div class="grid">
+          <article class="card skeleton" aria-hidden="true"><div class="skeleton-block skeleton-thumb"></div><div class="skeleton-lines"><div class="skeleton-block skeleton-line big"></div><div class="skeleton-block skeleton-line mid"></div><div class="skeleton-block skeleton-line small"></div></div></article>
+          <article class="card skeleton" aria-hidden="true"><div class="skeleton-block skeleton-thumb"></div><div class="skeleton-lines"><div class="skeleton-block skeleton-line big"></div><div class="skeleton-block skeleton-line mid"></div><div class="skeleton-block skeleton-line small"></div></div></article>
+          <article class="card skeleton" aria-hidden="true"><div class="skeleton-block skeleton-thumb"></div><div class="skeleton-lines"><div class="skeleton-block skeleton-line big"></div><div class="skeleton-block skeleton-line mid"></div><div class="skeleton-block skeleton-line small"></div></div></article>
+          <article class="card skeleton" aria-hidden="true"><div class="skeleton-block skeleton-thumb"></div><div class="skeleton-lines"><div class="skeleton-block skeleton-line big"></div><div class="skeleton-block skeleton-line mid"></div><div class="skeleton-block skeleton-line small"></div></div></article>
+          <article class="card skeleton" aria-hidden="true"><div class="skeleton-block skeleton-thumb"></div><div class="skeleton-lines"><div class="skeleton-block skeleton-line big"></div><div class="skeleton-block skeleton-line mid"></div><div class="skeleton-block skeleton-line small"></div></div></article>
+          <article class="card skeleton" aria-hidden="true"><div class="skeleton-block skeleton-thumb"></div><div class="skeleton-lines"><div class="skeleton-block skeleton-line big"></div><div class="skeleton-block skeleton-line mid"></div><div class="skeleton-block skeleton-line small"></div></div></article>
+        </div>
       </section>
+      <div class="archive-groups" id="dokumentasiSection">
+      </div>
     </main>
 
     <footer>
@@ -1218,610 +1419,605 @@
     </footer>
   </div>
 
-  <script>
-    "use strict";
-
-    /* =========================================================
-       SUMBER ARSIP
-       ========================================================= */
-    const SUMBER_ARSIP = [
-      "/file/arsip.json",
-      "./file/arsip.json",
-      "https://raw.githubusercontent.com/Ahmadrijani/pkl/refs/heads/main/file/arsip.json"
-    ];
-
-    const dokumentasiGrid = document.getElementById("dokumentasiGrid");
-    const searchInput = document.getElementById("searchInput");
-    const helpButton = document.getElementById("helpButton");
-    const helpPanel = document.getElementById("helpPanel");
-    const helpClose = document.getElementById("helpClose");
-    const helpSettings = document.getElementById("helpSettings");
-    const clearSearch = document.getElementById("clearSearch");
-    const retryTop = document.getElementById("retryTop");
-    const resultCount = document.getElementById("resultCount");
-    const sectionHint = document.getElementById("sectionHint");
-    const connectionStatus = document.getElementById("connectionStatus");
-
-    let semuaItem = [];
-    let sedangMemuat = false;
-
-    /* =========================================================
-       HELPERS
-       ========================================================= */
-    function escapeHTML(nilai) {
-      return String(nilai ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    function normalizeText(nilai) {
-      return String(nilai ?? "").toLowerCase().trim();
-    }
-
-    function getVideoId(item) {
-      if (item && item.id) return String(item.id);
-
-      if (!item || !item.href) return "";
-
-      try {
-        const url = new URL(item.href, window.location.href);
-
-        if (url.hostname === "youtu.be") {
-          return url.pathname.replace("/", "").trim();
-        }
-
-        if (url.hostname.includes("youtube.com")) {
-          return url.searchParams.get("v") || "";
-        }
-      } catch (error) {
-        console.warn("URL video tidak valid:", item.href, error);
-      }
-
-      return "";
-    }
-
-    function createSkeleton(count = 6) {
-      return Array.from({ length: count }, () => `
-        <article class="card skeleton" aria-hidden="true">
-          <div class="skeleton-block skeleton-thumb"></div>
-          <div class="skeleton-lines">
-            <div class="skeleton-block skeleton-line big"></div>
-            <div class="skeleton-block skeleton-line mid"></div>
-            <div class="skeleton-block skeleton-line small"></div>
-          </div>
-        </article>
-      `).join("");
-    }
-
-    function setConnectionStatus(label, online) {
-      connectionStatus.textContent = online ? "● online" : "● offline";
-      connectionStatus.style.background = online
-        ? "rgba(34, 123, 69, .18)"
-        : "rgba(179, 56, 56, .20)";
-    }
-
-    function setCount(visible, total) {
-      if (!total) {
-        resultCount.textContent = "Belum ada data";
-        return;
-      }
-
-      resultCount.textContent = visible === total
-        ? `${total} item`
-        : `${visible} dari ${total} item`;
-    }
-
-    function itemSearchText(item) {
-      return [
-        item?.title,
-        item?.manualTitle,
-        item?.href,
-        item?.type,
-        item?.icon,
-        item?.id
-      ].map(normalizeText).join(" ");
-    }
-
-    /* =========================================================
-       RENDER VIDEO
-       ========================================================= */
-    function createVideo(item, index) {
-      const videoId = getVideoId(item);
-      const link = item.href || (
-        videoId
-          ? `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`
-          : "#"
-      );
-
-      const sudahAdaJudul = Boolean(item.title || item.manualTitle);
-      const judul = item.title || item.manualTitle || "Memuat judul…";
-
-      if (item.disabled) {
-        return `
-          <article class="card disabled-card">
-            <div class="asset-icon">VIDEO</div>
-            <div class="content">
-              <h3 class="title">${escapeHTML(judul)}</h3>
-              <span class="watch">Link belum tersedia</span>
-            </div>
-          </article>
-        `;
-      }
-
-      if (!videoId) {
-        return `
+  <!-- =========================================================
+       DATA ARSIP — EDIT LANGSUNG HTML DI BAGIAN BAWAH INI
+       Tambah/ubah kartu di dalam header bagiannya. Tidak memakai JSON.
+       ========================================================= -->
+  <template id="arsipHTMLData">
+      <section class="section archive-category" id="kategori-dokumentasi-pkl">
+        <div class="section-head">
+          <h2><img class="category-title-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjz2I65w6TZM15oo12UhMFUTXJtyDINCNuCzODGhJl1Q&amp;s=10" alt="Ikon website" loading="lazy"> DOKUMENTASI PKL</h2>
+          <span>7 item</span>
+        </div>
+        <div class="grid">
           <article class="card">
-            <div class="asset-icon">VIDEO</div>
-            <div class="content">
-              <h3 class="title">${escapeHTML(
-                judul === "Memuat judul…" ? "Video tidak valid" : judul
-              )}</h3>
-              <span class="watch">ID video tidak ditemukan</span>
-            </div>
+          <a class="thumb-link" href="https://ahmadrijaniofficial.blogspot.com/search/label/pkl" aria-label="PKL BLOGSPOT">
+            <div class="asset-icon"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Blogger.svg/1280px-Blogger.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail" alt="Ikon Blogger"></div>
+          </a>
+          <div class="content">
+            <a href="https://ahmadrijaniofficial.blogspot.com/search/label/pkl">
+              <h3 class="title">PKL BLOGSPOT</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/playlist?list=PLcB9YfP3-OL8" aria-label="Playlist PKL di YouTube">
+            <div class="asset-icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC7rRv5p0NHqBDRbnfLOfLYY5CWXgtfZTod1D2wX4ZEw&amp;s=10" alt="Ikon playlist YouTube"></div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/playlist?list=PLcB9YfP3-OL8">
+              <h3 class="title">Playlist PKL di YouTube</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://ahmadrijaniofficial.blogspot.com/2026/07/PKL-AHMAD-RIJANI.html" aria-label="Dokumentasi Foto PKL">
+            <div class="asset-icon"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjTViVSiZU2tKtDa5o8pq4EBfHY26iKIHTEev9nfJwqGjbxGUqLT3aM8XswqzZ4NK-vGfB81zuCpU5D9P6eOA2U8bHs79stWt4FJ0FVrEOb2sDCX7C36jTA73nD9OSlJ2SVwM3PtI81gFuQMI1wuimJQK5MBrl8TKgGDwutUsM0lhXxcqE1rRa11JK1040=s1600" alt="Ikon Dokumentasi Foto PKL"></div>
+          </a>
+          <div class="content">
+            <a href="https://ahmadrijaniofficial.blogspot.com/2026/07/PKL-AHMAD-RIJANI.html">
+              <h3 class="title">Dokumentasi Foto PKL</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://example.com" aria-label="Jurnal PKL">
+            <div class="asset-icon">—</div>
+          </a>
+          <div class="content">
+            <a href="https://example.com">
+              <h3 class="title">Jurnal PKL</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://example.com" aria-label="Laporan PKL versi digital">
+            <div class="asset-icon">—</div>
+          </a>
+          <div class="content">
+            <a href="https://example.com">
+              <h3 class="title">Laporan PKL versi digital</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+          <article class="card">
+            <a class="thumb-link" href="https://example.com" aria-label="Pesan Pesan"><div class="asset-icon">PESAN</div></a>
+            <div class="content"><a href="https://example.com"><h3 class="title">Pesan Pesan</h3><span class="watch">Buka dokumentasi</span></a></div>
           </article>
-        `;
-      }
-
-      return `
-        <article class="card">
-          <a
-            class="thumb-link"
-            href="${escapeHTML(link)}"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="${escapeHTML(judul)}"
-          >
+          <article class="card">
+            <a class="thumb-link" href="https://ahmadrijaniofficial.blogspot.com/2026/09/JADWAL.html" aria-label="Perubahan Jadwal"><div class="asset-icon">JADWAL</div></a>
+            <div class="content"><a href="https://ahmadrijaniofficial.blogspot.com/2026/09/JADWAL.html"><h3 class="title">Perubahan Jadwal</h3><span class="watch">Buka dokumentasi</span></a></div>
+          </article>
+        </div>
+      </section>
+      <section class="section archive-category" id="hasil-desain">
+        <div class="section-head">
+          <h2><img class="category-title-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjz2I65w6TZM15oo12UhMFUTXJtyDINCNuCzODGhJl1Q&amp;s=10" alt="Ikon website" loading="lazy"> HASIL DESAIN</h2>
+          <span>2 item</span>
+        </div>
+        <div class="grid">
+          <article class="card">
+          <a class="thumb-link" href="https://ahmadrijaniofficial.blogspot.com/2026/09/HASIL.html" aria-label="HASIL DESAIN">
+            <div class="asset-icon"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjGU5A49U2YFgf0_XZ-MZeZWghqzxredLcZNZ7iJHTzKJGIAliRcMcY4iafiJbENMvq0lNy2GjXwTnZYwc0tE5VVpgt2negumq6QP4VhsS-vdUlFI8aJq-Pl9UT2QCE487AiFJEkQclMRh3lKex0_bBACc5reeX4nB1eYacEEz2nCbdDWXphS4n6OVgkwk=s1600" alt="Ikon hasil desain"></div>
+          </a>
+          <div class="content">
+            <a href="https://ahmadrijaniofficial.blogspot.com/2026/09/HASIL.html">
+              <h3 class="title">HASIL DESAIN</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://ahmadrijani.github.io/pkl/file/WARKOP%20SENJA.pdf" aria-label="WARKOP SENJA.pdf">
+            <div class="asset-icon">PDF</div>
+          </a>
+          <div class="content">
+            <a href="https://ahmadrijani.github.io/pkl/file/WARKOP%20SENJA.pdf">
+              <h3 class="title">WARKOP SENJA.pdf</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+        </div>
+      </section>
+      <section class="section archive-category" id="kategori-tutorial">
+        <div class="section-head">
+          <h2><img class="category-title-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjz2I65w6TZM15oo12UhMFUTXJtyDINCNuCzODGhJl1Q&amp;s=10" alt="Ikon website" loading="lazy"> TUTORIAL</h2>
+          <span>7 item</span>
+        </div>
+        <div class="grid">
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/foPxTrJ9oJc?si=RynqC_drWScPbWvw&amp;t=1670" aria-label="⚙️ Cara Setting">
             <div class="thumb-wrap">
-              <img
-                class="thumb"
-                src="https://img.youtube.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg"
-                alt=""
-                loading="lazy"
-                onerror="
-                  this.style.display='none';
-                  var f=this.nextElementSibling;
-                  if(f) f.style.display='grid';
-                "
-              >
+              <img class="thumb" src="https://img.youtube.com/vi/foPxTrJ9oJc/hqdefault.jpg" alt="" loading="lazy">
               <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
               <span class="play">▶</span>
             </div>
           </a>
-
           <div class="content">
-            <a
-              href="${escapeHTML(link)}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h3
-                class="title ${sudahAdaJudul ? "" : "loading-title"}"
-                data-title-index="${index}"
-              >
-                ${escapeHTML(judul)}
-              </h3>
-              <span class="watch">Tonton di YouTube ↗</span>
+            <a href="https://youtu.be/foPxTrJ9oJc?si=RynqC_drWScPbWvw&amp;t=1670">
+              <h3 class="title">⚙️ Cara Setting</h3>
+              <span class="watch">Tonton di YouTube</span>
             </a>
           </div>
         </article>
-      `;
-    }
-
-    /* =========================================================
-       RENDER FILE / LINK
-       ========================================================= */
-    function createFileOrLink(item) {
-      const icon = item.icon || "LINK";
-      const judul = item.title || "Tanpa judul";
-      const href = item.href || "#";
-
-      if (item.disabled) {
-        return `
-          <article class="card disabled-card">
-            <div class="asset-icon">${escapeHTML(icon)}</div>
-            <div class="content">
-              <h3 class="title">${escapeHTML(judul)}</h3>
-              <span class="watch">Link belum tersedia</span>
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/foPxTrJ9oJc?si=f2X2YL4cvaKbAt4J" aria-label="🧹 Membersihkan Printer">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/foPxTrJ9oJc/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
             </div>
-          </article>
-        `;
-      }
-
-      return `
-        <article class="card">
-          <a
-            class="thumb-link"
-            href="${escapeHTML(href)}"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="${escapeHTML(judul)}"
-          >
-            <div class="asset-icon">${escapeHTML(icon)}</div>
           </a>
-
           <div class="content">
-            <a
-              href="${escapeHTML(href)}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h3 class="title">${escapeHTML(judul)}</h3>
-              <span class="watch">Buka dokumentasi ↗</span>
+            <a href="https://youtu.be/foPxTrJ9oJc?si=f2X2YL4cvaKbAt4J">
+              <h3 class="title">🧹 Membersihkan Printer</h3>
+              <span class="watch">Tonton di YouTube</span>
             </a>
           </div>
-
-          <span class="external">↗</span>
         </article>
-      `;
-    }
-
-    /* =========================================================
-       YOUTUBE TITLE
-       ========================================================= */
-    async function ambilJudulYouTube(item, index) {
-      if (item.title || item.manualTitle || item.disabled) return;
-
-      const videoId = getVideoId(item);
-      if (!videoId) return;
-
-      const elemen = document.querySelector(`[data-title-index="${index}"]`);
-      if (!elemen) return;
-
-      try {
-        const youtubeUrl =
-          `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`;
-
-        const endpoint =
-          `https://www.youtube.com/oembed?url=${encodeURIComponent(youtubeUrl)}&format=json`;
-
-        const response = await fetch(endpoint);
-
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-        const data = await response.json();
-
-        if (data && data.title) {
-          elemen.textContent = data.title;
-        } else {
-          elemen.textContent = "Judul tidak tersedia";
-        }
-
-        elemen.classList.remove("loading-title");
-      } catch (error) {
-        console.warn("Gagal mengambil judul YouTube:", videoId, error);
-        elemen.textContent = "Judul tidak tersedia";
-        elemen.classList.remove("loading-title");
-      }
-    }
-
-    /* =========================================================
-       RENDER + FILTER
-       ========================================================= */
-    function renderDokumentasi(items) {
-      if (!items || items.length === 0) {
-        dokumentasiGrid.innerHTML = `
-          <div class="status-box warning">
-            <strong><i class="fa-solid fa-box-open" aria-hidden="true"></i> Belum ada dokumentasi</strong>
-            <div class="status-text">Arsip berhasil dibaca, tetapi belum berisi item.</div>
-          </div>
-        `;
-        setCount(0, 0);
-        sectionHint.textContent = "0 item";
-        return;
-      }
-
-      dokumentasiGrid.innerHTML = items.map((item, index) => {
-        return item.type === "video"
-          ? createVideo(item, index)
-          : createFileOrLink(item);
-      }).join("");
-
-      items.forEach((item, index) => {
-        if (item.type === "video") ambilJudulYouTube(item, index);
-      });
-
-      setCount(items.length, semuaItem.length);
-      sectionHint.textContent = `${items.length} item ditampilkan`;
-    }
-
-    function filterDokumentasi() {
-      if (!semuaItem.length) return;
-
-      const query = normalizeText(searchInput.value);
-      document.body.classList.toggle("searching", Boolean(query));
-
-      if (!query) {
-        document.body.classList.remove("searching");
-        renderDokumentasi(semuaItem);
-        return;
-      }
-
-      const hasil = semuaItem.filter(item =>
-        itemSearchText(item).includes(query)
-      );
-
-      if (!hasil.length) {
-        dokumentasiGrid.innerHTML = `
-          <div class="status-box warning">
-            <strong><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Tidak ada hasil</strong>
-            <div class="status-text">
-              Tidak ada dokumentasi yang cocok dengan "<b>${escapeHTML(searchInput.value)}</b>".
-              Coba kata kunci yang lebih pendek.
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/foPxTrJ9oJc?si=EXHob4TZ-hRkncJV&amp;t=1930" aria-label="🖨️ Proses Mencetak &amp; Hidupkan Kipas">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/foPxTrJ9oJc/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
             </div>
-            <div class="no-result-actions">
-              <button class="clear-search-bottom" id="clearSearchBottom" type="button">
-                <i class="fa-solid fa-xmark" aria-hidden="true"></i> HAPUS PENCARIAN
-              </button>
+          </a>
+          <div class="content">
+            <a href="https://youtu.be/foPxTrJ9oJc?si=EXHob4TZ-hRkncJV&amp;t=1930">
+              <h3 class="title">🖨️ Proses Mencetak &amp; Hidupkan Kipas</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=foPxTrJ9oJc&amp;t=813s" aria-label="✂️ Proses Ngegunting">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/foPxTrJ9oJc/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
             </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=foPxTrJ9oJc&amp;t=813s">
+              <h3 class="title">✂️ Proses Ngegunting</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
           </div>
-        `;
-        setCount(0, semuaItem.length);
-        sectionHint.textContent = "Tidak ditemukan";
-        return;
-      }
-
-      renderDokumentasi(hasil);
-    }
-
-    /* =========================================================
-       AMBIL ARSIP
-       ========================================================= */
-    async function ambilArsip() {
-      let errorTerakhir = null;
-      const kegagalan = [];
-
-      for (const sumber of SUMBER_ARSIP) {
-        try {
-          console.log("Mencoba sumber arsip:", sumber);
-
-          const response = await fetch(sumber, {
-            cache: "no-cache",
-            headers: { "Accept": "application/json" }
-          });
-
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-          }
-
-          const data = await response.json();
-
-          if (!Array.isArray(data)) {
-            throw new Error("arsip.json harus berupa array");
-          }
-
-          console.log("Arsip berhasil:", sumber);
-          return data;
-        } catch (error) {
-          errorTerakhir = error;
-          kegagalan.push({
-            sumber,
-            pesan: error?.message || "Kesalahan tidak diketahui"
-          });
-          console.warn("Sumber gagal:", sumber, error);
-        }
-      }
-
-      const err = errorTerakhir || new Error("Semua sumber gagal");
-      err.detailGagal = kegagalan;
-      throw err;
-    }
-
-    function setHelpOpen(open) {
-      if (!helpPanel || !helpButton) return;
-      helpPanel.hidden = !open;
-      helpButton.setAttribute("aria-expanded", String(open));
-    }
-
-    function tampilkanBantuan() {
-      setHelpOpen(true);
-    }
-
-    /* =========================================================
-       ERROR HELPER
-       ========================================================= */
-    function tampilkanError(error) {
-      console.error("Gagal memuat dokumentasi:", error);
-
-      const offline = navigator.onLine === false;
-      const fileProtocol = window.location.protocol === "file:";
-
-      let kondisi = "Koneksi atau sumber arsip tidak merespons.";
-      if (offline) {
-        kondisi = "Browser mendeteksi tidak ada koneksi internet.";
-      } else if (fileProtocol) {
-        kondisi = "Halaman sedang dibuka langsung sebagai file lokal (file://). Browser dapat memblokir fetch arsip karena aturan keamanan.";
-      }
-
-      const detail = Array.isArray(error?.detailGagal)
-        ? error.detailGagal
-            .map(x => `${x.sumber} → ${x.pesan}`)
-            .join(" | ")
-        : (error?.message || "Tidak ada detail.");
-
-      dokumentasiGrid.innerHTML = `
-        <div class="status-box error">
-          <strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Gagal memuat dokumentasi</strong>
-          <div class="status-text">${escapeHTML(kondisi)}</div>
-
-          <div class="help-grid">
-            <div class="help-item"><b>🌐 Internet:</b> pastikan Wi‑Fi/data aktif lalu tekan <b>Coba Lagi</b>.</div>
-            <div class="help-item"><b><i class="fa-solid fa-code" aria-hidden="true"></i> JavaScript:</b> bila JavaScript diblokir, buka pengaturan browser lalu izinkan untuk situs ini. Gunakan tombol <b>Buka Pengaturan JavaScript</b> di bawah.</div>
-            <div class="help-item"><b>🔄 Browser:</b> muat ulang halaman (Ctrl+R) setelah memperbaiki koneksi.</div>
-            <div class="help-item"><b>📂 Lokal:</b> bila dibuka dari file, jalankan melalui web server lokal agar fetch JSON diizinkan.</div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/foPxTrJ9oJc?si=vJT3HoRIkOZLJ38b&amp;t=1598" aria-label="📍 Origin X">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/foPxTrJ9oJc/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://youtu.be/foPxTrJ9oJc?si=vJT3HoRIkOZLJ38b&amp;t=1598">
+              <h3 class="title">📍 Origin X</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
           </div>
-
-          <div class="status-actions">
-            <button class="button primary" type="button" onclick="loadArchive()"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Coba Lagi</button>
-            <button class="button" type="button" onclick="window.location.reload()"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Muat Ulang</button>
-            <button class="button" type="button" onclick="cekKoneksi()"><i class="fa-solid fa-globe" aria-hidden="true"></i> Cek Internet</button>
-            <button class="button" type="button" onclick="bukaPengaturanJavaScript()"><i class="fa-solid fa-gear" aria-hidden="true"></i> Buka Pengaturan JavaScript</button>
-            <button class="button" type="button" onclick="tampilkanBantuan()"><i class="fa-solid fa-circle-question" aria-hidden="true"></i> Bantuan HP</button>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/y_hlaAFzUf0?si=AGlLQPPGX0wtl4J0" aria-label="Video tutorial 6">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/y_hlaAFzUf0/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://youtu.be/y_hlaAFzUf0?si=AGlLQPPGX0wtl4J0">
+              <h3 class="title">Video tutorial 6</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
           </div>
-
-          <div class="details">
-            Detail: ${escapeHTML(detail)}
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/Q0gOB-Po0Uk?si=id0tsQ3zOOIItK46" aria-label="Video tutorial 7">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/Q0gOB-Po0Uk/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://youtu.be/Q0gOB-Po0Uk?si=id0tsQ3zOOIItK46">
+              <h3 class="title">Video tutorial 7</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
           </div>
+        </article>
         </div>
-      `;
+      </section>
+      <section class="section archive-category" id="kategori-dokumentasi-video">
+        <div class="section-head">
+          <h2><img class="category-title-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjz2I65w6TZM15oo12UhMFUTXJtyDINCNuCzODGhJl1Q&amp;s=10" alt="Ikon website" loading="lazy"> DOKUMENTASI VIDEO</h2>
+          <span>18 item</span>
+        </div>
+        <div class="grid">
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=RQjHYXaPaZw" aria-label="Dokumentasi video 1">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/RQjHYXaPaZw/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=RQjHYXaPaZw">
+              <h3 class="title">Dokumentasi video 1</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=XXUjxQzFJxQ" aria-label="Dokumentasi video 2">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/XXUjxQzFJxQ/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=XXUjxQzFJxQ">
+              <h3 class="title">Dokumentasi video 2</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=48fpnlzdrPc" aria-label="Dokumentasi video 3">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/48fpnlzdrPc/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=48fpnlzdrPc">
+              <h3 class="title">Dokumentasi video 3</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=VOrxCY01vUI" aria-label="Dokumentasi video 4">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/VOrxCY01vUI/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=VOrxCY01vUI">
+              <h3 class="title">Dokumentasi video 4</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=uxcgfwLGwv4" aria-label="Dokumentasi video 5">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/uxcgfwLGwv4/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=uxcgfwLGwv4">
+              <h3 class="title">Dokumentasi video 5</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=KTBWHINfLoU" aria-label="Dokumentasi video 6">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/KTBWHINfLoU/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=KTBWHINfLoU">
+              <h3 class="title">Dokumentasi video 6</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=foPxTrJ9oJc" aria-label="Dokumentasi video 7">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/foPxTrJ9oJc/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=foPxTrJ9oJc">
+              <h3 class="title">Dokumentasi video 7</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=Uy0S_-om0w8" aria-label="Dokumentasi video 8">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/Uy0S_-om0w8/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=Uy0S_-om0w8">
+              <h3 class="title">Dokumentasi video 8</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=Fxjp_o2gHb0" aria-label="Dokumentasi video 9">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/Fxjp_o2gHb0/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=Fxjp_o2gHb0">
+              <h3 class="title">Dokumentasi video 9</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=MT1tUgoyjTY" aria-label="Dokumentasi video 10">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/MT1tUgoyjTY/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=MT1tUgoyjTY">
+              <h3 class="title">Dokumentasi video 10</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://www.youtube.com/watch?v=ZRoUXq1q5lw" aria-label="Dokumentasi keyboard, dokumentasi Pengujian komponen dan lain lain">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/ZRoUXq1q5lw/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://www.youtube.com/watch?v=ZRoUXq1q5lw">
+              <h3 class="title">Dokumentasi keyboard, dokumentasi Pengujian komponen dan lain lain</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/XvqGu2pUP6A?si=qHxd5jH" aria-label="Dokumentasi video 12">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/XvqGu2pUP6A/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://youtu.be/XvqGu2pUP6A?si=qHxd5jH">
+              <h3 class="title">Dokumentasi video 12</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/tSFF52aZFj0?si=ylfHJzeHNYzvORzkPbZMmJ2Ve" aria-label="Dokumentasi video 13">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/tSFF52aZFj0/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://youtu.be/tSFF52aZFj0?si=ylfHJzeHNYzvORzkPbZMmJ2Ve">
+              <h3 class="title">Dokumentasi video 13</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/Lz0JZzl59Ak?si=GWFdMu8ENtknJBXO" aria-label="Dokumentasi video 14">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/Lz0JZzl59Ak/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://youtu.be/Lz0JZzl59Ak?si=GWFdMu8ENtknJBXO">
+              <h3 class="title">Dokumentasi video 14</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/Tc-nzrJlil4?si=vbFdTJP-snn5FM1D" aria-label="Dokumentasi video 15">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/Tc-nzrJlil4/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://youtu.be/Tc-nzrJlil4?si=vbFdTJP-snn5FM1D">
+              <h3 class="title">Dokumentasi video 15</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/np9AKGNX5ao?si=I70bb1u3W7d0ACi1" aria-label="Dokumentasi video 16">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/np9AKGNX5ao/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://youtu.be/np9AKGNX5ao?si=I70bb1u3W7d0ACi1">
+              <h3 class="title">Dokumentasi video 16</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/XvqGu2pUP6A?si=ZjhdFCkQTpSObSWQ" aria-label="Dokumentasi video 17">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/XvqGu2pUP6A/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://youtu.be/XvqGu2pUP6A?si=ZjhdFCkQTpSObSWQ">
+              <h3 class="title">Dokumentasi video 17</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://youtu.be/_zFxnmMqXFY?si=4PVFVsDwv1SRuShQ" aria-label="Dokumentasi video 18">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://img.youtube.com/vi/_zFxnmMqXFY/hqdefault.jpg" alt="" loading="lazy">
+              <span class="thumb-fallback">THUMBNAIL TIDAK TERSEDIA</span>
+              <span class="play">▶</span>
+            </div>
+          </a>
+          <div class="content">
+            <a href="https://youtu.be/_zFxnmMqXFY?si=4PVFVsDwv1SRuShQ">
+              <h3 class="title">Dokumentasi video 18</h3>
+              <span class="watch">Tonton di YouTube</span>
+            </a>
+          </div>
+        </article>
 
-      setCount(0, semuaItem.length);
-      sectionHint.textContent = "Terjadi error";
+
+        </div>
+      </section>
+      <section class="section archive-category" id="kategori-website-dan-tools-pkl">
+        <div class="section-head">
+          <h2><img class="category-title-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjz2I65w6TZM15oo12UhMFUTXJtyDINCNuCzODGhJl1Q&amp;s=10" alt="Ikon website" loading="lazy"> WEBSITE DAN TOOLS PKL</h2>
+          <span>6 item</span>
+        </div>
+        <div class="grid">
+          <article class="card">
+          <a class="thumb-link" href="https://ahmadrijani.github.io/pkl/Website/Penghitung-Biaya-s8000.html" aria-label="Penghitung Biaya S8000">
+            <div class="asset-icon">▶</div>
+          </a>
+          <div class="content">
+            <a href="https://ahmadrijani.github.io/pkl/Website/Penghitung-Biaya-s8000.html">
+              <h3 class="title">Penghitung Biaya S8000</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://ahmadrijani.github.io/pkl/Website/JADWAL_LAMA.html" aria-label="Jadwal Lama">
+            <div class="asset-icon">▶</div>
+          </a>
+          <div class="content">
+            <a href="https://ahmadrijani.github.io/pkl/Website/JADWAL_LAMA.html">
+              <h3 class="title">Jadwal Lama</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://ahmadrijani.github.io/pkl/Website/JADWAL.html" aria-label="Jadwal">
+            <div class="asset-icon">▶</div>
+          </a>
+          <div class="content">
+            <a href="https://ahmadrijani.github.io/pkl/Website/JADWAL.html">
+              <h3 class="title">Jadwal</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://ahmadrijani.github.io/pkl/Website/malas%20buat%20sw.html" aria-label="Malas Buat SW">
+            <div class="asset-icon">▶</div>
+          </a>
+          <div class="content">
+            <a href="https://ahmadrijani.github.io/pkl/Website/malas%20buat%20sw.html">
+              <h3 class="title">Malas Buat SW</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://ahmadrijani.github.io/pkl/Website/Arsip.html" aria-label="Arsip">
+            <div class="asset-icon">▶</div>
+          </a>
+          <div class="content">
+            <a href="https://ahmadrijani.github.io/pkl/Website/Arsip.html">
+              <h3 class="title">Arsip</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+          <article class="card">
+          <a class="thumb-link" href="https://ahmadrijani.github.io/pkl/Website/spin_yang_spin.html" aria-label="Spin Yang Spin">
+            <div class="asset-icon">▶</div>
+          </a>
+          <div class="content">
+            <a href="https://ahmadrijani.github.io/pkl/Website/spin_yang_spin.html">
+              <h3 class="title">Spin Yang Spin</h3>
+              <span class="watch">Buka dokumentasi</span>
+            </a>
+          </div>
+          
+        </article>
+        </div>
+      </section>
+
+  </template>
+
+  <script>
+    // JavaScript hanya menampilkan data HTML lokal dan mengakhiri animasi memuat.
+    const archiveContainer = document.getElementById("dokumentasiSection");
+    const archiveTemplate = document.getElementById("arsipHTMLData");
+    if (archiveContainer && archiveTemplate) {
+      archiveContainer.append(archiveTemplate.content.cloneNode(true));
     }
-
-    function bukaPengaturanJavaScript() {
-      const ua = navigator.userAgent || "";
-      const isAndroid = /Android/i.test(ua);
-      const isIOS = /iPhone|iPad|iPod/i.test(ua);
-      const isEdge = /Edg\//i.test(ua);
-      const isChrome = /Chrome\//i.test(ua) && !isEdge;
-      let settingsUrl = "";
-
-      if (isEdge) {
-        settingsUrl = "edge://settings/content/javascript";
-      } else if (isChrome) {
-        settingsUrl = "chrome://settings/content/javascript";
-      }
-
-      if (settingsUrl) {
-        const tab = window.open(settingsUrl, "_blank");
-        if (tab) return;
-      }
-
-      if (isAndroid) {
-        alert("Untuk HP Android:\n\nChrome: ⋮ → Setelan → Setelan situs → JavaScript → Izinkan.\nSetelah itu kembali ke halaman ini dan tekan Muat Ulang.\n\nHalaman web tidak bisa menyalakan JavaScript sendiri.");
-      } else if (isIOS) {
-        alert("Untuk iPhone/iPad:\n\nBuka Pengaturan → Apps → Safari → Advanced → JavaScript, lalu aktifkan.\nSetelah itu kembali ke halaman ini dan muat ulang.");
-      } else {
-        alert("JavaScript tidak bisa dinyalakan otomatis oleh halaman web.\n\nBuka pengaturan browser, izinkan JavaScript untuk situs ini, lalu muat ulang halaman.");
-      }
-
-      window.open("https://support.google.com/chrome/answer/95346", "_blank", "noopener");
-    }
-
-    function nyalakanJavaScript() {
-      bukaPengaturanJavaScript();
-    }
-
-    async function cekKoneksi() {
-      if (!navigator.onLine) {
-        setConnectionStatus("● offline", false);
-        alert("Browser mendeteksi Anda sedang offline. Nyalakan Wi‑Fi/data lalu coba lagi.");
-        return false;
-      }
-
-      try {
-        await fetch("https://www.gstatic.com/generate_204", {
-          method: "GET",
-          cache: "no-store",
-          mode: "no-cors"
-        });
-
-        setConnectionStatus("● online", true);
-        alert("Koneksi internet terdeteksi. Silakan tekan Coba Lagi.");
-        return true;
-      } catch (error) {
-        setConnectionStatus("● offline", false);
-        alert("Koneksi internet belum terdeteksi dari halaman ini. Coba buka situs lain untuk memastikan internet aktif.");
-        return false;
-      }
-    }
-
-    /* =========================================================
-       LOAD
-       ========================================================= */
-    async function loadArchive() {
-      if (sedangMemuat) return;
-      sedangMemuat = true;
-
-      retryTop.disabled = true;
-      searchInput.disabled = true;
-      clearSearch.disabled = true;
-
-      dokumentasiGrid.innerHTML = createSkeleton(6);
-      resultCount.textContent = "Memuat…";
-      sectionHint.textContent = "Menghubungkan ke arsip…";
-
-      try {
-        setConnectionStatus(navigator.onLine ? "● online" : "● offline", navigator.onLine);
-
-        const items = await ambilArsip();
-        semuaItem = Array.isArray(items) ? items : [];
-        document.body.classList.remove("searching");
-
-        searchInput.disabled = false;
-        clearSearch.disabled = false;
-
-        renderDokumentasi(semuaItem);
-      } catch (error) {
-        tampilkanError(error);
-      } finally {
-        retryTop.disabled = false;
-        sedangMemuat = false;
-      }
-    }
-
-    /* =========================================================
-       EVENT
-       ========================================================= */
-    if (helpButton) {
-      helpButton.addEventListener("click", () => setHelpOpen(helpPanel ? helpPanel.hidden : true));
-    }
-
-    if (helpClose) {
-      helpClose.addEventListener("click", () => setHelpOpen(false));
-    }
-
-    if (helpSettings) {
-      helpSettings.addEventListener("click", bukaPengaturanJavaScript);
-    }
-
-    searchInput.addEventListener("input", filterDokumentasi);
-
-    function hapusPencarianDanTampilkanSemua() {
-      searchInput.value = "";
-      document.body.classList.remove("searching");
-      filterDokumentasi();
-      searchInput.focus();
-    }
-
-    clearSearch.addEventListener("click", hapusPencarianDanTampilkanSemua);
-
-    dokumentasiGrid.addEventListener("click", (event) => {
-      const target = event.target.closest("#clearSearchBottom");
-      if (target) {
-        hapusPencarianDanTampilkanSemua();
-      }
-    });
-
-    retryTop.addEventListener("click", loadArchive);
-
-    window.addEventListener("online", () => {
-      setConnectionStatus("● online", true);
-    });
-
-    window.addEventListener("offline", () => {
-      setConnectionStatus("● offline", false);
-    });
-
-    window.addEventListener("keydown", (event) => {
-      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "f") {
-        event.preventDefault();
-        searchInput.disabled = false;
-        searchInput.focus();
-        searchInput.select();
-      }
-
-      if (event.key === "Escape" && document.activeElement === searchInput) {
-        searchInput.value = "";
-        filterDokumentasi();
-      }
-    });
-
-    /* MULAI */
-    loadArchive();
+    window.setTimeout(() => {
+      document.documentElement.classList.remove("archive-loading");
+    }, 320);
   </script>
 </body>
 </html>

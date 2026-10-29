@@ -4,7 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#000000">
-  <title>Dokumentasi PKL AHMAD RIJANI DI ASIA PRINT TAMIANG LAYANG 2026</title>
+
+  <!-- SEO DASAR -->
+  <title>Arsip PKL AHMAD RIJANI | Dokumentasi PKL Asia Print Tamiang Layang 2026</title>
+  <meta name="description" content="Arsip PKL Ahmad Rijani berisi dokumentasi kegiatan Praktik Kerja Lapangan di Asia Print Tamiang Layang tahun 2026, termasuk foto, video, dan bahan dokumentasi PKL.">
+  <meta name="keywords" content="Arsip PKL Ahmad Rijani, dokumentasi PKL Ahmad Rijani, PKL Asia Print Tamiang Layang, kegiatan PKL 2026, foto PKL, video PKL, laporan PKL, SMK Negeri 2 Tamiang Layang">
+  <meta name="author" content="Ahmad Rijani">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="googlebot" content="index, follow, max-image-preview:large">
+  <meta name="language" content="Indonesian">
+  <link rel="canonical" href="https://ahmadrijani.github.io/pkl/">
+
+  <!-- FAVICON: KUNING_MINUM.jpg -->
+  <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/Ahmadrijani/ahmadrijaniofficial/refs/heads/main/Image/KUNING_MINUM.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="https://raw.githubusercontent.com/Ahmadrijani/ahmadrijaniofficial/refs/heads/main/Image/KUNING_MINUM.jpg">
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Ahmadrijani/ahmadrijaniofficial/refs/heads/main/Image/KUNING_MINUM.jpg">
+
+  <!-- OPEN GRAPH / LINK PREVIEW -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Arsip PKL AHMAD RIJANI">
+  <meta property="og:title" content="Arsip PKL AHMAD RIJANI">
+  <meta property="og:description" content="Arsip dokumentasi Praktik Kerja Lapangan Ahmad Rijani di Asia Print Tamiang Layang tahun 2026.">
+  <meta property="og:url" content="https://ahmadrijani.github.io/pkl/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/Ahmadrijani/ahmadrijaniofficial/refs/heads/main/Image/KUNING_MINUM.jpg">
+  <meta property="og:image:alt" content="Ikon Arsip PKL Ahmad Rijani">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:locale" content="id_ID">
+
+  <!-- TWITTER / X CARD -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Arsip PKL AHMAD RIJANI">
+  <meta name="twitter:description" content="Arsip dokumentasi PKL Ahmad Rijani di Asia Print Tamiang Layang tahun 2026.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/Ahmadrijani/ahmadrijaniofficial/refs/heads/main/Image/KUNING_MINUM.jpg">
+
+  <!-- DATA TERSTRUKTUR UNTUK MESIN PENCARI -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Arsip PKL AHMAD RIJANI",
+    "url": "https://ahmadrijani.github.io/pkl/",
+    "description": "Arsip dokumentasi Praktik Kerja Lapangan Ahmad Rijani di Asia Print Tamiang Layang tahun 2026.",
+    "inLanguage": "id-ID",
+    "author": {
+      "@type": "Person",
+      "name": "Ahmad Rijani"
+    }
+  }
+  </script>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -1508,8 +1555,10 @@
           </div>
                   </article>
           <article class="card">
-          <a class="thumb-link" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg3D5NGxQ3Gj-Vn4hG4A-Eap7e1SyF3t3iZaxsrFQsON-tJUs_q7ijjbkJxgktIoceQ2i6wY67wpDQWAzcYk8UAg_imTlJJl38RuqifWhyphenhyphen82wwEMDQWrfbqEpmlo6USnbt8JCInyso184JfNZMS2Fv6qgncBR18BQxpBKaliwv2wEnEcEWpvsOxKmSbjlA/s1600/IMG20261026194626.jpg" aria-label="Laporan PKL versi digital">
-            <div class="asset-icon">—</div>
+          <a class="thumb-link" href="https://ahmadrijaniofficial.blogspot.com/2026/10/KABEL.html?m=1" aria-label="Laporan Kabel LAN">
+            <div class="thumb-wrap">
+              <img class="thumb" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg3D5NGxQ3Gj-Vn4hG4A-Eap7e1SyF3t3iZaxsrFQsON-tJUs_q7ijjbkJxgktIoceQ2i6wY67wpDQWAzcYk8UAg_imTlJJl38RuqifWhyphenhyphen82wwEMDQWrfbqEpmlo6USnbt8JCInyso184JfNZMS2Fv6qgncBR18BQxpBKaliwv2wEnEcEWpvsOxKmSbjlA/s1600/IMG20261026194626.jpg" alt="Gambar Laporan Kabel LAN" loading="lazy">
+            </div>
           </a>
           <div class="content">
             <a href="https://ahmadrijaniofficial.blogspot.com/2026/10/KABEL.html?m=1">
@@ -2031,8 +2080,13 @@
 
     (async function loadYoutubeTitles() {
       const warning = document.getElementById("metadataWarning");
+      const tutorialCards = Array.from(document.querySelectorAll("#kategori-tutorial article.card"));
+      const protectedTutorialCards = new Set(tutorialCards.slice(0, 5));
       const cards = Array.from(document.querySelectorAll(".archive-category article.card"))
         .filter(card => {
+          // Lima item tutorial pertama memakai nama tetap yang ditulis di HTML,
+          // jadi judulnya tidak boleh diganti metadata YouTube.
+          if (protectedTutorialCards.has(card)) return false;
           const a = card.querySelector(".thumb-link[href]");
           return a && /youtube\.com|youtu\.be/i.test(a.href);
         });

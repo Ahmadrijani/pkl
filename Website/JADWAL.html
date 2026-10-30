@@ -45,7 +45,7 @@ body:after{content:"";position:fixed;top:17%;left:0;width:100%;height:2px;pointe
 .judul-kecil{color:#8f8f8f;font-size:clamp(8px,1.5vw,13px);letter-spacing:clamp(2px,.7vw,7px);font-weight:800;margin-bottom:4px}
 .judul-utama{line-height:.95;font-size:clamp(29px,7vw,65px);font-weight:1000;font-style:italic;letter-spacing:clamp(1px,.5vw,5px);background:linear-gradient(180deg,#fff 5%,#ddd 45%,#858585 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(3px 4px 0 #000)}
 .judul-utama span{background:linear-gradient(180deg,#ffd34f,#ff7b00 35%,#ff2600 73%,#8f0000);-webkit-background-clip:text;background-clip:text;color:transparent}
-.label-baru{display:inline-block;margin-top:12px;padding:5px 28px;background:linear-gradient(180deg,#4a4a4a,#111);border:2px solid var(--oranye);font-size:clamp(16px,3vw,25px);font-weight:1000;font-style:italic;letter-spacing:3px;clip-path:polygon(8% 0,92% 0,100% 30%,100% 70%,92% 100%,8% 100%,0 70%,0 30%);box-shadow:0 0 10px rgba(255,90,0,.6)}
+.label-header{display:inline-block;margin-top:12px;padding:5px 28px;background:linear-gradient(180deg,#4a4a4a,#111);border:2px solid var(--oranye);font-size:clamp(16px,3vw,25px);font-weight:1000;font-style:italic;letter-spacing:3px;clip-path:polygon(8% 0,92% 0,100% 30%,100% 70%,92% 100%,8% 100%,0 70%,0 30%);box-shadow:0 0 10px rgba(255,90,0,.6)}
 .control-panel{margin:14px 0;padding:14px;text-align:center;background:linear-gradient(180deg,#141414,#070707);border:1px solid #672015;box-shadow:inset 0 0 25px rgba(255,40,0,.04)}
 .kombinasi-info{margin-bottom:10px;color:#9f9f9f;font-size:14px}.kombinasi-info strong{color:#ff8500;font-size:22px;text-shadow:0 0 10px rgba(255,100,0,.7)}
 .mode-info{margin:8px auto 12px;padding:8px 10px;max-width:620px;color:#bdbdbd;background:#0b0b0b;border:1px solid #432018;font-size:12px;line-height:1.45}.mode-info strong{color:#ffad00}
@@ -823,7 +823,7 @@ button:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 7px
 @keyframes moonOrbitSpin{from{transform:translate(-50%,-50%) rotate(var(--start)) translateX(var(--r)) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(calc(var(--start) + 360deg)) translateX(var(--r)) rotate(360deg)}}
 @media(max-width:700px){.rocket-stage.moon-focus{transform-origin:90% 10%;transform:scale(1.82)}.moon-orbit-names{width:255px;height:255px}.moon-orbit-name{font-size:8px;padding:5px 7px;max-width:100px}.moon-orbit-name:nth-child(2){--r:90px}.moon-orbit-name:nth-child(3){--r:108px}.moon-orbit-name:nth-child(4){--r:76px}.clock-letter{font-size:14px}}
 
-/* ANIMASI BARU: DIMENSI KUBUS */
+/* ANIMASI DIMENSI KUBUS */
 .cube-box{width:min(920px,96vw);padding:15px;background:linear-gradient(145deg,#040610,#02020a 62%,#090316);border:2px solid #9b6cff;box-shadow:0 0 48px rgba(133,91,255,.48),inset 0 0 42px rgba(120,80,255,.07);text-align:center;position:relative;overflow:hidden}
 .cube-title{font-size:clamp(26px,6vw,46px);font-weight:1000;font-style:italic;letter-spacing:3px;color:#eee9ff;text-shadow:0 0 22px rgba(174,136,255,.8)}
 .cube-subtitle{margin:4px 0 11px;color:#b99bff;font-size:11px;letter-spacing:2px;font-weight:900}
@@ -1022,6 +1022,169 @@ body{overflow-x:hidden}
 .load-option strong{display:block;font-size:12px;color:#ffb000}.load-option span{display:block;margin-top:7px;color:#8b8b8b;font-size:10.5px;line-height:1.45}
 @media(max-width:700px){.settings-tabs{grid-template-columns:1fr 1fr}.peserta-file-actions{grid-template-columns:1fr}.animasi-pilih-box,.load-peserta-box{padding:16px 13px}.animasi-picker-grid{grid-template-columns:1fr 1fr;max-height:64vh}.load-peserta-actions{grid-template-columns:1fr}.animasi-picker-footer,.load-peserta-footer{display:grid}.animasi-picker-footer button,.load-peserta-footer button{width:100%}.animasi-picker-selected{font-size:10.5px}}
 @media(max-width:430px){.animasi-picker-grid{grid-template-columns:1fr}}
+
+/* TAB TEMA WARNA */
+.settings-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:430px){.settings-tabs{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.settings-tab{font-size:9px;letter-spacing:.7px;padding:8px 4px}}
+.skin-mode-pilihan{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:8px}
+.skin-color-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.skin-color-card{min-width:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 7px;text-align:center;background:#111;border:1px solid #402118}
+.skin-color-card strong{display:block;color:#fff;font-size:11px}
+.skin-color-card small{display:block;margin-top:3px;color:#898989;font-size:9px;line-height:1.35}
+.skin-color-wheel{position:relative;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;padding:4px;background:conic-gradient(#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00);box-shadow:0 0 14px rgba(255,130,0,.2)}
+.skin-color-wheel:before{content:"";position:absolute;inset:3px;border:2px solid rgba(255,255,255,.9);border-radius:50%;pointer-events:none}
+.skin-color-wheel input{width:48px;height:48px;padding:0;border:0;border-radius:50%;background:transparent;overflow:hidden;cursor:pointer}
+.skin-color-wheel input::-webkit-color-swatch-wrapper{padding:0;border-radius:50%}
+.skin-color-wheel input::-webkit-color-swatch{border:2px solid #111;border-radius:50%}
+.skin-color-wheel input::-moz-color-swatch{border:2px solid #111;border-radius:50%}
+@media(max-width:700px){.skin-mode-pilihan{grid-template-columns:1fr}.skin-color-grid{gap:5px}.skin-color-card{padding:9px 4px}.skin-color-wheel{width:50px;height:50px}.skin-color-wheel input{width:40px;height:40px}.skin-color-card strong{font-size:10px}.skin-color-card small{font-size:8px}}
+
+/* Warna skin hanya mengubah area jadwal dan pengaturan; animasi bawaan tetap utuh. */
+body.skin-enabled{background:radial-gradient(circle at 50% -15%,color-mix(in srgb,var(--skin-primary) 24%,transparent),transparent 40%),radial-gradient(circle at 100% 100%,color-mix(in srgb,var(--skin-secondary) 16%,transparent),transparent 36%),linear-gradient(145deg,var(--skin-background),color-mix(in srgb,var(--skin-background) 78%,#000));color:var(--skin-on-background)}
+body.skin-enabled:after{background:linear-gradient(90deg,transparent,var(--skin-primary),var(--skin-secondary),var(--skin-primary),transparent);box-shadow:0 0 12px var(--skin-primary)}
+body.skin-enabled .header{border-color:var(--skin-primary);box-shadow:0 0 14px color-mix(in srgb,var(--skin-primary) 58%,transparent),inset 0 0 35px color-mix(in srgb,var(--skin-primary) 9%,transparent)}
+body.skin-enabled .header:before{border-color:color-mix(in srgb,var(--skin-secondary) 72%,transparent)}
+body.skin-enabled .header:after,body.skin-enabled .garis-atas{background:linear-gradient(90deg,transparent,var(--skin-primary),var(--skin-secondary),var(--skin-primary),transparent);box-shadow:0 0 10px var(--skin-primary)}
+body.skin-enabled .judul-utama span{background:linear-gradient(180deg,var(--skin-secondary),var(--skin-primary));-webkit-background-clip:text;background-clip:text;color:transparent}
+body.skin-enabled .label-header{border-color:var(--skin-primary);box-shadow:0 0 10px color-mix(in srgb,var(--skin-primary) 55%,transparent)}
+body.skin-enabled .control-panel{border-color:color-mix(in srgb,var(--skin-primary) 48%,#222)}
+body.skin-enabled .kombinasi-info strong,body.skin-enabled .settings-section h3,body.skin-enabled .mode-panel h3{color:var(--skin-secondary)}
+body.skin-enabled .mode-info{border-color:color-mix(in srgb,var(--skin-primary) 38%,#222)}
+body.skin-enabled .mode-info strong{color:var(--skin-secondary)}
+body.skin-enabled #areaDownload{border-color:var(--skin-primary);box-shadow:0 0 22px color-mix(in srgb,var(--skin-primary) 35%,transparent),inset 0 0 40px color-mix(in srgb,var(--skin-primary) 6%,transparent)}
+body.skin-enabled .hari{border-color:var(--skin-primary);box-shadow:0 0 7px color-mix(in srgb,var(--skin-primary) 34%,transparent),inset 0 0 14px color-mix(in srgb,var(--skin-primary) 5%,transparent)}
+body.skin-enabled .hari:before{background:linear-gradient(90deg,var(--skin-primary),var(--skin-secondary),var(--skin-primary));box-shadow:0 0 8px var(--skin-primary)}
+body.skin-enabled .hari-header{background:linear-gradient(180deg,var(--skin-primary),var(--skin-secondary));border-bottom-color:var(--skin-secondary);color:var(--skin-on-primary);text-shadow:0 1px 2px color-mix(in srgb,var(--skin-on-primary) 35%,transparent)}
+body.skin-enabled .nomor{background:linear-gradient(145deg,var(--skin-primary),var(--skin-secondary));border-right-color:var(--skin-secondary);color:var(--skin-on-primary);text-shadow:none}
+body.skin-enabled .orang{border-color:color-mix(in srgb,var(--skin-primary) 30%,#414141);background:linear-gradient(135deg,color-mix(in srgb,var(--skin-background) 78%,#fff 8%),color-mix(in srgb,var(--skin-background) 90%,#000))}
+body.skin-enabled .nama{color:var(--skin-on-background)}
+body.skin-enabled .hiasan-bawah{background:repeating-linear-gradient(135deg,var(--skin-primary) 0 8px,transparent 8px 13px)}
+body.skin-enabled .btn-acak,body.skin-enabled .btn-tukar.aktif,body.skin-enabled .btn-simpan-setting,body.skin-enabled .btn-setup-primary,body.skin-enabled .btn-tukar-primary{background:linear-gradient(180deg,var(--skin-secondary),var(--skin-primary));border-color:var(--skin-secondary);color:var(--skin-on-primary)}
+body.skin-enabled .settings-overlay-shell .settings-box{border-left-color:var(--skin-primary)}
+body.skin-enabled .settings-tabs .settings-tab.aktif{border-color:var(--skin-secondary);background:linear-gradient(180deg,var(--skin-secondary),var(--skin-primary));color:var(--skin-on-primary)}
+body.skin-enabled .settings-section{border-color:color-mix(in srgb,var(--skin-primary) 35%,#4e241c)}
+body.skin-enabled .settings-section h3{color:var(--skin-secondary)}
+.balik-arrival-hidden{opacity:0!important;visibility:hidden!important}
+.balik-name-clone{position:fixed!important;z-index:99999!important;margin:0!important;pointer-events:none!important;overflow:hidden!important;clip-path:none!important;transform-origin:top left!important;border:2px solid var(--skin-secondary,#ffc000)!important;box-shadow:0 14px 35px rgba(0,0,0,.55),0 0 22px color-mix(in srgb,var(--skin-primary,#ff6a00) 65%,transparent)!important;will-change:transform,opacity!important}
+.balik-name-clone .nama{white-space:normal}
+@media(prefers-reduced-motion:reduce){.balik-name-clone{display:none!important}}
+
+
+/* ===== TEMA MENYELURUH, BENTUK UI, DAN EDITOR PESERTA ===== */
+.skin-mode-pilihan{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:700px){.skin-mode-pilihan{grid-template-columns:repeat(2,minmax(0,1fr))}.ui-shape-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:380px){.skin-mode-pilihan{grid-template-columns:1fr}}
+.ui-shape-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:9px}
+.shape-option{min-width:0;display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 5px;background:#111;border:1px solid #402118;color:#fff;text-align:center}
+.shape-option strong{font-size:10px}.shape-option small{font-size:8px;color:#888;line-height:1.25}
+.shape-option.aktif{border:2px solid var(--skin-primary,var(--oranye));background:linear-gradient(145deg,color-mix(in srgb,var(--skin-primary,var(--oranye)) 18%,#111),#090909);box-shadow:0 0 14px color-mix(in srgb,var(--skin-primary,var(--oranye)) 25%,transparent)}
+.shape-preview{display:block;width:42px;height:25px;background:linear-gradient(135deg,var(--skin-secondary,#ffb000),var(--skin-primary,#ff6a00));border:1px solid rgba(255,255,255,.45);box-shadow:0 3px 8px rgba(0,0,0,.35)}
+.shape-preview-default{clip-path:polygon(10% 0,90% 0,100% 20%,100% 80%,90% 100%,10% 100%,0 80%,0 20%)}
+.shape-preview-rounded{border-radius:9px}.shape-preview-soft{border-radius:5px}.shape-preview-square{border-radius:0}.shape-preview-pill{border-radius:999px}
+.btn-reset-theme{width:100%;background:linear-gradient(180deg,#383838,#111);border-color:var(--skin-primary,var(--oranye));color:#fff}
+
+/* Tema mengalir ke semua kontrol, panel, jadwal, popup, dan komponen animasi. */
+body.skin-enabled{background:radial-gradient(circle at 50% -15%,color-mix(in srgb,var(--skin-primary) 22%,transparent),transparent 42%),radial-gradient(circle at 100% 100%,color-mix(in srgb,var(--skin-secondary) 15%,transparent),transparent 38%),linear-gradient(145deg,var(--skin-background),color-mix(in srgb,var(--skin-background) 82%,#000));color:var(--skin-on-background)}
+body.skin-enabled button,body.skin-enabled input[type=button],body.skin-enabled input[type=submit]{background:linear-gradient(180deg,var(--skin-secondary),var(--skin-primary))!important;border-color:var(--skin-secondary)!important;color:var(--skin-on-primary)!important;box-shadow:0 4px 0 color-mix(in srgb,var(--skin-primary) 60%,#000),0 0 12px color-mix(in srgb,var(--skin-primary) 20%,transparent)!important}
+body.skin-enabled button:hover{filter:brightness(1.12);box-shadow:0 6px 16px color-mix(in srgb,var(--skin-primary) 32%,transparent)!important}
+body.skin-enabled button:disabled{filter:saturate(.4);opacity:.5}
+body.skin-enabled :is(.settings-box,.setup-box,.tukar-box,.animasi-pilih-box,.load-peserta-box,.peserta-editor-box,.theme-confirm-box,.spin-box,.hasil-box,.kombinasi-box,.gacha-box,.race-box,.solar-box,.quiz-box,.hacker-box,.rocket-box,.clock-box,.cube-box,.cat-box){border-color:var(--skin-primary)!important;box-shadow:0 0 28px color-mix(in srgb,var(--skin-primary) 22%,transparent),inset 0 0 28px color-mix(in srgb,var(--skin-primary) 5%,transparent)}
+body.skin-enabled :is(.settings-section,.settings-toggle,.mode-panel,.skin-color-card,.peserta-row,.peserta-editor-input,.theme-confirm-box,.load-option,.animasi-picker-card,.kombinasi-item,.hasil-hari,.hasil-nama,.race-lane,.race-result,.solar-side,.solar-info,.solar-mini,.cat-final-card){background:color-mix(in srgb,var(--skin-background) 84%,#fff 4%)!important;border-color:color-mix(in srgb,var(--skin-primary) 48%,#333)!important;color:var(--skin-on-background)}
+body.skin-enabled :is(.settings-header h2,.settings-section h3,.settings-tab.aktif,.settings-toggle-text strong,.mode-title,.hasil-hari h3,.kombinasi-nomor,.animasi-picker-card strong,.gacha-hari,.race-title,.race-status,.solar-title,.solar-status,.quiz-title,.quiz-subtitle,.clock-title,.cube-title,.rocket-title,.hacker-title,.cat-title,.peserta-editor-header h2){color:var(--skin-secondary)!important}
+body.skin-enabled :is(.settings-tab.aktif,.mode-card.aktif,.animasi-card.aktif,.animasi-picker-card.aktif,.shape-option.aktif,.peserta-no,.nomor,.hasil-nama,.gacha-reel.stopped,.race-runner-no){border-color:var(--skin-secondary)!important}
+body.skin-enabled :is(.hari-header,.nomor,.peserta-no,.btn-download,.btn-acak,.btn-tukar.aktif,.btn-balik,.btn-lanjut,.btn-race-lanjut,.btn-setup-primary,.btn-tukar-primary,.btn-simpan-setting,.btn-animasi-picker-run,.btn-editor-save,.btn-reset-confirm){background:linear-gradient(145deg,var(--skin-secondary),var(--skin-primary))!important;color:var(--skin-on-primary)!important;border-color:var(--skin-secondary)!important}
+body.skin-enabled :is(.orang,.peserta-name,.hasil-nama,.hasil-box,.settings-desc,.settings-section-desc,.mode-info,.kombinasi-detail,.race-result b,.solar-info,.solar-mini,.cat-rank-full-row){color:var(--skin-on-background)}
+body.skin-enabled :is(.hari,.header,#areaDownload,.control-panel,.settings-box,.settings-section,.settings-toggle,.mode-card,.mode-panel,.peserta-row,.hasil-hari,.kombinasi-item,.gacha-card,.race-lane,.quiz-answer,.cat-final-card){border-color:color-mix(in srgb,var(--skin-primary) 54%,#262626)!important}
+body.skin-enabled :is(.hari:before,.header:after,.garis-atas,.race-lane:after){background:linear-gradient(90deg,var(--skin-primary),var(--skin-secondary),var(--skin-primary))!important}
+body.skin-enabled :is(.progress span,.race-progress span,.gacha-progress span,.solar-progress span,.quiz-progress span,.clock-progress span,.hack-progress span,.rocket-progress span){background:linear-gradient(90deg,var(--skin-primary),var(--skin-secondary),#fff)!important}
+body.skin-enabled :is(.settings-tab.aktif,.mode-card.aktif,.animasi-picker-card.aktif,.load-option:hover,.peserta-row:hover){border-color:var(--skin-secondary)!important}
+body.skin-enabled input:not([type=checkbox]):not([type=radio]):not([type=color]),body.skin-enabled textarea,body.skin-enabled select{accent-color:var(--skin-primary);border-color:color-mix(in srgb,var(--skin-primary) 55%,#555)}
+body.skin-enabled input:focus,body.skin-enabled textarea:focus,body.skin-enabled select:focus{outline-color:var(--skin-secondary)}
+
+
+body.skin-enabled button:is(.settings-tab,.mode-card,.shape-option,.animasi-picker-card,.load-option):not(.aktif){background:linear-gradient(180deg,color-mix(in srgb,var(--skin-background) 78%,#fff 7%),color-mix(in srgb,var(--skin-background) 88%,#000))!important;color:var(--skin-on-background)!important;border-color:color-mix(in srgb,var(--skin-primary) 42%,#333)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important}
+body.skin-enabled button:is(.settings-tab,.mode-card,.shape-option,.animasi-picker-card,.load-option).aktif{background:linear-gradient(180deg,var(--skin-secondary),var(--skin-primary))!important;color:var(--skin-on-primary)!important;border-color:var(--skin-secondary)!important}
+
+/* Bentuk UI disatukan tanpa mengubah bentuk ikon/ilustrasi animasi. */
+body.ui-shape-rounded :is(button,.header,.label-header,.control-panel,#areaDownload,.hari,.hari-header,.orang,.settings-box,.settings-section,.settings-toggle,.mode-card,.mode-panel,.peserta-row,.hasil-box,.hasil-hari,.hasil-nama,.kombinasi-box,.kombinasi-item,.gacha-box,.gacha-card,.race-box,.race-lane,.quiz-box,.quiz-answer,.solar-box,.solar-side,.animasi-pilih-box,.load-peserta-box,.peserta-editor-box,.theme-confirm-box){border-radius:18px!important;clip-path:none!important}
+body.ui-shape-rounded button{border-radius:12px!important}
+body.ui-shape-soft :is(button,.header,.label-header,.control-panel,#areaDownload,.hari,.hari-header,.orang,.settings-box,.settings-section,.settings-toggle,.mode-card,.mode-panel,.peserta-row,.hasil-box,.hasil-hari,.hasil-nama,.kombinasi-box,.kombinasi-item,.gacha-box,.gacha-card,.race-box,.race-lane,.quiz-box,.quiz-answer,.solar-box,.solar-side,.animasi-pilih-box,.load-peserta-box,.peserta-editor-box,.theme-confirm-box){border-radius:9px!important;clip-path:none!important}
+body.ui-shape-square :is(button,.header,.label-header,.control-panel,#areaDownload,.hari,.hari-header,.orang,.settings-box,.settings-section,.settings-toggle,.mode-card,.mode-panel,.peserta-row,.hasil-box,.hasil-hari,.hasil-nama,.kombinasi-box,.kombinasi-item,.gacha-box,.gacha-card,.race-box,.race-lane,.quiz-box,.quiz-answer,.solar-box,.solar-side,.animasi-pilih-box,.load-peserta-box,.peserta-editor-box,.theme-confirm-box){border-radius:0!important;clip-path:none!important}
+body.ui-shape-pill :is(.header,.label-header,.control-panel,#areaDownload,.hari,.hari-header,.orang,.settings-box,.settings-section,.settings-toggle,.mode-card,.mode-panel,.peserta-row,.hasil-box,.hasil-hari,.hasil-nama,.kombinasi-box,.kombinasi-item,.gacha-box,.gacha-card,.race-box,.race-lane,.quiz-box,.quiz-answer,.solar-box,.solar-side,.animasi-pilih-box,.load-peserta-box,.peserta-editor-box,.theme-confirm-box){border-radius:18px!important;clip-path:none!important}
+body.ui-shape-pill button{border-radius:999px!important}
+
+/* Dialog tambah/edit peserta bergaya native aplikasi. */
+.peserta-row{grid-template-columns:32px minmax(0,1fr) auto 38px 38px;gap:5px}
+.peserta-order-actions{display:flex;gap:3px}
+.peserta-action.move{width:29px;min-width:29px;height:34px;min-height:34px;font-size:13px;background:linear-gradient(180deg,#303030,#101010);border-color:#555}
+.peserta-action:disabled{opacity:.28;cursor:not-allowed;box-shadow:none}
+.peserta-row.dragging{opacity:.35;border-style:dashed}
+.peserta-row.drag-target{border-color:var(--skin-primary,var(--oranye));box-shadow:0 0 15px color-mix(in srgb,var(--skin-primary,var(--oranye)) 35%,transparent);transform:translateY(-2px)}
+.peserta-editor-overlay,.theme-reset-overlay{z-index:7000}
+.peserta-editor-box,.theme-confirm-box{width:min(450px,94vw);padding:22px;background:linear-gradient(145deg,#171717,#070707 72%,#180700);border:2px solid var(--skin-primary,var(--oranye));box-shadow:0 0 36px color-mix(in srgb,var(--skin-primary,var(--oranye)) 34%,transparent);position:relative}
+.peserta-editor-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:20px}
+.peserta-editor-header h2{margin-top:4px;color:var(--skin-secondary,var(--emas));font-size:clamp(20px,5vw,28px);font-weight:1000}
+.peserta-editor-header p{margin-top:5px;color:#999;font-size:11px}
+.editor-eyebrow{color:var(--skin-primary,var(--oranye));font-size:9px;font-weight:900;letter-spacing:2px}
+.peserta-editor-label{display:block;margin-bottom:7px;color:#bbb;font-size:10px;font-weight:900;letter-spacing:1px}
+.peserta-editor-input{width:100%;min-height:48px;padding:12px 13px;background:#090909;color:#fff;border:1px solid #63301e;font:600 14px Poppins,Arial,sans-serif;outline:none}
+.peserta-editor-input:focus{border-color:var(--skin-secondary,var(--emas));box-shadow:0 0 0 3px color-mix(in srgb,var(--skin-primary,var(--oranye)) 18%,transparent)}
+.peserta-editor-error{min-height:18px;margin-top:6px;color:#ff7777;font-size:10px}
+.peserta-editor-actions{display:grid;grid-template-columns:1fr 1.35fr;gap:8px;margin-top:10px}
+.peserta-editor-actions button{min-height:44px}
+.btn-editor-cancel{background:linear-gradient(180deg,#393939,#111);border-color:#666}
+.btn-editor-save{background:linear-gradient(180deg,var(--skin-secondary,var(--emas)),var(--skin-primary,var(--oranye)));border-color:var(--skin-secondary,var(--emas))}
+.theme-confirm-box{text-align:center}
+.theme-confirm-icon{display:grid;place-items:center;width:54px;height:54px;margin:0 auto 12px;border:1px solid var(--skin-secondary,var(--emas));border-radius:50%;color:var(--skin-secondary,var(--emas));font-size:30px}
+.theme-confirm-box h2{color:var(--skin-secondary,var(--emas));font-size:clamp(18px,4.5vw,24px);font-weight:1000}
+.theme-confirm-box p{margin:9px 0 18px;color:#aaa;font-size:11px;line-height:1.6}
+.theme-confirm-actions{display:grid;grid-template-columns:1fr 1.35fr;gap:8px}
+.theme-confirm-actions button{min-height:44px}
+.theme-confirm-actions button:first-child{background:linear-gradient(180deg,#3c3c3c,#111);border-color:#666}
+.btn-reset-confirm{background:linear-gradient(180deg,var(--skin-secondary,var(--emas)),var(--skin-primary,var(--oranye)))}
+@media(max-width:700px){.peserta-editor-box,.theme-confirm-box{padding:18px 15px}.peserta-row{grid-template-columns:27px minmax(0,1fr) auto 34px 34px;gap:4px;padding:6px}.peserta-action{width:34px;min-width:34px}.peserta-action.move{width:25px;min-width:25px}.peserta-name{font-size:11px}.ui-shape-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+
+/* ===== ANIMASI CUSTOM CSS: PREVIEW, EDITOR, DAN HASIL GACHA ===== */
+.custom-animation-builder{margin-top:15px}
+.custom-animation-preview-wrap,.custom-ai-prompt-box{padding:12px;margin-top:10px;background:linear-gradient(145deg,#151515,#080808);border:1px solid #493026}
+.custom-preview-heading,.custom-css-editor-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;color:#eee;font-size:11px;letter-spacing:1px}
+.custom-preview-heading span{padding:4px 7px;border:1px solid var(--skin-primary,var(--oranye));color:var(--skin-secondary,var(--emas));font-size:9px;font-weight:900}
+.custom-animation-preview{padding:8px;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.06),transparent 60%),#050505;border:1px solid #282828;overflow:hidden}
+.custom-gacha-stage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%}
+.custom-gacha-group{min-width:0;padding:10px;background:linear-gradient(160deg,#171717,#070707);border:1px solid var(--skin-primary,#ff6a00);box-shadow:inset 0 0 20px rgba(255,255,255,.025),0 5px 15px rgba(0,0,0,.3)}
+.custom-gacha-group-title{margin-bottom:9px;padding:7px 5px;text-align:center;color:var(--skin-on-primary,#fff);font-size:12px;font-weight:1000;letter-spacing:2px;background:linear-gradient(100deg,var(--skin-secondary,#ffb000),var(--skin-primary,#ff6a00));border-radius:5px}
+.custom-gacha-item{position:relative;display:flex;align-items:center;gap:8px;min-width:0;min-height:43px;margin:7px 0;padding:7px 9px;overflow:hidden;color:#fff;background:linear-gradient(120deg,#252525,#101010);border:1px solid #555;box-shadow:0 4px 12px rgba(0,0,0,.35);opacity:0;animation:customGachaEnter .78s cubic-bezier(.15,.8,.25,1) calc(var(--custom-index,0)*.16s) forwards}
+.custom-gacha-item strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(10px,1.8vw,15px);font-weight:1000;letter-spacing:.3px;text-shadow:0 2px 4px #000}
+.custom-gacha-no{flex:0 0 27px;display:grid;place-items:center;height:27px;color:var(--skin-on-primary,#fff);background:linear-gradient(145deg,var(--skin-secondary,#ffb000),var(--skin-primary,#ff6a00));font-size:10px;font-weight:1000}
+.custom-gacha-winner{border-color:var(--skin-secondary,#ffb000);box-shadow:0 0 16px color-mix(in srgb,var(--skin-primary,#ff6a00) 50%,transparent),inset 0 0 15px rgba(255,255,255,.08);animation:customGachaEnter .78s cubic-bezier(.15,.8,.25,1) calc(var(--custom-index,0)*.16s) forwards,customGachaWinner 1.3s ease-in-out calc(1.1s + var(--custom-index,0)*.16s) infinite alternate}
+@keyframes customGachaEnter{0%{opacity:0;transform:translateY(26px) rotateX(-32deg) scale(.84);filter:blur(5px)}65%{opacity:1;transform:translateY(-5px) rotateX(5deg) scale(1.04);filter:blur(0)}100%{opacity:1;transform:translateY(0) rotateX(0) scale(1)}}
+@keyframes customGachaWinner{from{filter:brightness(1);transform:scale(1)}to{filter:brightness(1.45);transform:scale(1.025)}}
+.custom-gacha-preview-stage .custom-gacha-group{padding:7px}.custom-gacha-preview-stage .custom-gacha-group-title{font-size:10px}.custom-gacha-preview-stage .custom-gacha-item{min-height:35px;padding:5px 6px;margin:5px 0}.custom-gacha-preview-stage .custom-gacha-item strong{font-size:10px}.custom-gacha-preview-stage .custom-gacha-no{flex-basis:22px;height:22px;font-size:8px}
+.custom-preview-actions,.custom-action-row{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:9px}
+.custom-preview-actions button,.custom-action-row button,.custom-action-grid button,.custom-css-editor-head button{min-height:38px;padding:8px 11px;font-size:10px}
+.custom-animation-status{min-width:0;color:#929292;font-size:10px;line-height:1.4}
+.custom-ai-prompt-box{display:grid;gap:8px}.custom-ai-prompt-box label,.custom-css-editor-head strong{color:#eee;font-size:10px;letter-spacing:1px}
+.custom-ai-prompt-box textarea,.custom-css-editor-panel textarea{width:100%;min-width:0;resize:vertical;padding:10px;color:#f4f4f4;background:#080808;border:1px solid #494949;border-radius:7px;font-family:inherit;font-size:11px;line-height:1.55;outline:none}
+.custom-ai-prompt-box textarea:focus,.custom-css-editor-panel textarea:focus{border-color:var(--skin-primary,var(--oranye));box-shadow:0 0 0 2px color-mix(in srgb,var(--skin-primary,var(--oranye)) 18%,transparent)}
+.custom-ai-prompt-box textarea[readonly]{min-height:135px;color:#d5d5d5}
+.custom-css-editor-head{margin-top:14px;padding:10px 0 0;border-top:1px solid #333}
+.custom-css-editor-head div{display:grid;gap:4px}.custom-css-editor-head small{color:#888;font-size:9px}
+.custom-css-editor-panel{margin-top:8px}.custom-css-editor-panel[hidden]{display:none}.custom-css-editor-panel textarea{min-height:260px;font-family:Consolas,monospace;font-size:10px;tab-size:2;white-space:pre;overflow:auto}
+.custom-css-actions{justify-content:flex-start}
+.custom-action-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:10px}
+.custom-action-grid button{min-width:0;white-space:normal}
+.btn-custom-primary{background:linear-gradient(145deg,var(--skin-secondary,var(--emas)),var(--skin-primary,var(--oranye)))!important;border-color:var(--skin-secondary,var(--emas))!important;color:var(--skin-on-primary,#fff)!important}
+.btn-custom-reset{border-color:#a43c3c!important;color:#ffdede!important}
+.custom-gacha-box{position:relative;width:min(850px,96vw);max-height:92vh;overflow-y:auto;padding:22px 18px;background:linear-gradient(145deg,#151515,#050505 60%,#10070d);border:2px solid var(--skin-primary,#ff6a00);box-shadow:0 0 36px color-mix(in srgb,var(--skin-primary,#ff6a00) 42%,transparent);text-align:center}
+.custom-gacha-heading{padding-top:8px;color:#fff;font-size:clamp(28px,6vw,45px);font-weight:1000;font-style:italic;letter-spacing:3px;text-shadow:0 0 18px var(--skin-primary,#ff6a00)}
+.custom-gacha-subheading{margin:4px 0 17px;color:var(--skin-secondary,#ffb000);font-size:10px;font-weight:900;letter-spacing:3px}
+.custom-gacha-live-status{margin-top:14px;color:#ccc;font-size:11px;font-weight:900;letter-spacing:1.3px}
+.custom-reset-box{width:min(430px,94vw)}
+body.skin-enabled .custom-gacha-group{border-color:var(--skin-primary)}
+body.skin-enabled .custom-gacha-group-title,body.skin-enabled .custom-gacha-no{color:var(--skin-on-primary)}
+@media(max-width:560px){.custom-gacha-stage{grid-template-columns:1fr}.custom-gacha-box{padding:18px 10px}.custom-action-grid{grid-template-columns:1fr 1fr}.custom-animation-preview{padding:5px}.custom-preview-actions{align-items:flex-start}.custom-gacha-item strong{font-size:12px}}
+
 </style>
 </head>
 <body>
@@ -1029,7 +1192,7 @@ body{overflow-x:hidden}
 <div class="header">
 <div class="judul-kecil">SISTEM PENJADWALAN</div>
 <div class="judul-utama">JADWAL <span>ASIA PRINT</span></div>
-<div class="label-baru">BARU</div>
+
 </div>
 
 <div class="control-panel">
@@ -1267,6 +1430,28 @@ INITIALIZING MATRIX STREAM...</div>
 </div>
 
 
+<div class="overlay" id="customGachaOverlay">
+  <div class="custom-gacha-box">
+    <button type="button" class="btn-skip-animasi" onclick="mintaSkipAnimasi()">SKIP ANIMASI</button>
+    <div class="custom-gacha-heading">GACHA CUSTOM</div>
+    <div class="custom-gacha-subheading">ANIMASI CSS BUATAN SENDIRI</div>
+    <div class="custom-gacha-stage" id="customGachaStage"></div>
+    <div class="custom-gacha-live-status" id="customGachaStatus">MENYIAPKAN ANIMASI...</div>
+  </div>
+</div>
+
+<div class="overlay" id="customAnimResetOverlay" aria-hidden="true">
+  <div class="theme-confirm-box custom-reset-box">
+    <div class="theme-confirm-icon">↺</div>
+    <h3>RESET ANIMASI CUSTOM?</h3>
+    <p>Kode CSS custom yang sekarang akan diganti dengan animasi gacha bawaan. Tindakan ini tidak dapat dibatalkan.</p>
+    <div class="theme-confirm-actions">
+      <button type="button" onclick="tutupResetAnimasiCustom()">BATAL</button>
+      <button type="button" class="btn-reset-confirm" onclick="resetAnimasiCustomKeDefault()">YA, RESET</button>
+    </div>
+  </div>
+</div>
+
 <div class="overlay settings-overlay-shell" id="settingsOverlay">
   <div class="settings-box">
     <div class="settings-scroll-rail" id="settingsScrollRail"><div class="settings-scroll-track"></div><div class="settings-scroll-thumb" id="settingsScrollThumb"></div></div>
@@ -1274,10 +1459,11 @@ INITIALIZING MATRIX STREAM...</div>
       <h2>PENGATURAN</h2>
       <button class="btn-tutup" onclick="tutupPengaturan()">×</button>
     </div>
-    <div class="settings-desc">Atur animasi dan peserta dari dua tab terpisah. Perubahan peserta langsung menyesuaikan jadwal serta kombinasi.</div>
+    <div class="settings-desc">Atur animasi, peserta, tema warna, dan bentuk tampilan. Perubahan peserta langsung menyesuaikan jadwal serta kombinasi.</div>
     <div class="settings-tabs" role="tablist" aria-label="Pengaturan">
-      <button type="button" class="settings-tab aktif" data-settings-tab="animasi" role="tab" aria-selected="true" onclick="pilihTabPengaturan('animasi')">ANIMASI</button>
-      <button type="button" class="settings-tab" data-settings-tab="peserta" role="tab" aria-selected="false" onclick="pilihTabPengaturan('peserta')">PESERTA</button>
+      <button type="button" class="settings-tab aktif" data-settings-tab="animasi" role="tab" aria-selected="true">ANIMASI</button>
+      <button type="button" class="settings-tab" data-settings-tab="peserta" role="tab" aria-selected="false">PESERTA</button>
+      <button type="button" class="settings-tab" data-settings-tab="tema" role="tab" aria-selected="false">TEMA</button>
     </div>
 
     <section class="settings-tab-panel aktif" data-settings-panel="animasi">
@@ -1294,6 +1480,7 @@ INITIALIZING MATRIX STREAM...</div>
         <h3>Animasi yang dipakai</h3>
         <div class="animasi-pilihan">
           <label class="animasi-card" data-animasi-single="gacha"><input type="radio" name="animasiSingle" value="gacha"><div class="judul"><i class="fa-solid fa-dice" aria-hidden="true"></i>Gacha Jadwal</div><div class="detail">Reel berputar lalu hasil terkunci.</div></label>
+          <label class="animasi-card" data-animasi-single="custom"><input type="radio" name="animasiSingle" value="custom"><div class="judul"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>Animasi Custom CSS</div><div class="detail">Gunakan animasi gacha buatan sendiri dari editor CSS.</div></label>
           <label class="animasi-card" data-animasi-single="spin"><input type="radio" name="animasiSingle" value="spin"><div class="judul"><i class="fa-solid fa-rotate" aria-hidden="true"></i>Spin Klasik</div><div class="detail">Roda undian berputar sebelum hasil muncul.</div></label>
           <label class="animasi-card" data-animasi-single="meteor"><input type="radio" name="animasiSingle" value="meteor"><div class="judul"><i class="fa-solid fa-meteor" aria-hidden="true"></i>Meteor Impact</div><div class="detail">Meteor jatuh dan meledak sebelum hasil muncul.</div></label>
           <label class="animasi-card" data-animasi-single="rocket"><input type="radio" name="animasiSingle" value="rocket"><div class="judul"><i class="fa-solid fa-rocket" aria-hidden="true"></i>Roket ke Bulan</div><div class="detail">Roket mencari semua nama satu per satu lalu membawa semuanya ke bulan.</div></label>
@@ -1320,8 +1507,56 @@ INITIALIZING MATRIX STREAM...</div>
           <label><input type="checkbox" name="animasiPilihan" value="race"><span><strong><i class="fa-solid fa-flag-checkered" aria-hidden="true"></i> Balap Dinamis</strong><span>Urutan finis otomatis dibagi ke SENIN dan SELASA.</span></span></label>
           <label><input type="checkbox" name="animasiPilihan" value="solar"><span><strong><i class="fa-solid fa-solar-system" aria-hidden="true"></i> Tata Surya Nama</strong><span>Nama menjadi planet dan dipilih oleh roket.</span></span></label>
           <label><input type="checkbox" name="animasiPilihan" value="cat"><span><strong><i class="fa-solid fa-cat" aria-hidden="true"></i> Cat Blaster</strong><span>HP nama ditembak sampai habis, urutan finish dibuat acak.</span></span></label>
+          <label><input type="checkbox" name="animasiPilihan" value="custom"><span><strong><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Animasi Custom CSS</strong><span>Animasi gacha dengan CSS buatan sendiri.</span></span></label>
         </div>
-        <div class="helper-setting">Tidak ada batas minimum atau maksimum. Bila tidak ada yang dicentang, semua animasi akan dianggap tersedia.</div>
+        <div class="helper-setting">Tidak ada batas minimum atau maksimum. Bila tidak ada yang dicentang, semua animasi bawaan akan dianggap tersedia. Animasi Custom CSS hanya masuk ke pilihan setelah ditambahkan.</div>
+      </div>
+
+      <div class="settings-section custom-animation-builder">
+        <h3>ANIMASI CUSTOM CSS</h3>
+        <div class="settings-section-desc">Rancang animasi gacha dengan CSS saja. Lihat contoh, tulis ide untuk AI, salin prompt, lalu edit atau pasang CSS hasil buatanmu.</div>
+        <div class="custom-animation-preview-wrap">
+          <div class="custom-preview-heading"><strong>CONTOH ANIMASI</strong><span>CSS ONLY</span></div>
+          <div class="custom-animation-preview" id="customAnimationPreview">
+            <div class="custom-gacha-stage custom-gacha-preview-stage">
+              <div class="custom-gacha-group"><div class="custom-gacha-group-title">SENIN</div><div class="custom-gacha-item" style="--custom-index:0"><span class="custom-gacha-no">01</span><strong>AHMAD</strong></div><div class="custom-gacha-item" style="--custom-index:1"><span class="custom-gacha-no">02</span><strong>RIJANI</strong></div></div>
+              <div class="custom-gacha-group"><div class="custom-gacha-group-title">SELASA</div><div class="custom-gacha-item" style="--custom-index:2"><span class="custom-gacha-no">03</span><strong>PESERTA 3</strong></div><div class="custom-gacha-item custom-gacha-winner" style="--custom-index:3"><span class="custom-gacha-no">04</span><strong>PESERTA 4</strong></div></div>
+            </div>
+          </div>
+          <div class="custom-preview-actions">
+            <button type="button" onclick="putarUlangPreviewCustom()">↻ PUTAR ULANG</button>
+            <span id="customAnimationStatus" class="custom-animation-status">Contoh animasi siap.</span>
+          </div>
+        </div>
+
+        <div class="custom-ai-prompt-box">
+          <label for="customAnimationIdea"><strong>MAU ANIMASI SEPERTI APA?</strong></label>
+          <textarea id="customAnimationIdea" rows="3" placeholder="Contoh: Buat gacha futuristik. Nama masuk dari bawah, berputar seperti mesin slot, lalu nama terpilih membesar dengan cahaya biru..."></textarea>
+          <button type="button" class="btn-custom-primary" onclick="buatPromptAnimasiAI()">✦ BUAT PROMPT UNTUK AI</button>
+          <label for="customAnimationPrompt"><strong>PROMPT AI YANG SIAP DISALIN</strong></label>
+          <textarea id="customAnimationPrompt" rows="7" readonly placeholder="Prompt akan muncul di sini setelah kamu menjelaskan ide animasi."></textarea>
+          <div class="custom-action-row"><button type="button" onclick="salinPromptAnimasi()">▣ SALIN PROMPT</button><span id="customPromptStatus" class="custom-animation-status"></span></div>
+        </div>
+
+        <div class="custom-css-editor-head">
+          <div><strong>EDITOR CSS ANIMASI</strong><small>Gunakan keyframes dan selector .custom-gacha-*</small></div>
+          <button type="button" id="btnToggleCustomCssEditor" onclick="toggleEditorCSSCustom()">✎ EDIT ANIMASI CUSTOM</button>
+        </div>
+        <div id="customCssEditorPanel" class="custom-css-editor-panel" hidden>
+          <textarea id="customAnimationCss" spellcheck="false" rows="15" aria-label="Kode CSS animasi custom"></textarea>
+          <div class="helper-setting">Masukkan CSS saja, tanpa tag &lt;style&gt; dan tanpa JavaScript. Buat selector tetap diawali .custom-gacha- agar tidak mengubah bagian website lain.</div>
+          <div class="custom-action-row custom-css-actions">
+            <button type="button" class="btn-custom-primary" onclick="terapkanCSSCustom(true)">✓ SIMPAN & TERAPKAN CSS</button>
+            <button type="button" onclick="unduhCSSCustom()">⬇ DOWNLOAD CSS</button>
+          </div>
+        </div>
+        <div class="custom-action-grid">
+          <button type="button" onclick="gunakanAnimasiCustom()" class="btn-custom-primary">＋ MASUKKAN ANIMASI</button>
+          <button type="button" onclick="bukaEditorCSSCustom()">✎ EDIT CSS CUSTOM</button>
+          <button type="button" onclick="unduhCSSCustom()">⬇ DOWNLOAD CSS</button>
+          <button type="button" onclick="bukaResetAnimasiCustom()" class="btn-custom-reset">↺ RESET KE DEFAULT</button>
+        </div>
+        <div class="helper-setting" id="customUseStatus">Animasi Custom belum dipilih. Tekan MASUKKAN ANIMASI agar tersedia sebagai animasi yang digunakan.</div>
       </div>
     </section>
 
@@ -1332,7 +1567,7 @@ INITIALIZING MATRIX STREAM...</div>
         <div class="peserta-list" id="pesertaList"></div>
         <div class="peserta-actions peserta-actions-main">
           <button type="button" onclick="tambahPeserta()">＋ TAMBAH PESERTA</button>
-          <button type="button" onclick="resetPesertaDefault()">↺ NAMA DEFAULT</button>
+          <button type="button" onclick="resetPesertaDefault()">KEMBALIKAN SEMULA</button>
         </div>
         <div class="peserta-count" id="pesertaCount">0 peserta</div>
       </div>
@@ -1347,17 +1582,83 @@ INITIALIZING MATRIX STREAM...</div>
       </div>
     </section>
 
+    <section class="settings-tab-panel" data-settings-panel="tema" hidden>
+      <div class="settings-section">
+        <h3>TEMA WARNA</h3>
+        <div class="settings-section-desc">Pilih warna untuk seluruh tampilan, termasuk jadwal, tombol, popup, panel, garis, dan aksen animasi.</div>
+        <div class="mode-pilihan skin-mode-pilihan">
+          <button type="button" class="mode-card skin-mode-card" data-skin-mode="default"><div class="mode-title">Default</div><div class="mode-detail">Oranye bawaan seperti tampilan awal.</div></button>
+          <button type="button" class="mode-card skin-mode-card" data-skin-mode="pink"><div class="mode-title">Pink</div><div class="mode-detail">Pink dan merah muda.</div></button>
+          <button type="button" class="mode-card skin-mode-card" data-skin-mode="red"><div class="mode-title">Merah</div><div class="mode-detail">Merah dengan aksen hangat.</div></button>
+          <button type="button" class="mode-card skin-mode-card" data-skin-mode="blue"><div class="mode-title">Biru</div><div class="mode-detail">Biru dengan aksen cyan.</div></button>
+          <button type="button" class="mode-card skin-mode-card" data-skin-mode="green"><div class="mode-title">Hijau</div><div class="mode-detail">Hijau dengan aksen mint.</div></button>
+          <button type="button" class="mode-card skin-mode-card" data-skin-mode="random"><div class="mode-title">Warna Acak</div><div class="mode-detail">Buat kombinasi warna otomatis.</div></button>
+          <button type="button" class="mode-card skin-mode-card" data-skin-mode="custom"><div class="mode-title">Custom</div><div class="mode-detail">Atur tiga warna sendiri.</div></button>
+        </div>
+        <div class="mode-panel skin-custom-panel" id="skinCustomPanel" style="display:none">
+          <h3>RODA WARNA CUSTOM</h3>
+          <div class="skin-color-grid">
+            <label class="skin-color-card" for="skinPrimary"><span class="skin-color-wheel"><input type="color" id="skinPrimary" value="#ff6a00" aria-label="Warna utama"></span><span><strong>Warna Utama</strong><small>Aksen utama, border, dan tombol</small></span></label>
+            <label class="skin-color-card" for="skinSecondary"><span class="skin-color-wheel"><input type="color" id="skinSecondary" value="#ffb000" aria-label="Warna kedua"></span><span><strong>Warna Kedua</strong><small>Gradasi, sorotan, dan tombol</small></span></label>
+            <label class="skin-color-card" for="skinBackground"><span class="skin-color-wheel"><input type="color" id="skinBackground" value="#080808" aria-label="Warna latar"></span><span><strong>Warna Latar</strong><small>Latar halaman dan panel</small></span></label>
+          </div>
+          <div class="helper-setting">Warna tombol dan teks di atas warna otomatis mengikuti pilihan agar tetap terbaca.</div>
+        </div>
+        <div class="helper-setting" id="skinStatus">Tema aktif: Default oranye.</div>
+      </div>
+
+      <div class="settings-section">
+        <h3>BENTUK UI</h3>
+        <div class="settings-section-desc">Atur bentuk sudut tombol, kartu, panel, popup, dan bagian jadwal.</div>
+        <div class="ui-shape-grid">
+          <button type="button" class="shape-option" data-ui-shape="default"><span class="shape-preview shape-preview-default"></span><strong>Default</strong><small>Bentuk bawaan</small></button>
+          <button type="button" class="shape-option" data-ui-shape="rounded"><span class="shape-preview shape-preview-rounded"></span><strong>Rounded</strong><small>Sudut membulat</small></button>
+          <button type="button" class="shape-option" data-ui-shape="soft"><span class="shape-preview shape-preview-soft"></span><strong>Soft</strong><small>Membulat ringan</small></button>
+          <button type="button" class="shape-option" data-ui-shape="square"><span class="shape-preview shape-preview-square"></span><strong>Square</strong><small>Siku tegas</small></button>
+          <button type="button" class="shape-option" data-ui-shape="pill"><span class="shape-preview shape-preview-pill"></span><strong>Pill</strong><small>Tombol kapsul</small></button>
+        </div>
+      </div>
+
+      <div class="settings-section theme-reset-section">
+        <h3>ATURAN ULANG TEMA</h3>
+        <div class="settings-section-desc">Kembalikan tema warna dan bentuk UI ke tampilan awal oranye dengan bentuk bawaan.</div>
+        <button type="button" class="btn-reset-theme" onclick="bukaKonfirmasiResetTema()">↺ RESET TEMA KE AWAL</button>
+      </div>
+    </section>
+
     <div class="settings-footer"><button class="btn-simpan-setting" onclick="tutupPengaturan()">SELESAI</button></div>
+  </div>
+</div>
+
+<div class="overlay peserta-editor-overlay" id="pesertaEditorOverlay" aria-hidden="true">
+  <form class="peserta-editor-box" id="pesertaEditorForm" onsubmit="simpanEditorPeserta(event)">
+    <div class="peserta-editor-header">
+      <div><div class="editor-eyebrow">PENGELOLAAN PESERTA</div><h2 id="pesertaEditorTitle">TAMBAH PESERTA</h2><p>Masukkan nama peserta di bawah ini.</p></div>
+      <button type="button" class="btn-tutup" aria-label="Tutup" onclick="tutupEditorPeserta()">×</button>
+    </div>
+    <label class="peserta-editor-label" for="pesertaEditorInput">NAMA PESERTA</label>
+    <input id="pesertaEditorInput" class="peserta-editor-input" type="text" maxlength="60" autocomplete="off" placeholder="Contoh: Ahmad Rijani">
+    <div class="peserta-editor-error" id="pesertaEditorError" aria-live="polite"></div>
+    <div class="peserta-editor-actions"><button type="button" class="btn-editor-cancel" onclick="tutupEditorPeserta()">BATAL</button><button type="submit" class="btn-editor-save" id="pesertaEditorSave">SIMPAN</button></div>
+  </form>
+</div>
+
+<div class="overlay theme-reset-overlay" id="resetTemaOverlay" aria-hidden="true">
+  <div class="theme-confirm-box" role="dialog" aria-modal="true" aria-labelledby="resetTemaTitle">
+    <div class="theme-confirm-icon">↺</div>
+    <h2 id="resetTemaTitle">KEMBALIKAN TEMA KE AWAL?</h2>
+    <p>Warna tema dan bentuk UI akan dikembalikan ke pengaturan bawaan oranye. Pengaturan peserta dan animasi tidak berubah.</p>
+    <div class="theme-confirm-actions"><button type="button" onclick="tutupKonfirmasiResetTema()">BATAL</button><button type="button" class="btn-reset-confirm" onclick="konfirmasiResetTema()">YA, RESET TEMA</button></div>
   </div>
 </div>
 
 <div class="overlay" id="loadPesertaOverlay">
   <div class="load-peserta-box">
     <div class="load-peserta-header"><div><h2>LOAD DATA PESERTA</h2><p id="loadPesertaInfo">Data siap dimuat.</p></div><button class="btn-tutup" type="button" onclick="batalLoadPeserta()">×</button></div>
-    <div class="load-peserta-warning">Pilih cara memasukkan data baru. Opsi kedua akan menghapus data peserta lama terlebih dahulu.</div>
+    <div class="load-peserta-warning">Pilih cara memasukkan data. Opsi kedua akan menghapus data peserta lama terlebih dahulu.</div>
     <div class="load-peserta-actions">
       <button type="button" class="load-option overwrite" onclick="konfirmasiLoadPeserta('overwrite')"><strong>NIMPA DATA LAMA</strong><span>Ganti daftar peserta sekarang dengan isi file.</span></button>
-      <button type="button" class="load-option replace" onclick="konfirmasiLoadPeserta('replace')"><strong>HAPUS DATA LAMA + MASUKKAN BARU</strong><span>Hapus data peserta tersimpan, lalu masukkan isi file.</span></button>
+      <button type="button" class="load-option replace" onclick="konfirmasiLoadPeserta('replace')"><strong>HAPUS DATA LAMA + IMPOR DATA</strong><span>Hapus data peserta tersimpan, lalu masukkan isi file.</span></button>
     </div>
     <div class="load-peserta-footer"><button type="button" onclick="batalLoadPeserta()">BATAL</button></div>
   </div>
@@ -1465,7 +1766,9 @@ function muatPeserta(){
   peserta=[...PESERTA_DEFAULT];
 }
 function simpanPeserta(){try{localStorage.setItem(PESERTA_KEY,JSON.stringify(peserta));}catch(_){}}
-function grupUntukHari(hari){return ['senin','rabu','jumat'].includes(hari)?'senin':'selasa'}
+function grupUntukHari(hari){
+  return ['senin','rabu','jumat'].includes(hari)?'senin':'selasa';
+}
 function salinJadwal(data){return {senin:[...(data?.senin||[])],selasa:[...(data?.selasa||[])]}}
 function pilihUkuranSenin(){return Math.ceil(peserta.length/2)}
 function hitungKombinasiBigInt(n,k){
@@ -1509,8 +1812,8 @@ function randomIndexKombinasi(){
 function updateJadwal(){
   const wrap=document.getElementById('wadahJadwal');if(!wrap)return;
   wrap.innerHTML=hariDaftar.map(([kode,nama])=>{
-    const grup=grupUntukHari(kode),arr=jadwalAktif[grup]||[];
-    const isi=arr.length?arr.map((namaPeserta,i)=>`<div class="orang" data-slot="${kode}-${i}" data-grup="${grup}" data-index="${i}"><div class="nomor">${i+1}</div><div class="nama">${escapeHtml(namaPeserta)}</div></div>`).join(''):'<div class="jadwal-kosong">TIDAK ADA PESERTA</div>';
+    const grup=grupUntukHari(kode),arr=(grup&&jadwalAktif[grup])||[];
+    const isi=arr.length?arr.map((namaPeserta,i)=>`<div class="orang" data-slot="${kode}-${i}" data-grup="${grup||''}" data-index="${i}"><div class="nomor">${i+1}</div><div class="nama">${escapeHtml(namaPeserta)}</div></div>`).join(''):'<div class="jadwal-kosong">TIDAK ADA PESERTA</div>';
     return `<div class="hari" data-hari="${kode}"><div class="hari-header">${nama}</div>${isi}<div class="hiasan-bawah"></div></div>`;
   }).join('');
   refreshTampilanKombinasi();
@@ -1528,29 +1831,53 @@ function pesertaDefault(){return peserta.length?salinJadwal(kombinasiKe(0)):{sen
 function rebuildSetelahPerubahan(){
   refreshTotalKombinasi();kombinasiAktif=0;jadwalAktif=pesertaDefault();halamanKombinasi=0;updateJadwal();buatDaftarKombinasi();
 }
+let indeksPesertaDiedit=null;
+let pesertaDragIndex=null;
 function renderPesertaSettings(){
   const list=document.getElementById('pesertaList');if(!list)return;
   list.innerHTML='';
   peserta.forEach((nama,index)=>{
-    const row=document.createElement('div');row.className='peserta-row';
-    row.innerHTML=`<div class="peserta-no">${index+1}</div><div class="peserta-name" title="${escapeHtml(nama)}">${escapeHtml(nama)}</div><button class="peserta-action edit" type="button" title="Ganti nama" aria-label="Ganti nama" onclick="ubahNamaPeserta(${index})">✎</button><button class="peserta-action delete" type="button" title="Hapus peserta" aria-label="Hapus peserta" onclick="hapusPeserta(${index})">×</button>`;
+    const row=document.createElement('div');row.className='peserta-row';row.draggable=true;row.dataset.pesertaIndex=String(index);row.title='Geser baris atau gunakan tombol panah untuk mengubah urutan';
+    row.innerHTML=`<div class="peserta-no">${index+1}</div><div class="peserta-name" title="${escapeHtml(nama)}">${escapeHtml(nama)}</div><div class="peserta-order-actions"><button class="peserta-action move" type="button" title="Geser ke atas" aria-label="Geser ${escapeHtml(nama)} ke atas" ${index===0?'disabled':''} onclick="geserPeserta(${index},-1)">↑</button><button class="peserta-action move" type="button" title="Geser ke bawah" aria-label="Geser ${escapeHtml(nama)} ke bawah" ${index===peserta.length-1?'disabled':''} onclick="geserPeserta(${index},1)">↓</button></div><button class="peserta-action edit" type="button" title="Edit nama" aria-label="Edit nama" onclick="ubahNamaPeserta(${index})">✎</button><button class="peserta-action delete" type="button" title="Hapus peserta" aria-label="Hapus peserta" onclick="hapusPeserta(${index})">×</button>`;
+    row.addEventListener('dragstart',e=>{pesertaDragIndex=index;row.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',String(index));});
+    row.addEventListener('dragend',()=>{pesertaDragIndex=null;document.querySelectorAll('.peserta-row').forEach(el=>el.classList.remove('dragging','drag-target'));});
+    row.addEventListener('dragover',e=>{e.preventDefault();row.classList.add('drag-target');e.dataTransfer.dropEffect='move';});
+    row.addEventListener('dragleave',()=>row.classList.remove('drag-target'));
+    row.addEventListener('drop',e=>{e.preventDefault();row.classList.remove('drag-target');const from=Number(e.dataTransfer.getData('text/plain')||pesertaDragIndex);if(Number.isInteger(from)&&from!==index) pindahPeserta(from,index);});
     list.appendChild(row);
   });
   const count=document.getElementById('pesertaCount');if(count)count.textContent=`${peserta.length} peserta • kombinasi ${formatKombinasi(totalKombinasi)}`;
 }
-function ubahNamaPeserta(index){
-  const lama=peserta[index];if(lama===undefined)return;
-  const baru=window.prompt('Ganti nama peserta:',lama);
-  if(baru===null)return;
-  const nama=baru.trim();if(!nama)return;
-  peserta[index]=nama==='Ahmad Rijani'?'AHMAD RIJANI':nama;
-  simpanPeserta();renderPesertaSettings();rebuildSetelahPerubahan();
+function bukaEditorPeserta(mode,index=null){
+  const overlay=document.getElementById('pesertaEditorOverlay');const input=document.getElementById('pesertaEditorInput');const title=document.getElementById('pesertaEditorTitle');const error=document.getElementById('pesertaEditorError');
+  if(!overlay||!input)return;
+  indeksPesertaDiedit=mode==='edit'?index:null;
+  title.textContent=mode==='edit'?'EDIT NAMA PESERTA':'TAMBAH PESERTA';
+  input.value=mode==='edit'?(peserta[index]||''):`Peserta ${peserta.length+1}`;
+  if(error)error.textContent='';
+  const save=document.getElementById('pesertaEditorSave');if(save)save.textContent=mode==='edit'?'SIMPAN PERUBAHAN':'TAMBAH PESERTA';
+  overlay.classList.add('aktif');overlay.setAttribute('aria-hidden','false');
+  requestAnimationFrame(()=>{input.focus();input.select()});
 }
-function tambahPeserta(){
-  const angka=peserta.length+1;let nama=window.prompt('Nama peserta baru:',`Peserta ${angka}`);
-  if(nama===null)return;nama=nama.trim();if(!nama)return;
-  peserta.push(nama==='Ahmad Rijani'?'AHMAD RIJANI':nama);simpanPeserta();renderPesertaSettings();rebuildSetelahPerubahan();
+function tutupEditorPeserta(){
+  const overlay=document.getElementById('pesertaEditorOverlay');if(overlay){overlay.classList.remove('aktif');overlay.setAttribute('aria-hidden','true')}
+  indeksPesertaDiedit=null;
 }
+function simpanEditorPeserta(event){
+  event?.preventDefault();const input=document.getElementById('pesertaEditorInput');const error=document.getElementById('pesertaEditorError');
+  const nama=(input?.value||'').trim();
+  if(!nama){if(error)error.textContent='Nama peserta tidak boleh kosong.';input?.focus();return}
+  const hasil=nama==='Ahmad Rijani'?'AHMAD RIJANI':nama;
+  if(indeksPesertaDiedit!==null){if(peserta[indeksPesertaDiedit]===undefined)return;peserta[indeksPesertaDiedit]=hasil}else peserta.push(hasil);
+  tutupEditorPeserta();simpanPeserta();renderPesertaSettings();rebuildSetelahPerubahan();
+}
+function ubahNamaPeserta(index){if(peserta[index]===undefined)return;bukaEditorPeserta('edit',index)}
+function tambahPeserta(){bukaEditorPeserta('add')}
+function pindahPeserta(dari,ke){
+  if(!Number.isInteger(dari)||!Number.isInteger(ke)||dari<0||ke<0||dari>=peserta.length||ke>=peserta.length||dari===ke)return;
+  const [nama]=peserta.splice(dari,1);peserta.splice(ke,0,nama);simpanPeserta();renderPesertaSettings();rebuildSetelahPerubahan();
+}
+function geserPeserta(index,arah){pindahPeserta(index,index+arah)}
 function hapusPeserta(index){
   if(index<0||index>=peserta.length)return;
   const nama=peserta[index];if(!window.confirm(`Hapus peserta "${nama}"?`))return;
@@ -1678,17 +2005,181 @@ async function animasiGacha(hasil){
 
 
 const SETTINGS_KEY='jadwalAsiaPrintAnimasiV5';
+let tabPengaturanAktif='animasi';
 const OLD_SETTINGS_KEY='jadwalAsiaPrintAnimasiV3';
 const OLDER_SETTINGS_KEY='jadwalAsiaPrintAnimasiV2';
 const ANIMASI_SEMUA=['gacha','spin','meteor','rocket','hacker','clock','cube','quiz','race','solar','cat'];
-const NAMA_ANIMASI={gacha:'Gacha Jadwal',spin:'Spin Klasik',meteor:'Meteor Impact',rocket:'Roket ke Bulan',hacker:'Terminal Hacker',clock:'Jam Waktu',cube:'Dimensi Kubus',quiz:'Quiz Otomatis',race:'Balap Dinamis',solar:'Tata Surya Nama',cat:'Cat Blaster'};
-const ICON_ANIMASI={gacha:'fa-dice',spin:'fa-rotate',meteor:'fa-meteor',rocket:'fa-rocket',hacker:'fa-user-secret',clock:'fa-clock',cube:'fa-cube',quiz:'fa-circle-question',race:'fa-flag-checkered',solar:'fa-solar-system',cat:'fa-cat'};
-const pengaturanAnimasi={aktif:true,mode:'random',single:'gacha',multiple:[...ANIMASI_SEMUA]};
+const ANIMASI_TERSEDIA=[...ANIMASI_SEMUA,'custom'];
+const NAMA_ANIMASI={gacha:'Gacha Jadwal',spin:'Spin Klasik',meteor:'Meteor Impact',rocket:'Roket ke Bulan',hacker:'Terminal Hacker',clock:'Jam Waktu',cube:'Dimensi Kubus',quiz:'Quiz Otomatis',race:'Balap Dinamis',solar:'Tata Surya Nama',cat:'Cat Blaster',custom:'Animasi Custom CSS'};
+const ICON_ANIMASI={gacha:'fa-dice',spin:'fa-rotate',meteor:'fa-meteor',rocket:'fa-rocket',hacker:'fa-user-secret',clock:'fa-clock',cube:'fa-cube',quiz:'fa-circle-question',race:'fa-flag-checkered',solar:'fa-solar-system',cat:'fa-cat',custom:'fa-wand-magic-sparkles'};
+const pengaturanAnimasi={
+  aktif:true,mode:'random',single:'gacha',multiple:[...ANIMASI_SEMUA],
+  skin:{mode:'default',primary:'#ff6a00',secondary:'#ffb000',background:'#080808'},
+  customCss:''
+};
 let setupPertama=true;
 let modeSetup='single';
 let setupSingle='gacha';
 let setupMultiple=[...ANIMASI_SEMUA];
 let animasiHasilAktif='gacha';
+
+
+const DEFAULT_CUSTOM_ANIMATION_CSS = `/* Animasi custom bawaan — CSS saja. Selector dibatasi pada .custom-gacha-* */
+.custom-gacha-heading{animation:customHeadingGlow 1.8s ease-in-out infinite alternate;}
+.custom-gacha-group{animation:customGroupFloat 3.4s ease-in-out infinite alternate;}
+.custom-gacha-group:nth-child(2){animation-delay:.25s;}
+.custom-gacha-item{animation:customGachaEnter .78s cubic-bezier(.15,.8,.25,1) calc(var(--custom-index,0)*.16s) both;}
+.custom-gacha-winner{animation:customGachaEnter .78s cubic-bezier(.15,.8,.25,1) calc(var(--custom-index,0)*.16s) both,customGachaWinner 1.3s ease-in-out calc(1.1s + var(--custom-index,0)*.16s) infinite alternate;}
+@keyframes customHeadingGlow{from{text-shadow:0 0 8px var(--skin-primary,#ff6a00);letter-spacing:2px;}to{text-shadow:0 0 24px var(--skin-secondary,#ffb000),0 0 40px var(--skin-primary,#ff6a00);letter-spacing:4px;}}
+@keyframes customGroupFloat{from{transform:translateY(0);}to{transform:translateY(-4px);}}
+@keyframes customGachaEnter{0%{opacity:0;transform:translateY(26px) rotateX(-32deg) scale(.84);filter:blur(5px);}65%{opacity:1;transform:translateY(-5px) rotateX(5deg) scale(1.04);filter:blur(0);}100%{opacity:1;transform:translateY(0) rotateX(0) scale(1);}}
+@keyframes customGachaWinner{from{filter:brightness(1);transform:scale(1);}to{filter:brightness(1.45);transform:scale(1.025);}}
+`;
+function cssCustomAktif(){
+  const saved=String(pengaturanAnimasi.customCss||'').trim();
+  return saved||DEFAULT_CUSTOM_ANIMATION_CSS;
+}
+function sinkronkanCustomCss(){
+  let style=document.getElementById('customAnimationRuntimeStyle');
+  if(!style){style=document.createElement('style');style.id='customAnimationRuntimeStyle';document.head.appendChild(style)}
+  style.textContent=cssCustomAktif();
+  const editor=document.getElementById('customAnimationCss');
+  if(editor&&!editor.dataset.loaded)editor.value=cssCustomAktif();
+  if(editor)editor.dataset.loaded='1';
+  const status=document.getElementById('customAnimationStatus');
+  if(status&&document.getElementById('customAnimationPreview'))status.textContent='Contoh animasi menggunakan CSS yang sedang aktif.';
+}
+function validasiCSSAnimasiCustom(css){
+  const source=String(css||'').trim();
+  if(!source)return {ok:false,message:'Kode CSS tidak boleh kosong.'};
+  if(source.length>30000)return {ok:false,message:'Kode CSS terlalu panjang. Maksimal 30.000 karakter.'};
+  if(/<\/?(?:style|script)|@import\b|url\s*\(|expression\s*\(|javascript\s*:/i.test(source)){
+    return {ok:false,message:'Gunakan CSS murni. Tag HTML, JavaScript, @import, dan URL eksternal tidak diperbolehkan.'};
+  }
+  const probe=document.createElement('style');probe.textContent=source;document.head.appendChild(probe);
+  try{
+    const rules=probe.sheet?.cssRules;
+    if(!rules||!rules.length)return {ok:false,message:'Struktur CSS belum lengkap atau tidak valid.'};
+    const periksa=list=>{for(const rule of Array.from(list)){
+      if(rule.type===1){
+        const selectors=String(rule.selectorText||'').split(',').map(x=>x.trim()).filter(Boolean);
+        if(!selectors.length||selectors.some(x=>!/\.custom-gacha-[a-z0-9_-]+/i.test(x)))throw new Error('Selector harus dibatasi pada elemen .custom-gacha-* agar tidak mengubah website lain.');
+      }else if(rule.type===7){
+        if(!/^custom[a-z0-9_-]*$/i.test(String(rule.name||'')))throw new Error('Nama @keyframes harus diawali custom, misalnya customGachaBounce.');
+      }else if(rule.type===4||rule.type===12){periksa(rule.cssRules||[])}
+      else throw new Error('Aturan CSS ini tidak didukung. Gunakan selector .custom-gacha- dan @keyframes custom*.');
+    }};
+    periksa(rules);return {ok:true,message:''};
+  }catch(error){return {ok:false,message:error?.message||'CSS tidak dapat dibaca browser.'}}
+  finally{probe.remove()}
+}
+function terapkanCSSCustom(simpan=true){
+  const editor=document.getElementById('customAnimationCss');
+  const css=(editor?.value||'').trim();
+  const validasi=validasiCSSAnimasiCustom(css);
+  if(!validasi.ok){window.alert(validasi.message);return false}
+  let style=document.getElementById('customAnimationRuntimeStyle');
+  if(!style){style=document.createElement('style');style.id='customAnimationRuntimeStyle';document.head.appendChild(style)}
+  style.textContent=css;
+  if(simpan){pengaturanAnimasi.customCss=css;simpanPengaturan()}
+  putarUlangPreviewCustom();
+  const status=document.getElementById('customAnimationStatus');
+  if(status)status.textContent=simpan?'CSS custom berhasil disimpan dan diterapkan.':'Pratinjau diperbarui.';
+  return true;
+}
+function toggleEditorCSSCustom(){
+  const panel=document.getElementById('customCssEditorPanel');
+  const btn=document.getElementById('btnToggleCustomCssEditor');
+  if(!panel)return;
+  const buka=panel.hidden;panel.hidden=!buka;
+  if(btn)btn.textContent=buka?'× TUTUP EDITOR':'✎ EDIT ANIMASI CUSTOM';
+  if(buka){const editor=document.getElementById('customAnimationCss');if(editor){if(!editor.dataset.loaded){editor.value=cssCustomAktif();editor.dataset.loaded='1'}editor.focus()}panel.scrollIntoView({behavior:'smooth',block:'nearest'})}
+}
+function bukaEditorCSSCustom(){
+  const panel=document.getElementById('customCssEditorPanel');
+  if(panel?.hidden)toggleEditorCSSCustom();
+  panel?.scrollIntoView({behavior:'smooth',block:'nearest'});
+  document.getElementById('customAnimationCss')?.focus();
+}
+function unduhCSSCustom(){
+  const css=(document.getElementById('customAnimationCss')?.value||cssCustomAktif()).trim();
+  const blob=new Blob([css+'\n'],{type:'text/css;charset=utf-8'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='animasi-custom-jadwal.css';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);
+}
+function buatPromptAnimasiAI(){
+  const idea=(document.getElementById('customAnimationIdea')?.value||'').trim();
+  const out=document.getElementById('customAnimationPrompt');
+  const status=document.getElementById('customPromptStatus');
+  if(!idea){if(status)status.textContent='Jelaskan dulu animasi yang diinginkan.';document.getElementById('customAnimationIdea')?.focus();return}
+  const prompt=`Buatkan animasi gacha jadwal peserta menggunakan CSS saja berdasarkan konsep berikut:\n\nKONSEP ANIMASI:\n${idea}\n\nKETENTUAN TEKNIS:\n1. Keluarkan hanya kode CSS murni, tanpa Markdown fence, tanpa penjelasan, tanpa JavaScript, library, framework, gambar, video, atau tag <style>.\n2. Animasi harus bekerja pada komponen HTML yang sudah memiliki selector .custom-gacha-box, .custom-gacha-heading, .custom-gacha-subheading, .custom-gacha-stage, .custom-gacha-group, .custom-gacha-group-title, .custom-gacha-item, .custom-gacha-no, dan .custom-gacha-winner.\n3. Setiap selector aturan harus menargetkan .custom-gacha-*. Jangan menargetkan body, html, :root, *, button, atau elemen global. Nama @keyframes wajib diawali custom, misalnya customGachaBounce.\n4. Gunakan @keyframes untuk gerakan. Animasi harus responsif di HP dan desktop, tidak menyebabkan scroll horizontal, dan tetap mudah dibaca.\n5. Gunakan variabel tema yang tersedia seperti --skin-primary dan --skin-secondary sebagai warna aksen, tetapi sediakan fallback warna.\n6. Atur urutan animasi nama dengan variabel --custom-index. Jangan menghapus atau menyembunyikan nama secara permanen.\n7. Buat animasi masuk, proses pengundian, dan penekanan pada .custom-gacha-winner. Perhatikan prefers-reduced-motion.\n8. Jangan mengubah HTML atau fungsi website. Jangan gunakan @import, url(), expression(), atau sumber eksternal. Berikan komentar singkat pada bagian CSS.\n\nKELUARAN: Berikan satu blok kode CSS lengkap yang bisa langsung ditempel ke editor Animasi Custom CSS.`;
+  if(out)out.value=prompt;
+  if(status)status.textContent='Prompt berhasil dibuat. Salin untuk digunakan pada AI.';
+}
+async function salinPromptAnimasi(){
+  const value=document.getElementById('customAnimationPrompt')?.value||'';
+  const status=document.getElementById('customPromptStatus');
+  if(!value){if(status)status.textContent='Buat prompt terlebih dahulu.';return}
+  try{
+    if(navigator.clipboard?.writeText)await navigator.clipboard.writeText(value);
+    else{const el=document.getElementById('customAnimationPrompt');el.focus();el.select();if(!document.execCommand('copy'))throw new Error('copy failed')}
+    if(status)status.textContent='Prompt berhasil disalin.';
+  }catch(_){const el=document.getElementById('customAnimationPrompt');el?.focus();el?.select();if(status)status.textContent='Tekan Ctrl+C untuk menyalin prompt.'}
+}
+function putarUlangPreviewCustom(){
+  const preview=document.getElementById('customAnimationPreview');if(!preview)return;
+  preview.querySelectorAll('.custom-gacha-heading,.custom-gacha-group,.custom-gacha-group-title,.custom-gacha-item,.custom-gacha-no,.custom-gacha-winner').forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.removeProperty('animation')});
+  const status=document.getElementById('customAnimationStatus');if(status)status.textContent='Pratinjau animasi diputar ulang.';
+}
+function gunakanAnimasiCustom(){
+  if(!terapkanCSSCustom(true))return;
+  pengaturanAnimasi.aktif=true;
+  pengaturanAnimasi.mode='single';
+  pengaturanAnimasi.single='custom';
+  simpanPengaturan();sinkronkanPengaturanUI();
+  const status=document.getElementById('customUseStatus');if(status)status.textContent='Animasi Custom CSS sudah dimasukkan dan dipilih. Gunakan tombol ACAK JADWAL untuk menjalankannya.';
+}
+function bukaResetAnimasiCustom(){
+  const overlay=document.getElementById('customAnimResetOverlay');overlay?.classList.add('aktif');overlay?.setAttribute('aria-hidden','false');
+}
+function tutupResetAnimasiCustom(){
+  const overlay=document.getElementById('customAnimResetOverlay');overlay?.classList.remove('aktif');overlay?.setAttribute('aria-hidden','true');
+}
+function resetAnimasiCustomKeDefault(){
+  pengaturanAnimasi.customCss='';
+  simpanPengaturan();
+  const editor=document.getElementById('customAnimationCss');if(editor){editor.value=DEFAULT_CUSTOM_ANIMATION_CSS;editor.dataset.loaded='1'}
+  sinkronkanCustomCss();putarUlangPreviewCustom();tutupResetAnimasiCustom();
+  const status=document.getElementById('customUseStatus');if(status)status.textContent='Animasi Custom berhasil dikembalikan ke CSS bawaan.';
+}
+async function animasiGachaCustom(hasil){
+  const overlay=document.getElementById('customGachaOverlay');
+  const stage=document.getElementById('customGachaStage');
+  const status=document.getElementById('customGachaStatus');
+  if(!overlay||!stage)return;
+  stage.innerHTML='';
+  const groups=[['SENIN',hasil.senin||[]],['SELASA',hasil.selasa||[]]];
+  let maxItems=0;
+  groups.forEach(([hari,names])=>{
+    maxItems=Math.max(maxItems,names.length);
+    const group=document.createElement('section');group.className='custom-gacha-group';
+    const title=document.createElement('div');title.className='custom-gacha-group-title';title.textContent=hari;group.appendChild(title);
+    if(!names.length){const empty=document.createElement('div');empty.className='custom-gacha-item';empty.textContent='TIDAK ADA PESERTA';empty.style.opacity='1';group.appendChild(empty)}
+    names.forEach((name,index)=>{
+      const item=document.createElement('div');item.className='custom-gacha-item'+(index===names.length-1?' custom-gacha-winner':'');item.style.setProperty('--custom-index',String(index+(hari==='SELASA'?groups[0][1].length:0)));
+      const number=document.createElement('span');number.className='custom-gacha-no';number.textContent=String(index+1).padStart(2,'0');
+      const label=document.createElement('strong');label.textContent=String(name);
+      item.append(number,label);group.appendChild(item);
+    });
+    stage.appendChild(group);
+  });
+  status.textContent='MENYUSUN NAMA • ANIMASI CSS SEDANG BERJALAN';
+  overlay.classList.add('aktif');
+  const totalItems=Math.max(1,(hasil.senin||[]).length+(hasil.selasa||[]).length);
+  const duration=Math.min(5200,1350+totalItems*160);
+  await new Promise(resolve=>setTimeout(resolve,duration));
+  if(!skipAnimasiDiminta){status.textContent='GACHA SELESAI • HASIL BERHASIL DIKUNCI';await jeda(350)}
+  overlay.classList.remove('aktif');
+}
 
 function normalisasiPengaturan(raw){
   const hasil={...pengaturanAnimasi};
@@ -1696,12 +2187,22 @@ function normalisasiPengaturan(raw){
   const legacySingle=ANIMASI_SEMUA.includes(raw?.mode)?raw.mode:null;
   if(legacySingle){
     hasil.mode='single';hasil.single=legacySingle;hasil.multiple=[...ANIMASI_SEMUA];
-    return hasil;
+  }else{
+    hasil.mode=['single','random','select','triple'].includes(raw?.mode)?(raw.mode==='triple'?'select':raw.mode):'random';
+    hasil.single=ANIMASI_TERSEDIA.includes(raw?.single)?raw.single:'gacha';
+    const m=Array.isArray(raw?.multiple)?raw.multiple.filter(x=>ANIMASI_TERSEDIA.includes(x)) : [];
+    hasil.multiple=[...new Set(m)];
   }
-  hasil.mode=['single','random','select','triple'].includes(raw?.mode)?(raw.mode==='triple'?'select':raw.mode):'random';
-  hasil.single=ANIMASI_SEMUA.includes(raw?.single)?raw.single:'gacha';
-  const m=Array.isArray(raw?.multiple)?raw.multiple.filter(x=>ANIMASI_SEMUA.includes(x)) : [];
-  hasil.multiple=[...new Set(m)];
+  const skinRaw=raw?.skin||{};
+  const validColor=value=>typeof value==='string'&&/^#[0-9a-fA-F]{6}$/.test(value);
+  hasil.skin={
+    mode:['default','pink','red','blue','green','random','custom'].includes(skinRaw.mode)?skinRaw.mode:'default',
+    primary:validColor(skinRaw.primary)?skinRaw.primary:'#ff6a00',
+    secondary:validColor(skinRaw.secondary)?skinRaw.secondary:'#ffb000',
+    background:validColor(skinRaw.background)?skinRaw.background:'#080808',
+    shape:['default','rounded','soft','square','pill'].includes(skinRaw.shape)?skinRaw.shape:'default'
+  };
+  hasil.customCss=typeof raw?.customCss==='string'&&raw.customCss.length<=30000?raw.customCss:'';
   return hasil;
 }
 
@@ -1713,15 +2214,99 @@ function muatPengaturan(){
       const raw=JSON.parse(localStorage.getItem(key)||'null');
       if(raw){Object.assign(pengaturanAnimasi,normalisasiPengaturan(raw));ada=true;break}
     }
-    if(ada)simpanPengaturan();
+    if(ada){
+      if(pengaturanAnimasi.skin?.mode==='random')pilihSkin('random');
+      else simpanPengaturan();
+    }
   }catch(_){ }
   setupPertama=!ada;
+  sinkronkanCustomCss();
   sinkronkanPengaturanUI();
 }
 function simpanPengaturan(){
   try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(pengaturanAnimasi));}catch(_){ }
 }
 function setModePengaturan(mode){pengaturanAnimasi.mode=mode;simpanPengaturan();sinkronkanPengaturanUI()}
+
+function hexKeRgb(hex){
+  const h=String(hex||'').replace('#','');
+  if(!/^[0-9a-f]{6}$/i.test(h))return {r:0,g:0,b:0};
+  return {r:parseInt(h.slice(0,2),16),g:parseInt(h.slice(2,4),16),b:parseInt(h.slice(4,6),16)};
+}
+function warnaKontras(hex){
+  const {r,g,b}=hexKeRgb(hex);
+  const linear=v=>{v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)};
+  const luminance=.2126*linear(r)+.7152*linear(g)+.0722*linear(b);
+  return luminance>.48?'#111111':'#ffffff';
+}
+function hslKeHex(h,s,l){
+  s/=100;l/=100;
+  const k=n=>(n+h/30)%12;
+  const a=s*Math.min(l,1-l);
+  const f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));
+  return '#'+[f(0),f(8),f(4)].map(v=>Math.round(255*v).toString(16).padStart(2,'0')).join('');
+}
+const PALET_TEMA={
+  default:{primary:'#ff6a00',secondary:'#ffb000',background:'#080808'},
+  pink:{primary:'#f04f9b',secondary:'#ffacd2',background:'#160913'},
+  red:{primary:'#ef3348',secondary:'#ff8065',background:'#16080b'},
+  blue:{primary:'#258cff',secondary:'#63d8ff',background:'#07111e'},
+  green:{primary:'#19b77a',secondary:'#8aefb4',background:'#07150f'}
+};
+function pilihSkin(mode){
+  const shape=pengaturanAnimasi.skin?.shape||'default';
+  if(PALET_TEMA[mode])pengaturanAnimasi.skin={mode,...PALET_TEMA[mode],shape};
+  else if(mode==='random'){
+    const hue=Math.floor(Math.random()*360);
+    pengaturanAnimasi.skin={mode:'random',primary:hslKeHex(hue,82,56),secondary:hslKeHex((hue+34)%360,90,66),background:hslKeHex(hue,24,8),shape};
+  }else if(mode==='custom'){
+    pengaturanAnimasi.skin={...(pengaturanAnimasi.skin||PALET_TEMA.default),mode:'custom',shape};
+  }
+  simpanPengaturan();sinkronkanSkinUI();
+}
+function ubahBentukUI(shape){
+  const valid=['default','rounded','soft','square','pill'].includes(shape)?shape:'default';
+  pengaturanAnimasi.skin={...(pengaturanAnimasi.skin||PALET_TEMA.default),shape:valid};
+  simpanPengaturan();sinkronkanSkinUI();
+}
+function bukaKonfirmasiResetTema(){document.getElementById('resetTemaOverlay')?.classList.add('aktif');document.getElementById('resetTemaOverlay')?.setAttribute('aria-hidden','false')}
+function tutupKonfirmasiResetTema(){document.getElementById('resetTemaOverlay')?.classList.remove('aktif');document.getElementById('resetTemaOverlay')?.setAttribute('aria-hidden','true')}
+function konfirmasiResetTema(){
+  pengaturanAnimasi.skin={mode:'default',...PALET_TEMA.default,shape:'default'};
+  simpanPengaturan();sinkronkanSkinUI();tutupKonfirmasiResetTema();
+  const status=document.getElementById('skinStatus');if(status)status.textContent='Tema berhasil dikembalikan ke pengaturan awal.';
+}
+function ubahWarnaSkin(){
+  const primary=document.getElementById('skinPrimary')?.value||'#ff6a00';
+  const secondary=document.getElementById('skinSecondary')?.value||'#ffb000';
+  const background=document.getElementById('skinBackground')?.value||'#080808';
+  pengaturanAnimasi.skin={mode:'custom',primary,secondary,background,shape:pengaturanAnimasi.skin?.shape||'default'};
+  simpanPengaturan();sinkronkanSkinUI();
+}
+function sinkronkanSkinUI(){
+  const skin=pengaturanAnimasi.skin||{mode:'default',...PALET_TEMA.default,shape:'default'};
+  const root=document.documentElement;const body=document.body;
+  const primary=document.getElementById('skinPrimary');const secondary=document.getElementById('skinSecondary');const background=document.getElementById('skinBackground');
+  if(primary)primary.value=skin.primary;if(secondary)secondary.value=skin.secondary;if(background)background.value=skin.background;
+  document.querySelectorAll('[data-skin-mode]').forEach(card=>card.classList.toggle('aktif',card.dataset.skinMode===skin.mode));
+  document.querySelectorAll('[data-ui-shape]').forEach(card=>card.classList.toggle('aktif',card.dataset.uiShape===(skin.shape||'default')));
+  const panel=document.getElementById('skinCustomPanel');if(panel)panel.style.display=skin.mode==='custom'?'block':'none';
+  const status=document.getElementById('skinStatus');
+  const names={default:'Default oranye',pink:'Pink',red:'Merah',blue:'Biru',green:'Hijau',random:'Warna acak',custom:'Custom'};
+  if(status)status.textContent=`Tema aktif: ${names[skin.mode]||'Default oranye'}. Bentuk UI: ${skin.shape||'default'}.`;
+  body.classList.remove('ui-shape-default','ui-shape-rounded','ui-shape-soft','ui-shape-square','ui-shape-pill');
+  if(skin.shape&&skin.shape!=='default')body.classList.add('ui-shape-'+skin.shape);
+  if(skin.mode==='default'){
+    body.classList.remove('skin-enabled');
+    ['--skin-primary','--skin-secondary','--skin-background','--skin-on-primary','--skin-on-secondary','--skin-on-background','--skin-on-muted','--merah','--merah-gelap','--oranye','--emas','--kuning','--skin-panel'].forEach(k=>root.style.removeProperty(k));
+    return;
+  }
+  body.classList.add('skin-enabled');
+  root.style.setProperty('--skin-primary',skin.primary);root.style.setProperty('--skin-secondary',skin.secondary);root.style.setProperty('--skin-background',skin.background);
+  root.style.setProperty('--skin-on-primary',warnaKontras(skin.primary));root.style.setProperty('--skin-on-secondary',warnaKontras(skin.secondary));root.style.setProperty('--skin-on-background',warnaKontras(skin.background));
+  root.style.setProperty('--skin-on-muted',warnaKontras(skin.background));root.style.setProperty('--skin-panel',`color-mix(in srgb, ${skin.background} 82%, #ffffff 5%)`);
+  root.style.setProperty('--merah',skin.primary);root.style.setProperty('--merah-gelap',`color-mix(in srgb, ${skin.primary} 45%, #000000)`);root.style.setProperty('--oranye',skin.primary);root.style.setProperty('--emas',skin.secondary);root.style.setProperty('--kuning',skin.secondary);
+}
 function sinkronkanPengaturanUI(){
   const toggle=document.getElementById('toggleAnimasi');
   if(toggle)toggle.checked=pengaturanAnimasi.aktif;
@@ -1735,6 +2320,7 @@ function sinkronkanPengaturanUI(){
   const panelPilihan=document.getElementById('panelAnimasiPilihan');
   if(panelSatu)panelSatu.style.display=pengaturanAnimasi.mode==='single'?'block':'none';
   if(panelPilihan)panelPilihan.style.display=pengaturanAnimasi.mode==='select'?'block':'none';
+  sinkronkanSkinUI();
 }
 function bukaPengaturan(){
   if(sedangMengacak)return;
@@ -1753,10 +2339,16 @@ function tutupPengaturan(){
   if(overlay)overlay.classList.remove('aktif');
 }
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'&&document.getElementById('settingsOverlay')?.classList.contains('aktif'))tutupPengaturan();
+  if(e.key!=='Escape')return;
+  if(document.getElementById('pesertaEditorOverlay')?.classList.contains('aktif'))tutupEditorPeserta();
+  else if(document.getElementById('customAnimResetOverlay')?.classList.contains('aktif'))tutupResetAnimasiCustom();
+  else if(document.getElementById('resetTemaOverlay')?.classList.contains('aktif'))tutupKonfirmasiResetTema();
+  else if(document.getElementById('settingsOverlay')?.classList.contains('aktif'))tutupPengaturan();
 });
+document.getElementById('pesertaEditorOverlay')?.addEventListener('click',e=>{if(e.target===e.currentTarget)tutupEditorPeserta()});
+document.getElementById('resetTemaOverlay')?.addEventListener('click',e=>{if(e.target===e.currentTarget)tutupKonfirmasiResetTema()});
 function pilihTabPengaturan(tab){
-  const valid=tab==='peserta'?'peserta':'animasi';
+  const valid=['animasi','peserta','tema'].includes(tab)?tab:'animasi';
   document.querySelectorAll('[data-settings-tab]').forEach(b=>b.classList.toggle('aktif',b.dataset.settingsTab===valid));
   document.querySelectorAll('[data-settings-panel]').forEach(p=>p.classList.toggle('aktif',p.dataset.settingsPanel===valid));
   document.querySelector('.settings-box')?.scrollTo({top:0,behavior:'smooth'});
@@ -1764,7 +2356,7 @@ function pilihTabPengaturan(tab){
 }
 /* ===== PENGATURAN: EVENT TAB + SCROLL YANG LEBIH TAHAN ERROR ===== */
 function setStatusTabPengaturan(tab){
-  const valid=tab==='peserta'?'peserta':'animasi';
+  const valid=['animasi','peserta','tema'].includes(tab)?tab:'animasi';
   document.querySelectorAll('[data-settings-tab]').forEach(button=>{
     const aktif=button.dataset.settingsTab===valid;
     button.classList.toggle('aktif',aktif);
@@ -1779,12 +2371,12 @@ function setStatusTabPengaturan(tab){
   });
 }
 function pilihTabPengaturan(tab){
-  setStatusTabPengaturan(tab);
+  const valid=['animasi','peserta','tema'].includes(tab)?tab:'animasi';
+  if(valid==='tema'&&tabPengaturanAktif!=='tema'&&pengaturanAnimasi.skin?.mode==='random')pilihSkin('random');
+  tabPengaturanAktif=valid;
+  setStatusTabPengaturan(valid);
   const box=document.querySelector('.settings-box');
-  if(box){
-    box.scrollTop=0;
-    requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
-  }
+  if(box){box.scrollTop=0;requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')))}
 }
 
 (function initPengaturan(){
@@ -1829,6 +2421,28 @@ function pilihTabPengaturan(tab){
       sinkronkanPengaturanUI();
     });
   }
+
+  document.querySelectorAll('[data-skin-mode]').forEach(card=>{
+    card.addEventListener('click',()=>pilihSkin(card.dataset.skinMode));
+  });
+  document.querySelectorAll('[data-ui-shape]').forEach(card=>{
+    card.addEventListener('click',()=>ubahBentukUI(card.dataset.uiShape));
+  });
+  ['skinPrimary','skinSecondary','skinBackground'].forEach(id=>{
+    document.getElementById(id)?.addEventListener('input',()=>ubahWarnaSkin());
+    document.getElementById(id)?.addEventListener('change',()=>ubahWarnaSkin());
+  });
+  const customCssEditor=document.getElementById('customAnimationCss');
+  if(customCssEditor){
+    customCssEditor.addEventListener('input',()=>{
+      const css=customCssEditor.value;
+      if(!css.trim()||css.length>30000||/<\/?(?:style|script)|@import\b|url\s*\(|expression\s*\(|javascript\s*:/i.test(css)||!/\.custom-gacha-/i.test(css))return;
+      let style=document.getElementById('customAnimationRuntimeStyle');
+      if(!style){style=document.createElement('style');style.id='customAnimationRuntimeStyle';document.head.appendChild(style)}
+      style.textContent=css;
+    });
+  }
+  document.getElementById('customAnimResetOverlay')?.addEventListener('click',e=>{if(e.target===e.currentTarget)tutupResetAnimasiCustom()});
 
   document.querySelectorAll('.settings-mode-card').forEach(card=>{
     card.addEventListener('click',e=>{
@@ -2042,7 +2656,7 @@ function mintaSkipAnimasi(){
   const yakin=window.confirm('Peringatan: animasi akan dilewati. Hasil akhir tetap akan ditampilkan, tetapi proses animasinya tidak selesai ditonton. Lanjut skip?');
   if(!yakin)return;
   skipAnimasiDiminta=true;
-  ['spinOverlay','classicSpinOverlay','meteorOverlay','hackerOverlay','rocketOverlay','clockOverlay','quizOverlay','cubeOverlay','raceOverlay','solarOverlay','catOverlay'].forEach(id=>document.getElementById(id)?.classList.remove('aktif'));
+  ['spinOverlay','classicSpinOverlay','meteorOverlay','hackerOverlay','rocketOverlay','clockOverlay','quizOverlay','cubeOverlay','raceOverlay','solarOverlay','catOverlay','customGachaOverlay'].forEach(id=>document.getElementById(id)?.classList.remove('aktif'));
   if(skipAnimasiResolver){const r=skipAnimasiResolver;skipAnimasiResolver=null;r();}
 }
 function jeda(ms){return new Promise(resolve=>setTimeout(resolve,skipAnimasiDiminta?0:ms))}
@@ -2370,6 +2984,7 @@ async function jalankanAnimasiUntukHasil(hasil,animasi,{replay=false}={}){
   balapHasilTersimpan=null;
   const jalankan=(async()=>{
     if(animasi==='gacha')await animasiGacha(hasil);
+    else if(animasi==='custom')await animasiGachaCustom(hasil);
     else if(animasi==='spin')await animasiSpinKlasik(hasil);
     else if(animasi==='meteor')await animasiMeteorImpact(hasil);
     else if(animasi==='rocket')await animasiRoketKeBulan(hasil);
@@ -2389,7 +3004,7 @@ async function jalankanAnimasiUntukHasil(hasil,animasi,{replay=false}={}){
     return raceResult||hasil;
   }
   await Promise.race([jalankan,overlayPromise]);
-  ['spinOverlay','classicSpinOverlay','meteorOverlay','hackerOverlay','rocketOverlay','clockOverlay','quizOverlay','cubeOverlay','raceOverlay','solarOverlay','catOverlay'].forEach(id=>document.getElementById(id)?.classList.remove('aktif'));
+  ['spinOverlay','classicSpinOverlay','meteorOverlay','hackerOverlay','rocketOverlay','clockOverlay','quizOverlay','cubeOverlay','raceOverlay','solarOverlay','catOverlay','customGachaOverlay'].forEach(id=>document.getElementById(id)?.classList.remove('aktif'));
   return hasil;
 }
 function lanjutDariBalap(){
@@ -2468,7 +3083,7 @@ function renderPilihanAnimasiLain(){
   const selected=document.getElementById('animasiPickerSelected');
   const run=document.getElementById('btnJalankanAnimasiPilihan');
   grid.innerHTML='';
-  ANIMASI_SEMUA.forEach(anim=>{
+  ANIMASI_TERSEDIA.forEach(anim=>{
     const current=anim===animasiFinalTersimpan;
     const b=document.createElement('button');
     b.type='button';
@@ -2499,7 +3114,7 @@ function renderPilihanAnimasiLain(){
 }
 async function jalankanAnimasiTerpilih(){
   const animasi=animasiLainTerpilih;
-  if(!hasilFinalTersimpan||sedangMengacak||!animasi||!ANIMASI_SEMUA.includes(animasi))return;
+  if(!hasilFinalTersimpan||sedangMengacak||!animasi||!ANIMASI_TERSEDIA.includes(animasi))return;
   const hasil=salinJadwal(hasilFinalTersimpan);
   document.getElementById('animasiPilihOverlay')?.classList.remove('aktif');
   animasiLainTerpilih=null;
@@ -2606,37 +3221,73 @@ function cariKombinasiAktif(){return -1}
 function balikDuaHari(){
  if(sedangMengacak)return;
  const tombol=document.getElementById('btnBalik');
- const kelasHari=['senin','selasa','rabu','kamis','jumat','sabtu'];
- const stateLama=kelasHari.map(h=>document.querySelector(`.hari[data-hari="${h}"]`));
+ const pasanganHari={senin:'selasa',selasa:'senin',rabu:'kamis',kamis:'rabu',jumat:'sabtu',sabtu:'jumat'};
+ const gerakan=[];
+ document.querySelectorAll('#wadahJadwal .hari .orang').forEach(slot=>{
+   const rect=slot.getBoundingClientRect();
+   if(!rect.width||!rect.height)return;
+   const hari=slot.closest('.hari')?.dataset.hari;
+   const tujuanHari=pasanganHari[hari];
+   if(!tujuanHari)return;
+   const clone=slot.cloneNode(true);
+   clone.classList.remove('swap-flash','swap-selection','drag-source','drag-over');
+   clone.classList.add('balik-name-clone');
+   clone.removeAttribute('data-slot');
+   clone.style.left=rect.left+'px';
+   clone.style.top=rect.top+'px';
+   clone.style.width=rect.width+'px';
+   clone.style.height=rect.height+'px';
+   clone.style.transform='translate(0,0) scale(1)';
+   document.body.appendChild(clone);
+   gerakan.push({clone,hari:tujuanHari,index:Number(slot.dataset.index),rect});
+ });
  const seninLama=[...jadwalAktif.senin];
  jadwalAktif.senin=[...jadwalAktif.selasa];
  jadwalAktif.selasa=seninLama;
- kombinasiAktif=cariKombinasiAktif();
- if(kombinasiAktif<0)kombinasiAktif=-1;
+ kombinasiAktif=-1;
  slotTerpilih=null;
  batalSeret();
  updateJadwal();
 
- tombol.disabled=true;
- tombol.textContent='↔ MENUKAR...';
- requestAnimationFrame(()=>{
-   kelasHari.forEach((hari,index)=>{
-     const el=stateLama[index];
-     if(!el)return;
-     el.classList.remove('balik-flash');
-     void el.offsetWidth;
-     setTimeout(()=>{
-       el.classList.add('balik-flash');
-       setTimeout(()=>el.classList.remove('balik-flash'),650);
-     }, index*45);
-   });
-   setTimeout(()=>{
-     tombol.disabled=false;
-     tombol.textContent='↔ BALIK SENIN ↔ SELASA';
-   },420);
+ const aktif=[];
+ gerakan.forEach(item=>{
+   const target=document.querySelector(`#wadahJadwal .hari[data-hari="${item.hari}"] .orang[data-index="${item.index}"]`);
+   if(!target){item.clone.remove();return;}
+   const targetRect=target.getBoundingClientRect();
+   target.classList.add('balik-arrival-hidden');
+   const dx=targetRect.left-item.rect.left;
+   const dy=targetRect.top-item.rect.top;
+   const sx=targetRect.width/item.rect.width;
+   const sy=targetRect.height/item.rect.height;
+   if(typeof item.clone.animate==='function'){
+     const animation=item.clone.animate([
+       {transform:'translate(0px,0px) scale(1,1) rotate(0deg)',opacity:1,offset:0},
+       {transform:`translate(${dx*.52}px,${dy*.52-58}px) scale(1.14,1.14) rotate(-4deg)`,opacity:1,offset:.52},
+       {transform:`translate(${dx}px,${dy}px) scale(${sx},${sy}) rotate(0deg)`,opacity:.12,offset:1}
+     ],{duration:820,easing:'cubic-bezier(.18,.82,.22,1)',fill:'forwards'});
+     aktif.push({animation,clone:item.clone,target});
+   }else{
+     item.clone.remove();target.classList.remove('balik-arrival-hidden');
+   }
  });
+ tombol.disabled=true;
+ tombol.textContent='NAMA SEDANG BERPINDAH...';
+ const selesai=()=>{
+   aktif.forEach(item=>{item.clone.remove();item.target.classList.remove('balik-arrival-hidden')});
+   tombol.disabled=false;
+   tombol.textContent='↔ BALIK SENIN ↔ SELASA';
+ };
+ if(!aktif.length){setTimeout(selesai,160);return;}
+ let selesaiCount=0;
+ aktif.forEach(item=>{
+   item.animation.onfinish=()=>{
+     item.clone.remove();item.target.classList.remove('balik-arrival-hidden');
+     selesaiCount++;
+     if(selesaiCount===aktif.length){tombol.disabled=false;tombol.textContent='↔ BALIK SENIN ↔ SELASA';}
+   };
+ });
+ setTimeout(selesai,1150);
 }
-
 function resetDefault(){if(sedangMengacak)return;kombinasiAktif=0;jadwalAktif=salinJadwal(kombinasiKe(0));slotTerpilih=null;updateJadwal()}
 
 function bukaDaftar(){if(sedangMengacak||modeTukar)return;document.getElementById('kombinasiOverlay').classList.add('aktif');tandaiKombinasi()}
@@ -2782,17 +3433,95 @@ document.addEventListener('pointerup',e=>{if(dataSeret?.aktif)selesaiSeret(e)});
 window.addEventListener('blur',()=>batalSeret());
 document.addEventListener('pointercancel',()=>batalSeret());
 
+function warnaTeksUntuk(hex){
+ const m=String(hex||'').match(/^#([0-9a-f]{6})$/i);if(!m)return '#ffffff';
+ const n=parseInt(m[1],16),r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+ const lum=(.2126*r+.7152*g+.0722*b)/255;return lum>.58?'#171717':'#ffffff';
+}
+function buatCanvasRoundRect(ctx,x,y,w,h,r){
+ const rr=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();
+ ctx.moveTo(x+rr,y);ctx.arcTo(x+w,y,x+w,y+h,rr);ctx.arcTo(x+w,y+h,x,y+h,rr);ctx.arcTo(x,y+h,x,y,rr);ctx.arcTo(x,y,x+w,y,rr);ctx.closePath();
+}
+function canvasWrapText(ctx,text,maxWidth,maxLines=2){
+ const words=String(text).split(/\s+/);const lines=[];let line='';
+ for(const word of words){
+  const next=line?line+' '+word:word;
+  if(ctx.measureText(next).width>maxWidth&&line){lines.push(line);line=word}else line=next;
+ }
+ if(line)lines.push(line);
+ if(lines.length>maxLines){lines.length=maxLines;let last=lines[maxLines-1];while(last.length>1&&ctx.measureText(last+'…').width>maxWidth)last=last.slice(0,-1);lines[maxLines-1]=last+'…'}
+ return lines;
+}
+function campurWarnaHexExport(a,b,rasio){
+ const ca=hexKeRgb(a),cb=hexKeRgb(b),t=Math.max(0,Math.min(1,Number(rasio)||0));
+ const ch=(x,y)=>Math.round(x+(y-x)*t).toString(16).padStart(2,'0');
+ return '#'+ch(ca.r,cb.r)+ch(ca.g,cb.g)+ch(ca.b,cb.b);
+}
 async function downloadImage(){
  if(sedangMengacak)return;
- const area=document.getElementById('areaDownload'),tombol=document.getElementById('btnDownload'),teksLama=tombol.innerHTML;
- tombol.disabled=true;tombol.innerHTML='⏳ MEMBUAT IMAGE...';
+ const tombol=document.getElementById('btnDownload');if(!tombol)return;
+ const teksLama=tombol.innerHTML;tombol.disabled=true;tombol.innerHTML='⏳ MEMBUAT IMAGE...';
  try{
-   const canvas=await html2canvas(area,{backgroundColor:'#050505',scale:Math.min(window.devicePixelRatio||2,3),useCORS:true,logging:false});
-   const link=document.createElement('a');
-   link.download=`jadwal_asia_print_${kombinasiAktif<0?'kustom':`kombinasi_${kombinasiAktif+1}`}.png`;
-   link.href=canvas.toDataURL('image/png');link.click();
- }catch(error){console.error(error);alert('Gagal membuat gambar.')}
- tombol.innerHTML=teksLama;tombol.disabled=false;
+  const skin=pengaturanAnimasi.skin||{};
+  const primary=skin.mode==='default'?'#ff2400':(skin.primary||'#ff6a00');
+  const secondary=skin.mode==='default'?'#ffb000':(skin.secondary||'#ffb000');
+  const background=skin.mode==='default'?'#080808':(skin.background||'#080808');
+  const textOnPrimary=warnaTeksUntuk(primary);
+  const cardTop=campurWarnaHexExport(background,'#ffffff',.105);
+  const cardBottom=campurWarnaHexExport(background,'#000000',.12);
+  const itemTop=campurWarnaHexExport(background,'#ffffff',.17);
+  const itemBottom=campurWarnaHexExport(background,'#000000',.04);
+  const itemText=warnaTeksUntuk(itemTop);
+  const mutedText=warnaTeksUntuk(campurWarnaHexExport(background,'#888888',.52));
+  const primaryRgb=hexKeRgb(primary);const primaryGlow=`rgba(${primaryRgb.r},${primaryRgb.g},${primaryRgb.b},.27)`;
+  const days=hariDaftar.map(([kode,nama])=>({kode,nama,items:(jadwalAktif[grupUntukHari(kode)]||[])}));
+  const width=1800,margin=42,gap=16,columns=6,colWidth=(width-margin*2-gap*(columns-1))/columns;
+  const maxRows=Math.max(1,...days.map(d=>d.items.length));
+  const headerH=66,rowH=68,cardPadding=12,cardH=headerH+maxRows*rowH+cardPadding*2+12;
+  const height=margin+28+cardH+64+margin;
+  const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+  const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas tidak tersedia.');
+  const bg=ctx.createLinearGradient(0,0,width,height);bg.addColorStop(0,background);bg.addColorStop(1,'#030303');ctx.fillStyle=bg;ctx.fillRect(0,0,width,height);
+  const glow=ctx.createRadialGradient(width*.5,0,10,width*.5,0,width*.72);glow.addColorStop(0,primaryGlow);glow.addColorStop(1,'transparent');ctx.fillStyle=glow;ctx.fillRect(0,0,width,height*.65);
+  ctx.strokeStyle=primary;ctx.lineWidth=4;ctx.strokeRect(12,12,width-24,height-24);
+  const topGrad=ctx.createLinearGradient(margin,margin,width-margin,margin);topGrad.addColorStop(0,'transparent');topGrad.addColorStop(.2,primary);topGrad.addColorStop(.5,secondary);topGrad.addColorStop(.8,primary);topGrad.addColorStop(1,'transparent');
+  ctx.fillStyle=topGrad;ctx.fillRect(margin,margin,width-margin*2,5);
+  const shape=skin.shape||'default';const radius=shape==='pill'?24:shape==='square'?0:shape==='soft'?8:shape==='rounded'?18:5;
+  days.forEach((day,index)=>{
+    const x=margin+index*(colWidth+gap),y=margin+22;
+    ctx.save();ctx.shadowColor=primaryGlow;ctx.shadowBlur=16;
+    buatCanvasRoundRect(ctx,x,y,colWidth,cardH,radius);const cardGrad=ctx.createLinearGradient(x,y,x,y+cardH);cardGrad.addColorStop(0,cardTop);cardGrad.addColorStop(1,cardBottom);ctx.fillStyle=cardGrad;ctx.fill();ctx.shadowBlur=0;
+    ctx.lineWidth=2;ctx.strokeStyle=primary;ctx.stroke();
+    const headGrad=ctx.createLinearGradient(x,y,x+colWidth,y+headerH);headGrad.addColorStop(0,secondary);headGrad.addColorStop(1,primary);
+    buatCanvasRoundRect(ctx,x+3,y+3,colWidth-6,headerH,radius>0?Math.min(radius,12):0);ctx.fillStyle=headGrad;ctx.fill();
+    ctx.fillStyle=textOnPrimary;ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='1000 28px Arial, sans-serif';ctx.fillText(day.nama,x+colWidth/2,y+headerH/2+2,colWidth-18);
+    day.items.forEach((name,idx)=>{
+      const itemY=y+headerH+cardPadding+idx*rowH+4;const itemX=x+10;const itemW=colWidth-20;const itemH=rowH-8;
+      buatCanvasRoundRect(ctx,itemX,itemY,itemW,itemH,Math.min(radius,9));const itemGrad=ctx.createLinearGradient(itemX,itemY,itemX+itemW,itemY+itemH);itemGrad.addColorStop(0,itemTop);itemGrad.addColorStop(1,itemBottom);ctx.fillStyle=itemGrad;ctx.fill();ctx.strokeStyle=campurWarnaHexExport(primary,background,.48);ctx.lineWidth=1;ctx.stroke();
+      const numberW=43;const numGrad=ctx.createLinearGradient(itemX,itemY,itemX+numberW,itemY+itemH);numGrad.addColorStop(0,secondary);numGrad.addColorStop(1,primary);
+      buatCanvasRoundRect(ctx,itemX+3,itemY+3,numberW,itemH-6,Math.min(radius,7));ctx.fillStyle=numGrad;ctx.fill();
+      ctx.fillStyle=textOnPrimary;ctx.font='1000 18px Arial, sans-serif';ctx.textAlign='center';ctx.fillText(String(idx+1),itemX+numberW/2+3,itemY+itemH/2);
+      let fontSize=19;ctx.textAlign='left';ctx.textBaseline='middle';
+      const textX=itemX+numberW+14,textW=itemW-numberW-23;
+      ctx.font=`800 ${fontSize}px Arial, sans-serif`;
+      while(fontSize>13&&ctx.measureText(String(name)).width>textW*1.7){fontSize--;ctx.font=`800 ${fontSize}px Arial, sans-serif`}
+      const lines=canvasWrapText(ctx,name,textW,2);const lineH=fontSize*1.12;const startY=itemY+itemH/2-((lines.length-1)*lineH)/2;
+      ctx.fillStyle=itemText;lines.forEach((line,lineIndex)=>ctx.fillText(line,textX,startY+lineIndex*lineH,textW));
+    });
+    if(!day.items.length){ctx.textAlign='center';ctx.fillStyle=mutedText;ctx.font='700 15px Arial, sans-serif';ctx.fillText('TIDAK ADA PESERTA',x+colWidth/2,y+headerH+48)}
+    ctx.restore();
+  });
+  const footerY=height-margin-25;ctx.fillStyle='#b5b5b5';ctx.textAlign='left';ctx.textBaseline='middle';ctx.font='600 17px Arial, sans-serif';ctx.fillText('WEBSITE DIBUAT OLEH: AHMAD RIJANI',margin,footerY);
+  ctx.textAlign='right';ctx.fillStyle='#777';ctx.font='14px Arial, sans-serif';ctx.fillText('JADWAL ASIA PRINT',width-margin,footerY);
+  // Konversi sinkron mempertahankan aktivasi klik pada browser mobile.
+  const dataUrl=canvas.toDataURL('image/png');
+  if(!dataUrl||dataUrl==='data:,'||!dataUrl.startsWith('data:image/png'))throw new Error('Browser tidak dapat membuat file PNG.');
+  const link=document.createElement('a');
+  link.download=`jadwal_asia_print_${kombinasiAktif<0?'kustom':`kombinasi_${kombinasiAktif+1}`}.png`;
+  link.href=dataUrl;link.style.position='fixed';link.style.left='-9999px';
+  document.body.appendChild(link);link.click();link.remove();
+ }catch(error){console.error('Download gambar gagal:',error);window.alert('Gagal membuat gambar: '+(error?.message||'Kesalahan tidak diketahui.'))}
+ finally{tombol.innerHTML=teksLama;tombol.disabled=false}
 }
 
 muatPengaturan();renderPesertaSettings();refreshTotalKombinasi();jadwalAktif=pesertaDefault();updateJadwal();buatDaftarKombinasi();setupSync();if(setupPertama)setTimeout(bukaSetupAwal,80);

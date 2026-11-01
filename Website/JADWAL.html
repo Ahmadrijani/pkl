@@ -1265,6 +1265,19 @@ body.skin-enabled{color:var(--skin-on-background)!important;background:radial-gr
 @media(max-width:700px){.wheel-box{padding:16px 10px 13px}.wheel-stage{width:min(78vw,360px)}.wheel-hub{width:52px;height:52px;font-size:19px}.wheel-pointer{border-left-width:14px;border-right-width:14px;border-top-width:30px}.animasi-example-play{width:29px;height:29px;min-width:29px;min-height:29px}}
 @media(max-width:430px){.settings-toggle{gap:7px}.settings-toggle-text strong{font-size:12px}.settings-toggle-text span{font-size:9px}.skip-confirm-box{padding:20px 14px 15px}.skip-confirm-actions{grid-template-columns:1fr}}
 
+
+.ui-shape-rounded{--shape-radius:20px}.ui-shape-soft{--shape-radius:9px}.ui-shape-square{--shape-radius:0px}.ui-shape-pill{--shape-radius:999px}
+/* RGB theme, dialog konsisten, skeleton dan kontrol unduhan */
+.skin-mode-pilihan [data-skin-mode="rgb"]{position:relative;overflow:hidden;border-color:#8d5cff;background:linear-gradient(120deg,#ff315c,#ffb52e,#42e889,#39a5ff,#bd55ff);background-size:300% 300%;animation:rgbCard 5s linear infinite;color:#fff;text-shadow:0 1px 5px #000}
+@keyframes rgbCard{to{background-position:300% 50%}}
+.rgb-controls{display:none;margin-top:12px;padding:13px;border:1px solid #8b65ff;background:rgba(90,50,160,.12);border-radius:var(--shape-radius,10px)}
+.rgb-controls.aktif{display:block}.rgb-controls label{display:flex;justify-content:space-between;gap:10px;font-weight:800}.rgb-controls input{width:100%;accent-color:#a45cff;margin-top:10px}
+.custom-dialog-overlay{z-index:12000}.app-dialog-box{position:relative;width:min(460px,94vw);padding:24px 20px 18px;text-align:center;background:linear-gradient(145deg,#202020,#080808);border:2px solid var(--skin-primary,#ff6500);border-radius:var(--shape-radius,12px);box-shadow:0 0 35px rgba(0,0,0,.6),0 0 25px rgba(255,90,0,.18);color:#fff}
+.app-dialog-icon{width:54px;height:54px;margin:0 auto 12px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,var(--skin-secondary,#ffb000),var(--skin-primary,#ff4b00));font-weight:1000;color:var(--skin-on-primary,#111)}
+.app-dialog-box h2{font-size:clamp(20px,5vw,27px);font-weight:1000}.app-dialog-box p{margin:10px 0 18px;color:#c6c6c6;font-size:12px;line-height:1.65}.app-dialog-actions{display:flex;gap:9px}.app-dialog-actions button{flex:1}.dialog-secondary{background:linear-gradient(#444,#171717)!important;border-color:#777!important}.download-dialog{text-align:left;padding-top:28px}.download-dialog h2,.download-dialog>p{text-align:center}.dialog-close{position:absolute;right:10px;top:10px}.download-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px;margin:9px 0;background:#111;border:1px solid #454545;border-radius:var(--shape-radius,9px)}.download-toggle span{display:grid;gap:4px}.download-toggle small{color:#aaa;font-size:10px;line-height:1.4}.download-toggle input{width:20px;height:20px;accent-color:var(--skin-primary,#ff6500);flex-shrink:0}
+.loading-skeleton{position:fixed;inset:0;z-index:20000;padding:5vh 5vw;background:#080808;display:grid;grid-template-rows:100px 90px 1fr;gap:18px;transition:opacity .35s,visibility .35s}.loading-skeleton.done{opacity:0;visibility:hidden;pointer-events:none}.loading-skeleton>div,.skeleton-grid i{background:linear-gradient(100deg,#171717 20%,#303030 38%,#171717 56%);background-size:220% 100%;animation:skeletonShimmer 1.2s linear infinite;border:1px solid #333;border-radius:9px}.skeleton-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.skeleton-grid i{display:block;min-height:110px}@keyframes skeletonShimmer{to{background-position-x:-220%}}
+@media(max-width:650px){.loading-skeleton{grid-template-rows:80px 110px 1fr}.skeleton-grid{grid-template-columns:repeat(2,1fr)}.app-dialog-actions{flex-direction:column}}
+
 </style>
 </head>
 <body>
@@ -1277,8 +1290,8 @@ body.skin-enabled{color:var(--skin-on-background)!important;background:radial-gr
 
 <div class="control-panel">
 <div class="kombinasi-info">KOMBINASI AKTIF: <strong id="kombinasiAktif">1</strong></div>
-<div class="download-area"><button class="btn-download" id="btnDownload" onclick="downloadImage()">⬇ DOWNLOAD IMAGE</button></div>
-<div class="mode-info" id="modeInfo"><strong>Mode biasa.</strong> Tekan <strong>TUKAR HARI</strong> untuk mengaktifkan susun manual. Setelah aktif, tahan nama lalu geser ke nama lain untuk menukarnya. Di HP, tap nama pertama lalu tap nama kedua juga bisa.</div>
+<div class="download-area"><button class="btn-download" id="btnDownload" onclick="bukaPengaturanDownload()">⬇ DOWNLOAD IMAGE</button></div>
+
 <div class="tombol-container">
 <button class="btn-acak" id="btnAcak" onclick="acakKombinasi()">🎲 ACAK JADWAL</button>
 <button class="btn-tukar" id="btnTukar" onclick="ubahModeTukar()">⇄ TUKAR HARI</button>
@@ -1660,6 +1673,7 @@ INITIALIZING MATRIX STREAM...</div>
           <button type="button" class="mode-card skin-mode-card" data-skin-mode="green"><div class="mode-title">Hijau</div><div class="mode-detail">Hijau dengan aksen mint.</div></button>
           <button type="button" class="mode-card skin-mode-card" data-skin-mode="random"><div class="mode-title">Warna Acak</div><div class="mode-detail">Buat kombinasi warna otomatis.</div></button>
           <button type="button" class="mode-card skin-mode-card" data-skin-mode="custom"><div class="mode-title">Custom</div><div class="mode-detail">Atur tiga warna sendiri.</div></button>
+          <button type="button" class="mode-card skin-mode-card" data-skin-mode="rgb" id="rgbThemeButton"><div class="mode-title">RGB</div><div class="mode-detail">Warna berubah otomatis dengan efek RGB.</div></button>
         </div>
         <div class="mode-panel skin-custom-panel" id="skinCustomPanel" style="display:none">
           <h3>RODA WARNA CUSTOM</h3>
@@ -1670,6 +1684,7 @@ INITIALIZING MATRIX STREAM...</div>
           </div>
           <div class="helper-setting">Warna tombol dan teks di atas warna otomatis mengikuti pilihan agar tetap terbaca.</div>
         </div>
+        <div class="rgb-controls" id="rgbControls"><label for="rgbSpeed"><span>Kecepatan pergantian warna</span><strong><span id="rgbSpeedValue">10</span></strong></label><input type="range" id="rgbSpeed" min="1" max="30" value="10"><div class="helper-setting">1 = lambat, 30 = sangat cepat. Perubahan warna berlaku pada halaman dan teks menyesuaikan otomatis.</div></div>
         <div class="helper-setting" id="skinStatus">Tema aktif: Default oranye.</div>
       </div>
 
@@ -1811,6 +1826,12 @@ INITIALIZING MATRIX STREAM...</div>
 
 
 <div class="overlay" id="kombinasiOverlay"><div class="kombinasi-box"><div class="kombinasi-header"><h2 id="kombinasiJudul">1 KOMBINASI UNIK</h2><button class="btn-tutup" onclick="tutupDaftar()">×</button></div><div class="list-kombinasi" id="listKombinasi"></div></div></div>
+
+<!-- Dialog universal agar seluruh peringatan memakai UI, bukan alert/confirm browser -->
+<div class="overlay custom-dialog-overlay" id="appDialog" aria-hidden="true"><div class="app-dialog-box" role="dialog" aria-modal="true"><div class="app-dialog-icon" id="appDialogIcon">!</div><h2 id="appDialogTitle">PERINGATAN</h2><p id="appDialogMessage"></p><div class="app-dialog-actions"><button type="button" id="appDialogCancel" class="dialog-secondary">BATAL</button><button type="button" id="appDialogOk">MENGERTI</button></div></div></div>
+<div class="overlay" id="rgbWarningOverlay"><div class="app-dialog-box"><div class="app-dialog-icon rgb-icon">RGB</div><h2>AKTIFKAN TEMA RGB?</h2><p>Perubahan warna otomatis dapat sedikit memengaruhi performa dan berpotensi mengganggu kenyamanan saat menggunakan halaman atau mengambil tangkapan layar.</p><div class="app-dialog-actions"><button type="button" class="dialog-secondary" onclick="tutupPeringatanRGB()">BATAL</button><button type="button" onclick="aktifkanRGB()">LANJUTKAN</button></div></div></div>
+<div class="overlay" id="downloadSettingsOverlay"><div class="app-dialog-box download-dialog"><button class="btn-tutup dialog-close" onclick="tutupPengaturanDownload()">×</button><div class="app-dialog-icon"><i class="fa-solid fa-image"></i></div><h2>PENGATURAN DOWNLOAD</h2><p>Atur elemen yang akan dimasukkan ke gambar. Bentuk kartu dan sudut mengikuti pilihan BENTUK UI yang sedang aktif.</p><label class="download-toggle"><span><b>Download dengan nama</b><small>Tambahkan header JADWAL ASIA PRINT di bagian atas gambar.</small></span><input type="checkbox" id="downloadWithName" checked></label><label class="download-toggle"><span><b>Credits</b><small>Tampilkan tanggal unduh dan tanggal website dibuat di samping nama pembuat.</small></span><input type="checkbox" id="downloadCredits" checked></label><div class="app-dialog-actions"><button type="button" class="dialog-secondary" onclick="tutupPengaturanDownload()">BATAL</button><button type="button" id="confirmDownloadButton" onclick="konfirmasiDownload()">DOWNLOAD PNG</button></div></div></div>
+<div class="loading-skeleton" id="loadingSkeleton" aria-label="Memuat jadwal"><div class="skeleton-head"></div><div class="skeleton-controls"></div><div class="skeleton-grid"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
 
 <script>
 const PESERTA_KEY='jadwalAsiaPrintPesertaV1';
@@ -1967,12 +1988,10 @@ function pindahPeserta(dari,ke){
 function geserPeserta(index,arah){pindahPeserta(index,index+arah)}
 function hapusPeserta(index){
   if(index<0||index>=peserta.length)return;
-  const nama=peserta[index];if(!window.confirm(`Hapus peserta "${nama}"?`))return;
-  peserta.splice(index,1);simpanPeserta();renderPesertaSettings();rebuildSetelahPerubahan();
+  const nama=peserta[index];dialogKonfirmasi('HAPUS PESERTA?',`Peserta "${nama}" akan dihapus dari daftar.`,()=>{peserta.splice(index,1);simpanPeserta();renderPesertaSettings();rebuildSetelahPerubahan();});
 }
 function resetPesertaDefault(){
-  if(!window.confirm('Kembalikan daftar nama ke default?'))return;
-  peserta=[...PESERTA_DEFAULT];simpanPeserta();renderPesertaSettings();rebuildSetelahPerubahan();
+  dialogKonfirmasi('RESET DAFTAR PESERTA?','Daftar peserta akan dikembalikan ke data bawaan.',()=>{peserta=[...PESERTA_DEFAULT];simpanPeserta();renderPesertaSettings();rebuildSetelahPerubahan();});
 }
 
 let dataPesertaSiapDimuat=null;
@@ -1996,7 +2015,7 @@ document.getElementById('loadPesertaInput')?.addEventListener('change',async e=>
     dataPesertaSiapDimuat=parsed;
     const info=document.getElementById('loadPesertaInfo');if(info)info.textContent=`File: ${file.name} • ${parsed.length} peserta siap dimuat.`;
     document.getElementById('loadPesertaOverlay').classList.add('aktif');
-  }catch(err){window.alert('Gagal memuat data peserta: '+err.message)}
+  }catch(err){tampilkanDialog('GAGAL MEMUAT DATA PESERTA',err.message,'error')}
 });
 function batalLoadPeserta(){dataPesertaSiapDimuat=null;document.getElementById('loadPesertaOverlay')?.classList.remove('aktif')}
 function konfirmasiLoadPeserta(mode){
@@ -2164,7 +2183,7 @@ function terapkanCSSCustom(simpan=true){
   const editor=document.getElementById('customAnimationCss');
   const css=(editor?.value||'').trim();
   const validasi=validasiCSSAnimasiCustom(css);
-  if(!validasi.ok){window.alert(validasi.message);return false}
+  if(!validasi.ok){tampilkanDialog('DATA TIDAK VALID',validasi.message,'warning');return false}
   let style=document.getElementById('customAnimationRuntimeStyle');
   if(!style){style=document.createElement('style');style.id='customAnimationRuntimeStyle';document.head.appendChild(style)}
   style.textContent=css;
@@ -2287,7 +2306,8 @@ function normalisasiPengaturan(raw){
     primary:validColor(skinRaw.primary)?skinRaw.primary:'#ff6a00',
     secondary:validColor(skinRaw.secondary)?skinRaw.secondary:'#ffb000',
     background:validColor(skinRaw.background)?skinRaw.background:'#080808',
-    shape:['default','rounded','soft','square','pill'].includes(skinRaw.shape)?skinRaw.shape:'default'
+    shape:['default','rounded','soft','square','pill'].includes(skinRaw.shape)?skinRaw.shape:'default',
+    rgbSpeed:Math.max(1,Math.min(30,Number(skinRaw.rgbSpeed)||10))
   };
   hasil.customCss=typeof raw?.customCss==='string'&&raw.customCss.length<=30000?raw.customCss:'';
   return hasil;
@@ -2348,7 +2368,7 @@ function pilihSkin(mode){
     pengaturanAnimasi.skin={mode:'random',primary:hslKeHex(hue,82,56),secondary:hslKeHex((hue+34)%360,90,66),background:hslKeHex(hue,24,8),shape};
   }else if(mode==='custom'){
     pengaturanAnimasi.skin={...(pengaturanAnimasi.skin||PALET_TEMA.default),mode:'custom',shape};
-  }
+  } else if(mode==='rgb'){ pengaturanAnimasi.skin={mode:'rgb',primary:'#ff315c',secondary:'#39a5ff',background:'#080808',shape,rgbSpeed:Number(pengaturanAnimasi.skin?.rgbSpeed)||10}; }
   simpanPengaturan();sinkronkanSkinUI();
 }
 function ubahBentukUI(shape){
@@ -2378,11 +2398,14 @@ function sinkronkanSkinUI(){
   document.querySelectorAll('[data-skin-mode]').forEach(card=>card.classList.toggle('aktif',card.dataset.skinMode===skin.mode));
   document.querySelectorAll('[data-ui-shape]').forEach(card=>card.classList.toggle('aktif',card.dataset.uiShape===(skin.shape||'default')));
   const panel=document.getElementById('skinCustomPanel');if(panel)panel.style.display=skin.mode==='custom'?'block':'none';
+  const rgbPanel=document.getElementById('rgbControls');if(rgbPanel)rgbPanel.classList.toggle('aktif',skin.mode==='rgb');
+  const speed=document.getElementById('rgbSpeed');if(speed)speed.value=String(skin.rgbSpeed||10);const speedLabel=document.getElementById('rgbSpeedValue');if(speedLabel)speedLabel.textContent=String(skin.rgbSpeed||10);
   const status=document.getElementById('skinStatus');
-  const names={default:'Default oranye',pink:'Pink',red:'Merah',blue:'Biru',green:'Hijau',random:'Warna acak',custom:'Custom'};
+  const names={default:'Default oranye',pink:'Pink',red:'Merah',blue:'Biru',green:'Hijau',random:'Warna acak',custom:'Custom',rgb:'RGB'};
   if(status)status.textContent=`Tema aktif: ${names[skin.mode]||'Default oranye'}. Bentuk UI: ${skin.shape||'default'}.`;
   body.classList.remove('ui-shape-default','ui-shape-rounded','ui-shape-soft','ui-shape-square','ui-shape-pill');
   if(skin.shape&&skin.shape!=='default')body.classList.add('ui-shape-'+skin.shape);
+  if(skin.mode==='rgb'){ startRGBTheme(); } else { stopRGBTheme(); }
   if(skin.mode==='default'){
     body.classList.remove('skin-enabled');
     ['--skin-primary','--skin-secondary','--skin-background','--skin-on-primary','--skin-on-secondary','--skin-on-background','--skin-on-muted','--merah','--merah-gelap','--oranye','--emas','--kuning','--skin-panel'].forEach(k=>root.style.removeProperty(k));
@@ -2511,7 +2534,7 @@ function pilihTabPengaturan(tab){
   }
 
   document.querySelectorAll('[data-skin-mode]').forEach(card=>{
-    card.addEventListener('click',()=>pilihSkin(card.dataset.skinMode));
+    card.addEventListener('click',()=>{if(card.dataset.skinMode==='rgb'){document.getElementById('rgbWarningOverlay')?.classList.add('aktif')}else pilihSkin(card.dataset.skinMode)});
   });
   document.querySelectorAll('[data-ui-shape]').forEach(card=>{
     card.addEventListener('click',()=>ubahBentukUI(card.dataset.uiShape));
@@ -3448,7 +3471,7 @@ function mulaiModeTukarDariPopup(){
   tombol.classList.add('aktif');
   tombol.textContent='✓ SELESAI TUKAR';
   const info=document.getElementById('modeInfo');
-  info.innerHTML='<strong>Mode tukar aktif.</strong> SENIN dan SELASA menyala. Pilih dua nama untuk menukarnya, atau tahan lalu geser. RABU sampai SABTU otomatis mengikuti.';
+  if(info)info.innerHTML='<strong>Mode tukar aktif.</strong> SENIN dan SELASA menyala. Pilih dua nama untuk menukarnya, atau tahan lalu geser. RABU sampai SABTU otomatis mengikuti.';
   slotTerpilih=null;batalSeret();refreshSlotTampilan();
 }
 function batalModeTukar(){
@@ -3460,7 +3483,7 @@ function batalModeTukar(){
   tombol.classList.remove('aktif');
   tombol.textContent='⇄ TUKAR HARI';
   const info=document.getElementById('modeInfo');
-  info.innerHTML='<strong>Mode biasa.</strong> Tekan <strong>TUKAR HARI</strong> untuk mengaktifkan susun manual. Setelah aktif, tahan nama lalu geser ke nama lain untuk menukarnya. Di HP, tap nama pertama lalu tap nama kedua juga bisa.';
+  if(info)info.innerHTML='';
   slotTerpilih=null;batalSeret();refreshSlotTampilan();
 }
 function ubahModeTukar(){
@@ -3712,7 +3735,8 @@ function campurWarnaHexExport(a,b,rasio){
  const ch=(x,y)=>Math.round(x+(y-x)*t).toString(16).padStart(2,'0');
  return '#'+ch(ca.r,cb.r)+ch(ca.g,cb.g)+ch(ca.b,cb.b);
 }
-async function downloadImage(){
+function radiusForExport(shape){return shape==='pill'?24:shape==='square'?0:shape==='soft'?8:shape==='rounded'?18:5;}
+async function downloadImage(options={}){
  if(sedangMengacak)return;
  const tombol=document.getElementById('btnDownload');if(!tombol)return;
  const teksLama=tombol.innerHTML;tombol.disabled=true;tombol.innerHTML='⏳ MEMBUAT IMAGE...';
@@ -3744,18 +3768,38 @@ async function downloadImage(){
   const jumlahBarisHari=Math.ceil(days.length/columns);
   const jarakBaris=columns===2?22:18;
   const tinggiGridHari=jumlahBarisHari*cardH+Math.max(0,jumlahBarisHari-1)*jarakBaris;
-  const height=margin+28+tinggiGridHari+64+margin;
+  const withName=options.withName!==false,showCredits=options.credits!==false;
+  const topHeader=withName?168:28;
+  const footerExtra=showCredits?54:32;
+  const scheduleStartY=margin+topHeader;
+  const height=scheduleStartY+tinggiGridHari+footerExtra+margin;
   const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
   const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas tidak tersedia.');
   const bg=ctx.createLinearGradient(0,0,width,height);bg.addColorStop(0,background);bg.addColorStop(1,'#030303');ctx.fillStyle=bg;ctx.fillRect(0,0,width,height);
   const glow=ctx.createRadialGradient(width*.5,0,10,width*.5,0,width*.72);glow.addColorStop(0,primaryGlow);glow.addColorStop(1,'transparent');ctx.fillStyle=glow;ctx.fillRect(0,0,width,height*.65);
   ctx.strokeStyle=primary;ctx.lineWidth=4;ctx.strokeRect(12,12,width-24,height-24);
+  if(withName){
+    // Panel header khusus untuk identitas ASIA PRINT, terpisah dari kartu jadwal.
+    const panelX=margin,panelY=margin+8,panelW=width-margin*2,panelH=132;
+    const panelGrad=ctx.createLinearGradient(panelX,panelY,panelX,panelY+panelH);
+    panelGrad.addColorStop(0,cardTop);panelGrad.addColorStop(1,cardBottom);
+    buatCanvasRoundRect(ctx,panelX,panelY,panelW,panelH,radiusForExport(skin.shape));
+    ctx.fillStyle=panelGrad;ctx.fill();ctx.lineWidth=3;ctx.strokeStyle=primary;ctx.stroke();
+    const innerLine=ctx.createLinearGradient(panelX+20,panelY+12,panelX+panelW-20,panelY+12);
+    innerLine.addColorStop(0,'transparent');innerLine.addColorStop(.2,primary);innerLine.addColorStop(.5,secondary);innerLine.addColorStop(.8,primary);innerLine.addColorStop(1,'transparent');
+    ctx.fillStyle=innerLine;ctx.fillRect(panelX+18,panelY+10,panelW-36,4);
+    ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=warnaTeksUntuk(cardTop);ctx.font='900 21px Arial, sans-serif';
+    ctx.fillText('SISTEM PENJADWALAN',width/2,panelY+39);
+    const titleGrad=ctx.createLinearGradient(width*.2,panelY+53,width*.8,panelY+112);
+    titleGrad.addColorStop(0,secondary);titleGrad.addColorStop(.5,'#ffffff');titleGrad.addColorStop(1,primary);
+    ctx.fillStyle=titleGrad;ctx.font='1000 58px Arial, sans-serif';ctx.fillText('JADWAL ASIA PRINT',width/2,panelY+88,width-margin*2-48);
+  }
   const topGrad=ctx.createLinearGradient(margin,margin,width-margin,margin);topGrad.addColorStop(0,'transparent');topGrad.addColorStop(.2,primary);topGrad.addColorStop(.5,secondary);topGrad.addColorStop(.8,primary);topGrad.addColorStop(1,'transparent');
-  ctx.fillStyle=topGrad;ctx.fillRect(margin,margin,width-margin*2,5);
+  if(!withName){ctx.fillStyle=topGrad;ctx.fillRect(margin,margin,width-margin*2,5);}
   const shape=skin.shape||'default';const radius=shape==='pill'?24:shape==='square'?0:shape==='soft'?8:shape==='rounded'?18:5;
   days.forEach((day,index)=>{
     const kolom=index%columns,baris=Math.floor(index/columns);
-    const x=margin+kolom*(colWidth+gap),y=margin+22+baris*(cardH+jarakBaris);
+    const x=margin+kolom*(colWidth+gap),y=scheduleStartY+baris*(cardH+jarakBaris);
     ctx.save();ctx.shadowColor=primaryGlow;ctx.shadowBlur=16;
     buatCanvasRoundRect(ctx,x,y,colWidth,cardH,radius);const cardGrad=ctx.createLinearGradient(x,y,x,y+cardH);cardGrad.addColorStop(0,cardTop);cardGrad.addColorStop(1,cardBottom);ctx.fillStyle=cardGrad;ctx.fill();ctx.shadowBlur=0;
     ctx.lineWidth=2;ctx.strokeStyle=primary;ctx.stroke();
@@ -3778,8 +3822,8 @@ async function downloadImage(){
     if(!day.items.length){ctx.textAlign='center';ctx.fillStyle=mutedText;ctx.font='700 15px Arial, sans-serif';ctx.fillText('TIDAK ADA PESERTA',x+colWidth/2,y+headerH+48)}
     ctx.restore();
   });
-  const footerY=height-margin-25;ctx.fillStyle='#b5b5b5';ctx.textAlign='left';ctx.textBaseline='middle';ctx.font='600 17px Arial, sans-serif';ctx.fillText('WEBSITE DIBUAT OLEH: AHMAD RIJANI',margin,footerY);
-  ctx.textAlign='right';ctx.fillStyle='#777';ctx.font='14px Arial, sans-serif';ctx.fillText('JADWAL ASIA PRINT',width-margin,footerY);
+  const footerY=height-margin-(showCredits?43:18);ctx.fillStyle='#b5b5b5';ctx.textAlign='left';ctx.textBaseline='middle';ctx.font='700 18px Arial, sans-serif';ctx.fillText('WEBSITE DI BUAT OLEH: AHMAD RIJANI',margin,footerY);
+  if(showCredits){ctx.fillStyle='#888';ctx.font='14px Arial, sans-serif';ctx.fillText('Tanggal unduh: '+new Date().toLocaleDateString('id-ID')+'  •  Website dibuat: 05/08/2026',margin,footerY+25);}
   const namaFile=`jadwal_asia_print_${kombinasiAktif<0?'kustom':`kombinasi_${kombinasiAktif+1}`}.png`;
   const unduhBlob=blob=>new Promise((resolve,reject)=>{
     try{
@@ -3804,9 +3848,32 @@ async function downloadImage(){
     const link=document.createElement('a');link.href=dataUrl;link.download=namaFile;
     document.body.appendChild(link);link.click();link.remove();
   }
- }catch(error){console.error('Download gambar gagal:',error);window.alert('Gagal membuat gambar: '+(error?.message||'Kesalahan tidak diketahui.'))}
+ }catch(error){console.error('Download gambar gagal:',error);tampilkanDialog('GAGAL MEMBUAT GAMBAR',error?.message||'Kesalahan tidak diketahui.','error');}
  finally{tombol.innerHTML=teksLama;tombol.disabled=false}
 }
+
+
+// Dialog UI universal, konfirmasi dan notifikasi aplikasi.
+let dialogAction=null;
+function tampilkanDialog(title,message,type='info',onOk=null,showCancel=false){const o=document.getElementById('appDialog');if(!o)return;dialogAction=onOk;document.getElementById('appDialogTitle').textContent=title;document.getElementById('appDialogMessage').textContent=message;document.getElementById('appDialogIcon').textContent=type==='error'?'!':type==='warning'?'?':'i';document.getElementById('appDialogCancel').style.display=showCancel?'':'none';document.getElementById('appDialogOk').textContent=showCancel?'LANJUTKAN':'MENGERTI';o.classList.add('aktif');o.setAttribute('aria-hidden','false')}
+function tutupDialog(){const o=document.getElementById('appDialog');o?.classList.remove('aktif');o?.setAttribute('aria-hidden','true');dialogAction=null}
+function dialogKonfirmasi(title,message,action){dialogAction=action;tampilkanDialog(title,message,'warning',action,true)}
+document.getElementById('appDialogOk')?.addEventListener('click',()=>{const fn=dialogAction;tutupDialog();if(typeof fn==='function')fn()});document.getElementById('appDialogCancel')?.addEventListener('click',tutupDialog);
+// RGB hue cycle; speed 1-30 maps to a safe 30s..0.7s interval.
+let rgbTimer=null,rgbHue=0;
+function stopRGBTheme(){if(rgbTimer){clearInterval(rgbTimer);rgbTimer=null}}
+function startRGBTheme(){stopRGBTheme();if(pengaturanAnimasi.skin?.mode!=='rgb')return;const speed=Math.max(1,Math.min(30,Number(pengaturanAnimasi.skin.rgbSpeed)||10));const tick=Math.max(24,Math.round(30000/(speed*speed)));const paint=()=>{if(pengaturanAnimasi.skin?.mode!=='rgb'){stopRGBTheme();return}rgbHue=(rgbHue+Math.max(1,speed*.45))%360;const primary=hslKeHex(rgbHue,88,57),secondary=hslKeHex((rgbHue+48)%360,95,68),background=hslKeHex(rgbHue,22,7);const root=document.documentElement;root.style.setProperty('--skin-primary',primary);root.style.setProperty('--skin-secondary',secondary);root.style.setProperty('--skin-background',background);root.style.setProperty('--skin-on-primary',warnaKontras(primary));root.style.setProperty('--skin-on-secondary',warnaKontras(secondary));root.style.setProperty('--skin-on-background','#ffffff');root.style.setProperty('--merah',primary);root.style.setProperty('--merah-gelap',hslKeHex(rgbHue,75,18));root.style.setProperty('--oranye',primary);root.style.setProperty('--emas',secondary);root.style.setProperty('--kuning',secondary);};paint();rgbTimer=setInterval(paint,tick)}
+function tutupPeringatanRGB(){document.getElementById('rgbWarningOverlay')?.classList.remove('aktif')}
+function aktifkanRGB(){tutupPeringatanRGB();pilihSkin('rgb');}
+// Override the RGB tile click to show the requested caution popup first.
+
+document.getElementById('rgbSpeed')?.addEventListener('input',e=>{pengaturanAnimasi.skin={...(pengaturanAnimasi.skin||{}),mode:'rgb',rgbSpeed:Number(e.target.value)};const v=document.getElementById('rgbSpeedValue');if(v)v.textContent=e.target.value;simpanPengaturan();startRGBTheme()});
+// Download settings are applied to the generated PNG, including the selected UI shape.
+function bukaPengaturanDownload(){if(sedangMengacak)return;document.getElementById('downloadSettingsOverlay')?.classList.add('aktif')}
+function tutupPengaturanDownload(){document.getElementById('downloadSettingsOverlay')?.classList.remove('aktif')}
+async function konfirmasiDownload(){const btn=document.getElementById('confirmDownloadButton');if(btn){btn.disabled=true;btn.textContent='MENYIAPKAN...'}const withName=document.getElementById('downloadWithName')?.checked!==false,credits=document.getElementById('downloadCredits')?.checked!==false;tutupPengaturanDownload();try{await downloadImage({withName,credits})}finally{if(btn){btn.disabled=false;btn.textContent='DOWNLOAD PNG'}}}
+// First-load skeleton disappears after initial render settles.
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loadingSkeleton')?.classList.add('done'),420),{once:true});setTimeout(()=>document.getElementById('loadingSkeleton')?.classList.add('done'),2600);
 
 muatPengaturan();renderPesertaSettings();refreshTotalKombinasi();jadwalAktif=pesertaDefault();updateJadwal();buatDaftarKombinasi();setupSync();pasangTombolPreviewAnimasi();if(setupPertama)setTimeout(bukaPemilihanTemaAwal,80);
 </script>

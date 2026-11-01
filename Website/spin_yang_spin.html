@@ -321,7 +321,7 @@ const warna=['#168fcd','#ffbd35','#2fb77c','#ed6678','#8276db','#27b7c5','#f58a3
 let namaNama=[...templateNama];
 let peluangNama=bagiRata(namaNama);
 let draftPeluang={...peluangNama};
-let putaran=0, jumlahSpin=0, sedangPutar=false, riwayat=[], hasilTerakhir=null, maximizeAktif=false, reelIndex=0, wheelSpinSectors=null;
+let putaran=0, sedangPutar=false, riwayat=[], hasilTerakhir=null, maximizeAktif=false, reelIndex=0, wheelSpinSectors=null;
 const jendela=document.getElementById('jendela');
 const kanvas=document.getElementById('roda'),ctx=kanvas.getContext('2d');
 const elNama=document.getElementById('nama'),elDaftar=document.getElementById('daftar'),elHasil=document.getElementById('hasil'),elRiwayat=document.getElementById('riwayat');
@@ -483,22 +483,10 @@ $('putar').addEventListener('click',()=>{
  if(sedangPutar)return;
  if(namaNama.length<2){setStatus('Tambahkan minimal dua peserta sebelum memutar.');gantiTab('nama');return}
  if(!peluangSah(peluangNama)){setStatus('Atur peluang hingga total 100% dan setidaknya dua peserta memiliki peluang.');gantiTab('pengaturan');return}
- const namaSpin=[...namaNama],oddsSpin={...peluangNama};
- const namaAhmad=namaSpin.find(n=>n.toLocaleUpperCase('id-ID')==='AHMAD RIJANI');
- if(jumlahSpin===0&&!namaAhmad){setStatus('Tambahkan peserta AHMAD RIJANI untuk hasil spin pertama.');gantiTab('nama');return}
- // Spin pertama diarahkan ke AHMAD RIJANI. Jika peluangnya 0%, beri sektor kecil
- // khusus untuk animasi agar roda tetap bisa berhenti tepat pada namanya.
- const oddsRodaSpin={...oddsSpin};
- if(jumlahSpin===0&&namaAhmad&&(Number(oddsRodaSpin[namaAhmad])||0)<=0){
-  const totalLain=namaSpin.filter(n=>n!==namaAhmad).reduce((sum,n)=>sum+(Number(oddsRodaSpin[n])||0),0);
-  oddsRodaSpin[namaAhmad]=1;
-  namaSpin.filter(n=>n!==namaAhmad).forEach(n=>{oddsRodaSpin[n]=totalLain>0?(Number(oddsSpin[n])||0)*99/totalLain:0});
- }
- const sektorSpin=buatSektorRoda(namaSpin,oddsRodaSpin);
- const pemenang=jumlahSpin===0?namaAhmad:pilihPemenangTertimbang(namaSpin,oddsSpin),indeksPemenang=indeksUntukNama(sektorSpin,pemenang);
+ const namaSpin=[...namaNama],oddsSpin={...peluangNama},sektorSpin=buatSektorRoda(namaSpin,oddsSpin);
+ const pemenang=pilihPemenangTertimbang(namaSpin,oddsSpin),indeksPemenang=indeksUntukNama(sektorSpin,pemenang);
  const pilihanUmpan=sektorSpin.map((s,i)=>({s,i})).filter(x=>x.s.nama!==pemenang);
  if(indeksPemenang<0||!pilihanUmpan.length){setStatus('Pastikan minimal dua peserta memiliki peluang positif.');return}
- jumlahSpin++;
  const umpanEntry=pilihanUmpan[Math.floor(Math.random()*pilihanUmpan.length)],namaUmpan=umpanEntry.s.nama,indeksUmpan=umpanEntry.i;
  sedangPutar=true;lockControls(true);wheelSpinSectors=sektorSpin;
  elHasil.textContent='Sedang mengacak…';elHasil.classList.remove('empty');$('peluangHasil').textContent='Animasi sedang berlangsung…';elNameReel.classList.add('is-spinning');elNameStatus.textContent='BERPUTAR';

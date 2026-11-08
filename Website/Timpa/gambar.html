@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#dff5ff">
+<title>Timpa Desain</title>
+<style>
+:root{
+  --biru:#168bd4;--biru2:#65c8f5;--teks:#24465d;--muted:#6c8799;
+  --garis:rgba(94,157,194,.3);--kaca:rgba(255,255,255,.82);
+  --bayang:0 12px 32px rgba(45,111,151,.15)
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Segoe UI,Arial,sans-serif;color:var(--teks);background:linear-gradient(135deg,#dff5ff,#edfaff 48%,#d4ecff)}
+body{overflow:auto}
+button,input,select{font:inherit}
+button{border:1px solid rgba(104,170,207,.48);border-radius:11px;background:linear-gradient(#fff,#e9f7ff);color:#28536f;padding:9px 12px;cursor:pointer;box-shadow:0 2px 5px #72b6d522,inset 0 1px #fff;transition:filter .14s,transform .14s,border-color .14s}
+button:hover{filter:brightness(1.035);transform:translateY(-1px);border-color:#69b9e8}
+button:active{transform:translateY(0);box-shadow:inset 0 2px 5px #70a9c755}
+button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #73cfff;outline-offset:2px}
+.utama{background:linear-gradient(#73d2ff,#258ed0);color:#fff;border-color:#2689c5;text-shadow:0 1px 2px #176a9a;box-shadow:0 4px 10px #258ed044,inset 0 1px #ffffffaa}
+.tombol-kecil{padding:9px 11px;font-size:12px;white-space:nowrap}
+.ikon{font-size:15px;margin-right:5px}
+.sembunyi{display:none!important}
+.aplikasi{min-height:100vh;display:flex;flex-direction:column;min-width:320px}
+.kepala{min-height:62px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 18px;background:linear-gradient(110deg,rgba(255,255,255,.95),rgba(223,246,255,.92));border-bottom:1px solid #a9d8ef;box-shadow:0 3px 14px #529ac41b}
+.merek{display:flex;align-items:center;gap:11px;min-width:0}
+.logo{width:36px;height:36px;flex:none;border-radius:12px;background:linear-gradient(145deg,#9be5ff,#2694dc);display:grid;place-items:center;color:#fff;font-size:20px;font-weight:800;box-shadow:inset 0 1px 4px #fff9,0 4px 9px #188ac544}
+.judul{font-weight:750;letter-spacing:.2px}
+.subjudul{font-size:11px;color:#7293a8;margin-top:2px}
+.status-kanan{font-size:12px;color:#64879c;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.titik{width:8px;height:8px;border-radius:50%;background:#40bf8a;box-shadow:0 0 0 3px #40bf8a22}
+.ruang{flex:1;min-height:560px;display:grid;grid-template-columns:280px minmax(0,1fr)}
+.panel{min-height:0;overflow-y:auto;padding:13px;background:linear-gradient(180deg,rgba(248,253,255,.94),rgba(227,245,255,.9));border-right:1px solid var(--garis);scrollbar-width:thin;scrollbar-color:#7bbfe2 #e2f3fb}
+.kelompok{background:var(--kaca);border:1px solid var(--garis);border-radius:13px;padding:12px;margin-bottom:11px;box-shadow:0 5px 15px #5b9bb617;min-width:0}
+.kelompok h3{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:#53809d;margin:0 0 11px;display:flex;align-items:center;justify-content:space-between}
+.baris{display:flex;align-items:center;gap:8px;margin:9px 0;min-width:0}
+.baris label{font-size:12px;color:#57778d;flex:1;min-width:0}
+.input-angka{width:100%;min-width:0;border:1px solid #bddded;border-radius:8px;background:#f9fdff;padding:8px;color:#315b75;outline:none}
+.input-angka:focus{border-color:#4cafe5;box-shadow:0 0 0 3px #5bb9e522}
+.baris input[type=number]{width:104px;flex:none}
+.baris input[type=range]{width:112px;min-width:40px;accent-color:#239bdc}
+.baris select{max-width:155px}
+.angka{width:48px;text-align:right;font-size:11px;color:#4c7894;font-variant-numeric:tabular-nums;flex:none}
+.dua{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dua button{font-size:11px;padding:9px 6px}
+.catatan{font-size:11px;line-height:1.5;color:#7893a4;margin:8px 1px 0}
+.status-objek{font-size:11px;color:#54819c;background:#edf9ff;padding:8px 9px;border-radius:8px;margin-bottom:10px;line-height:1.4}
+.aksi-undo{display:flex;gap:7px}
+.aksi-undo button{flex:1}
+.tombol-cermin[aria-pressed="true"]{background:linear-gradient(#c5efff,#74c8f0);border-color:#2299d5;color:#145e89;box-shadow:inset 0 1px #fff,0 0 0 2px #68c6f044}
+.area{position:relative;min-width:0;min-height:0;overflow:auto;background-color:#eaf4fa;background-image:radial-gradient(#b8d2df .8px,transparent .8px);background-size:18px 18px;scrollbar-width:thin;scrollbar-color:#7bbfe2 #e2f3fb;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.area::-webkit-scrollbar,.panel::-webkit-scrollbar{width:11px;height:11px}
+.area::-webkit-scrollbar-track,.panel::-webkit-scrollbar-track{background:#e2f3fb;border-radius:12px}
+.area::-webkit-scrollbar-thumb,.panel::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#9bd9f4,#4da8d8);border:2px solid #e2f3fb;border-radius:12px}
+.area-dalam{width:max-content;height:max-content;min-width:100%;min-height:100%;display:flex;justify-content:center;align-items:center;padding:38px;position:relative}
+.bingkai-kanvas{flex:none;position:relative;box-shadow:0 14px 35px #234d6638,0 0 0 1px #ffffffaa;background:repeating-conic-gradient(#fff 0% 25%,#edf3f7 0% 50%) 50%/18px 18px;line-height:0}
+.kanvas{display:block;touch-action:none;max-width:none;cursor:default}
+.petunjuk{position:absolute;right:14px;bottom:12px;padding:8px 11px;border-radius:10px;background:#ffffffdc;border:1px solid #c7e2ef;color:#6c8798;font-size:11px;box-shadow:0 4px 12px #37698715;pointer-events:none;backdrop-filter:blur(8px)}
+.kosong{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;pointer-events:none}
+.kosong-kartu{max-width:370px;background:#ffffffdf;border:1px solid #c7e4f1;border-radius:18px;padding:24px 26px;box-shadow:var(--bayang);line-height:1.5}
+.kosong-ikon{font-size:36px;margin-bottom:8px}
+.kosong-kartu strong{display:block;font-size:16px;margin-bottom:5px}
+.kosong-kartu span{font-size:12px;color:#7290a4}
+.toolbar{min-height:58px;flex:none;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 14px;background:rgba(245,252,255,.9);border-top:1px solid var(--garis);border-bottom:1px solid var(--garis)}
+.toolbar .spacer{flex:1}
+.mode-aktif{background:linear-gradient(#bcecff,#72c9f2)!important;border-color:#238fc7!important;color:#145d86!important;box-shadow:inset 0 1px #fff,0 0 0 2px #64bce844!important}
+.luapan-kanvas{position:absolute;pointer-events:none;z-index:2;max-width:none;display:none}
+.bingkai-kanvas{overflow:visible}
+.pemisah{height:28px;width:1px;background:#b8d9e9;margin:0 3px}
+.nama-file{font-size:11px;color:#6b899c;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tautan-unduh{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:linear-gradient(#e4f8ff,#c8edff);border:1px solid #75bfe4;border-radius:11px;color:#185e86;font-weight:650}
+.bawah{min-height:42px;flex:none;background:rgba(248,253,255,.94);display:flex;align-items:center;gap:12px;padding:5px 15px;font-size:11px;color:#64859a}
+.bawah .spacer{flex:1}
+.bawah input{width:140px;accent-color:#269bdc}
+.zoom-label{width:42px;text-align:right;font-variant-numeric:tabular-nums}
+.badge{padding:4px 8px;border-radius:20px;background:#e6f6ff;color:#4784a5}
+.panel-mobile-head{display:none}
+@media(min-width:701px){.ruang{height:calc(100vh - 162px);max-height:calc(100vh - 162px)}}
+@media(max-width:900px) and (min-width:701px){.ruang{grid-template-columns:250px minmax(0,1fr)}.panel{padding:9px}.kepala{padding:8px 12px}}
+@media(max-width:700px){
+  .aplikasi{min-height:100dvh}
+  .kepala{min-height:54px;padding:7px 10px;order:0}
+  .toolbar{order:1}
+  .ruang{order:2}
+  .bawah{order:3}
+  .logo{width:32px;height:32px}
+  .subjudul{font-size:10px}
+  .status-kanan{font-size:10px}
+  .ruang{display:flex;flex-direction:column;min-height:0;height:auto;max-height:none}
+  .area{order:0;height:52dvh;min-height:290px;max-height:620px;width:100%;touch-action:pan-x pan-y}
+  .area-dalam{padding:22px;min-height:100%;}
+  .panel{order:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:max-content;align-content:start;gap:8px;padding:10px 9px 13px;border-right:0;border-top:1px solid var(--garis);overflow:visible}
+  .panel-mobile-head{display:flex;grid-column:1/-1;align-items:center;justify-content:space-between;padding:2px 3px 3px;color:#3e7696}
+  .panel-mobile-head strong{font-size:12px;letter-spacing:.4px}
+  .panel-mobile-head span{font-size:10px;color:#7898aa}
+  .kelompok{margin:0;padding:10px}
+  .kelompok.kontrol-lebar{grid-column:1/-1}
+  .kelompok h3{margin-bottom:8px}
+  .baris{gap:6px;margin:7px 0}
+  .baris label{font-size:11px}
+  .baris input[type=number]{width:100px}
+  .baris input[type=range]{flex:1;min-width:45px}
+  .baris select{max-width:58%}
+  .dua button,.aksi-undo button{min-height:42px}
+  .toolbar{position:static;min-height:0;padding:10px 9px;gap:7px;flex-wrap:wrap;align-items:stretch}
+  .toolbar>*{flex:0 0 auto}
+  .toolbar button{min-height:42px}
+  .toolbar .spacer{display:none}
+  .pemisah{display:none}
+  .nama-file{max-width:100%;align-self:center}
+  .petunjuk{display:none}
+  .bawah{min-height:46px;padding:7px 10px;gap:7px}
+  .bawah input{flex:1;min-width:70px;width:auto}
+  .badge{display:none}
+}
+@media(max-width:420px){
+  .panel{grid-template-columns:minmax(0,1fr);padding:8px}
+  .kelompok.kontrol-lebar,.panel-mobile-head{grid-column:1}
+  .area{height:48dvh;min-height:260px}
+  .kelompok{padding:10px}
+  .baris label{font-size:12px}
+  .baris input[type=number]{width:46%}
+  .baris select{max-width:60%}
+  .toolbar button{flex:1 1 calc(50% - 8px)}
+  .toolbar{display:flex;align-content:flex-start}
+  .toolbar .mode-ukuran{flex:1 1 calc(25% - 8px)}
+  .nama-file{flex:1 1 100%;text-align:center}
+  .judul{font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="aplikasi">
+  <header class="kepala">
+    <div class="merek"><div class="logo">✦</div><div><div class="judul">Timpa Desain</div><div class="subjudul">Editor PNG · Kanvas 2 × 1 meter · Dasar 1.png terkunci</div></div></div>
+    <div class="status-kanan"><span class="titik"></span><span id="status_teks">Mencari 1.png…</span></div>
+  </header>
+
+  <main class="ruang">
+    <aside class="panel" aria-label="Peralatan desain">
+      <div class="panel-mobile-head"><strong>Peralatan desain</strong><span>Semua kontrol tersedia di sini</span></div>
+      <section class="kelompok kontrol-lebar">
+        <h3>Lapisan PNG <span>◈</span></h3>
+        <div class="status-objek" id="status_objek">1.png adalah dasar permanen dan terkunci. Tambahkan PNG untuk mulai mengedit.</div>
+        <div class="dua"><button id="btn_ukuran_asli">Ukuran asli</button><button id="btn_reset">Reset objek</button></div>
+        <p class="catatan">Sentuh/klik lalu tahan PNG untuk memindahkannya. Tarik titik di tepi atau sudut untuk mengubah ukuran. Titik atas untuk rotasi.</p>
+      </section>
+      <section class="kelompok">
+        <h3>Posisi</h3>
+        <div class="baris"><label for="pos_x" id="label_pos_x">X (cm)</label><input class="input-angka" id="pos_x" type="number" step="0.01" value="0"></div>
+        <div class="baris"><label for="pos_y" id="label_pos_y">Y (cm)</label><input class="input-angka" id="pos_y" type="number" step="0.01" value="0"></div>
+        <button id="btn_tengah" style="width:100%;margin-top:4px">⊙ Tengah kanvas</button>
+      </section>
+      <section class="kelompok">
+        <h3>Ukuran fisik</h3>
+        <div class="baris"><label for="satuan_ukuran">Satuan</label><select class="input-angka" id="satuan_ukuran"><option value="cm">Centimeter (cm)</option><option value="m">Meter (m)</option></select></div>
+        <div class="baris"><label for="lebar" id="label_lebar">Lebar (cm)</label><input class="input-angka" id="lebar" type="number" min="0.01" step="0.01" value="0"></div>
+        <div class="baris"><label for="tinggi" id="label_tinggi">Tinggi (cm)</label><input class="input-angka" id="tinggi" type="number" min="0.01" step="0.01" value="0"></div>
+        <input type="hidden" id="mode_ukuran" value="rata"><div class="dua" style="margin-top:8px"><button type="button" class="mode-ukuran mode-aktif" data-mode="rata" aria-pressed="true">Rata</button><button type="button" class="mode-ukuran" data-mode="bebas" aria-pressed="false">Bebas</button><button type="button" class="mode-ukuran" data-mode="gepeng" aria-pressed="false">Gepeng</button></div>
+        <p class="catatan">Rata menjaga rasio gambar. Bebas dan Gepeng mengizinkan perubahan lebar/tinggi terpisah; gunakan kontrol Gepeng X/Y untuk memiringkan objek. Kanvas selalu 200 × 100 cm (2 × 1 m).</p>
+      </section>
+      <section class="kelompok">
+        <h3>Transformasi</h3>
+        <div class="baris"><label for="rotasi">Rotasi</label><input id="rotasi" type="range" min="-180" max="180" value="0"><span class="angka" id="nilai_rotasi">0°</span></div>
+        <div class="baris"><label for="miring_x">Gepeng X</label><input id="miring_x" type="range" min="-30" max="30" value="0"><span class="angka" id="nilai_miring_x">0°</span></div>
+        <div class="baris"><label for="miring_y">Gepeng Y</label><input id="miring_y" type="range" min="-30" max="30" value="0"><span class="angka" id="nilai_miring_y">0°</span></div>
+        <div class="baris"><label for="opasitas">Opasitas</label><input id="opasitas" type="range" min="0" max="100" value="100"><span class="angka" id="nilai_opasitas">100%</span></div>
+        <div class="dua" style="margin-top:10px">
+          <button class="tombol-cermin" id="btn_cermin_x" type="button" aria-pressed="false">⇋ Cermin X</button>
+          <button class="tombol-cermin" id="btn_cermin_y" type="button" aria-pressed="false">⇵ Cermin Y</button>
+        </div>
+      </section>
+      <section class="kelompok kontrol-lebar">
+        <h3>Tampilan kanvas</h3>
+        <div class="dua"><button id="btn_fit">▣ Fit kanvas</button><button id="btn_zoom100">100%</button></div>
+      </section>
+    </aside>
+
+    <section class="area" id="area_kerja" aria-label="Area desain yang dapat digulir">
+      <div class="area-dalam" id="area_dalam">
+        <div class="bingkai-kanvas" id="bingkai_kanvas"><canvas class="kanvas" id="kanvas" width="1200" height="600"></canvas><canvas class="luapan-kanvas" id="kanvas_luapan"></canvas></div>
+      </div>
+      <div class="kosong" id="tampilan_kosong"><div class="kosong-kartu"><div class="kosong-ikon">🖼️</div><strong>File dasar 1.png diperlukan</strong><span>Letakkan file bernama <b>1.png</b> di folder yang sama dengan HTML ini. Seluruh gambar dasar ditampilkan tanpa crop dan tidak bisa diedit atau diganti. Kanvas tetap 2:1; ruang sisa transparan bila rasio 1.png berbeda. Setelah terbuka, gunakan Tambah PNG untuk menimpakan gambar.</span></div></div>
+      <div class="petunjuk">1.png terkunci · Sentuh/tahan PNG untuk memindahkan · Gulir area kosong untuk menggeser kanvas</div>
+    </section>
+  </main>
+
+  <!-- Toolbar berada di alur halaman setelah area kerja; bukan fixed atau overlay. -->
+  <nav class="toolbar" aria-label="Toolbar aksi">
+    <button class="utama tombol-kecil" id="btn_tambah"><span class="ikon">＋</span>Tambah PNG</button>
+    <button class="tombol-kecil" id="btn_luapan" type="button" aria-pressed="false">↗ Lebihi 2×1 m</button>
+    <button class="tombol-kecil mode-ukuran mode-aktif" data-mode="rata" type="button" aria-pressed="true">Rata</button>
+    <button class="tombol-kecil mode-ukuran" data-mode="bebas" type="button" aria-pressed="false">Bebas</button>
+    <button class="tombol-kecil mode-ukuran" data-mode="gepeng" type="button" aria-pressed="false">Gepeng</button>
+    <span class="nama-file" id="nama_lapisan">Belum ada lapisan</span>
+    <span class="spacer"></span>
+    <button class="tombol-kecil" id="btn_undo" title="Ctrl + Z" disabled>↶ Undo</button>
+    <button class="tombol-kecil" id="btn_redo" title="Ctrl + Y" disabled>↷ Redo</button>
+    <button class="utama tombol-kecil" id="btn_download"><span class="ikon">⇩</span>Download hasil PNG</button>
+    <a class="tombol-kecil tautan-unduh sembunyi" id="tautan_unduh_manual" href="#" download="timpa-desain-2x1m.png">↧ Klik untuk simpan PNG</a>
+    <input class="sembunyi" id="input_lapisan" type="file" accept="image/png,image/webp,image/jpeg">
+  </nav>
+
+  <footer class="bawah"><span id="info_kanvas">Kanvas 200 × 100 cm · 2 × 1 m</span><span class="spacer"></span><span>Zoom</span><input id="zoom" type="range" min="1" max="300" value="50"><span class="zoom-label" id="nilai_zoom">50%</span><span class="badge">PNG · 2:1</span></footer>
+</div>
+<!-- Plugin download: FileSaver.js (MIT). Jika CDN utama gagal, gunakan CDN cadangan. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"
+        onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js'"></script>
+<script>
+(() => {
+  'use strict';
+  const kanvas = document.getElementById('kanvas');
+  const ctx = kanvas.getContext('2d');
+  const kanvas_luapan = document.getElementById('kanvas_luapan');
+  const ctx_luapan = kanvas_luapan.getContext('2d');
+  const area = document.getElementById('area_kerja');
+  const bingkai = document.getElementById('bingkai_kanvas');
+  const input_lapisan = document.getElementById('input_lapisan');
+  const el = id => document.getElementById(id);
+
+  let gambar_dasar = null;
+  let gambar_lapisan = null;
+  let nama_file_lapisan = '';
+  let objek = null;
+  let dipilih = true;
+  let zoom = 50;
+  let mode_luapan = false;
+  let drag = null;
+  let snapshot_awal = null;
+  let riwayat_undo = [];
+  let riwayat_redo = [];
+  const batas_riwayat = 60;
+  let satuan_ukuran = 'cm';
+  const KANVAS_LEBAR_CM = 200;
+  const KANVAS_TINGGI_CM = 100;
+
+  function keadaan_awal() { return objek ? JSON.parse(JSON.stringify(objek)) : null; }
+  function sama(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+  function mulai_aksi() { if (objek && !snapshot_awal) snapshot_awal = keadaan_awal(); }
+  function akhiri_aksi() {
+    if (snapshot_awal && objek && !sama(snapshot_awal, objek)) {
+      riwayat_undo.push(snapshot_awal);
+      if (riwayat_undo.length > batas_riwayat) riwayat_undo.shift();
+      riwayat_redo = [];
+      perbarui_undo_redo();
+    }
+    snapshot_awal = null;
+    gambar_ulang();
+  }
+  function aksi(fn) { mulai_aksi(); fn(); akhiri_aksi(); sinkronkan_kontrol(); }
+  function perbarui_undo_redo() { el('btn_undo').disabled = riwayat_undo.length === 0; el('btn_redo').disabled = riwayat_redo.length === 0; }
+  function undo() {
+    if (!objek || !riwayat_undo.length) return;
+    riwayat_redo.push(keadaan_awal()); objek = riwayat_undo.pop();
+    perbarui_undo_redo(); sinkronkan_kontrol(); gambar_ulang();
+  }
+  function redo() {
+    if (!objek || !riwayat_redo.length) return;
+    riwayat_undo.push(keadaan_awal()); objek = riwayat_redo.pop();
+    perbarui_undo_redo(); sinkronkan_kontrol(); gambar_ulang();
+  }
+  function bersihkan_riwayat() { riwayat_undo = []; riwayat_redo = []; snapshot_awal = null; perbarui_undo_redo(); }
+
+  function muat_gambar(file, callback) {
+    if (!file) return;
+    if (!file.type.startsWith('image/')) { alert('Pilih file gambar.'); return; }
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => { callback(img, file.name); URL.revokeObjectURL(url); };
+    img.onerror = () => { URL.revokeObjectURL(url); alert('Gambar tidak dapat dibuka.'); };
+    img.src = url;
+  }
+
+  function atur_kanvas_2_banding_1(img) {
+    // Lebar mengikuti resolusi 1.png, tinggi dibuat setengahnya agar dokumen selalu 2:1.
+    kanvas.width = Math.max(2, img.naturalWidth);
+    kanvas.height = Math.max(1, Math.round(kanvas.width / 2));
+  }
+  function gambar_dasar_memenuhi(targetCtx) {
+    if (!gambar_dasar) return;
+    // Tampilkan seluruh 1.png tanpa crop dan tanpa mengubah rasio aslinya.
+    // Kanvas dokumen tetap 2:1; ruang sisa dibiarkan transparan.
+    const skala = Math.min(kanvas.width / gambar_dasar.naturalWidth, kanvas.height / gambar_dasar.naturalHeight);
+    const w = gambar_dasar.naturalWidth * skala;
+    const h = gambar_dasar.naturalHeight * skala;
+    const x = (kanvas.width - w) / 2;
+    const y = (kanvas.height - h) / 2;
+    targetCtx.save();
+    targetCtx.imageSmoothingEnabled = true;
+    targetCtx.imageSmoothingQuality = 'high';
+    targetCtx.drawImage(gambar_dasar, x, y, w, h);
+    targetCtx.restore();
+  }
+  function pasang_dasar_permanen(img) {
+    // Sumber dasar hanya berasal dari berkas bernama 1.png di sebelah HTML. Tidak ada input untuk menggantinya.
+    gambar_dasar = img;
+    atur_kanvas_2_banding_1(img);
+    el('status_teks').textContent = '1.png terkunci · Kanvas 2 × 1 m';
+    el('status_objek').textContent = '1.png terkunci permanen · Tambahkan PNG sebagai lapisan di atasnya.';
+    el('tampilan_kosong').classList.add('sembunyi');
+    tampilkan_ukuran_kanvas();
+    atur_ukuran_css(); fit_kanvas(); gambar_ulang();
+  }
+  function pasang_lapisan(img, nama) {
+    if (!gambar_dasar) { alert('Letakkan 1.png di folder yang sama dengan HTML terlebih dahulu.'); return; }
+    gambar_lapisan = img; nama_file_lapisan = nama;
+    const skala_maks = Math.min(1, kanvas.width / img.naturalWidth, kanvas.height / img.naturalHeight);
+    const lebar_awal = Math.max(1, Math.round(img.naturalWidth * skala_maks));
+    const tinggi_awal = Math.max(1, Math.round(img.naturalHeight * skala_maks));
+    objek = { x: kanvas.width / 2, y: kanvas.height / 2, lebar: lebar_awal, tinggi: tinggi_awal, rotasi: 0, miring_x: 0, miring_y: 0, opasitas: 100, cermin_x: false, cermin_y: false };
+    dipilih = true; bersihkan_riwayat();
+    el('nama_lapisan').textContent = nama;
+    el('status_objek').textContent = `PNG aktif · ${format_ukuran(objek.lebar)} × ${format_ukuran(objek.tinggi)} ${satuan_ukuran}`;
+    el('status_teks').textContent = 'Lapisan PNG siap · 1.png terkunci';
+    sinkronkan_kontrol(); gambar_ulang();
+  }
+
+  function atur_ukuran_css() {
+    if (!gambar_dasar) return;
+    const w = kanvas.width * zoom / 100;
+    const h = kanvas.height * zoom / 100;
+    kanvas.style.width = `${w}px`; kanvas.style.height = `${h}px`;
+    bingkai.style.width = `${w}px`; bingkai.style.height = `${h}px`;
+    el('zoom').value = zoom; el('nilai_zoom').textContent = `${zoom}%`;
+    if (mode_luapan && gambar_lapisan && objek) gambar_ulang();
+  }
+  function fit_kanvas() {
+    if (!gambar_dasar) return;
+    const skala_x = Math.max(1, area.clientWidth - 76) / kanvas.width;
+    const skala_y = Math.max(1, area.clientHeight - 76) / kanvas.height;
+    zoom = Math.max(1, Math.min(300, Math.floor(Math.min(skala_x, skala_y) * 100)));
+    atur_ukuran_css();
+  }
+  function set_zoom(nilai) { zoom = Math.max(1, Math.min(300, Number(nilai) || 50)); atur_ukuran_css(); }
+  function rad(derajat) { return derajat * Math.PI / 180; }
+
+  // Ukuran lapisan dihitung berdasarkan dokumen fisik 200 × 100 cm, bukan PPI monitor.
+  function piksel_ke_satuan(nilai) {
+    const cm = (nilai / kanvas.width) * KANVAS_LEBAR_CM;
+    return satuan_ukuran === 'm' ? cm / 100 : cm;
+  }
+  function satuan_ke_piksel(nilai) {
+    const cm = satuan_ukuran === 'm' ? nilai * 100 : nilai;
+    return (cm / KANVAS_LEBAR_CM) * kanvas.width;
+  }
+  function format_ukuran(nilai) {
+    return Number(piksel_ke_satuan(nilai).toFixed(satuan_ukuran === 'm' ? 4 : 2));
+  }
+  function tampilkan_ukuran_kanvas() {
+    el('info_kanvas').textContent = satuan_ukuran === 'm' ? 'Kanvas 2 × 1 m · rasio 2:1' : 'Kanvas 200 × 100 cm · rasio 2:1';
+  }
+  function label_satuan() {
+    ['pos_x','pos_y','lebar','tinggi'].forEach(id => {
+      const label = el('label_' + id);
+      if (label) label.textContent = `${id === 'pos_x' ? 'X' : id === 'pos_y' ? 'Y' : id === 'lebar' ? 'Lebar' : 'Tinggi'} (${satuan_ukuran})`;
+      el(id).step = satuan_ukuran === 'm' ? '0.0001' : '0.01';
+      if (id === 'lebar' || id === 'tinggi') el(id).min = satuan_ukuran === 'm' ? '0.0001' : '0.01';
+    });
+    tampilkan_ukuran_kanvas();
+  }
+
+  function konstanta_miring(sumber = objek) { return { kx: Math.tan(rad(sumber.miring_x)), ky: Math.tan(rad(sumber.miring_y)) }; }
+  function titik_layar(x, y) {
+    const { kx, ky } = konstanta_miring();
+    const hx = x + kx * y; const hy = y + ky * x;
+    const a = rad(objek.rotasi), c = Math.cos(a), s = Math.sin(a);
+    return { x: objek.x + hx * c - hy * s, y: objek.y + hx * s + hy * c };
+  }
+  function ke_lokal(px, py, sumber = objek) {
+    const dx = px - sumber.x, dy = py - sumber.y;
+    const a = rad(sumber.rotasi), c = Math.cos(a), s = Math.sin(a);
+    const rx = dx * c + dy * s; const ry = -dx * s + dy * c;
+    const kx = Math.tan(rad(sumber.miring_x)), ky = Math.tan(rad(sumber.miring_y));
+    const det = 1 - kx * ky;
+    return { x: (rx - kx * ry) / det, y: (ry - ky * rx) / det };
+  }
+  function geser_pusat_lokal(dx, dy, sumber) {
+    const kx = Math.tan(rad(sumber.miring_x)), ky = Math.tan(rad(sumber.miring_y));
+    const sx = dx + kx * dy, sy = ky * dx + dy;
+    const a = rad(sumber.rotasi), c = Math.cos(a), sn = Math.sin(a);
+    return { x: sx * c - sy * sn, y: sx * sn + sy * c };
+  }
+  function daftar_handle() {
+    const w = objek.lebar / 2, h = objek.tinggi / 2;
+    return [
+      { id: 'nw', x: -w, y: -h }, { id: 'n', x: 0, y: -h }, { id: 'ne', x: w, y: -h },
+      { id: 'e', x: w, y: 0 }, { id: 'se', x: w, y: h }, { id: 's', x: 0, y: h },
+      { id: 'sw', x: -w, y: h }, { id: 'w', x: -w, y: 0 },
+      { id: 'putar', x: 0, y: -h - 34 / (zoom / 100) }
+    ].map(p => ({ id: p.id, ...titik_layar(p.x, p.y) }));
+  }
+  function gambar_lapisan_ke(targetCtx) {
+    if (!gambar_lapisan || !objek) return;
+    targetCtx.save();
+    targetCtx.globalAlpha = objek.opasitas / 100;
+    targetCtx.translate(objek.x, objek.y);
+    targetCtx.rotate(rad(objek.rotasi));
+    const { kx, ky } = konstanta_miring();
+    targetCtx.transform(1, ky, kx, 1, 0, 0);
+    targetCtx.scale((objek.cermin_x ? -1 : 1) * objek.lebar / gambar_lapisan.naturalWidth,
+                    (objek.cermin_y ? -1 : 1) * objek.tinggi / gambar_lapisan.naturalHeight);
+    targetCtx.drawImage(gambar_lapisan, -gambar_lapisan.naturalWidth / 2, -gambar_lapisan.naturalHeight / 2);
+    targetCtx.restore();
+  }
+  function gambar_ulang() {
+    ctx.clearRect(0, 0, kanvas.width, kanvas.height);
+    if (gambar_dasar) gambar_dasar_memenuhi(ctx);
+    if (mode_luapan && gambar_lapisan && objek) {
+      const pad = Math.ceil(Math.max(objek.lebar, objek.tinggi) * 1.8 + 80);
+      kanvas_luapan.width = kanvas.width + pad * 2;
+      kanvas_luapan.height = kanvas.height + pad * 2;
+      kanvas_luapan.style.display = 'block';
+      kanvas_luapan.style.left = `${-pad * zoom / 100}px`;
+      kanvas_luapan.style.top = `${-pad * zoom / 100}px`;
+      kanvas_luapan.style.width = `${kanvas_luapan.width * zoom / 100}px`;
+      kanvas_luapan.style.height = `${kanvas_luapan.height * zoom / 100}px`;
+      ctx_luapan.clearRect(0, 0, kanvas_luapan.width, kanvas_luapan.height);
+      ctx_luapan.save(); ctx_luapan.translate(pad, pad); gambar_lapisan_ke(ctx_luapan); ctx_luapan.restore();
+    } else {
+      kanvas_luapan.style.display = 'none';
+      if (gambar_lapisan) gambar_lapisan_ke(ctx);
+    }
+    if (gambar_lapisan && objek && dipilih) gambar_pemilih();
+  }
+  function gambar_pemilih() {
+    const w = objek.lebar, h = objek.tinggi;
+    ctx.save(); ctx.translate(objek.x, objek.y); ctx.rotate(rad(objek.rotasi));
+    const { kx, ky } = konstanta_miring(); ctx.transform(1, ky, kx, 1, 0, 0);
+    ctx.strokeStyle = '#04a7ed'; ctx.lineWidth = 1.5; ctx.setLineDash([7, 4]);
+    ctx.strokeRect(-w / 2, -h / 2, w, h); ctx.setLineDash([]); ctx.restore();
+    const handles = daftar_handle(); const ukuran = 7 / (zoom / 100);
+    const atas = handles.find(p => p.id === 'putar'); const puncak = titik_layar(0, -h / 2);
+    ctx.beginPath(); ctx.moveTo(puncak.x, puncak.y); ctx.lineTo(atas.x, atas.y);
+    ctx.strokeStyle = '#078fce'; ctx.lineWidth = 1.4 / (zoom / 100); ctx.stroke();
+    handles.forEach(p => {
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.id === 'putar' ? ukuran * .85 : ukuran, 0, Math.PI * 2);
+      ctx.fillStyle = p.id === 'putar' ? '#087fbe' : '#fff'; ctx.fill();
+      ctx.lineWidth = 1.6 / (zoom / 100); ctx.strokeStyle = '#078fce'; ctx.stroke();
+    });
+  }
+  function sinkronkan_kontrol() {
+    if (!objek) {
+      el('btn_cermin_x').setAttribute('aria-pressed', 'false');
+      el('btn_cermin_y').setAttribute('aria-pressed', 'false');
+      return;
+    }
+    const angka = nilai => Number(piksel_ke_satuan(nilai).toFixed(satuan_ukuran === 'm' ? 4 : 2));
+    el('pos_x').value = angka(objek.x); el('pos_y').value = angka(objek.y);
+    el('lebar').value = angka(objek.lebar); el('tinggi').value = angka(objek.tinggi);
+    el('status_objek').textContent = `PNG aktif · ${angka(objek.lebar)} × ${angka(objek.tinggi)} ${satuan_ukuran}`;
+    el('rotasi').value = objek.rotasi; el('miring_x').value = objek.miring_x; el('miring_y').value = objek.miring_y; el('opasitas').value = objek.opasitas;
+    el('nilai_rotasi').textContent = `${Math.round(objek.rotasi)}°`;
+    el('nilai_miring_x').textContent = `${Math.round(objek.miring_x)}°`;
+    el('nilai_miring_y').textContent = `${Math.round(objek.miring_y)}°`;
+    el('nilai_opasitas').textContent = `${Math.round(objek.opasitas)}%`;
+    el('btn_cermin_x').setAttribute('aria-pressed', String(!!objek.cermin_x));
+    el('btn_cermin_y').setAttribute('aria-pressed', String(!!objek.cermin_y));
+  }
+  function butuh_objek() { if (!objek || !gambar_lapisan) { alert('Tambahkan PNG terlebih dahulu.'); return false; } return true; }
+  function koordinat_kanvas(event) {
+    const r = kanvas.getBoundingClientRect();
+    return { x: (event.clientX - r.left) * (kanvas.width / r.width), y: (event.clientY - r.top) * (kanvas.height / r.height) };
+  }
+  function cursor_handle(id) {
+    return ({ putar:'grab',n:'ns-resize',s:'ns-resize',e:'ew-resize',w:'ew-resize',ne:'nesw-resize',sw:'nesw-resize',nw:'nwse-resize',se:'nwse-resize' })[id] || 'move';
+  }
+
+  kanvas.addEventListener('pointerdown', event => {
+    if (!gambar_dasar || !event.isPrimary) return;
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    const p = koordinat_kanvas(event);
+    const toleransi = 18 / (zoom / 100);
+    const handle = objek ? daftar_handle().find(h => Math.hypot(h.x - p.x, h.y - p.y) <= toleransi) : null;
+    const lokal = objek ? ke_lokal(p.x, p.y) : null;
+    let mode = null;
+    if (objek && handle) mode = handle.id === 'putar' ? 'putar' : 'ubah';
+    else if (objek && Math.abs(lokal.x) <= objek.lebar / 2 && Math.abs(lokal.y) <= objek.tinggi / 2) mode = 'geser';
+    else if (event.pointerType === 'touch') mode = 'pan';
+    else { if (objek) { dipilih = true; gambar_ulang(); } return; }
+    if (mode === 'pan') {
+      drag = { mode, awal_layar_x:event.clientX, awal_layar_y:event.clientY, scroll_x:area.scrollLeft, scroll_y:area.scrollTop };
+      kanvas.setPointerCapture(event.pointerId); event.preventDefault(); return;
+    }
+    dipilih = true;
+    mulai_aksi();
+    drag = { mode, handle:handle?.id, awal_x:p.x, awal_y:p.y, objek_awal:keadaan_awal(), sudut_awal:Math.atan2(p.y - objek.y,p.x - objek.x) };
+    kanvas.setPointerCapture(event.pointerId); kanvas.style.cursor = cursor_handle(handle?.id || 'move');
+    event.preventDefault();
+  });
+  kanvas.addEventListener('pointermove', event => {
+    const p = koordinat_kanvas(event);
+    if (!drag) {
+      if (objek) {
+        const toleransi = 18 / (zoom / 100);
+        const h = daftar_handle().find(q => Math.hypot(q.x-p.x,q.y-p.y) <= toleransi);
+        const l = ke_lokal(p.x,p.y);
+        kanvas.style.cursor = h ? cursor_handle(h.id) : (Math.abs(l.x)<=objek.lebar/2 && Math.abs(l.y)<=objek.tinggi/2 ? 'move' : 'default');
+      }
+      return;
+    }
+    if (drag.mode === 'pan') {
+      area.scrollLeft = drag.scroll_x - (event.clientX-drag.awal_layar_x);
+      area.scrollTop = drag.scroll_y - (event.clientY-drag.awal_layar_y);
+      event.preventDefault(); return;
+    }
+    const awal = drag.objek_awal;
+    if (drag.mode === 'geser') {
+      objek.x = awal.x + p.x-drag.awal_x; objek.y = awal.y + p.y-drag.awal_y;
+    } else if (drag.mode === 'putar') {
+      const sudut = Math.atan2(p.y-awal.y,p.x-awal.x); let selisih = sudut-drag.sudut_awal;
+      while (selisih>Math.PI) selisih-=Math.PI*2;
+      while (selisih< -Math.PI) selisih+=Math.PI*2;
+      objek.rotasi = Math.max(-360,Math.min(360,awal.rotasi+selisih*180/Math.PI));
+    } else if (drag.mode === 'ubah') {
+      const h = drag.handle;
+      const hasX = h.includes('e') || h.includes('w');
+      const hasY = h.includes('n') || h.includes('s');
+      const lokal = ke_lokal(p.x,p.y,awal);
+      const tanda_x = h.includes('e') ? 1 : -1;
+      const tanda_y = h.includes('s') ? 1 : -1;
+      let lebar_baru = awal.lebar;
+      let tinggi_baru = awal.tinggi;
+      if (hasX) lebar_baru = Math.max(4, awal.lebar/2 + tanda_x*lokal.x);
+      if (hasY) tinggi_baru = Math.max(4, awal.tinggi/2 + tanda_y*lokal.y);
+      if (el('mode_ukuran').value === 'rata') {
+        const faktor_x = hasX ? lebar_baru/awal.lebar : null;
+        const faktor_y = hasY ? tinggi_baru/awal.tinggi : null;
+        // Untuk sudut gunakan sumbu yang paling dominan; untuk tepi ikuti sumbu yang ditarik.
+        const faktor = hasX && hasY ? Math.max(0.01, faktor_x >= faktor_y ? faktor_x : faktor_y) : (faktor_x ?? faktor_y);
+        lebar_baru = Math.max(4, awal.lebar*faktor);
+        tinggi_baru = Math.max(4, awal.tinggi*faktor);
+      }
+      const delta_w = lebar_baru-awal.lebar;
+      const delta_h = tinggi_baru-awal.tinggi;
+      const geser_x = hasX ? tanda_x*delta_w/2 : 0;
+      const geser_y = hasY ? tanda_y*delta_h/2 : 0;
+      const pergeseran = geser_pusat_lokal(geser_x,geser_y,awal);
+      objek.x = awal.x+pergeseran.x; objek.y = awal.y+pergeseran.y;
+      objek.lebar = lebar_baru; objek.tinggi = tinggi_baru;
+    }
+    sinkronkan_kontrol(); gambar_ulang(); event.preventDefault();
+  });
+  function selesai_drag(event) {
+    if (!drag) return;
+    const mode_selesai = drag.mode; drag = null; kanvas.style.cursor = 'default';
+    try { if (event.pointerId !== undefined) kanvas.releasePointerCapture(event.pointerId); } catch (_) {}
+    if (mode_selesai !== 'pan') { akhiri_aksi(); sinkronkan_kontrol(); }
+  }
+  kanvas.addEventListener('pointerup',selesai_drag);
+  kanvas.addEventListener('pointercancel',selesai_drag);
+
+  function ubah_angka(id, properti, minimum = -Infinity) {
+    el(id).addEventListener('change', () => {
+      if (!butuh_objek()) return;
+      const nilai = Number(el(id).value);
+      if (!Number.isFinite(nilai)) { sinkronkan_kontrol(); return; }
+      const nilai_px = Math.max(minimum, satuan_ke_piksel(nilai));
+      aksi(() => {
+        if (properti === 'lebar' && el('mode_ukuran').value === 'rata') {
+          const rasio = objek.tinggi/objek.lebar; objek.lebar = nilai_px; objek.tinggi = Math.max(1,nilai_px*rasio);
+        } else if (properti === 'tinggi' && el('mode_ukuran').value === 'rata') {
+          const rasio = objek.lebar/objek.tinggi; objek.tinggi = nilai_px; objek.lebar = Math.max(1,nilai_px*rasio);
+        } else objek[properti] = nilai_px;
+      });
+    });
+  }
+  ubah_angka('pos_x','x'); ubah_angka('pos_y','y'); ubah_angka('lebar','lebar',1); ubah_angka('tinggi','tinggi',1);
+  function pasang_slider(id, properti, label_id, akhiran='°') {
+    const input = el(id);
+    input.addEventListener('pointerdown',()=>{ if(butuh_objek()) mulai_aksi(); });
+    input.addEventListener('input',()=>{
+      if(!objek) return; if(!snapshot_awal) mulai_aksi();
+      objek[properti]=Number(input.value); el(label_id).textContent=`${input.value}${akhiran}`; gambar_ulang();
+    });
+    input.addEventListener('change',()=>{ if(objek){akhiri_aksi();sinkronkan_kontrol();} });
+  }
+  pasang_slider('rotasi','rotasi','nilai_rotasi');
+  pasang_slider('miring_x','miring_x','nilai_miring_x');
+  pasang_slider('miring_y','miring_y','nilai_miring_y');
+  pasang_slider('opasitas','opasitas','nilai_opasitas','%');
+
+  document.querySelectorAll('.mode-ukuran').forEach(tombol => tombol.addEventListener('click', () => {
+    const mode = tombol.dataset.mode; el('mode_ukuran').value = mode;
+    document.querySelectorAll('.mode-ukuran').forEach(b => { const aktif = b.dataset.mode === mode; b.classList.toggle('mode-aktif', aktif); b.setAttribute('aria-pressed', String(aktif)); });
+  }));
+  el('btn_luapan').addEventListener('click', () => {
+    mode_luapan = !mode_luapan;
+    el('btn_luapan').classList.toggle('mode-aktif', mode_luapan);
+    el('btn_luapan').setAttribute('aria-pressed', String(mode_luapan));
+    el('btn_luapan').textContent = mode_luapan ? '↙ Batas 2×1 m' : '↗ Lebihi 2×1 m';
+    gambar_ulang();
+  });
+  el('satuan_ukuran').addEventListener('change',e=>{satuan_ukuran=e.target.value;label_satuan();sinkronkan_kontrol();});
+  el('btn_tambah').addEventListener('click',()=>input_lapisan.click());
+  input_lapisan.addEventListener('change',e=>{const file=e.target.files[0];if(file)muat_gambar(file,pasang_lapisan);e.target.value='';});
+  el('btn_undo').addEventListener('click',undo); el('btn_redo').addEventListener('click',redo);
+  el('btn_tengah').addEventListener('click',()=>{if(butuh_objek())aksi(()=>{objek.x=kanvas.width/2;objek.y=kanvas.height/2;});});
+  el('btn_ukuran_asli').addEventListener('click',()=>{if(butuh_objek())aksi(()=>{objek.lebar=gambar_lapisan.naturalWidth;objek.tinggi=gambar_lapisan.naturalHeight;});});
+  el('btn_reset').addEventListener('click',()=>{if(butuh_objek())aksi(()=>{objek.x=kanvas.width/2;objek.y=kanvas.height/2;objek.lebar=gambar_lapisan.naturalWidth;objek.tinggi=gambar_lapisan.naturalHeight;objek.rotasi=0;objek.miring_x=0;objek.miring_y=0;objek.opasitas=100;objek.cermin_x=false;objek.cermin_y=false;});});
+  el('btn_cermin_x').addEventListener('click',()=>{if(butuh_objek())aksi(()=>{objek.cermin_x=!objek.cermin_x;});});
+  el('btn_cermin_y').addEventListener('click',()=>{if(butuh_objek())aksi(()=>{objek.cermin_y=!objek.cermin_y;});});
+  el('btn_fit').addEventListener('click',fit_kanvas);
+  el('btn_zoom100').addEventListener('click',()=>set_zoom(100));
+  el('zoom').addEventListener('input',e=>set_zoom(e.target.value));
+
+  let url_unduhan_aktif = null;
+  el('btn_download').addEventListener('click', () => {
+    if (!gambar_dasar) {
+      alert('File 1.png belum ditemukan. Letakkan 1.png di folder yang sama dengan HTML.');
+      return;
+    }
+
+    const tombol = el('btn_download');
+    const tautan_manual = el('tautan_unduh_manual');
+    const nama_hasil = 'timpa-desain-2x1m.png';
+    tombol.disabled = true;
+    el('status_teks').textContent = 'Menyiapkan PNG dengan FileSaver.js…';
+
+    try {
+      // Ekspor hanya ukuran kanvas 2:1. Area luapan editor tidak ikut diekspor.
+      const hasil = document.createElement('canvas');
+      hasil.width = kanvas.width;
+      hasil.height = kanvas.height;
+      const hasil_ctx = hasil.getContext('2d');
+      if (!hasil_ctx) throw new Error('Browser tidak menyediakan Canvas 2D.');
+      gambar_dasar_memenuhi(hasil_ctx);
+      gambar_lapisan_ke(hasil_ctx);
+
+      const siapkan_unduhan = (blob) => {
+        try {
+          if (!blob || !blob.size) throw new Error('Browser menghasilkan file PNG kosong.');
+
+          if (url_unduhan_aktif) URL.revokeObjectURL(url_unduhan_aktif);
+          url_unduhan_aktif = URL.createObjectURL(blob);
+
+          // Tautan cadangan tetap tersedia jika browser menolak unduhan plugin.
+          tautan_manual.href = url_unduhan_aktif;
+          tautan_manual.download = nama_hasil;
+          tautan_manual.classList.remove('sembunyi');
+          tautan_manual.textContent = '↧ Klik untuk simpan PNG';
+
+          // FileSaver.js menangani penyimpanan Blob hasil kanvas.
+          if (typeof window.saveAs === 'function') {
+            window.saveAs(blob, nama_hasil);
+            el('status_teks').textContent = 'FileSaver.js: perintah simpan PNG sudah dikirim';
+          } else {
+            // Fallback jika CDN/plugin tidak dapat dimuat.
+            const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            if (ios) {
+              const tab = window.open(url_unduhan_aktif, '_blank');
+              el('status_teks').textContent = tab
+                ? 'PNG dibuka · gunakan Bagikan lalu Simpan ke File'
+                : 'Plugin belum termuat · pop-up diblokir, ketuk tautan simpan';
+            } else {
+              const a = document.createElement('a');
+              a.href = url_unduhan_aktif;
+              a.download = nama_hasil;
+              a.style.display = 'none';
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+              el('status_teks').textContent = 'Plugin belum termuat · memakai unduhan browser';
+            }
+          }
+        } catch (err) {
+          console.error('Penyimpanan PNG gagal:', err);
+          el('status_teks').textContent = 'Penyimpanan gagal';
+          alert('Tidak bisa menyimpan PNG. ' + (err.message || 'Coba gunakan browser lain.'));
+        } finally {
+          tombol.disabled = false;
+        }
+      };
+
+      // toBlob menghasilkan Blob langsung; FileSaver.js kemudian menyimpannya.
+      if (typeof hasil.toBlob === 'function') {
+        hasil.toBlob(blob => siapkan_unduhan(blob), 'image/png');
+      } else {
+        // Fallback untuk browser lama tanpa HTMLCanvasElement.toBlob().
+        const data_url = hasil.toDataURL('image/png');
+        if (!data_url || data_url === 'data:,') throw new Error('Hasil PNG kosong.');
+        const data_biner = atob(data_url.split(',')[1]);
+        const byte = new Uint8Array(data_biner.length);
+        for (let i = 0; i < data_biner.length; i++) byte[i] = data_biner.charCodeAt(i);
+        siapkan_unduhan(new Blob([byte], { type: 'image/png' }));
+      }
+    } catch (err) {
+      console.error('Ekspor Timpa Desain gagal:', err);
+      tombol.disabled = false;
+      el('status_teks').textContent = 'Ekspor gagal';
+      let pesan = 'Tidak bisa membuat PNG.';
+      if (err && err.name === 'SecurityError') {
+        pesan = 'Browser memblokir akses gambar untuk ekspor. Pastikan 1.png berada di folder yang sama dan buka HTML melalui browser yang sama.';
+      } else if (err && err.message) {
+        pesan += ' ' + err.message;
+      }
+      alert(pesan);
+    }
+  });
+
+  // File yang dijatuhkan ke kanvas selalu menjadi lapisan baru; 1.png tidak pernah diganti.
+  area.addEventListener('dragover',e=>{e.preventDefault();area.style.outline='2px dashed #41aee5';});
+  area.addEventListener('dragleave',()=>{area.style.outline='';});
+  area.addEventListener('drop',e=>{
+    e.preventDefault();area.style.outline='';
+    const file=[...(e.dataTransfer?.files||[])].find(f=>f.type.startsWith('image/'));
+    if(file)muat_gambar(file,pasang_lapisan);
+  });
+  document.addEventListener('keydown',e=>{
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();undo();}
+    else if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='y'){e.preventDefault();redo();}
+    else if(objek&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)){
+      e.preventDefault();aksi(()=>{const langkah=e.shiftKey?10:1;if(e.key==='ArrowLeft')objek.x-=langkah;if(e.key==='ArrowRight')objek.x+=langkah;if(e.key==='ArrowUp')objek.y-=langkah;if(e.key==='ArrowDown')objek.y+=langkah;});
+    }
+  });
+  window.addEventListener('resize',()=>{if(gambar_dasar)fit_kanvas();});
+  label_satuan();
+
+  // Otomatis membuka 1.png di folder yang sama. Sumber dasar tidak bisa diganti dari dalam aplikasi.
+  const dasar_permanen=new Image();
+  dasar_permanen.onload=()=>pasang_dasar_permanen(dasar_permanen);
+  dasar_permanen.onerror=()=>{
+    el('nama_lapisan').textContent='Menunggu 1.png';
+    el('status_teks').textContent='1.png tidak ditemukan';
+    el('status_objek').textContent='File dasar 1.png wajib berada satu folder dengan HTML. Tidak tersedia fitur mengganti file dasar.';
+    el('tampilan_kosong').classList.remove('sembunyi');
+  };
+  dasar_permanen.src='1.png';
+  gambar_ulang();
+})();
+</script>
+</body>
+</html>

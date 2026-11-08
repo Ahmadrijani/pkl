@@ -56,7 +56,8 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 .area::-webkit-scrollbar-track,.panel::-webkit-scrollbar-track{background:#e2f3fb;border-radius:12px}
 .area::-webkit-scrollbar-thumb,.panel::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#9bd9f4,#4da8d8);border:2px solid #e2f3fb;border-radius:12px}
 .area-dalam{width:max-content;height:max-content;min-width:100%;min-height:100%;display:flex;justify-content:center;align-items:center;padding:38px;position:relative}
-.bingkai-kanvas{flex:none;position:relative;box-shadow:0 14px 35px #234d6638,0 0 0 1px #ffffffaa;background:repeating-conic-gradient(#fff 0% 25%,#edf3f7 0% 50%) 50%/18px 18px;line-height:0}
+.bingkai-kanvas{flex:none;position:relative;box-shadow:0 14px 35px #234d6638,0 0 0 1px #ffffffaa;background:#fff;line-height:0}
+.tepi-dasar{position:absolute;pointer-events:none;z-index:4;border:1px solid rgba(30,126,176,.62);box-shadow:0 0 0 1px rgba(255,255,255,.45);display:none}
 .kanvas{display:block;touch-action:none;max-width:none;cursor:default}
 .petunjuk{position:absolute;right:14px;bottom:12px;padding:8px 11px;border-radius:10px;background:#ffffffdc;border:1px solid #c7e2ef;color:#6c8798;font-size:11px;box-shadow:0 4px 12px #37698715;pointer-events:none;backdrop-filter:blur(8px)}
 .kosong{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;pointer-events:none}
@@ -78,6 +79,16 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 .zoom-label{width:42px;text-align:right;font-variant-numeric:tabular-nums}
 .badge{padding:4px 8px;border-radius:20px;background:#e6f6ff;color:#4784a5}
 .panel-mobile-head{display:none}
+
+/* Notifikasi dan popup UI, tanpa alert browser */
+.lapisan-ui{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(27,66,91,.28);backdrop-filter:blur(7px)}
+.kartu-popup{width:min(420px,100%);border:1px solid #a9d9f0;border-radius:19px;padding:18px;background:linear-gradient(155deg,#fff,#eaf8ff);box-shadow:0 22px 70px rgba(25,83,119,.28),inset 0 1px #fff}
+.kartu-popup h2{margin:0 0 8px;font-size:17px;color:#245d7e}.kartu-popup p{margin:0;color:#5e7d91;font-size:13px;line-height:1.55;white-space:pre-wrap}.aksi-popup{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+.toast-area{position:fixed;z-index:10001;right:16px;top:16px;display:flex;flex-direction:column;gap:8px;width:min(360px,calc(100vw - 32px));pointer-events:none}
+.toast-ui{padding:12px 14px;border:1px solid #a8d8ed;border-radius:13px;background:linear-gradient(145deg,#fff,#e9f8ff);color:#315f79;box-shadow:0 10px 28px rgba(35,100,139,.2);font-size:13px;line-height:1.45;animation:toast-masuk .2s ease-out}
+.toast-ui.error{border-color:#efb7b7;background:linear-gradient(145deg,#fff,#fff0f0);color:#8c4545}.toast-ui.success{border-color:#a8dfc5;background:linear-gradient(145deg,#fff,#edfff5);color:#286b4c}
+@keyframes toast-masuk{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){.toast-area{top:auto;bottom:12px;right:10px;width:calc(100vw - 20px)}.lapisan-ui{align-items:flex-end;padding:12px}.kartu-popup{border-radius:20px 20px 16px 16px}.toast-ui{font-size:12px}}
 @media(min-width:701px){.ruang{height:calc(100vh - 162px);max-height:calc(100vh - 162px)}}
 @media(max-width:900px) and (min-width:701px){.ruang{grid-template-columns:250px minmax(0,1fr)}.panel{padding:9px}.kepala{padding:8px 12px}}
 @media(max-width:700px){
@@ -90,8 +101,10 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
   .subjudul{font-size:10px}
   .status-kanan{font-size:10px}
   .ruang{display:flex;flex-direction:column;min-height:0;height:auto;max-height:none}
-  .area{order:0;height:52dvh;min-height:290px;max-height:620px;width:100%;touch-action:pan-x pan-y}
-  .area-dalam{padding:22px;min-height:100%;}
+  .area{order:0;height:clamp(250px,48dvh,560px);min-height:250px;max-height:560px;width:100%;touch-action:pan-x pan-y}
+  .area-dalam{padding:12px;min-height:100%;width:100%;justify-content:center;align-items:center}
+  .bingkai-kanvas{max-width:none}
+  .kanvas{display:block;max-width:none;height:auto}
   .panel{order:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:max-content;align-content:start;gap:8px;padding:10px 9px 13px;border-right:0;border-top:1px solid var(--garis);overflow:visible}
   .panel-mobile-head{display:flex;grid-column:1/-1;align-items:center;justify-content:space-between;padding:2px 3px 3px;color:#3e7696}
   .panel-mobile-head strong{font-size:12px;letter-spacing:.4px}
@@ -119,7 +132,8 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 @media(max-width:420px){
   .panel{grid-template-columns:minmax(0,1fr);padding:8px}
   .kelompok.kontrol-lebar,.panel-mobile-head{grid-column:1}
-  .area{height:48dvh;min-height:260px}
+  .area{height:clamp(230px,44dvh,480px);min-height:230px}
+  .area-dalam{padding:8px}
   .kelompok{padding:10px}
   .baris label{font-size:12px}
   .baris input[type=number]{width:46%}
@@ -146,7 +160,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
         <h3>Lapisan PNG <span>◈</span></h3>
         <div class="status-objek" id="status_objek">1.png adalah dasar permanen dan terkunci. Tambahkan PNG untuk mulai mengedit.</div>
         <div class="dua"><button id="btn_ukuran_asli">Ukuran asli</button><button id="btn_reset">Reset objek</button></div>
-        <p class="catatan">Sentuh/klik lalu tahan PNG untuk memindahkannya. Tarik titik di tepi atau sudut untuk mengubah ukuran. Titik atas untuk rotasi.</p>
+        <p class="catatan">Sentuh/klik lalu tahan PNG untuk memindahkannya. Tarik titik di tepi atau sudut untuk mengubah ukuran. Cubit dua jari di area kanvas untuk zoom tanpa memilih PNG.</p>
       </section>
       <section class="kelompok">
         <h3>Posisi</h3>
@@ -181,10 +195,10 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 
     <section class="area" id="area_kerja" aria-label="Area desain yang dapat digulir">
       <div class="area-dalam" id="area_dalam">
-        <div class="bingkai-kanvas" id="bingkai_kanvas"><canvas class="kanvas" id="kanvas" width="1200" height="600"></canvas><canvas class="luapan-kanvas" id="kanvas_luapan"></canvas></div>
+        <div class="bingkai-kanvas" id="bingkai_kanvas"><canvas class="kanvas" id="kanvas" width="1200" height="600"></canvas><canvas class="luapan-kanvas" id="kanvas_luapan"></canvas><div class="tepi-dasar" id="tepi_dasar" aria-hidden="true"></div></div>
       </div>
       <div class="kosong" id="tampilan_kosong"><div class="kosong-kartu"><div class="kosong-ikon">🖼️</div><strong>File dasar 1.png diperlukan</strong><span>Letakkan file bernama <b>1.png</b> di folder yang sama dengan HTML ini. Seluruh gambar dasar ditampilkan tanpa crop dan tidak bisa diedit atau diganti. Kanvas tetap 2:1; ruang sisa transparan bila rasio 1.png berbeda. Setelah terbuka, gunakan Tambah PNG untuk menimpakan gambar.</span></div></div>
-      <div class="petunjuk">1.png terkunci · Sentuh/tahan PNG untuk memindahkan · Gulir area kosong untuk menggeser kanvas</div>
+      <div class="petunjuk">1.png terkunci · Sentuh/tahan PNG untuk memindahkan · Cubit dua jari untuk zoom · Geser area kosong untuk menggeser kanvas</div>
     </section>
   </main>
 
@@ -206,6 +220,10 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 
   <footer class="bawah"><span id="info_kanvas">Kanvas 200 × 100 cm · 2 × 1 m</span><span class="spacer"></span><span>Zoom</span><input id="zoom" type="range" min="1" max="300" value="50"><span class="zoom-label" id="nilai_zoom">50%</span><span class="badge">PNG · 2:1</span></footer>
 </div>
+<div class="toast-area" id="toast_area" aria-live="polite" aria-atomic="false"></div>
+<div class="lapisan-ui sembunyi" id="popup_ui" role="dialog" aria-modal="true" aria-labelledby="popup_judul">
+  <div class="kartu-popup"><h2 id="popup_judul">Informasi</h2><p id="popup_pesan"></p><div class="aksi-popup"><button class="utama" id="popup_tutup" type="button">Mengerti</button></div></div>
+</div>
 <!-- Plugin download: FileSaver.js (MIT). Jika CDN utama gagal, gunakan CDN cadangan. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"
         onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js'"></script>
@@ -220,6 +238,25 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
   const bingkai = document.getElementById('bingkai_kanvas');
   const input_lapisan = document.getElementById('input_lapisan');
   const el = id => document.getElementById(id);
+  let toast_timer = null;
+  function notifikasi(pesan, jenis = 'info', durasi = 3000) {
+    const wadah = el('toast_area');
+    const item = document.createElement('div');
+    item.className = 'toast-ui' + (jenis === 'error' ? ' error' : jenis === 'success' ? ' success' : '');
+    item.textContent = pesan;
+    wadah.appendChild(item);
+    window.setTimeout(() => { item.style.opacity = '0'; item.style.transform = 'translateY(-6px)'; window.setTimeout(() => item.remove(), 220); }, durasi);
+  }
+  function popup_ui(judul, pesan) {
+    el('popup_judul').textContent = judul;
+    el('popup_pesan').textContent = pesan;
+    el('popup_ui').classList.remove('sembunyi');
+    el('popup_tutup').focus();
+  }
+  function tutup_popup() { el('popup_ui').classList.add('sembunyi'); }
+  el('popup_tutup').addEventListener('click', tutup_popup);
+  el('popup_ui').addEventListener('click', e => { if (e.target === el('popup_ui')) tutup_popup(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !el('popup_ui').classList.contains('sembunyi')) tutup_popup(); });
 
   let gambar_dasar = null;
   let gambar_lapisan = null;
@@ -266,11 +303,11 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 
   function muat_gambar(file, callback) {
     if (!file) return;
-    if (!file.type.startsWith('image/')) { alert('Pilih file gambar.'); return; }
+    if (!file.type.startsWith('image/')) { popup_ui('File tidak sesuai', 'Pilih file gambar PNG, JPG, atau WebP.'); return; }
     const url = URL.createObjectURL(file);
     const img = new Image();
     img.onload = () => { callback(img, file.name); URL.revokeObjectURL(url); };
-    img.onerror = () => { URL.revokeObjectURL(url); alert('Gambar tidak dapat dibuka.'); };
+    img.onerror = () => { URL.revokeObjectURL(url); popup_ui('Gambar tidak dapat dibuka', 'File gambar rusak atau formatnya tidak didukung browser.'); };
     img.src = url;
   }
 
@@ -305,7 +342,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
     atur_ukuran_css(); fit_kanvas(); gambar_ulang();
   }
   function pasang_lapisan(img, nama) {
-    if (!gambar_dasar) { alert('Letakkan 1.png di folder yang sama dengan HTML terlebih dahulu.'); return; }
+    if (!gambar_dasar) { popup_ui('1.png belum tersedia', 'Letakkan file bernama 1.png di folder yang sama dengan Timpa_Desain.html.'); return; }
     gambar_lapisan = img; nama_file_lapisan = nama;
     const skala_maks = Math.min(1, kanvas.width / img.naturalWidth, kanvas.height / img.naturalHeight);
     const lebar_awal = Math.max(1, Math.round(img.naturalWidth * skala_maks));
@@ -325,12 +362,26 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
     kanvas.style.width = `${w}px`; kanvas.style.height = `${h}px`;
     bingkai.style.width = `${w}px`; bingkai.style.height = `${h}px`;
     el('zoom').value = zoom; el('nilai_zoom').textContent = `${zoom}%`;
+    perbarui_tepi_dasar();
     if (mode_luapan && gambar_lapisan && objek) gambar_ulang();
+  }
+  function perbarui_tepi_dasar() {
+    const tepi = el('tepi_dasar');
+    if (!gambar_dasar) { tepi.style.display = 'none'; return; }
+    const skala = Math.min(kanvas.width / gambar_dasar.naturalWidth, kanvas.height / gambar_dasar.naturalHeight);
+    const w = gambar_dasar.naturalWidth * skala * zoom / 100;
+    const h = gambar_dasar.naturalHeight * skala * zoom / 100;
+    tepi.style.display = 'block';
+    tepi.style.left = `${(kanvas.width - gambar_dasar.naturalWidth * skala) / 2 * zoom / 100}px`;
+    tepi.style.top = `${(kanvas.height - gambar_dasar.naturalHeight * skala) / 2 * zoom / 100}px`;
+    tepi.style.width = `${w}px`; tepi.style.height = `${h}px`;
   }
   function fit_kanvas() {
     if (!gambar_dasar) return;
-    const skala_x = Math.max(1, area.clientWidth - 76) / kanvas.width;
-    const skala_y = Math.max(1, area.clientHeight - 76) / kanvas.height;
+    const mobile = window.matchMedia('(max-width:700px)').matches;
+    const margin = mobile ? 28 : 76;
+    const skala_x = Math.max(1, area.clientWidth - margin) / kanvas.width;
+    const skala_y = Math.max(1, area.clientHeight - margin) / kanvas.height;
     zoom = Math.max(1, Math.min(300, Math.floor(Math.min(skala_x, skala_y) * 100)));
     atur_ukuran_css();
   }
@@ -459,7 +510,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
     el('btn_cermin_x').setAttribute('aria-pressed', String(!!objek.cermin_x));
     el('btn_cermin_y').setAttribute('aria-pressed', String(!!objek.cermin_y));
   }
-  function butuh_objek() { if (!objek || !gambar_lapisan) { alert('Tambahkan PNG terlebih dahulu.'); return false; } return true; }
+  function butuh_objek() { if (!objek || !gambar_lapisan) { notifikasi('Tambahkan PNG terlebih dahulu untuk memakai tool ini.', 'info'); return false; } return true; }
   function koordinat_kanvas(event) {
     const r = kanvas.getBoundingClientRect();
     return { x: (event.clientX - r.left) * (kanvas.width / r.width), y: (event.clientY - r.top) * (kanvas.height / r.height) };
@@ -606,10 +657,36 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
   el('btn_zoom100').addEventListener('click',()=>set_zoom(100));
   el('zoom').addEventListener('input',e=>set_zoom(e.target.value));
 
+  // Zoom dua jari di area kerja tidak memerlukan pemilihan lapisan.
+  let pinch_awal = null;
+  function jarak_sentuh(a, b) { return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); }
+  area.addEventListener('touchstart', e => {
+    if (e.touches.length === 2) {
+      // Batalkan drag satu jari sebelum memulai pinch agar objek tidak ikut terseret.
+      if (drag && drag.mode !== 'pan') {
+        if (drag.objek_awal) objek = JSON.parse(JSON.stringify(drag.objek_awal));
+        drag = null; snapshot_awal = null; kanvas.style.cursor = 'default';
+        sinkronkan_kontrol(); gambar_ulang();
+      }
+      pinch_awal = { jarak: jarak_sentuh(e.touches[0], e.touches[1]), zoom };
+      e.preventDefault();
+    }
+  }, { passive: false });
+  area.addEventListener('touchmove', e => {
+    if (pinch_awal && e.touches.length === 2) {
+      const skala = jarak_sentuh(e.touches[0], e.touches[1]) / Math.max(1, pinch_awal.jarak);
+      set_zoom(Math.round(pinch_awal.zoom * skala));
+      e.preventDefault();
+    }
+  }, { passive: false });
+  function selesai_pinch(e) { if (e.touches.length < 2) pinch_awal = null; }
+  area.addEventListener('touchend', selesai_pinch, { passive: true });
+  area.addEventListener('touchcancel', selesai_pinch, { passive: true });
+
   let url_unduhan_aktif = null;
   el('btn_download').addEventListener('click', () => {
     if (!gambar_dasar) {
-      alert('File 1.png belum ditemukan. Letakkan 1.png di folder yang sama dengan HTML.');
+      popup_ui('1.png belum ditemukan', 'Letakkan 1.png di folder yang sama dengan Timpa_Desain.html, lalu buka ulang aplikasi.');
       return;
     }
 
@@ -617,6 +694,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
     const tautan_manual = el('tautan_unduh_manual');
     const nama_hasil = 'timpa-desain-2x1m.png';
     tombol.disabled = true;
+    notifikasi('Sedang menyiapkan gambar PNG…', 'info', 1800);
     el('status_teks').textContent = 'Menyiapkan PNG dengan FileSaver.js…';
 
     try {
@@ -646,6 +724,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
           if (typeof window.saveAs === 'function') {
             window.saveAs(blob, nama_hasil);
             el('status_teks').textContent = 'FileSaver.js: perintah simpan PNG sudah dikirim';
+            notifikasi('Perintah unduh PNG sudah dikirim ke browser.', 'success', 4200);
           } else {
             // Fallback jika CDN/plugin tidak dapat dimuat.
             const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
@@ -664,12 +743,13 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
               a.click();
               a.remove();
               el('status_teks').textContent = 'Plugin belum termuat · memakai unduhan browser';
+              notifikasi('Plugin tidak termuat. Browser mencoba mengunduh PNG secara langsung.', 'success', 4200);
             }
           }
         } catch (err) {
           console.error('Penyimpanan PNG gagal:', err);
           el('status_teks').textContent = 'Penyimpanan gagal';
-          alert('Tidak bisa menyimpan PNG. ' + (err.message || 'Coba gunakan browser lain.'));
+          popup_ui('Gagal menyimpan PNG', 'Tidak bisa menyimpan PNG. ' + (err.message || 'Coba gunakan browser lain.'));
         } finally {
           tombol.disabled = false;
         }
@@ -697,7 +777,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
       } else if (err && err.message) {
         pesan += ' ' + err.message;
       }
-      alert(pesan);
+      popup_ui('Ekspor gagal', pesan);
     }
   });
 
@@ -716,7 +796,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
       e.preventDefault();aksi(()=>{const langkah=e.shiftKey?10:1;if(e.key==='ArrowLeft')objek.x-=langkah;if(e.key==='ArrowRight')objek.x+=langkah;if(e.key==='ArrowUp')objek.y-=langkah;if(e.key==='ArrowDown')objek.y+=langkah;});
     }
   });
-  window.addEventListener('resize',()=>{if(gambar_dasar)fit_kanvas();});
+  window.addEventListener('resize',()=>{if(gambar_dasar){fit_kanvas();perbarui_tepi_dasar();}});
   label_satuan();
 
   // Otomatis membuka 1.png di folder yang sama. Sumber dasar tidak bisa diganti dari dalam aplikasi.

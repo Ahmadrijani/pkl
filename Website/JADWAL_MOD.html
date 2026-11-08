@@ -1294,6 +1294,13 @@ body.skin-enabled{color:var(--skin-on-background)!important;background:radial-gr
 #customAnimationIdea{font-family:inherit;font-size:11px;white-space:pre-wrap}
 #customAnimationPrompt{min-height:170px;color:#d2d2d2;white-space:pre-wrap}
 #customAnimationHtml:focus,#customAnimationIdea:focus,#customAnimationPrompt:focus{border-color:var(--skin-primary,var(--oranye));box-shadow:0 0 0 2px color-mix(in srgb,var(--skin-primary,var(--oranye)) 20%,transparent)}
+.custom-code-edit-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:9px}
+.custom-code-edit-actions button{min-width:0;min-height:42px;padding:8px 10px;font-size:10px;white-space:normal}
+.custom-code-edit-actions .btn-paste-replace{border-color:var(--skin-secondary,#ffb000);background:linear-gradient(180deg,#55400d,#211604)}
+.custom-code-edit-actions .btn-delete-code{border-color:#e64b4b;background:linear-gradient(180deg,#641a1a,#210808)}
+.dialog-countdown{width:62px;height:62px;margin:-3px auto 15px;display:grid;place-items:center;border:2px solid var(--skin-secondary,var(--emas));border-radius:50%;background:radial-gradient(circle,#38220a,#100b05);color:#fff;font-size:28px;font-weight:1000;text-shadow:0 0 12px var(--skin-secondary,var(--emas));box-shadow:0 0 18px color-mix(in srgb,var(--skin-secondary,var(--emas)) 35%,transparent)}
+.dialog-countdown[hidden]{display:none!important}
+.app-dialog-actions button:disabled{opacity:.4;cursor:not-allowed;filter:grayscale(.45);transform:none;box-shadow:none}
 .custom-html-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:10px}
 .custom-html-actions button,.custom-ai-box button{min-width:0;min-height:39px;padding:7px 8px;font-size:9px;white-space:normal}
 .custom-html-actions button i,.custom-ai-box button i{margin-right:4px}
@@ -1690,7 +1697,11 @@ INITIALIZING MATRIX STREAM...</div>
 
         <label class="custom-code-label" for="customAnimationHtml">KODE HTML LENGKAP</label>
         <textarea id="customAnimationHtml" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="<!doctype html>..." aria-label="Editor kode HTML animasi custom"></textarea>
-        <div class="custom-code-tip">Durasi ditentukan kode dengan <code>JADWAL_API.setDuration(ms)</code>, lalu akhiri memakai <code>JADWAL_API.finish()</code>. Interaksi klik, sentuh, keyboard, dan pointer berjalan di dalam animasi. Kontrak API lengkap sudah dimasukkan ke prompt AI.</div>
+        <div class="custom-code-edit-actions">
+          <button type="button" class="btn-paste-replace" onclick="konfirmasiTempelGantiKodeLama()"><i class="fa-solid fa-paste"></i> TEMPEL & HAPUS KODE LAMA</button>
+          <button type="button" class="btn-delete-code" onclick="konfirmasiHapusKodeHtml()"><i class="fa-solid fa-trash-can"></i> HAPUS KODE</button>
+        </div>
+        <div class="custom-code-tip">Tempel akan mengganti seluruh isi editor, bukan menambahkan di akhir. Setelah menempel, tekan SIMPAN KODE agar perubahan tersimpan. Durasi ditentukan kode dengan <code>JADWAL_API.setDuration(ms)</code>, lalu akhiri memakai <code>JADWAL_API.finish()</code>. Interaksi klik, sentuh, keyboard, dan pointer berjalan di dalam animasi. Kontrak API lengkap sudah dimasukkan ke prompt AI.</div>
 
         <div class="custom-html-actions">
           <button type="button" class="btn-custom-primary" onclick="simpanKodeAnimasiCustom()"><i class="fa-solid fa-floppy-disk"></i> SIMPAN KODE</button>
@@ -1910,7 +1921,7 @@ INITIALIZING MATRIX STREAM...</div>
 <div class="overlay" id="kombinasiOverlay"><div class="kombinasi-box"><div class="kombinasi-header"><h2 id="kombinasiJudul">1 KOMBINASI UNIK</h2><button class="btn-tutup" onclick="tutupDaftar()">×</button></div><div class="list-kombinasi" id="listKombinasi"></div></div></div>
 
 <!-- Dialog universal agar seluruh peringatan memakai UI, bukan alert/confirm browser -->
-<div class="overlay custom-dialog-overlay" id="appDialog" aria-hidden="true"><div class="app-dialog-box" role="dialog" aria-modal="true"><div class="app-dialog-icon" id="appDialogIcon">!</div><h2 id="appDialogTitle">PERINGATAN</h2><p id="appDialogMessage"></p><div class="app-dialog-actions"><button type="button" id="appDialogCancel" class="dialog-secondary">BATAL</button><button type="button" id="appDialogOk">MENGERTI</button></div></div></div>
+<div class="overlay custom-dialog-overlay" id="appDialog" aria-hidden="true"><div class="app-dialog-box" role="dialog" aria-modal="true"><div class="app-dialog-icon" id="appDialogIcon">!</div><h2 id="appDialogTitle">PERINGATAN</h2><p id="appDialogMessage"></p><div class="dialog-countdown" id="appDialogCountdown" hidden aria-live="polite"></div><div class="app-dialog-actions"><button type="button" id="appDialogCancel" class="dialog-secondary">BATAL</button><button type="button" id="appDialogOk">MENGERTI</button></div></div></div>
 <div class="overlay" id="rgbWarningOverlay"><div class="app-dialog-box"><div class="app-dialog-icon rgb-icon">RGB</div><h2>AKTIFKAN TEMA RGB?</h2><p>Perubahan warna otomatis dapat sedikit memengaruhi performa dan berpotensi mengganggu kenyamanan saat menggunakan halaman atau mengambil tangkapan layar.</p><div class="app-dialog-actions"><button type="button" class="dialog-secondary" onclick="tutupPeringatanRGB()">BATAL</button><button type="button" onclick="aktifkanRGB()">LANJUTKAN</button></div></div></div>
 <div class="overlay" id="downloadSettingsOverlay"><div class="app-dialog-box download-dialog"><button class="btn-tutup dialog-close" onclick="tutupPengaturanDownload()">×</button><div class="app-dialog-icon"><i class="fa-solid fa-image"></i></div><h2>PENGATURAN DOWNLOAD</h2><p>Atur elemen yang akan dimasukkan ke gambar. Bentuk kartu dan sudut mengikuti pilihan BENTUK UI yang sedang aktif.</p><label class="download-toggle"><span><b>Download dengan nama</b><small>Tambahkan header JADWAL ASIA PRINT di bagian atas gambar.</small></span><input type="checkbox" id="downloadWithName" checked></label><label class="download-toggle"><span><b>Credits</b><small>Tampilkan tanggal unduh dan tanggal website dibuat di samping nama pembuat.</small></span><input type="checkbox" id="downloadCredits" checked></label><div class="app-dialog-actions"><button type="button" class="dialog-secondary" onclick="tutupPengaturanDownload()">BATAL</button><button type="button" id="confirmDownloadButton" onclick="konfirmasiDownload()">DOWNLOAD PNG</button></div></div></div>
 <div class="loading-skeleton" id="loadingSkeleton" aria-label="Memuat jadwal"><div class="skeleton-head"></div><div class="skeleton-controls"></div><div class="skeleton-grid"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
@@ -2203,7 +2214,7 @@ const ICON_ANIMASI={gacha:'fa-dice',spin:'fa-rotate',wheel:'fa-dharmachakra',met
 const pengaturanAnimasi={
   aktif:true,mode:'random',single:'gacha',multiple:[...ANIMASI_SEMUA],
   skin:{mode:'default',primary:'#ff6a00',secondary:'#ffb000',background:'#080808'},
-  customCss:'',customCode:'',customWinnerMode:'center'
+  customCss:'',customCode:'',customCodeCleared:false,customWinnerMode:'center'
 };
 let setupPertama=true;
 let modeSetup='single';
@@ -2503,7 +2514,7 @@ async function animasiGachaCustom(hasil){
   const overlay=document.getElementById('customHtmlOverlay');
   const frame=document.getElementById('customHtmlRunFrame');
   const status=document.getElementById('customHtmlRunStatus');
-  const code=String(pengaturanAnimasi.customCode||DEFAULT_CUSTOM_HTML);
+  const code=String(pengaturanAnimasi.customCodeCleared?'':(pengaturanAnimasi.customCode||DEFAULT_CUSTOM_HTML));
   const validation=validasiDokumenAnimasiCustom(code);
   if(!validation.ok){tampilkanDialog('KODE ANIMASI TIDAK VALID',validation.message,'error');return salinJadwal(hasil)}
   const mode=deteksiModePemenangCustom(code);
@@ -2539,15 +2550,57 @@ async function animasiGachaCustom(hasil){
 
 function isiEditorAnimasiCustom(){
   const editor=document.getElementById('customAnimationHtml');
-  if(editor&&!editor.dataset.loaded){editor.value=pengaturanAnimasi.customCode||DEFAULT_CUSTOM_HTML;editor.dataset.loaded='1';}
+  if(editor&&!editor.dataset.loaded){editor.value=pengaturanAnimasi.customCodeCleared?'':(pengaturanAnimasi.customCode||DEFAULT_CUSTOM_HTML);editor.dataset.loaded='1';}
   pengaturanAnimasi.customWinnerMode=deteksiModePemenangCustom(editor?.value||pengaturanAnimasi.customCode||'');
 }
 function sinkronkanDeskripsiModeCustom(){return deteksiModePemenangCustom(document.getElementById('customAnimationHtml')?.value||pengaturanAnimasi.customCode||'');}
+function konfirmasiTempelGantiKodeLama(){
+  dialogKonfirmasiHitungMundur(
+    'TEMPEL DAN GANTI KODE LAMA?',
+    'Seluruh isi editor HTML saat ini akan diganti dengan isi clipboard. Kode lama di editor tidak akan digabungkan. Pastikan kode baru sudah disalin sebelum menekan OK.',
+    tempelKodeDariClipboard
+  );
+}
+async function tempelKodeDariClipboard(){
+  const editor=document.getElementById('customAnimationHtml');
+  const status=document.getElementById('customHtmlStatus');
+  if(!editor)return;
+  try{
+    if(!navigator.clipboard?.readText)throw new Error('Fitur baca clipboard tidak tersedia di browser ini.');
+    const pasted=await navigator.clipboard.readText();
+    if(!pasted.trim())throw new Error('Clipboard kosong. Salin kode HTML terlebih dahulu.');
+    if(pasted.length>150000)throw new Error('Kode terlalu besar. Batas maksimal 150.000 karakter.');
+    editor.value=pasted;
+    editor.dataset.loaded='1';
+    pengaturanAnimasi.customWinnerMode=deteksiModePemenangCustom(pasted);
+    editor.focus();
+    if(status)status.textContent='Kode baru berhasil ditempel dan seluruh kode lama di editor sudah diganti. Tekan SIMPAN KODE agar perubahan tersimpan.';
+  }catch(error){
+    tampilkanDialog('GAGAL MEMBACA CLIPBOARD',String(error?.message||'Clipboard tidak dapat dibaca.')+' Pastikan halaman berjalan pada HTTPS atau localhost dan izin clipboard diizinkan browser.');
+  }
+}
+function konfirmasiHapusKodeHtml(){
+  dialogKonfirmasiHitungMundur(
+    'HAPUS SELURUH KODE HTML?',
+    'Kode HTML di editor dan kode custom yang tersimpan akan dihapus. Animasi Custom tidak dapat dijalankan sampai kode baru dimasukkan dan disimpan kembali.',
+    hapusKodeAnimasiCustom
+  );
+}
+function hapusKodeAnimasiCustom(){
+  const editor=document.getElementById('customAnimationHtml');
+  if(editor){editor.value='';editor.dataset.loaded='1';editor.focus();}
+  pengaturanAnimasi.customCode='';
+  pengaturanAnimasi.customCodeCleared=true;
+  pengaturanAnimasi.customWinnerMode='center';
+  simpanPengaturan();
+  const preview=document.getElementById('customAnimationPreviewFrame');if(preview)preview.srcdoc='';
+  const status=document.getElementById('customHtmlStatus');if(status)status.textContent='Seluruh kode HTML berhasil dihapus dari editor dan penyimpanan.';
+}
 function simpanKodeAnimasiCustom(showMessage=true){
   const editor=document.getElementById('customAnimationHtml'),code=(editor?.value||'').trim();
   const check=validasiDokumenAnimasiCustom(code);
   if(!check.ok){tampilkanDialog('KODE HTML TIDAK VALID',check.message,'error');return false;}
-  const mode=deteksiModePemenangCustom(code);pengaturanAnimasi.customCode=code;pengaturanAnimasi.customWinnerMode=mode;simpanPengaturan();
+  const mode=deteksiModePemenangCustom(code);pengaturanAnimasi.customCode=code;pengaturanAnimasi.customCodeCleared=false;pengaturanAnimasi.customWinnerMode=mode;simpanPengaturan();
   const status=document.getElementById('customHtmlStatus');if(status)status.textContent='Kode tersimpan. Mode otomatis terdeteksi: '+(mode==='html'?'animasi menentukan peserta':'sistem jadwal menentukan peserta')+'.';
   if(showMessage)tampilkanDialog('ANIMASI BERHASIL DISIMPAN','Kode HTML, CSS, dan JavaScript tersimpan. Mode penentuan peserta dibaca otomatis dari kode.','info');
   return true;
@@ -2728,7 +2781,8 @@ function normalisasiPengaturan(raw){
     rgbSpeed:Math.max(1,Math.min(30,Number(skinRaw.rgbSpeed)||10))
   };
   hasil.customCss=typeof raw?.customCss==='string'&&raw.customCss.length<=30000?raw.customCss:'';
-  hasil.customCode=typeof raw?.customCode==='string'&&raw.customCode.length<=150000?raw.customCode:DEFAULT_CUSTOM_HTML;
+  hasil.customCodeCleared=raw?.customCodeCleared===true;
+  hasil.customCode=hasil.customCodeCleared?'':(typeof raw?.customCode==='string'&&raw.customCode.length<=150000?raw.customCode:DEFAULT_CUSTOM_HTML);
   hasil.customWinnerMode=raw?.customWinnerMode==='html'?'html':'center';
   return hasil;
 }
@@ -4283,10 +4337,43 @@ async function downloadImage(options={}){
 
 // Dialog UI universal, konfirmasi dan notifikasi aplikasi.
 let dialogAction=null;
-function tampilkanDialog(title,message,type='info',onOk=null,showCancel=false){const o=document.getElementById('appDialog');if(!o)return;dialogAction=onOk;document.getElementById('appDialogTitle').textContent=title;document.getElementById('appDialogMessage').textContent=message;document.getElementById('appDialogIcon').textContent=type==='error'?'!':type==='warning'?'?':'i';document.getElementById('appDialogCancel').style.display=showCancel?'':'none';document.getElementById('appDialogOk').textContent=showCancel?'LANJUTKAN':'MENGERTI';o.classList.add('aktif');o.setAttribute('aria-hidden','false')}
-function tutupDialog(){const o=document.getElementById('appDialog');o?.classList.remove('aktif');o?.setAttribute('aria-hidden','true');dialogAction=null}
+let dialogCountdownTimer=null;
+function hentikanDialogCountdown(){
+  if(dialogCountdownTimer){clearInterval(dialogCountdownTimer);dialogCountdownTimer=null;}
+  const counter=document.getElementById('appDialogCountdown');if(counter){counter.hidden=true;counter.textContent='';}
+  const ok=document.getElementById('appDialogOk');if(ok)ok.disabled=false;
+}
+function tampilkanDialog(title,message,type='info',onOk=null,showCancel=false){
+  hentikanDialogCountdown();
+  const o=document.getElementById('appDialog');if(!o)return;
+  dialogAction=onOk;
+  document.getElementById('appDialogTitle').textContent=title;
+  document.getElementById('appDialogMessage').textContent=message;
+  document.getElementById('appDialogIcon').textContent=type==='error'?'!':type==='warning'?'?':'i';
+  document.getElementById('appDialogCancel').style.display=showCancel?'':'none';
+  document.getElementById('appDialogOk').textContent=showCancel?'LANJUTKAN':'MENGERTI';
+  o.classList.add('aktif');o.setAttribute('aria-hidden','false');
+}
+function tutupDialog(){
+  hentikanDialogCountdown();
+  const o=document.getElementById('appDialog');o?.classList.remove('aktif');o?.setAttribute('aria-hidden','true');dialogAction=null;
+}
 function dialogKonfirmasi(title,message,action){dialogAction=action;tampilkanDialog(title,message,'warning',action,true)}
-document.getElementById('appDialogOk')?.addEventListener('click',()=>{const fn=dialogAction;tutupDialog();if(typeof fn==='function')fn()});document.getElementById('appDialogCancel')?.addEventListener('click',tutupDialog);
+function dialogKonfirmasiHitungMundur(title,message,action){
+  tampilkanDialog(title,message,'warning',action,true);
+  const counter=document.getElementById('appDialogCountdown'),ok=document.getElementById('appDialogOk');
+  if(!counter||!ok)return;
+  let remaining=3;
+  counter.hidden=false;counter.textContent='3';ok.disabled=true;ok.textContent='OK (3)';
+  dialogCountdownTimer=setInterval(()=>{
+    remaining--;
+    if(remaining>0){counter.textContent=String(remaining);ok.textContent=`OK (${remaining})`;return;}
+    clearInterval(dialogCountdownTimer);dialogCountdownTimer=null;
+    counter.hidden=true;counter.textContent='';ok.disabled=false;ok.textContent='OK';
+  },1000);
+}
+document.getElementById('appDialogOk')?.addEventListener('click',()=>{if(document.getElementById('appDialogOk')?.disabled)return;const fn=dialogAction;tutupDialog();if(typeof fn==='function')fn()});
+document.getElementById('appDialogCancel')?.addEventListener('click',tutupDialog);
 // RGB hue cycle; speed 1-30 maps to a safe 30s..0.7s interval.
 let rgbTimer=null,rgbHue=0;
 function stopRGBTheme(){if(rgbTimer){clearInterval(rgbTimer);rgbTimer=null}}

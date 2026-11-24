@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Jadwal Asia Print - Tukar Hari</title>
+    <title>Pembagian Role Asia Print</title>
 
     <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB3_ezx13PZpP_soh3BX8k9EK4Hcp7J5KkicDQJy9mM-LIZlmuwLu0-pbz&s=10">
 
-    <meta name="description" content="Lihat jadwal PKL Asia Print dan gunakan fitur tukar hari untuk menyesuaikan jadwal kegiatan PKL.">
+    <meta name="description" content="Acak pembagian role anggota Asia Print, kelola role dan nama anggota, serta simpan hasil pembagian.">
 
-    <meta property="og:title" content="Jadwal PKL">
-    <meta property="og:description" content="Lihat jadwal PKL Asia Print dan gunakan fitur tukar hari untuk menyesuaikan jadwal kegiatan PKL.">
+    <meta property="og:title" content="Pembagian Role Asia Print">
+    <meta property="og:description" content="Acak pembagian role anggota Asia Print, kelola role dan nama anggota, serta simpan hasil pembagian.">
     <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB3_ezx13PZpP_soh3BX8k9EK4Hcp7J5KkicDQJy9mM-LIZlmuwLu0-pbz&s=10">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Jadwal Asia Print">
     <meta property="og:url" content="https://ahmadrijani.github.io/pkl/Website/JADWAL.html">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Jadwal PKL">
-    <meta name="twitter:description" content="Lihat jadwal PKL Asia Print dan gunakan fitur tukar hari untuk menyesuaikan jadwal kegiatan PKL.">
+    <meta name="twitter:title" content="Pembagian Role Asia Print">
+    <meta name="twitter:description" content="Acak pembagian role anggota Asia Print, kelola role dan nama anggota, serta simpan hasil pembagian.">
     <meta name="twitter:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB3_ezx13PZpP_soh3BX8k9EK4Hcp7J5KkicDQJy9mM-LIZlmuwLu0-pbz&s=10">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,82 +29,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
-// ===== ROLE RANDOMIZER V2: completely separate from legacy participant storage =====
-const ROLE_STORE_KEY='asiaPrintRoleSystemV2_data';
-const ROLE_DEFAULTS=['Bantu Desain','Bantu Desian','Administarasi','Operator'];
-const MEMBER_DEFAULTS=['Diang','AHMAD RIJANI','Fikri','Ferdi'];
-let roleData={roles:[...ROLE_DEFAULTS],members:[...MEMBER_DEFAULTS]};
-let roleLastResults=[];
-let roleAnimationSkip=false;
-function roleLoad(){
- try{const v=JSON.parse(localStorage.getItem(ROLE_STORE_KEY)||'null');
-  if(v&&Array.isArray(v.roles)&&Array.isArray(v.members)){
-   roleData={roles:v.roles.map(x=>String(x).trim()).filter(Boolean),members:v.members.map(x=>String(x).trim()).filter(Boolean)};
-  }
- }catch(e){console.warn('Role storage tidak dapat dibaca',e)}
- if(!roleData.roles.length)roleData.roles=[...ROLE_DEFAULTS];
-}
-function roleSave(){try{localStorage.setItem(ROLE_STORE_KEY,JSON.stringify({version:2,roles:roleData.roles,members:roleData.members,updatedAt:new Date().toISOString()}));const st=document.getElementById('roleStorageStatus');if(st)st.textContent='Tersimpan otomatis • Local Storage terpisah (ROLE V2)';}catch(e){tampilkanDialog('PENYIMPANAN GAGAL','Browser tidak mengizinkan Local Storage.','error')}}
-function roleShuffle(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
-function roleRenderSettings(){
- const rl=document.getElementById('roleListEditor'),ml=document.getElementById('memberListEditor');if(!rl||!ml)return;
- rl.innerHTML='';roleData.roles.forEach((name,i)=>{const row=document.createElement('div');row.className='role-edit-row';
- const label=document.createElement('span');label.textContent=name;const edit=document.createElement('button');edit.textContent='✎';edit.title='Edit nama role';edit.onclick=()=>editRole(i);
- const del=document.createElement('button');del.textContent='HAPUS';del.className='peserta-action delete';del.onclick=()=>hapusRole(i);row.append(label,edit,del);rl.append(row)});
- ml.innerHTML='';roleData.members.forEach((name,i)=>{const row=document.createElement('div');row.className='member-edit-row';const label=document.createElement('span');label.textContent=name;
- const edit=document.createElement('button');edit.textContent='✎';edit.title='Edit anggota';edit.onclick=()=>editAnggota(i);
- const del=document.createElement('button');del.textContent='HAPUS';del.className='peserta-action delete';del.onclick=()=>hapusAnggota(i);row.append(label,edit,del);ml.append(row)});
-}
-function rolePrompt(title,initial){const value=window.prompt(title,initial);return value===null?null:value.trim()}
-function tambahRole(){const el=document.getElementById('newRoleName'),v=(el?.value||'').trim();if(!v){el?.focus();return}if(roleData.roles.some(x=>x.toLowerCase()===v.toLowerCase())){tampilkanDialog('ROLE SUDAH ADA','Gunakan nama role yang berbeda.','warning');return}roleData.roles.push(v);el.value='';roleSave();roleRenderSettings()}
-function editRole(i){const v=rolePrompt('Ubah nama role:',roleData.roles[i]);if(v===null)return;if(!v){tampilkanDialog('NAMA KOSONG','Nama role tidak boleh kosong.','warning');return}if(roleData.roles.some((x,j)=>j!==i&&x.toLowerCase()===v.toLowerCase())){tampilkanDialog('ROLE SUDAH ADA','Nama role tersebut sudah digunakan.','warning');return}roleData.roles[i]=v;roleSave();roleRenderSettings()}
-function hapusRole(i){const name=roleData.roles[i];if(name===undefined)return;dialogKonfirmasi('HAPUS ROLE?',`PERINGATAN: role "${name}" akan dihapus permanen dari daftar role. Role tersebut tidak akan ikut pengacakan berikutnya.`,()=>{roleData.roles.splice(i,1);roleSave();roleRenderSettings()})}
-function tambahAnggota(){const el=document.getElementById('newMemberName'),v=(el?.value||'').trim();if(!v){el?.focus();return}if(roleData.members.some(x=>x.toLowerCase()===v.toLowerCase())){tampilkanDialog('ANGGOTA SUDAH ADA','Nama anggota sudah terdaftar.','warning');return}roleData.members.push(v);el.value='';roleSave();roleRenderSettings()}
-function editAnggota(i){const v=rolePrompt('Ubah nama anggota:',roleData.members[i]);if(v===null)return;if(!v){tampilkanDialog('NAMA KOSONG','Nama anggota tidak boleh kosong.','warning');return}roleData.members[i]=v;roleSave();roleRenderSettings()}
-function hapusAnggota(i){const name=roleData.members[i];if(name===undefined)return;dialogKonfirmasi('HAPUS ANGGOTA?',`Anggota "${name}" akan dihapus dari daftar dan tidak ikut pengacakan.`,()=>{roleData.members.splice(i,1);roleSave();roleRenderSettings()})}
-function resetRoleDefault(){dialogKonfirmasi('RESET ROLE & ANGGOTA?', 'Semua perubahan role dan anggota akan diganti dengan data bawaan. Data jadwal lama tidak akan disentuh.',()=>{roleData={roles:[...ROLE_DEFAULTS],members:[...MEMBER_DEFAULTS]};roleSave();roleRenderSettings();document.getElementById('roleResults').innerHTML='<div class="role-empty">Data role berhasil dikembalikan ke bawaan.</div>'})}
-function lewatiAnimasiRole(){roleAnimationSkip=true}
-async function animasiKejarRole(results){
- const overlay=document.getElementById('roleChaseOverlay'),track=document.getElementById('roleChaseTrack'),status=document.getElementById('roleChaseStatus'),bar=document.getElementById('roleChaseProgress');
- track.innerHTML='';bar.style.width='0%';roleAnimationSkip=false;
- const rows=results.map((r,i)=>{const row=document.createElement('div');row.className='role-chase-row chasing';const role=document.createElement('div');role.className='role-chase-role';role.textContent=r.role;const arrow=document.createElement('div');arrow.className='role-chase-arrow';arrow.textContent='➜';const name=document.createElement('div');name.className='role-chase-name';name.textContent='MENCARI NAMA...';row.append(role,arrow,name);track.append(row);return {row,role,name,r}});
- overlay.classList.add('aktif');overlay.setAttribute('aria-hidden','false');
- for(let i=0;i<rows.length;i++){
-  const item=rows[i];status.textContent=`ROLE "${item.r.role}" sedang mengejar nama anggota...`;
-  const pool=roleShuffle(roleData.members);
-  for(let j=0;j<Math.min(9,pool.length+5)&&!roleAnimationSkip;j++){
-   item.name.textContent=pool[j%pool.length]||'...';await new Promise(r=>setTimeout(r,85+Math.min(i*12,80)));
-  }
-  item.name.textContent=item.r.member;item.row.classList.remove('chasing');item.row.classList.add('locked');bar.style.width=((i+1)/rows.length*100)+'%';
-  await new Promise(r=>setTimeout(r,roleAnimationSkip?0:160));
- }
- status.textContent='SEMUA ROLE BERHASIL DIPASANGKAN';await new Promise(r=>setTimeout(r,roleAnimationSkip?0:450));
- overlay.classList.remove('aktif');overlay.setAttribute('aria-hidden','true');
-}
-function renderRoleResults(results){
- const root=document.getElementById('roleResults');root.innerHTML='';
- results.forEach((r,i)=>{const card=document.createElement('article');card.className='role-card';card.style.animationDelay=(i*65)+'ms';
- const no=document.createElement('div');no.className='role-index';no.textContent=`PENUGASAN ${String(i+1).padStart(2,'0')}`;
- const title=document.createElement('h3');title.textContent=r.role;
- const member=document.createElement('div');member.className='role-assignee';member.textContent=r.member;
- card.append(no,title,member);root.append(card)});
-}
-async function acakRole(){
- if(!roleData.roles.length){tampilkanDialog('ROLE KOSONG','Tambahkan minimal satu role di Pengaturan → Role & Anggota.','warning');return}
- if(!roleData.members.length){tampilkanDialog('ANGGOTA KOSONG','Tambahkan minimal satu nama anggota di Pengaturan → Role & Anggota.','warning');return}
- const roles=roleShuffle(roleData.roles),members=roleShuffle(roleData.members);
- const n=Math.min(roles.length,members.length);
- const results=Array.from({length:n},(_,i)=>({role:roles[i],member:members[i]}));
- roleLastResults=results;
- await animasiKejarRole(results);
- renderRoleResults(results);
- if(roles.length>members.length)tampilkanDialog('ROLE LEBIH BANYAK',`${members.length} role terisi. ${roles.length-members.length} role belum mendapat anggota karena jumlah anggota lebih sedikit.`,'info');
-}
-roleLoad();roleRenderSettings();
-document.querySelectorAll('[data-settings-tab]').forEach(tab=>tab.addEventListener('click',()=>{if(tab.dataset.settingsTab==='role')roleRenderSettings()}));
-
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -1353,56 +1278,37 @@ body.skin-enabled{color:var(--skin-on-background)!important;background:radial-gr
 .loading-skeleton{position:fixed;inset:0;z-index:20000;padding:5vh 5vw;background:#080808;display:grid;grid-template-rows:100px 90px 1fr;gap:18px;transition:opacity .35s,visibility .35s}.loading-skeleton.done{opacity:0;visibility:hidden;pointer-events:none}.loading-skeleton>div,.skeleton-grid i{background:linear-gradient(100deg,#171717 20%,#303030 38%,#171717 56%);background-size:220% 100%;animation:skeletonShimmer 1.2s linear infinite;border:1px solid #333;border-radius:9px}.skeleton-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.skeleton-grid i{display:block;min-height:110px}@keyframes skeletonShimmer{to{background-position-x:-220%}}
 @media(max-width:650px){.loading-skeleton{grid-template-rows:80px 110px 1fr}.skeleton-grid{grid-template-columns:repeat(2,1fr)}.app-dialog-actions{flex-direction:column}}
 
-
-/* ROLE SYSTEM V2 — isolated storage, responsive role board, and chase animation */
-.role-board-shell{max-width:1250px;margin:14px auto;padding:18px;background:linear-gradient(145deg,#080808,#17100c 55%,#080808);border:2px solid var(--oranye);box-shadow:0 0 24px rgba(255,70,0,.25)}
-.role-board-heading{text-align:center;padding:8px 4px 18px}.role-board-heading span,.role-chase-kicker{color:#ffad45;font-size:10px;font-weight:900;letter-spacing:3px}.role-board-heading h2{font-size:clamp(23px,5vw,38px);font-weight:1000;font-style:italic;color:#fff;text-shadow:0 0 16px rgba(255,100,0,.5)}.role-board-heading p{color:#aaa;font-size:12px;margin-top:5px}
-.role-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.role-card{position:relative;overflow:hidden;padding:15px;background:linear-gradient(145deg,#1b1b1b,#080808);border:1px solid #743018;box-shadow:inset 0 0 20px rgba(255,70,0,.06);animation:roleCardIn .55s both}.role-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(#ffd05a,#ff3d00)}.role-card h3{color:#ffae37;font-size:15px;letter-spacing:1px;margin-bottom:12px}.role-card .role-assignee{font-size:clamp(17px,3vw,23px);font-weight:1000;color:#fff;overflow-wrap:anywhere}.role-card .role-index{font-size:9px;color:#777;letter-spacing:2px;margin-bottom:5px}.role-empty{grid-column:1/-1;text-align:center;padding:55px 15px;color:#888;border:1px dashed #63301c}
-@keyframes roleCardIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
-.role-settings-intro{padding:12px;margin-bottom:12px;background:#100b08;border:1px solid #62301c}.role-settings-intro b{display:block;color:#ffad45}.role-settings-intro span{display:block;color:#aaa;font-size:11px;margin-top:4px}.role-manager-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.role-manager-card{padding:12px;background:#0b0b0b;border:1px solid #4e2619;min-width:0}.role-manager-card h3{color:#ff9b36;font-size:14px;margin-bottom:10px}.role-edit-row,.member-edit-row{display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid #29201b}.role-edit-row span,.member-edit-row span{flex:1;min-width:0;overflow-wrap:anywhere;font-size:12px;font-weight:800}.role-edit-row button,.member-edit-row button{min-height:32px;padding:5px 9px;font-size:10px}.role-add-row{display:flex;gap:6px;margin-top:10px}.role-add-row input{min-width:0;flex:1;padding:10px;background:#171717;border:1px solid #67402a;color:white;font:inherit}.role-add-row button,.role-settings-foot button{font-size:10px;padding:7px 9px;min-height:36px}.role-settings-foot{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:12px;color:#999;font-size:11px}.role-settings-foot button{background:#29100b;border-color:#a64b22}
-.role-chase-overlay{z-index:6500}.role-chase-box{width:min(760px,95vw);padding:22px;background:linear-gradient(145deg,#15100d,#030303);border:2px solid #ff7800;box-shadow:0 0 45px rgba(255,90,0,.5);text-align:center}.role-chase-box h2{font-size:clamp(21px,5vw,34px);color:#fff;margin:7px 0}.role-chase-box>p{color:#ffb14c;font-size:12px;min-height:20px}.role-chase-track{display:grid;gap:8px;margin:16px 0;max-height:48vh;overflow:auto}.role-chase-row{display:grid;grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);align-items:center;gap:8px;padding:10px;background:#090909;border:1px solid #3c281d}.role-chase-role,.role-chase-name{padding:10px 6px;min-width:0;overflow-wrap:anywhere;font-weight:1000;font-size:clamp(11px,2.5vw,16px);background:#19110c;border:1px solid #7d3d1d;color:#ffd08b}.role-chase-name{color:#fff;border-color:#555;background:#151515}.role-chase-arrow{color:#ff7b00;font-size:20px;animation:roleArrow .55s ease-in-out infinite alternate}.role-chase-row.chasing .role-chase-role{animation:rolePulse .35s infinite alternate}.role-chase-row.locked{border-color:#ffc000;box-shadow:0 0 14px rgba(255,180,0,.35)}.role-chase-row.locked .role-chase-arrow{color:#fff000;animation:none}.role-chase-progress{height:6px;background:#29140b;border:1px solid #633019;margin:12px auto;width:90%;overflow:hidden}.role-chase-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff3d00,#ffbd37,#fff);transition:width .2s}.role-chase-box>button{margin-top:4px}@keyframes roleArrow{to{transform:translateX(7px);filter:brightness(1.8)}}@keyframes rolePulse{to{filter:brightness(1.8);transform:scale(1.04)}}
-@media(max-width:700px){.role-manager-grid{grid-template-columns:1fr}.role-add-row{flex-wrap:wrap}.role-add-row input{flex-basis:100%}.role-settings-foot{align-items:flex-start;flex-direction:column}.role-chase-row{gap:4px;padding:7px}.role-chase-role,.role-chase-name{padding:8px 3px;font-size:11px}}
 </style>
 </head>
 <body>
 <div class="container">
 <div class="header">
-<div class="judul-kecil">SISTEM PENJADWALAN</div>
-<div class="judul-utama">JADWAL <span>ASIA PRINT</span></div>
+<div class="judul-kecil">ROLE ASSIGNMENT SYSTEM</div>
+<div class="judul-utama">ROLE <span>ASIA PRINT</span></div>
 
 </div>
 
 <div class="control-panel">
-<div class="kombinasi-info">PENGACAKAN PEMBAGIAN TUGAS <strong id="kombinasiAktif">ROLE</strong></div>
-<div class="download-area"><button class="btn-download" id="btnDownload" onclick="bukaPengaturanDownload()">⬇ DOWNLOAD IMAGE</button></div>
+<div class="kombinasi-info">PENGUNDIAN KE: <strong id="roleRoundNumber">0</strong></div>
+<div class="download-area"><button class="btn-download" id="btnDownload" onclick="bukaPengaturanDownload()">⬇ DOWNLOAD ROLE PNG</button></div>
 
 <div class="tombol-container">
-<button class="btn-acak" id="btnAcak" onclick="acakRole()">🎭 ACAK ROLE</button>
-<button class="btn-tukar" id="btnTukar" onclick="ubahModeTukar()">⇄ TUKAR HARI</button>
-<button class="btn-balik" id="btnBalik" onclick="balikDuaHari()">↔ BALIK SENIN ↔ SELASA</button>
-<button onclick="resetDefault()">↩ DEFAULT</button>
-<button onclick="bukaDaftar()">☰ KOMBINASI</button>
+<button class="btn-acak" id="btnAcak" onclick="acakKombinasi()">🎯 ACAK ROLE</button>
+
+
+<button onclick="resetDefault()">↺ RESET HASIL</button>
+
 <button onclick="bukaPengaturan()">⚙ PENGATURAN</button>
 </div>
 </div>
 
-<div id="areaDownload" style="display:none">
+<div id="areaDownload">
 <div class="garis-atas"></div>
 <div class="jadwal" id="wadahJadwal"></div>
-<div class="footer-download">Website dibuat oleh: <strong>AHMAD RIJANI</strong><br><span class="footer-tanggal">10/09/2026</span></div>
+<div class="footer-download">SISTEM PEMBAGIAN ROLE ASIA PRINT<br><span class="footer-tanggal">Setiap anggota akan mendapat satu role setiap kali diacak.</span></div>
 </div>
 </div>
 
-<section class="role-board-shell" id="roleBoardShell">
-  <div class="role-board-heading"><span>ASIA PRINT • ROLE ASSIGNMENT</span><h2>HASIL PEMBAGIAN ROLE</h2><p>Setiap anggota mendapatkan satu role secara acak.</p></div>
-  <div id="roleResults" class="role-results"><div class="role-empty">Tekan tombol ACAK ROLE untuk memulai pembagian.</div></div>
-</section>
-<div class="overlay role-chase-overlay" id="roleChaseOverlay" aria-hidden="true">
- <div class="role-chase-box"><div class="role-chase-kicker">ROLE ASSIGNMENT SYSTEM</div><h2>ROLE SEDANG MENGEJAR NAMA</h2><p id="roleChaseStatus">Mencari pasangan role dan anggota...</p>
-  <div class="role-chase-track" id="roleChaseTrack"></div><div class="role-chase-progress"><span id="roleChaseProgress"></span></div>
-  <button type="button" id="roleChaseSkip" onclick="lewatiAnimasiRole()">LEWATI ANIMASI</button>
- </div>
-</div>
 <div class="overlay" id="spinOverlay"><div class="gacha-box"><button type="button" class="btn-skip-animasi" onclick="mintaSkipAnimasi()">SKIP ANIMASI</button><div class="gacha-title">GACHA JADWAL</div><div class="gacha-subtitle" id="gachaSubtitle">HASIL SEDANG DIUNDI...</div><div class="gacha-stage" id="gachaStage"></div><span class="gacha-spark"></span><span class="gacha-spark"></span><span class="gacha-spark"></span><span class="gacha-spark"></span><div class="gacha-status" id="gachaStatus">MEMULAI PENGUNDIAN...</div><div class="gacha-progress"><span id="gachaProgressBar"></span></div></div></div>
 
 
@@ -1624,7 +1530,7 @@ INITIALIZING MATRIX STREAM...</div>
   </div>
 </div>
 
-<div class="overlay" id="hasilOverlay"><div class="hasil-box" id="hasilBox"><div class="hasil-effect-ring"></div><div class="hasil-spark s1"></div><div class="hasil-spark s2"></div><div class="hasil-spark s3"></div><div class="hasil-spark s4"></div><div class="hasil-judul">SIAPA YANG MASUK?</div><div class="hasil-subjudul">HASIL ACAK JADWAL</div><div class="hasil-grid" id="hasilGrid"></div><div class="cat-result-media" id="catResultMedia" hidden><img id="catResultImage" src="https://i.scdn.co/image/ab67616d00001e028b76d90a65a5721eafdb22ae" alt="Hasil akhir CAT BLASTER"><div class="cat-result-caption">HASIL AKHIR CAT BLASTER</div><button type="button" id="catResultSoundBtn" class="cat-result-sound-btn" onclick="putarSuaraFinalCat()"><i class="fa-solid fa-volume-high"></i> PUTAR SUARA KHUSUS</button><audio id="catResultAudio" preload="auto"></audio></div><div class="hasil-actions"><button type="button" class="btn-lanjut" onclick="tontonUlangAnimasi()">↻ TONTON ULANG ANIMASI</button><button type="button" class="btn-lanjut btn-hasil-lain" onclick="bukaPilihAnimasiLain()">▣ LIHAT HASIL DENGAN ANIMASI LAIN</button><button type="button" class="btn-lanjut btn-hasil-close" onclick="tutupHasil()">LANJUTKAN →</button></div></div></div>
+<div class="overlay" id="hasilOverlay"><div class="hasil-box" id="hasilBox"><div class="hasil-effect-ring"></div><div class="hasil-spark s1"></div><div class="hasil-spark s2"></div><div class="hasil-spark s3"></div><div class="hasil-spark s4"></div><div class="hasil-judul">HASIL PEMBAGIAN ROLE</div><div class="hasil-subjudul">ROLE SUDAH DIBAGIKAN</div><div class="hasil-grid" id="hasilGrid"></div><div class="cat-result-media" id="catResultMedia" hidden><img id="catResultImage" src="https://i.scdn.co/image/ab67616d00001e028b76d90a65a5721eafdb22ae" alt="Hasil akhir CAT BLASTER"><div class="cat-result-caption">HASIL AKHIR CAT BLASTER</div><button type="button" id="catResultSoundBtn" class="cat-result-sound-btn" onclick="putarSuaraFinalCat()"><i class="fa-solid fa-volume-high"></i> PUTAR SUARA KHUSUS</button><audio id="catResultAudio" preload="auto"></audio></div><div class="hasil-actions"><button type="button" class="btn-lanjut" onclick="tontonUlangAnimasi()">↻ TONTON ULANG ANIMASI</button><button type="button" class="btn-lanjut btn-hasil-close" onclick="tutupHasil()">LANJUTKAN →</button></div></div></div>
 
 <div class="overlay" id="animasiPilihOverlay">
   <div class="animasi-pilih-box">
@@ -1681,7 +1587,7 @@ INITIALIZING MATRIX STREAM...</div>
     <div class="settings-desc">Atur animasi, peserta, tema warna, dan bentuk tampilan. Perubahan peserta langsung menyesuaikan jadwal serta kombinasi.</div>
     <div class="settings-tabs" role="tablist" aria-label="Pengaturan">
       <button type="button" class="settings-tab aktif" data-settings-tab="animasi" role="tab" aria-selected="true">ANIMASI</button>
-      <button type="button" class="settings-tab" data-settings-tab="peserta" role="tab" aria-selected="false">PESERTA</button>\n      <button type="button" class="settings-tab" data-settings-tab="role" role="tab" aria-selected="false">ROLE & ANGGOTA</button>
+      <button type="button" class="settings-tab" data-settings-tab="peserta" role="tab" aria-selected="false">PESERTA</button>
       <button type="button" class="settings-tab" data-settings-tab="tema" role="tab" aria-selected="false">TEMA</button>
     </div>
 
@@ -1925,7 +1831,7 @@ INITIALIZING MATRIX STREAM...</div>
 <div class="overlay custom-dialog-overlay" id="appDialog" aria-hidden="true"><div class="app-dialog-box" role="dialog" aria-modal="true"><div class="app-dialog-icon" id="appDialogIcon">!</div><h2 id="appDialogTitle">PERINGATAN</h2><p id="appDialogMessage"></p><div class="app-dialog-actions"><button type="button" id="appDialogCancel" class="dialog-secondary">BATAL</button><button type="button" id="appDialogOk">MENGERTI</button></div></div></div>
 <div class="overlay" id="rgbWarningOverlay"><div class="app-dialog-box"><div class="app-dialog-icon rgb-icon">RGB</div><h2>AKTIFKAN TEMA RGB?</h2><p>Perubahan warna otomatis dapat sedikit memengaruhi performa dan berpotensi mengganggu kenyamanan saat menggunakan halaman atau mengambil tangkapan layar.</p><div class="app-dialog-actions"><button type="button" class="dialog-secondary" onclick="tutupPeringatanRGB()">BATAL</button><button type="button" onclick="aktifkanRGB()">LANJUTKAN</button></div></div></div>
 <div class="overlay" id="downloadSettingsOverlay"><div class="app-dialog-box download-dialog"><button class="btn-tutup dialog-close" onclick="tutupPengaturanDownload()">×</button><div class="app-dialog-icon"><i class="fa-solid fa-image"></i></div><h2>PENGATURAN DOWNLOAD</h2><p>Atur elemen yang akan dimasukkan ke gambar. Bentuk kartu dan sudut mengikuti pilihan BENTUK UI yang sedang aktif.</p><label class="download-toggle"><span><b>Download dengan nama</b><small>Tambahkan header JADWAL ASIA PRINT di bagian atas gambar.</small></span><input type="checkbox" id="downloadWithName" checked></label><label class="download-toggle"><span><b>Credits</b><small>Tampilkan tanggal unduh dan tanggal website dibuat di samping nama pembuat.</small></span><input type="checkbox" id="downloadCredits" checked></label><div class="app-dialog-actions"><button type="button" class="dialog-secondary" onclick="tutupPengaturanDownload()">BATAL</button><button type="button" id="confirmDownloadButton" onclick="konfirmasiDownload()">DOWNLOAD PNG</button></div></div></div>
-<div class="loading-skeleton" id="loadingSkeleton" aria-label="Memuat jadwal"><div class="skeleton-head"></div><div class="skeleton-controls"></div><div class="skeleton-grid"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+<div class="loading-skeleton" id="loadingSkeleton" aria-label="Memuat sistem role"><div class="skeleton-head"></div><div class="skeleton-controls"></div><div class="skeleton-grid"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
 
 <script>
 const PESERTA_KEY='jadwalAsiaPrintPesertaV1';
@@ -3969,7 +3875,612 @@ async function konfirmasiDownload(){const btn=document.getElementById('confirmDo
 // First-load skeleton disappears after initial render settles.
 window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loadingSkeleton')?.classList.add('done'),420),{once:true});setTimeout(()=>document.getElementById('loadingSkeleton')?.classList.add('done'),2600);
 
-muatPengaturan();renderPesertaSettings();refreshTotalKombinasi();jadwalAktif=pesertaDefault();updateJadwal();buatDaftarKombinasi();setupSync();pasangTombolPreviewAnimasi();if(setupPertama)setTimeout(bukaPemilihanTemaAwal,80);
+/* Inisialisasi sistem role V2 dilakukan setelah script lama selesai dimuat. */ setupPertama=false;
+</script>
+<script>
+/* =========================================================
+   ASIA PRINT — ROLE ASSIGNMENT SYSTEM V2
+   Sistem baru memakai satu key LocalStorage yang terpisah.
+   ========================================================= */
+const ROLE_DATA_KEY = 'AsiaPrint_RoleAssignment_System_V2';
+const ROLE_DEFAULT_NAMES = ['Bantu Desain', 'Bantu Desian', 'Administrasi', 'Operator'];
+const ROLE_MEMBER_DEFAULTS = ['Diang', 'AHMAD RIJANI', 'Fikri', 'Ferdi'];
+const ROLE_PALETTE = ['#ff6a00','#21b7a8','#5987ff','#bb70ff','#e54d86','#c99a35','#37a45b','#e45e40'];
+let roleSystemState = null;
+let roleEditorActiveId = null;
+let roleSkipRequested = false;
+let roleCurrentAnimation = null;
+let roleResultSnapshot = [];
+
+function roleMakeId(prefix='item') {
+  try { if (crypto && typeof crypto.randomUUID === 'function') return `${prefix}-${crypto.randomUUID()}`; } catch (_) {}
+  return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,10)}`;
+}
+function roleClone(value) { return JSON.parse(JSON.stringify(value)); }
+function roleFreshState() {
+  return {
+    version: 2,
+    roles: ROLE_DEFAULT_NAMES.map(name => ({id:roleMakeId('role'),name})),
+    members: ROLE_MEMBER_DEFAULTS.map(name => ({id:roleMakeId('member'),name})),
+    assignments: [],
+    round: 0,
+    animation: {enabled:true,speed:1},
+    visualSettings: null
+  };
+}
+function roleNormalizeState(raw) {
+  if (!raw || raw.version !== 2 || !Array.isArray(raw.roles) || !Array.isArray(raw.members)) return null;
+  const seenRoleIds = new Set();
+  const roles = raw.roles.map(item => {
+    const name = String(typeof item === 'string' ? item : item?.name || '').trim();
+    if (!name) return null;
+    let id = String(typeof item === 'object' && item?.id ? item.id : roleMakeId('role'));
+    if (seenRoleIds.has(id)) id = roleMakeId('role');
+    seenRoleIds.add(id);
+    return {id,name};
+  }).filter(Boolean);
+  const seenMemberIds = new Set();
+  const members = raw.members.map(item => {
+    let name = String(typeof item === 'string' ? item : item?.name || '').trim();
+    if (!name) return null;
+    if (name === 'Ahmad Rijani') name = 'AHMAD RIJANI';
+    let id = String(typeof item === 'object' && item?.id ? item.id : roleMakeId('member'));
+    if (seenMemberIds.has(id)) id = roleMakeId('member');
+    seenMemberIds.add(id);
+    return {id,name};
+  }).filter(Boolean);
+  const safeRoles = roles.length ? roles : ROLE_DEFAULT_NAMES.map(name => ({id:roleMakeId('role'),name}));
+  const roleIds = new Set(safeRoles.map(x=>x.id));
+  const memberIds = new Set(members.map(x=>x.id));
+  const assignments = Array.isArray(raw.assignments) ? raw.assignments.filter(x => x && memberIds.has(x.memberId) && roleIds.has(x.roleId)).map(x => ({memberId:x.memberId,roleId:x.roleId,step:Number(x.step)||0})) : [];
+  return {
+    version:2, roles:safeRoles, members, assignments,
+    round:Math.max(0,Number(raw.round)||0),
+    animation:{enabled:raw.animation?.enabled!==false,speed:Math.max(.55,Math.min(1.8,Number(raw.animation?.speed)||1))},
+    visualSettings:raw.visualSettings && typeof raw.visualSettings==='object' ? raw.visualSettings : null
+  };
+}
+function roleLoadState() {
+  let stored = null;
+  try { stored = JSON.parse(localStorage.getItem(ROLE_DATA_KEY) || 'null'); } catch (_) {}
+  roleSystemState = roleNormalizeState(stored) || roleFreshState();
+  syncLegacyMemberArray();
+  if (roleSystemState.visualSettings?.skin && typeof roleSystemState.visualSettings.skin === 'object') {
+    pengaturanAnimasi.skin = {...pengaturanAnimasi.skin,...roleSystemState.visualSettings.skin};
+  }
+  roleSaveState();
+}
+function roleSaveState() {
+  if (!roleSystemState) return;
+  try {
+    roleSystemState.version = 2;
+    roleSystemState.updatedAt = new Date().toISOString();
+    localStorage.setItem(ROLE_DATA_KEY, JSON.stringify(roleSystemState));
+  } catch (error) {
+    console.warn('Penyimpanan role tidak tersedia:', error);
+    if (typeof tampilkanDialog === 'function') tampilkanDialog('PENYIMPANAN TIDAK TERSEDIA','Browser tidak dapat menyimpan perubahan. Periksa izin penyimpanan atau mode privat browser.','warning');
+  }
+}
+function syncLegacyMemberArray() {
+  if (!roleSystemState) return;
+  peserta = roleSystemState.members.map(x=>x.name);
+}
+function roleEscape(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function roleShuffle(items) {
+  const arr = [...items];
+  for (let i=arr.length-1;i>0;i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+function roleClearResult() {
+  if (!roleSystemState) return;
+  roleSystemState.assignments = [];
+  roleResultSnapshot = [];
+  hasilFinalTersimpan = null;
+  jadwalAktif = {senin:[],selasa:[]};
+  kombinasiAktif = -1;
+  roleSaveState();
+  updateJadwal();
+  renderHasil();
+  const resultOverlay = document.getElementById('hasilOverlay');
+  resultOverlay?.classList.remove('aktif');
+}
+function roleGetAssignmentsByRole(assignments=roleSystemState?.assignments||[]) {
+  return (roleSystemState?.roles||[]).map(role => ({
+    role,
+    members: assignments.map(a => ({assignment:a,member:roleSystemState.members.find(m=>m.id===a.memberId)})).filter(x=>x.member && x.assignment.roleId===role.id).sort((a,b)=>(a.assignment.step||0)-(b.assignment.step||0)).map(x=>x.member)
+  }));
+}
+function updateJadwal() {
+  const wrap = document.getElementById('wadahJadwal');
+  if (!wrap || !roleSystemState) return;
+  wrap.classList.add('role-grid');
+  const groups = roleGetAssignmentsByRole();
+  wrap.innerHTML = groups.map(({role,members},index) => {
+    const assigned = members.length ? members.map((member,i)=>`<div class="role-member-chip"><span class="role-member-number">${String(i+1).padStart(2,'0')}</span><strong>${roleEscape(member.name)}</strong><i class="fa-solid fa-check" aria-hidden="true"></i></div>`).join('') : `<div class="role-empty">${roleSystemState.assignments.length ? 'BELUM ADA ANGGOTA DI ROLE INI' : 'TEKAN ACAK ROLE UNTUK MEMULAI'}</div>`;
+    return `<article class="hari role-card" data-role-id="${roleEscape(role.id)}" style="--role-accent:${ROLE_PALETTE[index%ROLE_PALETTE.length]}"><div class="role-card-top"><span class="role-card-kicker">ROLE ${(index+1).toString().padStart(2,'0')}</span><span class="role-card-count">${members.length} ANGGOTA</span></div><h2 class="hari-header">${roleEscape(role.name)}</h2><div class="role-member-list">${assigned}</div><div class="role-card-glow"></div></article>`;
+  }).join('');
+  const count = document.getElementById('pesertaCount');
+  if (count) count.textContent = `${roleSystemState.members.length} anggota • ${roleSystemState.roles.length} role`;
+  const round = document.getElementById('roleRoundNumber');
+  if (round) round.textContent = String(roleSystemState.round);
+  const summary = document.getElementById('roleSummary');
+  if (summary) summary.textContent = `${roleSystemState.members.length} anggota • ${roleSystemState.roles.length} role tersedia`;
+}
+function renderRoleSettings() {
+  const list = document.getElementById('rolesList');
+  if (!list || !roleSystemState) return;
+  list.innerHTML = '';
+  roleSystemState.roles.forEach((role,index)=>{
+    const row = document.createElement('div');
+    row.className = 'role-setting-row';
+    row.style.setProperty('--role-accent',ROLE_PALETTE[index%ROLE_PALETTE.length]);
+    const meta = document.createElement('div'); meta.className='role-setting-meta';
+    const no = document.createElement('span'); no.className='role-setting-no'; no.textContent=String(index+1).padStart(2,'0');
+    const name = document.createElement('strong'); name.className='role-setting-name'; name.textContent=role.name;
+    meta.append(no,name);
+    const actions = document.createElement('div'); actions.className='role-setting-actions';
+    const edit = document.createElement('button'); edit.type='button'; edit.className='role-setting-edit'; edit.title='Edit nama role'; edit.textContent='✎'; edit.addEventListener('click',()=>editRole(role.id));
+    const del = document.createElement('button'); del.type='button'; del.className='role-setting-delete'; del.title='Hapus role'; del.textContent='×'; del.disabled=roleSystemState.roles.length<=1; del.addEventListener('click',()=>hapusRole(role.id));
+    actions.append(edit,del); row.append(meta,actions); list.appendChild(row);
+  });
+}
+function renderPesertaSettings() {
+  const list = document.getElementById('pesertaList');
+  if (!list || !roleSystemState) return;
+  list.innerHTML = '';
+  roleSystemState.members.forEach((member,index)=>{
+    const row=document.createElement('div'); row.className='peserta-row role-person-row';
+    const no=document.createElement('div'); no.className='peserta-no'; no.textContent=String(index+1);
+    const name=document.createElement('div'); name.className='peserta-name'; name.textContent=member.name;
+    const actions=document.createElement('div'); actions.className='peserta-order-actions';
+    const up=document.createElement('button'); up.type='button'; up.className='peserta-action move'; up.textContent='↑'; up.title='Pindah ke atas'; up.disabled=index===0; up.addEventListener('click',()=>geserPeserta(index,-1));
+    const down=document.createElement('button'); down.type='button'; down.className='peserta-action move'; down.textContent='↓'; down.title='Pindah ke bawah'; down.disabled=index===roleSystemState.members.length-1; down.addEventListener('click',()=>geserPeserta(index,1));
+    actions.append(up,down);
+    const edit=document.createElement('button'); edit.type='button'; edit.className='peserta-action edit'; edit.textContent='✎'; edit.title='Edit nama anggota'; edit.addEventListener('click',()=>ubahNamaPeserta(index));
+    const del=document.createElement('button'); del.type='button'; del.className='peserta-action delete'; del.textContent='×'; del.title='Hapus anggota'; del.addEventListener('click',()=>hapusPeserta(index));
+    row.append(no,name,actions,edit,del); list.appendChild(row);
+  });
+  const count=document.getElementById('pesertaCount');
+  if(count) count.textContent=`${roleSystemState.members.length} anggota • ${roleSystemState.roles.length} role`;
+  renderRoleSettings();
+}
+function roleRefreshAfterRosterChange({keepAssignments=false}={}) {
+  syncLegacyMemberArray();
+  if (!keepAssignments) roleClearResult();
+  else { roleSaveState(); updateJadwal(); renderHasil(); }
+  renderPesertaSettings();
+}
+function simpanPeserta() {
+  if (!roleSystemState) return;
+  const old = roleSystemState.members;
+  roleSystemState.members = peserta.map((name,index)=>({id:old[index]?.id||roleMakeId('member'),name:String(name).trim()})).filter(x=>x.name);
+  roleRefreshAfterRosterChange();
+}
+function rebuildSetelahPerubahan() { roleRefreshAfterRosterChange(); }
+function bukaPengaturan() {
+  if (sedangMengacak) return;
+  const overlay=document.getElementById('settingsOverlay');
+  const box=document.querySelector('.settings-box');
+  renderPesertaSettings(); sinkronkanPengaturanUI();
+  overlay?.classList.add('aktif');
+  if(box) box.scrollTop=0;
+  pilihTabPengaturan('peserta');
+  requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
+}
+function sinkronkanPengaturanUI() {
+  const toggle=document.getElementById('toggleRoleAnimation');
+  if(toggle) toggle.checked=roleSystemState?.animation?.enabled!==false;
+  const animStatus=document.getElementById('roleAnimationStatus');
+  if(animStatus) animStatus.textContent=roleSystemState?.animation?.enabled!==false?'Aktif':'Mati';
+  const speed=document.getElementById('roleAnimationSpeed');
+  if(speed) speed.value=String(roleSystemState?.animation?.speed||1);
+  const speedLabel=document.getElementById('roleAnimationSpeedValue');
+  if(speedLabel) speedLabel.textContent=`${Number(roleSystemState?.animation?.speed||1).toFixed(1)}×`;
+  if(typeof sinkronkanSkinUI==='function') sinkronkanSkinUI();
+}
+function simpanPengaturan() {
+  if (!roleSystemState) return;
+  roleSystemState.visualSettings = {
+    skin: roleClone(pengaturanAnimasi.skin||{}),
+    customCss: String(pengaturanAnimasi.customCss||'')
+  };
+  roleSaveState();
+}
+function aturAnimasiRole(enabled) {
+  roleSystemState.animation.enabled=!!enabled;
+  roleSaveState(); sinkronkanPengaturanUI();
+}
+function aturKecepatanAnimasiRole(value) {
+  roleSystemState.animation.speed=Math.max(.55,Math.min(1.8,Number(value)||1));
+  roleSaveState(); sinkronkanPengaturanUI();
+}
+function bukaRoleEditor(mode='add',id=null) {
+  const overlay=document.getElementById('roleEditorOverlay');
+  const input=document.getElementById('roleEditorInput');
+  const title=document.getElementById('roleEditorTitle');
+  const error=document.getElementById('roleEditorError');
+  if(!overlay||!input) return;
+  roleEditorActiveId=mode==='edit'?id:null;
+  const current=roleSystemState.roles.find(x=>x.id===id);
+  title.textContent=mode==='edit'?'EDIT NAMA ROLE':'TAMBAH ROLE BARU';
+  input.value=mode==='edit'?(current?.name||''):`Role ${roleSystemState.roles.length+1}`;
+  if(error) error.textContent='';
+  document.getElementById('roleEditorSave').textContent=mode==='edit'?'SIMPAN ROLE':'TAMBAH ROLE';
+  overlay.classList.add('aktif'); overlay.setAttribute('aria-hidden','false');
+  requestAnimationFrame(()=>{input.focus();input.select()});
+}
+function tutupRoleEditor() {
+  document.getElementById('roleEditorOverlay')?.classList.remove('aktif');
+  document.getElementById('roleEditorOverlay')?.setAttribute('aria-hidden','true');
+  roleEditorActiveId=null;
+}
+function simpanRoleEditor(event) {
+  event?.preventDefault();
+  const input=document.getElementById('roleEditorInput');
+  const error=document.getElementById('roleEditorError');
+  const name=(input?.value||'').trim().replace(/\s+/g,' ');
+  if(!name){if(error)error.textContent='Nama role wajib diisi.';input?.focus();return}
+  const duplicate=roleSystemState.roles.some(r=>r.name.toLocaleLowerCase('id-ID')===name.toLocaleLowerCase('id-ID')&&r.id!==roleEditorActiveId);
+  if(duplicate){if(error)error.textContent='Nama role tersebut sudah ada.';input?.focus();return}
+  if(roleEditorActiveId){
+    const target=roleSystemState.roles.find(r=>r.id===roleEditorActiveId);
+    if(target)target.name=name;
+    roleSaveState(); updateJadwal(); renderHasil(); renderRoleSettings();
+  } else {
+    roleSystemState.roles.push({id:roleMakeId('role'),name});
+    roleRefreshAfterRosterChange();
+  }
+  tutupRoleEditor();
+}
+function tambahRole(){bukaRoleEditor('add')}
+function editRole(id){bukaRoleEditor('edit',id)}
+function hapusRole(id) {
+  const role=roleSystemState.roles.find(r=>r.id===id);
+  if(!role)return;
+  if(roleSystemState.roles.length<=1){tampilkanDialog('ROLE TIDAK DAPAT DIHAPUS','Minimal harus ada satu role agar anggota tetap bisa dibagikan.','warning');return}
+  const assigned=roleSystemState.assignments.filter(a=>a.roleId===id).length;
+  dialogKonfirmasi('HAPUS ROLE?',`Role “${role.name}” akan dihapus permanen dari daftar. ${assigned?`${assigned} anggota yang sedang berada di role ini akan kembali belum dibagikan.`:'Role ini belum memiliki anggota.'} Tindakan ini tidak dapat dibatalkan.`,()=>{
+    roleSystemState.roles=roleSystemState.roles.filter(r=>r.id!==id);
+    roleRefreshAfterRosterChange();
+  });
+}
+function ubahNamaPeserta(index) {
+  if(!roleSystemState.members[index])return;
+  bukaEditorPeserta('edit',index);
+}
+function tambahPeserta(){bukaEditorPeserta('add')}
+function simpanEditorPeserta(event) {
+  event?.preventDefault();
+  const input=document.getElementById('pesertaEditorInput');
+  const error=document.getElementById('pesertaEditorError');
+  let name=(input?.value||'').trim().replace(/\s+/g,' ');
+  if(!name){if(error)error.textContent='Nama anggota tidak boleh kosong.';input?.focus();return}
+  if(name==='Ahmad Rijani')name='AHMAD RIJANI';
+  if(indeksPesertaDiedit!==null){
+    const target=roleSystemState.members[indeksPesertaDiedit];
+    if(!target)return;
+    target.name=name;
+  } else {
+    roleSystemState.members.push({id:roleMakeId('member'),name});
+  }
+  tutupEditorPeserta(); roleRefreshAfterRosterChange();
+}
+function hapusPeserta(index) {
+  const member=roleSystemState.members[index]; if(!member)return;
+  dialogKonfirmasi('HAPUS ANGGOTA?',`Anggota “${member.name}” akan dihapus dari daftar dan tidak ikut pengacakan berikutnya.`,()=>{
+    roleSystemState.members.splice(index,1);
+    roleSystemState.assignments=roleSystemState.assignments.filter(a=>a.memberId!==member.id);
+    roleRefreshAfterRosterChange();
+  });
+}
+function pindahPeserta(from,to) {
+  if(from<0||to<0||from>=roleSystemState.members.length||to>=roleSystemState.members.length||from===to)return;
+  const [item]=roleSystemState.members.splice(from,1); roleSystemState.members.splice(to,0,item);
+  roleRefreshAfterRosterChange();
+}
+function geserPeserta(index,arah){pindahPeserta(index,index+arah)}
+function resetPesertaDefault() {
+  dialogKonfirmasi('RESET DAFTAR ANGGOTA?','Semua anggota saat ini akan diganti dengan daftar anggota bawaan dari file. Role yang sudah kamu buat atau edit tidak akan berubah.',()=>{
+    roleSystemState.members=ROLE_MEMBER_DEFAULTS.map(name=>({id:roleMakeId('member'),name}));
+    roleRefreshAfterRosterChange();
+  });
+}
+function resetRoleDefault() {
+  dialogKonfirmasi('RESET DAFTAR ROLE?','Semua role yang sudah diedit atau ditambahkan akan diganti dengan role bawaan.',()=>{
+    roleSystemState.roles=ROLE_DEFAULT_NAMES.map(name=>({id:roleMakeId('role'),name}));
+    roleRefreshAfterRosterChange();
+  });
+}
+function bukaDaftar(){bukaPengaturan();pilihTabPengaturan('peserta')}
+function resetDefault(){
+  if(sedangMengacak)return;
+  roleClearResult();
+  const label=document.getElementById('kombinasiAktif'); if(label)label.textContent='BELUM DIACAK';
+}
+function renderHasil() {
+  const grid=document.getElementById('hasilGrid'); if(!grid||!roleSystemState)return;
+  grid.classList.add('role-result-grid'); grid.innerHTML='';
+  roleGetAssignmentsByRole(roleResultSnapshot.length?roleResultSnapshot:roleSystemState.assignments).forEach(({role,members},index)=>{
+    const card=document.createElement('section'); card.className='hasil-hari role-result-card'; card.style.setProperty('--role-accent',ROLE_PALETTE[index%ROLE_PALETTE.length]);
+    const heading=document.createElement('h3'); heading.textContent=role.name; card.appendChild(heading);
+    const count=document.createElement('div'); count.className='role-result-count'; count.textContent=`${members.length} ANGGOTA`; card.appendChild(count);
+    if(members.length){members.forEach((member,i)=>{const item=document.createElement('div');item.className='hasil-nama';item.innerHTML=`<span class="role-result-number">${String(i+1).padStart(2,'0')}</span><strong>${roleEscape(member.name)}</strong>`;card.appendChild(item)})}
+    else {const empty=document.createElement('div');empty.className='hasil-nama';empty.textContent='— BELUM ADA ANGGOTA';card.appendChild(empty)}
+    grid.appendChild(card);
+  });
+  const heading=document.querySelector('#hasilBox .hasil-judul');if(heading)heading.textContent='HASIL PEMBAGIAN ROLE';
+  const sub=document.querySelector('#hasilBox .hasil-subjudul');if(sub)sub.textContent=`PENGUNDIAN KE-${roleSystemState.round} • SEMUA ANGGOTA TERBAGI`;
+  const media=document.getElementById('catResultMedia');if(media)media.hidden=true;
+}
+function roleShowResults() {
+  renderHasil();
+  const box=document.getElementById('hasilBox');
+  const overlay=document.getElementById('hasilOverlay');
+  if(box){box.className='hasil-box reveal-run reveal-role';}
+  overlay?.classList.remove('aktif');
+  if(overlay){void overlay.offsetWidth;overlay.classList.add('aktif')}
+}
+function kombiHasilFinal(){roleShowResults()}
+function skipRoleChase(){
+  roleSkipRequested=true;
+  try{roleCurrentAnimation?.cancel()}catch(_){}
+  document.getElementById('roleChaseOverlay')?.classList.remove('aktif');
+  document.getElementById('roleChaseOverlay')?.setAttribute('aria-hidden','true');
+}
+function roleDelay(ms){return new Promise(resolve=>setTimeout(resolve,ms))}
+async function animasiRoleChase(assignments=roleSystemState.assignments) {
+  const overlay=document.getElementById('roleChaseOverlay');
+  const stage=document.getElementById('roleChaseStage');
+  const status=document.getElementById('roleChaseStatus');
+  const counter=document.getElementById('roleChaseCounter');
+  const bar=document.getElementById('roleChaseProgress');
+  if(!overlay||!stage)return;
+  roleSkipRequested=false; roleCurrentAnimation=null;
+  stage.innerHTML='';
+  const items=[...assignments].sort((a,b)=>(a.step||0)-(b.step||0)).map(a=>({assignment:a,member:roleSystemState.members.find(m=>m.id===a.memberId),role:roleSystemState.roles.find(r=>r.id===a.roleId)})).filter(x=>x.member&&x.role);
+  items.forEach((item,index)=>{
+    const lane=document.createElement('div');lane.className='role-chase-lane';lane.style.setProperty('--role-accent',ROLE_PALETTE[Math.max(0,roleSystemState.roles.findIndex(r=>r.id===item.role.id))%ROLE_PALETTE.length]);
+    const target=document.createElement('div');target.className='role-chase-target';
+    const avatar=document.createElement('span');avatar.className='role-chase-avatar';avatar.innerHTML='<i class="fa-solid fa-user" aria-hidden="true"></i>';
+    const name=document.createElement('strong');name.className='role-chase-name';name.textContent=item.member.name;
+    target.append(avatar,name);
+    const track=document.createElement('div');track.className='role-chase-track';
+    const trail=document.createElement('span');trail.className='role-chase-trail';
+    const runner=document.createElement('span');runner.className='role-chase-runner';runner.textContent=item.role.name;
+    track.append(trail,runner);
+    const state=document.createElement('span');state.className='role-chase-state';state.textContent='MENUNGGU';
+    lane.append(target,track,state);lane.dataset.index=String(index);stage.appendChild(lane);
+  });
+  const speed=Number(roleSystemState.animation.speed)||1;
+  const duration=Math.round(760/speed);
+  overlay.classList.add('aktif'); overlay.setAttribute('aria-hidden','false');
+  if(counter)counter.textContent=`0 / ${items.length}`;
+  if(bar)bar.style.width='0%';
+  for(let i=0;i<items.length;i++){
+    if(roleSkipRequested)break;
+    const lane=stage.children[i]; if(!lane)continue;
+    lane.classList.add('is-hunting');
+    const state=lane.querySelector('.role-chase-state');
+    if(state)state.textContent='MENGEJAR';
+    if(status)status.textContent=`ROLE ${items[i].role.name.toUpperCase()} SEDANG MENGEJAR ${items[i].member.name.toUpperCase()}`;
+    const runner=lane.querySelector('.role-chase-runner');
+    if(runner && typeof runner.animate==='function'){
+      roleCurrentAnimation=runner.animate([
+        {transform:'translate(115%,-50%) scale(.78) rotate(5deg)',opacity:.25,filter:'blur(2px)'},
+        {transform:'translate(0,-50%) scale(1.07) rotate(-3deg)',opacity:1,filter:'blur(0)'},
+        {transform:'translate(-108%,-50%) scale(1)',opacity:1,filter:'blur(0)'}
+      ],{duration,easing:'cubic-bezier(.16,.84,.22,1)',fill:'forwards'});
+      try{await roleCurrentAnimation.finished}catch(_){}
+    } else await roleDelay(duration);
+    if(roleSkipRequested)break;
+    lane.classList.remove('is-hunting'); lane.classList.add('is-locked');
+    if(state)state.textContent='TERKUNCI';
+    if(counter)counter.textContent=`${i+1} / ${items.length}`;
+    if(bar)bar.style.width=`${(i+1)/Math.max(1,items.length)*100}%`;
+    await roleDelay(Math.max(65,150/speed));
+  }
+  if(roleSkipRequested){
+    [...stage.children].forEach(lane=>{lane.classList.remove('is-hunting');lane.classList.add('is-locked');const s=lane.querySelector('.role-chase-state');if(s)s.textContent='TERKUNCI'});
+    if(bar)bar.style.width='100%';
+    if(counter)counter.textContent=`${items.length} / ${items.length}`;
+    if(status)status.textContent='ANIMASI DILEWATI • HASIL TETAP AMAN';
+  } else if(status) status.textContent='SEMUA ROLE BERHASIL MENEMUKAN ANGGOTANYA';
+  roleCurrentAnimation=null;
+  await roleDelay(280);
+  overlay.classList.remove('aktif');
+}
+async function jalankanAnimasiUntukHasil(hasil,animasi,{replay=false}={}) {
+  await animasiRoleChase(Array.isArray(hasil)?hasil:roleSystemState.assignments);
+  return hasil;
+}
+async function acakKombinasi() {
+  if(sedangMengacak)return;
+  if(!roleSystemState.roles.length){tampilkanDialog('BELUM ADA ROLE','Tambahkan minimal satu role lewat PENGATURAN.','warning');return}
+  if(!roleSystemState.members.length){tampilkanDialog('BELUM ADA ANGGOTA','Tambahkan nama anggota terlebih dahulu lewat PENGATURAN.','warning');return}
+  sedangMengacak=true;
+  const button=document.getElementById('btnAcak');
+  if(button){button.disabled=true;button.textContent='ROLE SEDANG MENGEJAR...'}
+  try {
+    const members=roleShuffle(roleSystemState.members);
+    const roles=roleShuffle(roleSystemState.roles);
+    const result=members.map((member,index)=>({memberId:member.id,roleId:roles[index%roles.length].id,step:index}));
+    roleSystemState.assignments=result;
+    roleSystemState.round+=1;
+    roleResultSnapshot=roleClone(result);
+    hasilFinalTersimpan=roleClone(result);
+    animasiFinalTersimpan='rolechase';
+    roleSaveState();
+    if(roleSystemState.animation.enabled) await animasiRoleChase(result);
+    updateJadwal();
+    roleShowResults();
+  } catch(error) {
+    console.error(error);
+    tampilkanDialog('PENGACAKAN GAGAL','Terjadi kendala saat membagi role. Data anggota dan role tetap tersimpan.','error');
+  } finally {
+    sedangMengacak=false;
+    if(button){button.disabled=false;button.textContent='🎯 ACAK ROLE'}
+    renderPesertaSettings();
+  }
+}
+async function tontonUlangAnimasi() {
+  if(!roleSystemState?.assignments?.length||sedangMengacak)return;
+  document.getElementById('hasilOverlay')?.classList.remove('aktif');
+  await animasiRoleChase(roleSystemState.assignments);
+  roleShowResults();
+}
+function bukaPilihAnimasiLain(){
+  document.getElementById('hasilOverlay')?.classList.remove('aktif');
+  bukaPengaturan(); pilihTabPengaturan('animasi');
+}
+function bukaRoleSettings(){bukaPengaturan();pilihTabPengaturan('peserta')}
+function roleBuildSettingsUI() {
+  const tab=document.querySelector('[data-settings-tab="peserta"]');
+  if(tab)tab.textContent='ROLE & ANGGOTA';
+  const desc=document.querySelector('.settings-desc');
+  if(desc)desc.textContent='Atur role pekerjaan, nama anggota, animasi pengundian, serta tampilan sistem.';
+  const animationPanel=document.querySelector('[data-settings-panel="animasi"]');
+  if(animationPanel) {
+    animationPanel.innerHTML=`<div class="settings-section role-animation-settings"><h3>ANIMASI PENGUNDIAN ROLE</h3><div class="settings-section-desc">Badge role akan bergerak mengejar nama satu per satu, lalu mengunci role yang didapat setiap anggota.</div><div class="settings-toggle"><div class="settings-toggle-text"><strong>Animasi Kejar Role</strong><span id="roleAnimationStatus">Aktif</span></div><label class="switch"><input type="checkbox" id="toggleRoleAnimation" checked><span class="switch-track"></span></label></div><div class="role-animation-preview"><div class="role-preview-name">NAMA ANGGOTA</div><div class="role-preview-arrow">←</div><div class="role-preview-badge">OPERATOR</div></div><label class="role-speed-label" for="roleAnimationSpeed"><span>Kecepatan animasi</span><strong id="roleAnimationSpeedValue">1.0×</strong></label><input type="range" id="roleAnimationSpeed" min="0.55" max="1.8" step="0.05" value="1"><div class="helper-setting">Matikan animasi untuk langsung menampilkan hasil. Kecepatan bisa disesuaikan kapan saja.</div></div>`;
+    animationPanel.hidden=false;
+  }
+  const memberPanel=document.querySelector('[data-settings-panel="peserta"]');
+  if(memberPanel) {
+    memberPanel.innerHTML=`<div class="settings-section"><div class="role-section-head"><div><h3>DAFTAR ROLE</h3><div class="settings-section-desc">Tambah role baru, ubah namanya, atau hapus role yang tidak dipakai.</div></div><button type="button" class="role-add-button" onclick="tambahRole()">＋ TAMBAH ROLE</button></div><div class="role-settings-list" id="rolesList"></div><button type="button" class="role-reset-button" onclick="resetRoleDefault()">KEMBALIKAN ROLE BAWAAN</button></div><div class="settings-section"><div class="role-section-head"><div><h3>DAFTAR ANGGOTA</h3><div class="settings-section-desc">Nama anggota akan diundi dan mendapat satu role per pengacakan.</div></div><button type="button" class="role-add-button" onclick="tambahPeserta()">＋ TAMBAH ANGGOTA</button></div><div class="peserta-list" id="pesertaList"></div><div class="peserta-actions peserta-actions-main"><button type="button" onclick="resetPesertaDefault()">RESET ANGGOTA BAWAAN</button></div><div class="peserta-count" id="pesertaCount">0 anggota</div></div>`;
+  }
+  const comboInfo=document.querySelector('.kombinasi-info');
+  if(comboInfo)comboInfo.innerHTML='PENGUNDIAN KE: <strong id="roleRoundNumber">0</strong> <span id="roleSummary" class="role-summary">Siap mengacak role</span>';
+  const titleSmall=document.querySelector('.judul-kecil'); if(titleSmall)titleSmall.textContent='ROLE ASSIGNMENT SYSTEM';
+  const titleMain=document.querySelector('.judul-utama'); if(titleMain)titleMain.innerHTML='ROLE <span>ASIA PRINT</span>';
+  const oldSwap=document.getElementById('btnTukar');oldSwap?.remove();
+  const oldFlip=document.getElementById('btnBalik');oldFlip?.remove();
+  const oldComb=[...document.querySelectorAll('.tombol-container button')].find(b=>b.getAttribute('onclick')==='bukaDaftar()');oldComb?.remove();
+  const random=document.getElementById('btnAcak');if(random){random.textContent='🎯 ACAK ROLE';random.setAttribute('aria-label','Acak role untuk semua anggota')}
+  const reset=[...document.querySelectorAll('.tombol-container button')].find(b=>b.getAttribute('onclick')==='resetDefault()');if(reset)reset.textContent='↺ RESET HASIL';
+  const download=document.getElementById('btnDownload');if(download)download.textContent='⬇ DOWNLOAD ROLE PNG';
+  const areaFooter=document.querySelector('#areaDownload .footer-download');if(areaFooter)areaFooter.innerHTML='SISTEM PEMBAGIAN ROLE ASIA PRINT<br><span class="footer-tanggal">Setiap anggota mendapat satu role dalam setiap pengacakan.</span>';
+  const resultsHeading=document.querySelector('#hasilBox .hasil-judul');if(resultsHeading)resultsHeading.textContent='HASIL PEMBAGIAN ROLE';
+  const resultsSub=document.querySelector('#hasilBox .hasil-subjudul');if(resultsSub)resultsSub.textContent='ROLE SUDAH DIBAGIKAN';
+  document.getElementById('catResultMedia')?.remove();
+  const otherAnimButton=document.querySelector('#hasilBox .btn-hasil-lain');otherAnimButton?.remove();
+  const roleIntro=document.createElement('div');roleIntro.className='role-intro';roleIntro.textContent='Setiap nama akan diundi untuk mendapatkan satu role. Jumlah anggota pada tiap role dibuat seimbang.';
+  const header=document.querySelector('.header');if(header&&!document.querySelector('.role-intro'))header.insertAdjacentElement('afterend',roleIntro);
+  const settingsPanel=document.querySelector('[data-settings-panel="peserta"]');
+  if(settingsPanel)settingsPanel.hidden=true;
+    const descLabel=document.querySelector('#hasilBox .hasil-judul');if(descLabel)descLabel.textContent='HASIL PEMBAGIAN ROLE';
+}
+function roleCreateOverlays() {
+  document.body.insertAdjacentHTML('beforeend',`
+  <div class="overlay role-chase-overlay" id="roleChaseOverlay" aria-hidden="true"><div class="role-chase-box"><button type="button" class="btn-skip-animasi role-chase-skip" onclick="skipRoleChase()">LEWATI</button><div class="role-chase-eyebrow">ASIA PRINT • ROLE ASSIGNMENT ENGINE</div><h2 class="role-chase-title">ROLE HUNT</h2><p class="role-chase-desc">Setiap role sedang mengejar nama anggota untuk mengunci hasil pembagian.</p><div class="role-chase-stage" id="roleChaseStage"></div><div class="role-chase-footer"><span id="roleChaseStatus">MENYIAPKAN PENGUNDIAN...</span><strong id="roleChaseCounter">0 / 0</strong></div><div class="role-chase-progress"><span id="roleChaseProgress"></span></div></div></div>
+  <div class="overlay role-editor-overlay" id="roleEditorOverlay" aria-hidden="true"><form class="role-editor-box" onsubmit="simpanRoleEditor(event)"><div class="role-editor-eyebrow">PENGELOLAAN ROLE</div><div class="role-editor-head"><h2 id="roleEditorTitle">TAMBAH ROLE BARU</h2><button type="button" class="btn-tutup" onclick="tutupRoleEditor()">×</button></div><label class="peserta-editor-label" for="roleEditorInput">NAMA ROLE</label><input class="peserta-editor-input" id="roleEditorInput" maxlength="48" autocomplete="off" placeholder="Contoh: Finishing"><div class="peserta-editor-error" id="roleEditorError"></div><button type="submit" class="role-editor-save" id="roleEditorSave">TAMBAH ROLE</button></form></div>`);
+  document.getElementById('roleEditorOverlay')?.addEventListener('click',e=>{if(e.target===e.currentTarget)tutupRoleEditor()});
+}
+function roleInstallStyles() {
+  if(document.getElementById('roleSystemV2Styles'))return;
+  const style=document.createElement('style');style.id='roleSystemV2Styles';
+  style.textContent=`
+  .role-intro{margin:12px 0;padding:12px 15px;text-align:center;color:#c8c8c8;background:linear-gradient(110deg,rgba(255,106,0,.10),rgba(255,176,0,.045));border:1px solid rgba(255,130,0,.28);font-size:12px;line-height:1.55}
+  #areaDownload .jadwal.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:12px;align-items:stretch}
+  .role-card{clip-path:none!important;min-height:180px;padding:14px 12px 12px;border:1px solid color-mix(in srgb,var(--role-accent) 75%,#333)!important;border-radius:9px;background:radial-gradient(circle at 100% 0,color-mix(in srgb,var(--role-accent) 17%,transparent),transparent 48%),linear-gradient(155deg,#191919,#060606 72%);box-shadow:0 0 17px color-mix(in srgb,var(--role-accent) 16%,transparent),inset 0 0 24px rgba(255,255,255,.018);overflow:hidden;position:relative}
+  .role-card:before{content:'';position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,transparent,var(--role-accent),#fff4,transparent);box-shadow:0 0 13px var(--role-accent)}
+  .role-card-top{position:relative;display:flex;justify-content:space-between;gap:8px;align-items:center;margin:2px 0 9px;color:#888;font-size:9px;font-weight:900;letter-spacing:1.2px}
+  .role-card-kicker{color:var(--role-accent)}.role-card-count{padding:4px 7px;border:1px solid color-mix(in srgb,var(--role-accent) 45%,#333);background:#080808;color:#ccc}
+  .role-card .hari-header{clip-path:none!important;margin:0 0 10px;padding:0 0 9px;background:none!important;border:0;border-bottom:1px solid color-mix(in srgb,var(--role-accent) 40%,#333)!important;text-align:left;color:#fff;font-size:clamp(16px,2vw,22px);font-style:normal;line-height:1.2;text-shadow:0 0 13px color-mix(in srgb,var(--role-accent) 44%,transparent);overflow-wrap:anywhere}
+  .role-member-list{position:relative;display:grid;gap:7px;z-index:1}.role-member-chip{display:flex;gap:9px;align-items:center;min-height:40px;padding:8px;background:linear-gradient(110deg,color-mix(in srgb,var(--role-accent) 15%,#151515),#080808);border:1px solid color-mix(in srgb,var(--role-accent) 34%,#343434);color:#fff;font-size:12px;overflow-wrap:anywhere}.role-member-chip strong{flex:1}.role-member-number{display:grid;place-items:center;width:26px;height:26px;flex:0 0 26px;background:var(--role-accent);color:#080808;font-size:10px;font-weight:1000}.role-member-chip .fa-check{color:var(--role-accent);font-size:11px}.role-empty{padding:17px 9px;text-align:center;color:#777;border:1px dashed #383838;background:#080808;font-size:9px;font-weight:900;letter-spacing:1px;line-height:1.5}.role-summary{display:block;color:#999;font-size:10px;font-weight:600;letter-spacing:0;margin-top:2px}
+  .role-section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}.role-section-head .settings-section-desc{margin-top:5px}.role-add-button,.role-reset-button{min-height:38px;padding:8px 12px;background:linear-gradient(180deg,#ff7600,#a92900);border:1px solid #ffbd55;font-size:10px;white-space:nowrap}.role-reset-button{margin-top:12px;background:linear-gradient(180deg,#333,#101010);border-color:#555;color:#ddd}.role-settings-list{display:grid;gap:7px}.role-setting-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 11px;background:linear-gradient(120deg,color-mix(in srgb,var(--role-accent) 12%,#171717),#080808);border:1px solid color-mix(in srgb,var(--role-accent) 35%,#333)}.role-setting-meta{display:flex;align-items:center;gap:10px;min-width:0}.role-setting-no{display:grid;place-items:center;flex:0 0 28px;height:28px;background:var(--role-accent);color:#111;font-size:10px;font-weight:1000}.role-setting-name{overflow-wrap:anywhere;color:#fff;font-size:12px}.role-setting-actions{display:flex;gap:5px;flex:0 0 auto}.role-setting-actions button{width:35px;min-width:35px;height:35px;min-height:35px;padding:0;font-size:16px}.role-setting-edit{border-color:#97762c!important;color:#ffe08a!important}.role-setting-delete{border-color:#903e35!important;color:#ff8d80!important}.role-setting-delete:disabled{opacity:.25;cursor:not-allowed}.role-person-row{grid-template-columns:32px minmax(0,1fr) auto 35px 35px!important}.role-person-row .peserta-name{font-size:12px}.role-person-row .peserta-action{width:34px;min-width:34px;height:34px;min-height:34px}
+  .role-animation-preview{display:flex;align-items:center;justify-content:center;gap:10px;margin:15px 0;padding:15px 8px;background:#080808;border:1px solid #3d2619;overflow:hidden}.role-preview-name{padding:9px 11px;background:#191919;border:1px solid #555;color:#fff;font-size:10px;font-weight:900}.role-preview-arrow{color:#ff9f27;font-size:22px;animation:roleArrowPulse .85s ease-in-out infinite alternate}.role-preview-badge{padding:8px 10px;background:linear-gradient(130deg,#ffb000,#ff5b00);color:#16100a;font-size:9px;font-weight:1000;animation:roleBadgeFloat 1.1s ease-in-out infinite alternate}@keyframes roleArrowPulse{to{transform:translateX(-5px);filter:drop-shadow(0 0 6px #ff9d22)}}@keyframes roleBadgeFloat{to{transform:translateX(-5px) scale(1.04)}}.role-speed-label{display:flex;justify-content:space-between;gap:10px;margin:16px 0 7px;color:#bbb;font-size:11px;font-weight:700}.role-speed-label strong{color:#ffad45}.role-animation-settings input[type=range]{width:100%;accent-color:var(--skin-primary,var(--oranye))}
+  .role-chase-overlay{z-index:8500}.role-chase-box{position:relative;width:min(880px,96vw);max-height:92vh;overflow:auto;padding:24px 18px 17px;background:radial-gradient(circle at 50% -5%,rgba(255,130,25,.18),transparent 40%),linear-gradient(150deg,#10151b,#050608 72%);border:2px solid #ff8d20;box-shadow:0 0 50px rgba(255,112,0,.34),inset 0 0 30px rgba(255,160,50,.04);text-align:center}.role-chase-eyebrow{margin:5px 0 6px;color:#ffb653;font-size:9px;font-weight:900;letter-spacing:3px}.role-chase-title{color:#fff;font-size:clamp(29px,6vw,49px);font-style:italic;font-weight:1000;letter-spacing:3px;text-shadow:0 0 20px rgba(255,130,20,.5)}.role-chase-desc{margin:5px auto 17px;max-width:580px;color:#9eabb5;font-size:11px;line-height:1.5}.role-chase-stage{display:grid;gap:8px;max-height:54vh;overflow:auto;padding:2px 5px 9px}.role-chase-lane{display:grid;grid-template-columns:minmax(110px,1fr) minmax(90px,1.15fr) 78px;align-items:center;gap:10px;min-height:58px;padding:8px 10px;background:linear-gradient(90deg,#111b22,#0b0c10);border:1px solid #29343a;opacity:.52;transform:translateX(9px);transition:opacity .25s,transform .25s,border-color .25s,box-shadow .25s}.role-chase-lane.is-hunting{opacity:1;transform:translateX(0);border-color:var(--role-accent);box-shadow:0 0 18px color-mix(in srgb,var(--role-accent) 35%,transparent),inset 0 0 15px color-mix(in srgb,var(--role-accent) 10%,transparent)}.role-chase-lane.is-locked{opacity:1;transform:translateX(0);border-color:color-mix(in srgb,var(--role-accent) 75%,#fff);box-shadow:inset 0 0 18px color-mix(in srgb,var(--role-accent) 12%,transparent)}.role-chase-target{display:flex;align-items:center;gap:8px;min-width:0;text-align:left}.role-chase-avatar{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border-radius:50%;background:#242c35;border:1px solid #58636c;color:#d5e4ed;font-size:12px}.role-chase-name{min-width:0;color:#fff;font-size:clamp(10px,1.8vw,14px);overflow-wrap:anywhere}.role-chase-track{position:relative;height:34px;overflow:hidden;border-top:1px dashed #38434a;border-bottom:1px dashed #38434a;background:repeating-linear-gradient(90deg,transparent 0 20px,rgba(255,255,255,.025) 20px 21px)}.role-chase-trail{position:absolute;left:0;right:0;top:50%;height:2px;transform:translateY(-50%);background:linear-gradient(90deg,transparent,var(--role-accent),transparent);opacity:.65}.role-chase-runner{position:absolute;right:0;top:50%;max-width:100%;padding:6px 9px;transform:translate(115%,-50%);border:1px solid color-mix(in srgb,var(--role-accent) 72%,#fff);background:linear-gradient(140deg,var(--role-accent),#161616);color:#090909;font-size:8px;font-weight:1000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 0 12px color-mix(in srgb,var(--role-accent) 48%,transparent)}.role-chase-lane.is-locked .role-chase-runner{transform:translate(-108%,-50%);right:0}.role-chase-state{color:#77838c;font-size:8px;font-weight:1000;letter-spacing:1px}.role-chase-lane.is-hunting .role-chase-state{color:var(--role-accent)}.role-chase-lane.is-locked .role-chase-state{color:#9de7b6}.role-chase-footer{display:flex;justify-content:space-between;gap:12px;margin-top:12px;color:#ffb653;font-size:9px;font-weight:900;letter-spacing:1px}.role-chase-footer strong{color:#fff}.role-chase-progress{height:6px;margin-top:8px;background:#1a1a1a;border:1px solid #47301a;overflow:hidden}.role-chase-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,#ff5b00,#ffc75b,#fff0a6);box-shadow:0 0 13px #ff8b19;transition:width .18s linear}.role-chase-skip{top:10px;right:10px}.role-editor-overlay{z-index:8800}.role-editor-box{width:min(450px,94vw);padding:22px;background:linear-gradient(145deg,#171717,#070707 72%,#180700);border:2px solid var(--skin-primary,var(--oranye));box-shadow:0 0 36px color-mix(in srgb,var(--skin-primary,var(--oranye)) 34%,transparent)}.role-editor-eyebrow{color:var(--skin-primary,var(--oranye));font-size:9px;font-weight:900;letter-spacing:2px}.role-editor-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:7px 0 18px}.role-editor-head h2{font-size:clamp(19px,5vw,27px);color:var(--skin-secondary,var(--emas))}.role-editor-save{width:100%;margin-top:11px;background:linear-gradient(180deg,#ff7600,#ae2300);border-color:#ffb65b}.role-editor-box .btn-tutup{flex:0 0 39px}
+  .role-result-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}.role-result-card{border-color:var(--role-accent)!important;box-shadow:0 0 15px color-mix(in srgb,var(--role-accent) 20%,transparent)}.role-result-card h3{color:var(--role-accent)!important;overflow-wrap:anywhere}.role-result-count{margin:-6px 0 10px;color:#999;font-size:9px;font-weight:900;letter-spacing:1px}.role-result-card .hasil-nama{display:flex;align-items:center;gap:9px;text-align:left;border-left-color:var(--role-accent);overflow-wrap:anywhere}.role-result-number{display:grid;place-items:center;flex:0 0 27px;height:27px;background:var(--role-accent);color:#111;font-size:10px}.role-result-card .hasil-nama strong{font-size:clamp(12px,2vw,16px)}
+  @media(max-width:620px){.role-section-head{flex-direction:column}.role-add-button{width:100%}.role-chase-box{padding:22px 9px 13px}.role-chase-lane{grid-template-columns:minmax(92px,1fr) minmax(62px,.8fr) 58px;gap:6px;padding:7px 5px}.role-chase-avatar{width:27px;height:27px;flex-basis:27px}.role-chase-name{font-size:10px}.role-chase-runner{font-size:7px;padding:5px 5px}.role-chase-state{font-size:7px}.role-chase-footer{font-size:8px}.role-person-row{grid-template-columns:27px minmax(0,1fr) auto 31px 31px!important;gap:4px}.role-person-row .peserta-action{width:30px;min-width:30px;height:31px;min-height:31px}.role-person-row .peserta-order-actions{gap:2px}}
+  @media(prefers-reduced-motion:reduce){.role-preview-arrow,.role-preview-badge{animation:none!important}.role-chase-lane,.role-chase-progress span{transition:none!important}}
+  `;
+  document.head.appendChild(style);
+}
+async function downloadImage(options={}) {
+  if(sedangMengacak)return;
+  const button=document.getElementById('btnDownload');if(!button)return;
+  const old=button.innerHTML;button.disabled=true;button.textContent='MENYIAPKAN PNG...';
+  try {
+    const skin=pengaturanAnimasi.skin||{};
+    const primary=skin.mode==='default'?'#ff6a00':(skin.primary||'#ff6a00');
+    const secondary=skin.mode==='default'?'#ffb000':(skin.secondary||'#ffb000');
+    const background=skin.mode==='default'?'#080808':(skin.background||'#080808');
+    const roles=roleGetAssignmentsByRole();
+    const width=1500,margin=48,gap=22,columns=window.innerWidth<700?1:(window.innerWidth<1050?2:3);
+    const cardW=(width-margin*2-gap*(columns-1))/columns;
+    const titleH=options.withName===false?38:174;
+    const rows=Math.ceil(roles.length/columns);
+    const maxMembers=Math.max(1,...roles.map(x=>x.members.length));
+    const rowH= Math.max(238, 116+maxMembers*70);
+    const footerH=options.credits===false?36:66;
+    const height=margin+titleH+rows*rowH+Math.max(0,rows-1)*gap+footerH+margin;
+    const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+    const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas tidak tersedia.');
+    const bg=ctx.createLinearGradient(0,0,width,height);bg.addColorStop(0,background);bg.addColorStop(1,'#030303');ctx.fillStyle=bg;ctx.fillRect(0,0,width,height);
+    const glow=ctx.createRadialGradient(width*.5,0,10,width*.5,0,width*.7);glow.addColorStop(0,'rgba(255,130,20,.22)');glow.addColorStop(1,'transparent');ctx.fillStyle=glow;ctx.fillRect(0,0,width,height*.7);
+    ctx.strokeStyle=primary;ctx.lineWidth=4;ctx.strokeRect(12,12,width-24,height-24);
+    if(options.withName!==false){
+      const top=ctx.createLinearGradient(margin,margin,width-margin,margin+130);top.addColorStop(0,'#171717');top.addColorStop(1,'#090909');
+      buatCanvasRoundRect(ctx,margin,margin,width-margin*2,132,14);ctx.fillStyle=top;ctx.fill();ctx.strokeStyle=primary;ctx.lineWidth=2;ctx.stroke();
+      ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=secondary;ctx.font='900 22px Arial';ctx.fillText('ASIA PRINT • ROLE ASSIGNMENT SYSTEM',width/2,margin+40);
+      const grad=ctx.createLinearGradient(width*.2,margin+60,width*.8,margin+112);grad.addColorStop(0,secondary);grad.addColorStop(.5,'#fff');grad.addColorStop(1,primary);ctx.fillStyle=grad;ctx.font='1000 58px Arial';ctx.fillText('PEMBAGIAN ROLE',width/2,margin+91,width-margin*2-60);
+    }
+    const startY=margin+titleH;
+    roles.forEach(({role,members},index)=>{
+      const col=index%columns,row=Math.floor(index/columns),x=margin+col*(cardW+gap),y=startY+row*(rowH+gap),accent=ROLE_PALETTE[index%ROLE_PALETTE.length];
+      ctx.save();ctx.shadowColor=accent;ctx.shadowBlur=14;buatCanvasRoundRect(ctx,x,y,cardW,rowH,13);const cardGrad=ctx.createLinearGradient(x,y,x,y+rowH);cardGrad.addColorStop(0,'#1b1b1b');cardGrad.addColorStop(1,'#080808');ctx.fillStyle=cardGrad;ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle=accent;ctx.lineWidth=2;ctx.stroke();
+      const headerGrad=ctx.createLinearGradient(x,y,x+cardW,y+66);headerGrad.addColorStop(0,accent);headerGrad.addColorStop(1,primary);buatCanvasRoundRect(ctx,x+3,y+3,cardW-6,66,10);ctx.fillStyle=headerGrad;ctx.fill();
+      ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillStyle=warnaTeksUntuk(accent);ctx.font='1000 26px Arial';ctx.fillText(role.name,x+20,y+36,cardW-40);
+      ctx.fillStyle='#aaa';ctx.font='800 13px Arial';ctx.fillText(`${members.length} ANGGOTA`,x+18,y+89);
+      members.forEach((member,i)=>{
+        const yy=y+108+i*58;buatCanvasRoundRect(ctx,x+14,yy,cardW-28,48,7);ctx.fillStyle='#111';ctx.fill();ctx.strokeStyle='#393939';ctx.lineWidth=1;ctx.stroke();
+        ctx.fillStyle=accent;buatCanvasRoundRect(ctx,x+21,yy+8,32,32,5);ctx.fill();ctx.fillStyle=warnaTeksUntuk(accent);ctx.textAlign='center';ctx.font='1000 16px Arial';ctx.fillText(String(i+1),x+37,yy+25);
+        ctx.fillStyle='#fff';ctx.textAlign='left';ctx.font='800 19px Arial';ctx.fillText(member.name,x+66,yy+25,cardW-98);
+      });
+      if(!members.length){ctx.fillStyle='#777';ctx.textAlign='center';ctx.font='800 15px Arial';ctx.fillText('BELUM ADA ANGGOTA',x+cardW/2,y+144)}
+      ctx.restore();
+    });
+    const footerY=height-margin-(options.credits===false?15:42);ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillStyle='#aaa';ctx.font='700 17px Arial';ctx.fillText('SISTEM PEMBAGIAN ROLE ASIA PRINT',margin,footerY);
+    if(options.credits!==false){ctx.fillStyle='#777';ctx.font='14px Arial';ctx.fillText('Tanggal unduh: '+new Date().toLocaleDateString('id-ID')+' • Pengundian ke-'+roleSystemState.round,margin,footerY+23)}
+    const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Gagal membuat PNG.')),'image/png'));
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`role_asia_print_pengundian_${roleSystemState.round}.png`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+  } catch(error) {
+    console.error(error);tampilkanDialog('GAGAL MEMBUAT GAMBAR',error?.message||'Kesalahan tidak diketahui.','error');
+  } finally {button.innerHTML=old;button.disabled=false;}
+}
+function roleSystemInitialize() {
+  roleInstallStyles();
+  roleCreateOverlays();
+  roleBuildSettingsUI();
+  roleLoadState();
+  setupPertama=false;
+  syncLegacyMemberArray();
+  sinkronkanPengaturanUI();
+  renderPesertaSettings();
+  updateJadwal();
+  renderHasil();
+  const resultHeading=document.querySelector('#hasilBox .hasil-judul');if(resultHeading)resultHeading.textContent='HASIL PEMBAGIAN ROLE';
+  const resultOther=document.querySelector('#hasilBox .btn-hasil-lain');resultOther?.remove();
+  // Close any legacy day-based popups if the browser restores an old session.
+  ['tukarOverlay','kombinasiOverlay','setupOverlay','themeFirstOverlay'].forEach(id=>document.getElementById(id)?.classList.remove('aktif'));
+  const resultGrid=document.getElementById('hasilGrid');if(resultGrid)resultGrid.innerHTML='';
+  const status=document.getElementById('statusAnimasi');if(status)status.textContent='Aktif';
+  document.getElementById('toggleRoleAnimation')?.addEventListener('change',e=>{
+    aturAnimasiRole(e.target.checked);
+    const label=document.getElementById('roleAnimationStatus');if(label)label.textContent=e.target.checked?'Aktif':'Mati';
+  });
+  document.getElementById('roleAnimationSpeed')?.addEventListener('input',e=>aturKecepatanAnimasiRole(e.target.value));
+  document.getElementById('roleEditorOverlay')?.addEventListener('keydown',e=>{if(e.key==='Escape')tutupRoleEditor()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('roleChaseOverlay')?.classList.contains('aktif'))skipRoleChase()});
+  if(typeof sinkronkanSkinUI==='function')sinkronkanSkinUI();
+  if(typeof pasangTombolPreviewAnimasi==='function')pasangTombolPreviewAnimasi();
+}
+roleSystemInitialize();
+
 </script>
 </body>
 </html>

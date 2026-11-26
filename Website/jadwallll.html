@@ -1324,7 +1324,7 @@ body.skin-enabled{color:var(--skin-on-background)!important;background:radial-gr
 .uno-setup-kicker{font-size:10px;letter-spacing:3px;color:#66d79a;font-weight:900}
 .uno-setup-box h2{margin:6px 0;color:#fff;font-size:clamp(24px,6vw,36px);font-weight:1000}
 .uno-setup-box>p{margin:0 auto 16px;max-width:480px;color:#a8b9ae;font-size:12px;line-height:1.6}
-.uno-setup-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.uno-setup-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
 .uno-setup-option{min-height:90px;padding:13px 10px;text-align:left;border:1px solid #34734f;background:linear-gradient(145deg,#12251a,#07100a);box-shadow:none}
 .uno-setup-option b{display:block;color:#9cffbd;font-size:13px;margin-bottom:6px}
 .uno-setup-option span{display:block;color:#9fb3a5;font-size:10px;line-height:1.5;font-weight:500;letter-spacing:0}
@@ -1333,7 +1333,7 @@ body.skin-enabled{color:var(--skin-on-background)!important;background:radial-gr
 .uno-self-setup h3{margin-bottom:10px;color:#b9ffd0;font-size:12px;letter-spacing:1px}
 .uno-setup-options.compact .uno-setup-option{min-height:76px}
 #unoManualSelectWrap{margin-top:12px}#unoManualSelectWrap label{display:block;margin-bottom:6px;color:#9db7a7;font-size:10px;font-weight:900;letter-spacing:1px}
-#unoHumanSelect{width:100%;min-height:44px;padding:8px 10px;background:#050a07;color:#fff;border:1px solid #39845b;font:600 13px Poppins,Arial}
+#unoHumanSelect,#unoHumanSelect2{width:100%;min-height:44px;padding:8px 10px;background:#050a07;color:#fff;border:1px solid #39845b;font:600 13px Poppins,Arial}
 .uno-start-self{width:100%;margin-top:8px;background:linear-gradient(180deg,#16894f,#07542e);border-color:#79e8a8}
 .uno-setup-footer{display:flex;justify-content:flex-end;margin-top:14px}.uno-setup-cancel{border-color:#555;background:#151515}
 .uno-skip-button{min-height:34px;padding:6px 11px;border-color:#c17b35;background:linear-gradient(180deg,#7d3c13,#311606);font-size:10px}.uno-skip-button.skip-active{border-color:#9cffbd;background:linear-gradient(180deg,#16894f,#07542e);color:#fff}
@@ -1382,7 +1382,7 @@ body.skin-enabled{color:var(--skin-on-background)!important;background:radial-gr
 .area-split-slider:focus-visible{outline:2px solid #ffc078;outline-offset:5px;border-radius:6px}
 .area-split-slider-ends{display:flex;justify-content:space-between;color:#777;font-size:8px;font-weight:800;letter-spacing:.4px}
 .area-split-preview{margin-top:12px;padding:10px;border-radius:8px;background:rgba(255,255,255,.045);color:#d8d8d8;text-align:center;font-size:11px;font-weight:700;line-height:1.5;transition:background .2s}
-.btn-area-split-disable{width:100%;margin-top:10px;border-color:#555;background:linear-gradient(180deg,#343434,#151515);color:#aaa;font-size:10px}
+.btn-area-split-disable{width:100%;margin-top:10px;border-color:#555;background:linear-gradient(180deg,#343434,#151515);color:#aaa;font-size:10px}.btn-area-split-reset{width:100%;margin-top:10px;border-color:#77b9ff;background:linear-gradient(180deg,#205f91,#102a46);color:#eaf5ff;font-size:10px;box-shadow:0 0 12px rgba(65,150,255,.16)}.btn-area-split-reset:hover{border-color:#a9d5ff;box-shadow:0 0 16px rgba(65,150,255,.34)}
 @media(max-width:420px){.area-split-percent-pair{gap:6px}.area-split-percent-card{padding:9px 5px}.area-split-locked{grid-template-columns:36px 1fr}.area-split-lock-icon{width:36px;height:36px}}
 @media(prefers-reduced-motion:reduce){.area-split-meter span,.area-split-percent-card,.area-split-percent-card strong,.area-split-preview,.area-split-slider::-webkit-slider-thumb,.area-split-slider::-moz-range-thumb{transition:none!important}}
 
@@ -1400,14 +1400,20 @@ body.skin-enabled{color:var(--skin-on-background)!important;background:radial-gr
 .person-area-control{grid-column:1/-1;display:grid;grid-template-columns:minmax(55px,auto) minmax(90px,1fr) minmax(55px,auto);align-items:center;gap:8px;margin-top:2px}
 .person-area-end{font-size:8px;color:#8d8d8d;font-weight:900;letter-spacing:.35px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .person-area-end.right{text-align:right}
-.person-area-slider{--thumb-color:#65baff;width:100%;height:27px;margin:0;appearance:none;-webkit-appearance:none;background:transparent;cursor:pointer;touch-action:pan-y;transition:filter .18s ease}
-.person-area-slider::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(90deg,#247ddd 0%,#535353 50%,#dc812e 100%);border:1px solid rgba(255,255,255,.16)}
-.person-area-slider::-moz-range-track{height:8px;border-radius:99px;background:linear-gradient(90deg,#247ddd 0%,#535353 50%,#dc812e 100%);border:1px solid rgba(255,255,255,.16)}
-.person-area-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:21px;height:21px;margin-top:-7px;border:3px solid #fff;border-radius:50%;background:var(--thumb-color);box-shadow:0 0 0 4px rgba(255,255,255,.1),0 2px 10px #000;transition:transform .12s,box-shadow .12s}
-.person-area-slider::-moz-range-thumb{width:15px;height:15px;border:3px solid #fff;border-radius:50%;background:var(--thumb-color);box-shadow:0 0 0 4px rgba(255,255,255,.1),0 2px 10px #000;transition:transform .12s,box-shadow .12s}
+.person-area-slider{--thumb-color:#65baff;width:100%;height:36px;margin:0;appearance:none;-webkit-appearance:none;background:transparent;cursor:grab;touch-action:pan-y;transition:filter .18s ease}.person-area-slider:active{cursor:grabbing;filter:brightness(1.18)}
+.person-area-slider::-webkit-slider-runnable-track{height:11px;border-radius:99px;background:linear-gradient(90deg,#247ddd 0%,#535353 50%,#dc812e 100%);border:1px solid rgba(255,255,255,.16)}
+.person-area-slider::-moz-range-track{height:11px;border-radius:99px;background:linear-gradient(90deg,#247ddd 0%,#535353 50%,#dc812e 100%);border:1px solid rgba(255,255,255,.16)}
+.person-area-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:25px;height:25px;margin-top:-8px;border:3px solid #fff;border-radius:50%;background:var(--thumb-color);box-shadow:0 0 0 4px rgba(255,255,255,.1),0 2px 10px #000;transition:transform .12s,box-shadow .12s}
+.person-area-slider::-moz-range-thumb{width:19px;height:19px;border:3px solid #fff;border-radius:50%;background:var(--thumb-color);box-shadow:0 0 0 4px rgba(255,255,255,.1),0 2px 10px #000;transition:transform .12s,box-shadow .12s}
 .person-area-slider:active::-webkit-slider-thumb{transform:scale(1.14);box-shadow:0 0 0 6px rgba(255,255,255,.15),0 2px 10px #000}
 .person-area-slider:focus-visible{outline:2px solid #ffc078;outline-offset:4px;border-radius:8px}
 @media(max-width:420px){.area-assignment-person{grid-template-columns:27px minmax(0,1fr) auto;padding:8px}.person-area-control{grid-template-columns:48px minmax(80px,1fr) 48px;gap:5px}.person-area-end{font-size:7px}}
+
+.uno-multiplayer-note{margin:0 0 10px;color:#a9c0b2;font-size:11px;line-height:1.5}.uno-multiplayer-players{display:grid;gap:7px;max-height:38vh;overflow:auto}.uno-multiplayer-row{display:grid;grid-template-columns:minmax(0,1fr) 125px;align-items:center;gap:8px;padding:8px 10px;background:#0b170f;border:1px solid #2c4c37;border-radius:8px}.uno-multiplayer-row strong{font-size:12px;overflow-wrap:anywhere}.uno-multiplayer-row select{width:100%;min-height:38px;padding:6px 8px;background:#050a07;color:#fff;border:1px solid #39845b;border-radius:6px;font:700 11px Poppins,Arial}.uno-multiplayer-row select option{background:#080d09;color:#fff}@media(max-width:420px){.uno-multiplayer-row{grid-template-columns:minmax(0,1fr) 105px;padding:7px}}
+
+
+.peserta-row .peserta-name-wrap{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:5px}.person-equalize-btn{min-height:27px;padding:4px 8px;border-radius:6px;border:1px solid #70baff;background:linear-gradient(180deg,#164f7b,#0a2942);color:#e4f4ff;font-size:9px;font-weight:900;letter-spacing:.3px;box-shadow:none}.person-equalize-btn:hover{border-color:#b7e0ff;box-shadow:0 0 10px rgba(80,170,255,.25)}
+
 </style>
 </head>
 <body>
@@ -1670,21 +1676,23 @@ INITIALIZING MATRIX STREAM...</div>
   <div class="uno-setup-box" role="dialog" aria-modal="true" aria-labelledby="unoSetupTitle">
     <div class="uno-setup-kicker">PENGATURAN PERTANDINGAN</div>
     <h2 id="unoSetupTitle">PILIH MODE UNO</h2>
-    <p>Jalankan pertandingan otomatis dengan semua peserta dikendalikan bot, atau ikut bermain sebagai salah satu peserta.</p>
+    <p>Main sendiri melawan BOT, atau buka Multiplayer untuk menentukan setiap peserta menjadi MANUSIA atau BOT lewat dropdown.</p>
     <div class="uno-setup-options">
-      <button type="button" class="uno-setup-option" onclick="pilihModeUNOBot()"><b>SEMUA BOT</b><span>Semua peserta bermain otomatis seperti mode sebelumnya.</span></button>
-      <button type="button" class="uno-setup-option human" onclick="bukaPilihanPemainUNO()"><b>MAINKAN SENDIRI</b><span>Pilih satu peserta untuk kamu kendalikan. Kartu lawan akan tertutup.</span></button>
+      <button type="button" class="uno-setup-option" onclick="pilihModeUNOBot()"><b>SEMUA BOT</b><span>Simulasi otomatis seluruh peserta.</span></button>
+      <button type="button" class="uno-setup-option human" onclick="bukaPilihanPemainUNO(1)"><b>MAIN SENDIRI</b><span>Pilih nama kamu. Peserta lain dan kursi tambahan bermain sebagai BOT.</span></button>
+      <button type="button" id="unoMultiplayerSetupButton" class="uno-setup-option human" onclick="bukaMultiplayerUNO()"><b>MULTIPLAYER</b><span>Pilih siapa yang bermain sebagai manusia atau BOT. Bisa atur beberapa pemain.</span></button>
     </div>
     <div id="unoSelfSetup" class="uno-self-setup" hidden>
-      <h3>SIAPA YANG KAMU KENDALIKAN?</h3>
-      <div class="uno-setup-options compact">
-        <button type="button" class="uno-setup-option" onclick="mulaiMainSendiriUNO('auto')"><b>PILIH OTOMATIS</b><span>Sistem memilih satu peserta secara acak untuk kamu.</span></button>
-        <button type="button" class="uno-setup-option" onclick="tampilkanSelectPemainUNO()"><b>PILIH SENDIRI</b><span>Kamu menentukan nama peserta yang dimainkan.</span></button>
-      </div>
+      <h3 id="unoSelfSetupTitle">PILIH PEMAIN</h3>
       <div id="unoManualSelectWrap" hidden>
-        <label for="unoHumanSelect">PILIH NAMA PESERTA</label>
+        <label for="unoHumanSelect">NAMA PEMAIN</label>
         <select id="unoHumanSelect"></select>
-        <button type="button" class="uno-start-self" onclick="mulaiMainSendiriUNO('manual')">MULAI SEBAGAI PESERTA INI</button>
+        <button type="button" id="unoStartHumanButton" class="uno-start-self" onclick="mulaiMainSendiriUNO()">MULAI SENDIRI + BOT</button>
+      </div>
+      <div id="unoMultiplayerWrap" hidden>
+        <div class="uno-multiplayer-note">Tentukan kontrol untuk setiap nama. Minimal satu peserta MANUSIA; yang lain otomatis atau sesuai pilihan menjadi BOT.</div>
+        <div id="unoMultiplayerPlayers" class="uno-multiplayer-players"></div>
+        <button type="button" class="uno-start-self" onclick="mulaiMultiplayerUNO()">MULAI MULTIPLAYER</button>
       </div>
     </div>
     <div class="uno-setup-footer"><button type="button" class="uno-setup-cancel" onclick="batalSetupUNO()">BATAL</button></div>
@@ -1693,7 +1701,7 @@ INITIALIZING MATRIX STREAM...</div>
 
 <div class="overlay" id="unoOverlay" aria-live="polite">
   <div class="uno-box">
-    <div class="uno-head"><div><div class="uno-kicker">BOT CARD BATTLE</div><h2>UNO SHOWDOWN</h2><p>Semua peserta mendapat 7 kartu. Permainan berlangsung sampai dua posisi teratas terkunci.</p></div><div class="uno-clock" id="unoClock">00:00</div></div>
+    <div class="uno-head"><div><div class="uno-kicker">BOT CARD BATTLE</div><h2>UNO SHOWDOWN</h2><p>Setiap pemain mendapat 7 kartu. Pemain manusia bergiliran; BOT mengisi kursi tambahan dan kartu pemain lain tetap tertutup.</p></div><div class="uno-clock" id="unoClock">00:00</div></div>
     <div class="uno-toolbar"><div class="uno-speed-label">KECEPATAN GAME</div><div class="uno-speed"><button type="button" data-uno-speed="0.5" onclick="setUnoSpeed(0.5)">SLOW</button><button type="button" data-uno-speed="1" class="active" onclick="setUnoSpeed(1)">1×</button><button type="button" data-uno-speed="2" onclick="setUnoSpeed(2)">2×</button><button type="button" data-uno-speed="4" onclick="setUnoSpeed(4)">4×</button><button type="button" data-uno-speed="10" onclick="setUnoSpeed(10)">10×</button></div><button type="button" class="uno-auto-button" id="unoAutoButton" onclick="unoPlayAutomatically()">▶ MAIN OTOMATIS • 100×</button><button type="button" class="uno-direct-button" id="unoDirectButton" onclick="unoRequestDirectResult()">LANGSUNG HASIL</button><button type="button" class="uno-skip-button" id="unoSkipButton" onclick="unoSkipAnimation()">SKIP ANIMASI</button><div class="uno-turn-counter" id="unoTurnCounter">GILIRAN 0</div></div>
     <div class="uno-status" id="unoStatus">MEMBAGIKAN KARTU...</div>
     <div class="uno-table"><div class="uno-table-center"><div class="uno-deck-pile"><span>UNO</span><small id="unoDeckCount">108 KARTU</small></div><div class="uno-discard-wrap"><small>KARTU TERBUKA</small><div id="unoTopCard" class="uno-playing-card wild"><b>UNO</b><span>START</span></div></div><div class="uno-direction" id="unoDirection">ARAH →</div></div></div>
@@ -1812,7 +1820,7 @@ INITIALIZING MATRIX STREAM...</div>
           <label class="animasi-card" data-animasi-single="race"><input type="radio" name="animasiSingle" value="race"><div class="judul"><i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>Balap Dinamis</div><div class="detail">Semua peserta ikut balapan; urutan finis otomatis dibagi ke dua area.</div></label>
           <label class="animasi-card" data-animasi-single="solar"><input type="radio" name="animasiSingle" value="solar"><div class="judul"><i class="fa-solid fa-solar-system" aria-hidden="true"></i>Tata Surya Nama</div><div class="detail">Semua nama menjadi planet di orbit, tata surya berputar, lalu roket memilih satu nama sebagai pemenang.</div></label>
           <label class="animasi-card" data-animasi-single="cat"><input type="radio" name="animasiSingle" value="cat"><div class="judul"><i class="fa-solid fa-cat" aria-hidden="true"></i>Cat Blaster</div><div class="detail">Kucing menembak target nama, HP berkurang, lalu hit terakhir menentukan urutan.</div></label>
-          <label class="animasi-card" data-animasi-single="uno"><input type="radio" name="animasiSingle" value="uno"><div class="judul"><i class="fa-solid fa-layer-group" aria-hidden="true"></i>UNO Showdown</div><div class="detail">Pilih mode semua bot atau mainkan sendiri. Jika slider area per peserta aktif, sistem akan meminta konfirmasi karena hasil UNO menentukan pembagian area.</div></label>
+          <label class="animasi-card" data-animasi-single="uno"><input type="radio" name="animasiSingle" value="uno"><div class="judul"><i class="fa-solid fa-layer-group" aria-hidden="true"></i>UNO Showdown</div><div class="detail">Pilih semua BOT, satu pemain manusia melawan BOT, atau dua pemain manusia. BOT mengisi kursi lawan yang masih kosong.</div></label>
         </div>
       </div>
       <div class="mode-panel" id="panelAnimasiPilihan" style="display:none">
@@ -1830,7 +1838,7 @@ INITIALIZING MATRIX STREAM...</div>
           <label><input type="checkbox" name="animasiPilihan" value="race"><span><strong><i class="fa-solid fa-flag-checkered" aria-hidden="true"></i> Balap Dinamis</strong><span>Urutan finis otomatis dibagi ke dua area.</span></span></label>
           <label><input type="checkbox" name="animasiPilihan" value="solar"><span><strong><i class="fa-solid fa-solar-system" aria-hidden="true"></i> Tata Surya Nama</strong><span>Nama menjadi planet dan dipilih oleh roket.</span></span></label>
           <label><input type="checkbox" name="animasiPilihan" value="cat"><span><strong><i class="fa-solid fa-cat" aria-hidden="true"></i> Cat Blaster</strong><span>HP nama ditembak sampai habis, urutan finish dibuat acak.</span></span></label>
-          <label><input type="checkbox" name="animasiPilihan" value="uno"><span><strong><i class="fa-solid fa-layer-group" aria-hidden="true"></i> UNO Showdown</strong><span>Permainan kartu bot sampai hasil pemenang dan peserta yang kalah ditetapkan.</span></span></label>
+          <label><input type="checkbox" name="animasiPilihan" value="uno"><span><strong><i class="fa-solid fa-layer-group" aria-hidden="true"></i> UNO Showdown</strong><span>Permainan kartu UNO: satu atau dua pemain manusia dapat bergabung, sementara peserta lain dikendalikan BOT.</span></span></label>
         </div>
         <div class="helper-setting">Tidak ada batas minimum atau maksimum. Bila tidak ada yang dicentang, semua animasi bawaan akan dianggap tersedia. Animasi Custom CSS hanya masuk ke pilihan setelah ditambahkan.</div>
       </div>
@@ -1860,6 +1868,7 @@ INITIALIZING MATRIX STREAM...</div>
           <div class="area-assignment-summary" id="areaAssignmentSummary"></div>
           <button type="button" class="btn-area-split-disable" onclick="nonaktifkanSliderPersentase()">NONAKTIFKAN SLIDER PER PESERTA</button>
         </div>
+        <button type="button" class="btn-area-split-reset" onclick="resetPersentaseSetara()">⚖ KEMBALIKAN PERSENTASE JADI SETARA (50:50)</button>
       </div>
       <div class="settings-section peserta-file-section">
         <h3>DATA PESERTA</h3>
@@ -1999,7 +2008,7 @@ INITIALIZING MATRIX STREAM...</div>
         <label class="animasi-card" data-setup-single="race"><input type="radio" name="setupSingle" value="race"><div class="judul"><i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>Balap Dinamis</div><div class="detail">Semua peserta berlari ke garis finis dan urutan finis menentukan pembagian jadwal.</div></label>
         <label class="animasi-card" data-setup-single="solar"><input type="radio" name="setupSingle" value="solar"><div class="judul"><i class="fa-solid fa-solar-system" aria-hidden="true"></i>Tata Surya Nama</div><div class="detail">Nama menjadi planet di orbit dan roket memilih pemenang.</div></label>
          <label class="animasi-card" data-setup-single="cat"><input type="radio" name="setupSingle" value="cat"><div class="judul"><i class="fa-solid fa-cat" aria-hidden="true"></i>Cat Blaster</div><div class="detail">Kucing menembak HP nama sampai urutan final terkunci.</div></label>
-        <label class="animasi-card" data-setup-single="uno"><input type="radio" name="setupSingle" value="uno"><div class="judul"><i class="fa-solid fa-layer-group" aria-hidden="true"></i>UNO Showdown</div><div class="detail">Mode semua bot atau main sendiri dengan pilihan peserta dan kartu lawan tersembunyi.</div></label>
+        <label class="animasi-card" data-setup-single="uno"><input type="radio" name="setupSingle" value="uno"><div class="judul"><i class="fa-solid fa-layer-group" aria-hidden="true"></i>UNO Showdown</div><div class="detail">Mode semua BOT, satu pemain manusia, atau dua pemain manusia dengan kartu lawan tersembunyi.</div></label>
       </div>
     </div>
     <div class="mode-panel" id="setupPanelPilihan" style="display:none">
@@ -2017,7 +2026,7 @@ INITIALIZING MATRIX STREAM...</div>
         <label><input type="checkbox" name="setupPilihan" value="race"><span><strong><i class="fa-solid fa-flag-checkered" aria-hidden="true"></i> Balap Dinamis</strong><span>Urutan finis menentukan pembagian hari.</span></span></label>
         <label><input type="checkbox" name="setupPilihan" value="solar"><span><strong><i class="fa-solid fa-solar-system" aria-hidden="true"></i> Tata Surya Nama</strong><span>Orbit planet nama + pilihan roket.</span></span></label>
          <label><input type="checkbox" name="setupPilihan" value="cat"><span><strong><i class="fa-solid fa-cat" aria-hidden="true"></i> Cat Blaster</strong><span>HP target, tembakan bola, dan ranking acak.</span></span></label>
-        <label><input type="checkbox" name="setupPilihan" value="uno"><span><strong><i class="fa-solid fa-layer-group" aria-hidden="true"></i> UNO Showdown</strong><span>Permainan kartu semua peserta dengan bot.</span></span></label>
+        <label><input type="checkbox" name="setupPilihan" value="uno"><span><strong><i class="fa-solid fa-layer-group" aria-hidden="true"></i> UNO Showdown</strong><span>Permainan UNO untuk satu atau dua pemain manusia, dengan BOT sebagai lawan otomatis.</span></span></label>
       </div>
       <div class="helper-setting">Tanpa batas minimum atau maksimum. Tidak mencentang apa pun berarti semua animasi tersedia.</div>
     </div>
@@ -2261,6 +2270,15 @@ function nonaktifkanSliderPersentase(){
     refreshTotalKombinasi();kombinasiAktif=0;jadwalAktif=pesertaDefault();halamanKombinasi=0;updateJadwal();buatDaftarKombinasi();
   });
 }
+function setPeluangPesertaSetara(index){if(!penempatanArea.enabled||peserta[index]===undefined)return;const name=peserta[index];distribusikanPeluang(peserta,name,50);simpanPenempatanArea();updateSliderPesertaUI();if(penempatanArea.enabled){jadwalAktif=buatJadwalBerbobot(peserta,true);kombinasiAktif=-1;updateJadwal();}tampilkanDialog('PELUANG PESERTA DISETARAKAN',`${name} sekarang memiliki peluang 50% ${namaAreaTampil('outdoor')} dan 50% ${namaAreaTampil('indoor')}. Peluang peserta lain disesuaikan agar total tetap seimbang.`);}
+function resetPersentaseSetara(){
+  dialogKonfirmasi('KEMBALIKAN PERSENTASE KE 50:50?','Semua peserta akan dikembalikan ke peluang yang sama: 50% INDOOR dan 50% OUTDOOR. Status slider tetap seperti sekarang.',()=>{
+    penempatanArea.byName={};peserta.forEach(nama=>{penempatanArea.byName[nama]=50;});
+    simpanPenempatanArea();updateSliderPesertaUI();
+    if(penempatanArea.enabled){jadwalAktif=buatJadwalBerbobot(peserta,true);kombinasiAktif=-1;updateJadwal();}
+    tampilkanDialog('PERSENTASE SUDAH SETARA','Semua peserta sekarang memiliki peluang 50:50.');
+  });
+}
 function simpanJadwalAktif(){try{localStorage.setItem(SCHEDULE_KEY,JSON.stringify(jadwalAktif));}catch(_){}}
 function muatJadwalAktif(){try{const raw=JSON.parse(localStorage.getItem(SCHEDULE_KEY)||'null');if(raw&&Array.isArray(raw.senin)&&Array.isArray(raw.selasa)){const known=new Set(peserta);return {senin:raw.senin.filter(x=>known.has(x)),selasa:raw.selasa.filter(x=>known.has(x))};}}catch(_){}return null;}
 function muatHasilUNOTersimpan(){try{hasilUNOTersimpan=JSON.parse(localStorage.getItem(UNO_RESULT_KEY)||'null');}catch(_){hasilUNOTersimpan=null;}perbaruiTombolHasilUNO();}
@@ -2337,7 +2355,7 @@ function renderPesertaSettings(){
     const row=document.createElement('div');row.className='peserta-row';row.draggable=true;row.dataset.pesertaIndex=String(index);row.title='Geser baris atau gunakan tombol panah untuk mengubah urutan';
     const chance=peluangOutdoor(nama),assignmentControl=penempatanArea.enabled?`<div class="person-area-destination" id="personAreaLabel${index}">${chance}% ${escapeHtml(namaAreaTampil('outdoor').toUpperCase())} • ${100-chance}% ${escapeHtml(namaAreaTampil('indoor').toUpperCase())}</div><div class="person-area-control"><span class="person-area-end left">${escapeHtml(namaAreaTampil('indoor').toUpperCase())}</span><input class="person-area-slider" data-person-index="${index}" type="range" min="1" max="100" step="1" value="${chance}" ${peserta.length<2?'disabled title="Tambahkan minimal dua peserta agar peluang dapat diseimbangkan."':''} aria-label="Peluang ${escapeHtml(nama)} masuk ke ${escapeHtml(namaAreaTampil('outdoor'))}" oninput="previewAreaPeserta(${index},this.value)" onchange="terapkanAreaPeserta(${index},this.value)"><span class="person-area-end right">${escapeHtml(namaAreaTampil('outdoor').toUpperCase())}</span></div>`:'';
     row.classList.toggle('assignment-enabled',penempatanArea.enabled);row.dataset.area=chance>=50?'outdoor':'indoor';
-    row.innerHTML=`<div class="peserta-no">${index+1}</div><div class="peserta-name" title="${escapeHtml(nama)}">${escapeHtml(nama)}</div><div class="peserta-order-actions"><button class="peserta-action move" type="button" title="Geser ke atas" aria-label="Geser ${escapeHtml(nama)} ke atas" ${index===0?'disabled':''} onclick="geserPeserta(${index},-1)">↑</button><button class="peserta-action move" type="button" title="Geser ke bawah" aria-label="Geser ${escapeHtml(nama)} ke bawah" ${index===peserta.length-1?'disabled':''} onclick="geserPeserta(${index},1)">↓</button></div><button class="peserta-action edit" type="button" title="Edit nama" aria-label="Edit nama" onclick="ubahNamaPeserta(${index})">✎</button><button class="peserta-action delete" type="button" title="Hapus peserta" aria-label="Hapus peserta" onclick="hapusPeserta(${index})">×</button>${assignmentControl}`;
+    row.innerHTML=`<div class="peserta-no">${index+1}</div><div class="peserta-name-wrap"><div class="peserta-name" title="${escapeHtml(nama)}">${escapeHtml(nama)}</div>${penempatanArea.enabled?`<button type="button" class="person-equalize-btn" onclick="setPeluangPesertaSetara(${index})" title="Kembalikan peluang peserta ini ke 50%">↔ SETARAKAN 50%</button>`:''}</div><div class="peserta-order-actions"><button class="peserta-action move" type="button" title="Geser ke atas" aria-label="Geser ${escapeHtml(nama)} ke atas" ${index===0?'disabled':''} onclick="geserPeserta(${index},-1)">↑</button><button class="peserta-action move" type="button" title="Geser ke bawah" aria-label="Geser ${escapeHtml(nama)} ke bawah" ${index===peserta.length-1?'disabled':''} onclick="geserPeserta(${index},1)">↓</button></div><button class="peserta-action edit" type="button" title="Edit nama" aria-label="Edit nama" onclick="ubahNamaPeserta(${index})">✎</button><button class="peserta-action delete" type="button" title="Hapus peserta" aria-label="Hapus peserta" onclick="hapusPeserta(${index})">×</button>${assignmentControl}`;
     row.addEventListener('dragstart',e=>{if(e.target.closest('.person-area-slider')){e.preventDefault();return;}pesertaDragIndex=index;row.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',String(index));});
     row.addEventListener('dragend',()=>{pesertaDragIndex=null;document.querySelectorAll('.peserta-row').forEach(el=>el.classList.remove('dragging','drag-target'));});
     row.addEventListener('dragover',e=>{e.preventDefault();row.classList.add('drag-target');e.dataTransfer.dropEffect='move';});
@@ -3648,7 +3666,7 @@ async function animasiCatBlaster(hasil){
 
 
 /* ========================= UNO SHOWDOWN ========================= */
-let unoSpeed=1,unoLastResult=null,unoSkipVisual=false,unoHumanIndex=-1,unoGameMode='bot',unoLiveState=null,unoHumanResolve=null,unoPendingWildCard=null,unoForceAuto=false,unoDirectResultRequested=false;
+let unoSpeed=1,unoLastResult=null,unoSkipVisual=false,unoHumanIndex=-1,unoHumanIndices=[],unoGameMode='bot',unoLiveState=null,unoHumanResolve=null,unoPendingWildCard=null,unoForceAuto=false,unoDirectResultRequested=false;
 let unoSetupResolver=null;
 function setUnoSpeed(value){unoSpeed=[0.5,1,2,4,10,100].includes(Number(value))?Number(value):1;document.querySelectorAll('[data-uno-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.unoSpeed)===unoSpeed));}
 function unoPlayAutomatically(){
@@ -3683,7 +3701,7 @@ function unoBotMove(state,player,playable){
   return {message:`${player.name} tidak punya kartu yang cocok, mengambil 1 kartu${drawn?' ('+unoCardText(drawn)+')':''}.`,moveAhead:1};
 }
 function unoShuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function unoCreateDeck(){const colors=['red','yellow','green','blue'],deck=[];let id=0;for(const color of colors){deck.push({id:id++,color,value:'0',type:'number'});for(let n=1;n<=9;n++)for(let k=0;k<2;k++)deck.push({id:id++,color,value:String(n),type:'number'});for(const [value,type] of [['SKIP','skip'],['REV','reverse'],['+2','draw2']])for(let k=0;k<2;k++)deck.push({id:id++,color,value,type});}for(let k=0;k<4;k++){deck.push({id:id++,color:'wild',value:'WILD',type:'wild'});deck.push({id:id++,color:'wild',value:'+4',type:'draw4'});}return unoShuffle(deck);}
+function unoCreateDeck(playerCount=4){const colors=['red','yellow','green','blue'],deck=[];let id=0;for(const color of colors){deck.push({id:id++,color,value:'0',type:'number'});for(let n=1;n<=9;n++)for(let k=0;k<2;k++)deck.push({id:id++,color,value:String(n),type:'number'});for(const [value,type] of [['SKIP','skip'],['REV','reverse'],['+2','draw2']])for(let k=0;k<2;k++)deck.push({id:id++,color,value,type});}for(let k=0;k<4;k++){deck.push({id:id++,color:'wild',value:'WILD',type:'wild'});deck.push({id:id++,color:'wild',value:'+4',type:'draw4'});}const base=deck.map(c=>({...c})),minimum=Math.max(108,Math.ceil(Math.max(2,playerCount)*7+18));while(deck.length<minimum){base.forEach(c=>deck.push({...c,id:id++}));}return unoShuffle(deck);}
 function unoCardText(c){return c.type==='skip'?'SKIP':c.type==='reverse'?'REV':c.type==='draw2'?'+2':c.type==='draw4'?'+4':c.value;}
 function unoCardClass(c){return c.color==='wild'?'wild':c.color;}
 function unoRenderCard(c,small=false){const cls=unoCardClass(c),txt=unoCardText(c);return `<div class="${small?'uno-mini-card':'uno-playing-card'} ${cls} ${c.type!=='number'?'special':''}" title="${escapeHtml(c.color+' '+txt)}"><b>${escapeHtml(txt)}</b>${small?'':`<span>${c.color==='wild'?'WILD':c.color.toUpperCase()}</span>`}</div>`;}
@@ -3694,23 +3712,25 @@ function unoNextAlive(state,from,steps=1){let at=from;for(let s=0;s<steps;s++){l
 function unoAddLog(state,message){state.log.unshift(message);if(state.log.length>14)state.log.length=14;}
 function unoSnapshot(state,message){return {current:state.current,direction:state.direction,turns:state.turns,color:state.currentColor,top:state.discard[state.discard.length-1],hands:state.players.map(p=>[...p.hand]),finished:state.players.map(p=>p.finished),message,deck:state.deck.length,log:[...state.log]};}
 function unoIsPlayableForCurrent(card,state,player){return unoPlayable(card,state.discard[state.discard.length-1],state.currentColor,player.hand.filter(c=>c.id!==card.id));}
-function unoRenderFrame(frame,players,humanIndex=unoHumanIndex){
+function unoRenderFrame(frame,players,humanIndexes=unoHumanIndices){
   const root=document.getElementById('unoPlayers');if(!root)return;
+  const humanSet=new Set(Array.isArray(humanIndexes)?humanIndexes:(Number.isInteger(humanIndexes)&&humanIndexes>=0?[humanIndexes]:[]));
+  const hasHumanPlayers=humanSet.size>0;
   root.innerHTML=players.map((p,i)=>{
-    const cards=frame.hands[i]||[],isHuman=i===humanIndex,isMyTurn=isHuman&&frame.current===i;
+    const cards=frame.hands[i]||[],isHuman=humanSet.has(i),isMyTurn=isHuman&&frame.current===i;
     let cardMarkup='';
-    if(isHuman){
+    if(isMyTurn){
       cardMarkup=cards.map(c=>{
-        const playable=isMyTurn&&unoLiveState&&unoIsPlayableForCurrent(c,unoLiveState,unoLiveState.players[i]);
+        const playable=unoLiveState&&unoIsPlayableForCurrent(c,unoLiveState,unoLiveState.players[i]);
         const item=unoRenderCard(c,true);
-        return isMyTurn?`<button type="button" class="uno-hand-card ${playable?'playable':''}" ${playable?'onclick="unoPlayHumanCard('+Number(c.id)+')"':'disabled'} aria-label="${playable?'Mainkan':'Tidak bisa dimainkan'} ${escapeHtml(unoCardText(c))}">${item}</button>`:item;
+        return `<button type="button" class="uno-hand-card ${playable?'playable':''}" ${playable?'onclick="unoPlayHumanCard('+Number(c.id)+')"':'disabled'} aria-label="${playable?'Mainkan':'Tidak bisa dimainkan'} ${escapeHtml(unoCardText(c))}">${item}</button>`;
       }).join('');
-    }else if(humanIndex>=0){
-      cardMarkup=cards.map(()=>'<div class="uno-mini-card back" aria-label="Kartu lawan tertutup"><b>UNO</b></div>').join('');
+    }else if(hasHumanPlayers){
+      cardMarkup=cards.map(()=>'<div class="uno-mini-card back" aria-label="Kartu pemain lain tertutup"><b>UNO</b></div>').join('');
     }else{
       cardMarkup=cards.map(c=>unoRenderCard(c,true)).join('');
     }
-    return `<section class="uno-player ${frame.current===i?'active':''} ${frame.finished[i]?'finished':''} ${isHuman?'uno-human-player':''}"><div class="uno-player-head"><span class="uno-player-name">${escapeHtml(p.name)}${isHuman?' • KAMU':''}</span><span class="uno-player-info">${frame.finished[i]?'SELESAI':cards.length+' KARTU'}</span></div><div class="uno-hand">${cards.length?cardMarkup:'<span class="uno-empty-hand">UNO! KARTU HABIS</span>'}</div></section>`;
+    return `<section class="uno-player ${frame.current===i?'active':''} ${frame.finished[i]?'finished':''} ${isHuman?'uno-human-player':''}"><div class="uno-player-head"><span class="uno-player-name">${escapeHtml(p.name)}${isHuman?' • PEMAIN':''}</span><span class="uno-player-info">${frame.finished[i]?'SELESAI':cards.length+' KARTU'}</span></div><div class="uno-hand">${cards.length?cardMarkup:'<span class="uno-empty-hand">UNO! KARTU HABIS</span>'}</div></section>`;
   }).join('');
   const top=document.getElementById('unoTopCard');if(top&&frame.top)top.outerHTML=unoRenderCard(frame.top,false).replace('<div class="uno-playing-card','<div id="unoTopCard" class="uno-playing-card');
   const count=document.getElementById('unoDeckCount');if(count)count.textContent=frame.deck+' KARTU';
@@ -3723,40 +3743,46 @@ function unoRenderFrame(frame,players,humanIndex=unoHumanIndex){
 function unoUpdateClock(start){const clock=document.getElementById('unoClock');if(!clock)return;const sec=Math.floor((Date.now()-start)/1000);clock.textContent=String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
 function unoStatusText(text){const el=document.getElementById('unoGameStatus');if(el)el.textContent=text;}
 function unoHide(){document.getElementById('unoOverlay')?.classList.remove('aktif');document.getElementById('unoHumanControls')?.setAttribute('hidden','');}
-function unoOpenSetup(){return new Promise(resolve=>{unoSetupResolver=resolve;const overlay=document.getElementById('unoSetupOverlay');const self=document.getElementById('unoSelfSetup');const manual=document.getElementById('unoManualSelectWrap');if(self)self.hidden=true;if(manual)manual.hidden=true;const select=document.getElementById('unoHumanSelect');if(select)select.innerHTML=peserta.map((name,i)=>`<option value="${i}">${escapeHtml(name)}</option>`).join('');overlay?.classList.add('aktif');overlay?.setAttribute('aria-hidden','false');});}
+function unoOpenSetup(){return new Promise(resolve=>{unoSetupResolver=resolve;const overlay=document.getElementById('unoSetupOverlay'),self=document.getElementById('unoSelfSetup'),manual=document.getElementById('unoManualSelectWrap'),multi=document.getElementById('unoMultiplayerWrap'),select=document.getElementById('unoHumanSelect');if(self)self.hidden=true;if(manual)manual.hidden=true;if(multi)multi.hidden=true;const options=peserta.map((name,i)=>`<option value="${i}">${escapeHtml(name)}</option>`).join('');if(select)select.innerHTML=options;overlay?.classList.add('aktif');overlay?.setAttribute('aria-hidden','false');});}
 function tutupSetupUNO(){const overlay=document.getElementById('unoSetupOverlay');overlay?.classList.remove('aktif');overlay?.setAttribute('aria-hidden','true');}
 function selesaiSetupUNO(choice){tutupSetupUNO();if(unoSetupResolver){const done=unoSetupResolver;unoSetupResolver=null;done(choice);}}
-function pilihModeUNOBot(){selesaiSetupUNO({mode:'bot',humanIndex:-1});}
-function bukaPilihanPemainUNO(){const el=document.getElementById('unoSelfSetup');if(el)el.hidden=false;document.getElementById('unoManualSelectWrap').hidden=true;}
-function tampilkanSelectPemainUNO(){document.getElementById('unoManualSelectWrap').hidden=false;}
-function mulaiMainSendiriUNO(method){let humanIndex=-1;if(method==='auto'){humanIndex=Math.floor(Math.random()*peserta.length);}else{humanIndex=Number(document.getElementById('unoHumanSelect')?.value);if(!Number.isInteger(humanIndex)||humanIndex<0||humanIndex>=peserta.length)return;}selesaiSetupUNO({mode:'manual',humanIndex});}
+function pilihModeUNOBot(){selesaiSetupUNO({mode:'bot',humanIndices:[]});}
+function bukaPilihanPemainUNO(){const self=document.getElementById('unoSelfSetup'),manual=document.getElementById('unoManualSelectWrap'),multi=document.getElementById('unoMultiplayerWrap'),title=document.getElementById('unoSelfSetupTitle');if(self)self.hidden=false;if(manual)manual.hidden=false;if(multi)multi.hidden=true;if(title)title.textContent='PILIH PEMAIN MANUSIA';}
+function mulaiMainSendiriUNO(){const first=Number(document.getElementById('unoHumanSelect')?.value);if(!Number.isInteger(first)||first<0||first>=peserta.length)return;selesaiSetupUNO({mode:'manual',humanIndices:[first]});}
+function bukaMultiplayerUNO(){const self=document.getElementById('unoSelfSetup'),manual=document.getElementById('unoManualSelectWrap'),multi=document.getElementById('unoMultiplayerWrap'),title=document.getElementById('unoSelfSetupTitle'),list=document.getElementById('unoMultiplayerPlayers');if(self)self.hidden=false;if(manual)manual.hidden=true;if(multi)multi.hidden=false;if(title)title.textContent='PENGATURAN MULTIPLAYER';if(list){list.innerHTML=peserta.map((name,i)=>`<label class="uno-multiplayer-row"><strong>${escapeHtml(name)}</strong><select data-uno-player-index="${i}" aria-label="Kontrol pemain ${escapeHtml(name)}"><option value="bot">BOT</option><option value="human">MANUSIA</option></select></label>`).join('');}}
+function mulaiMultiplayerUNO(){const selects=[...document.querySelectorAll('#unoMultiplayerPlayers select[data-uno-player-index]')],indices=selects.filter(el=>el.value==='human').map(el=>Number(el.dataset.unoPlayerIndex));if(!indices.length){tampilkanDialog('PILIH PEMAIN MANUSIA','Pilih setidaknya satu nama sebagai MANUSIA.','warning');return;}selesaiSetupUNO({mode:'manual',humanIndices:indices});}
 function batalSetupUNO(){selesaiSetupUNO({cancelled:true});}
-function unoShowHumanControls(state,playable){const panel=document.getElementById('unoHumanControls');const title=document.getElementById('unoHumanTitle');const msg=document.getElementById('unoHumanMessage');const draw=document.getElementById('unoDrawButton');const color=document.getElementById('unoColorPicker');if(!panel)return;panel.hidden=false;if(title)title.textContent='GILIRAN '+state.players[unoHumanIndex].name.toUpperCase();if(msg)msg.textContent=playable.length?'Pilih salah satu kartu yang menyala untuk dimainkan.':'Tidak ada kartu yang cocok. Ambil satu kartu untuk melanjutkan.';if(draw)draw.disabled=playable.length>0;if(color)color.hidden=true;}
-function unoWaitForHuman(state,playable){unoShowHumanControls(state,playable);unoRenderFrame(unoSnapshot(state,'GILIRAN KAMU • PILIH KARTU'),state.players);return new Promise(resolve=>{unoHumanResolve=resolve;});}
-function unoPlayHumanCard(cardId){if(!unoLiveState||!unoHumanResolve)return;const player=unoLiveState.players[unoHumanIndex],card=player?.hand.find(c=>c.id===cardId);if(!card||!unoIsPlayableForCurrent(card,unoLiveState,player))return;if(card.color==='wild'){unoPendingWildCard=cardId;const picker=document.getElementById('unoColorPicker');if(picker)picker.hidden=false;const msg=document.getElementById('unoHumanMessage');if(msg)msg.textContent='Pilih warna untuk kartu Wild.';return;}const done=unoHumanResolve;unoHumanResolve=null;done({type:'play',cardId,color:card.color});}
+function unoShowHumanControls(state,playable){const panel=document.getElementById('unoHumanControls'),title=document.getElementById('unoHumanTitle'),msg=document.getElementById('unoHumanMessage'),draw=document.getElementById('unoDrawButton'),color=document.getElementById('unoColorPicker'),player=state.players[state.current];if(!panel||!player)return;unoHumanIndex=state.current;panel.hidden=false;if(title)title.textContent='GILIRAN '+player.name.toUpperCase();if(msg)msg.textContent=playable.length?'Pilih salah satu kartu yang menyala untuk dimainkan.':'Tidak ada kartu yang cocok. Ambil satu kartu untuk melanjutkan.';if(draw)draw.disabled=playable.length>0;if(color)color.hidden=true;}
+function unoWaitForHuman(state,playable){unoHumanIndex=state.current;unoShowHumanControls(state,playable);unoStatusText('GILIRAN PEMAIN: '+state.players[state.current].name);unoRenderFrame(unoSnapshot(state,'GILIRAN '+state.players[state.current].name.toUpperCase()+' • PILIH KARTU'),state.players,unoHumanIndices);return new Promise(resolve=>{unoHumanResolve=resolve;});}
+function unoPlayHumanCard(cardId){if(!unoLiveState||!unoHumanResolve)return;const player=unoLiveState.players[unoLiveState.current],card=player?.hand.find(c=>c.id===cardId);if(!card||!unoIsPlayableForCurrent(card,unoLiveState,player))return;if(card.color==='wild'){unoPendingWildCard=cardId;const picker=document.getElementById('unoColorPicker');if(picker)picker.hidden=false;const msg=document.getElementById('unoHumanMessage');if(msg)msg.textContent='Pilih warna untuk kartu Wild.';return;}const done=unoHumanResolve;unoHumanResolve=null;done({type:'play',cardId,color:card.color});}
 function unoChooseWildColor(color){if(!unoHumanResolve||!unoPendingWildCard)return;const done=unoHumanResolve,cardId=unoPendingWildCard;unoHumanResolve=null;unoPendingWildCard=null;done({type:'play',cardId,color});}
 function unoHumanDraw(){if(!unoHumanResolve)return;const done=unoHumanResolve;unoHumanResolve=null;done({type:'draw'});}
 function unoHideHumanControls(){const panel=document.getElementById('unoHumanControls');if(panel)panel.hidden=true;const picker=document.getElementById('unoColorPicker');if(picker)picker.hidden=true;unoPendingWildCard=null;}
-function unoApplyCard(state,player,card,colorChoice){let moveAhead=1;state.discard.push(card);if(card.color!=='wild')state.currentColor=card.color;else state.currentColor=colorChoice||['red','yellow','green','blue'][Math.floor(Math.random()*4)];let message=`${player.name} memainkan ${unoCardText(card)} ${card.color==='wild'?'→ '+state.currentColor.toUpperCase():card.color.toUpperCase()}`;if(card.type==='skip')moveAhead=2;else if(card.type==='reverse'){state.direction*=-1;moveAhead=1;}else if(card.type==='draw2'||card.type==='draw4'){const next=unoNextAlive(state,state.current,1),victim=state.players[next],n=card.type==='draw2'?2:4;for(let k=0;k<n;k++){if(!state.deck.length){const discardTop=state.discard.pop();state.deck=unoShuffle(state.discard);state.discard=[discardTop];}if(state.deck.length)victim.hand.push(state.deck.pop());}message+=` • ${victim.name} AMBIL ${n} KARTU`;moveAhead=2;}if(player.hand.length===1)message+=' • UNO!';if(player.hand.length===0){player.finished=true;state.ranking.push(player.id);message+=` • ${state.ranking.length===1?'JUARA 1':'JUARA 2'}!`;}return {message,moveAhead};}
+function unoApplyCard(state,player,card,colorChoice){let moveAhead=1;state.discard.push(card);if(card.color!=='wild')state.currentColor=card.color;else state.currentColor=colorChoice||['red','yellow','green','blue'][Math.floor(Math.random()*4)];let message=`${player.name} memainkan ${unoCardText(card)} ${card.color==='wild'?'→ '+state.currentColor.toUpperCase():card.color.toUpperCase()}`;if(card.type==='skip')moveAhead=2;else if(card.type==='reverse'){state.direction*=-1;moveAhead=state.players.filter(p=>!p.finished).length===2?2:1;}else if(card.type==='draw2'||card.type==='draw4'){const next=unoNextAlive(state,state.current,1),victim=state.players[next],n=card.type==='draw2'?2:4;for(let k=0;k<n;k++){if(!state.deck.length){const discardTop=state.discard.pop();state.deck=unoShuffle(state.discard);state.discard=[discardTop];}if(state.deck.length)victim.hand.push(state.deck.pop());}message+=` • ${victim.name} AMBIL ${n} KARTU`;moveAhead=2;}if(player.hand.length===1)message+=' • UNO!';if(player.hand.length===0){player.finished=true;state.ranking.push(player.id);message+=` • ${state.ranking.length===1?'JUARA 1':'JUARA 2'}!`;}return {message,moveAhead};}
 async function animasiUNO(_schedule,{replay=false}={}){
   if(replay&&hasilUNOTersimpan?.frames?.length)return await replayUNO(hasilUNOTersimpan);
-  if(peserta.length<4){tampilkanDialog('PESERTA KURANG','UNO membutuhkan minimal 4 peserta agar dua pemenang dan dua peserta kalah dapat ditentukan. Tambahkan peserta pada menu Pengaturan → Peserta.','warning');return null;}
+  if(!peserta.length){tampilkanDialog('BELUM ADA PESERTA','Tambahkan minimal satu nama pada menu Pengaturan → Peserta. Satu peserta saja sudah bisa bermain melawan BOT.','warning');return null;}
   const config=await unoOpenSetup();if(!config||config.cancelled)return {cancelled:true};
-  unoGameMode=config.mode;unoHumanIndex=config.mode==='manual'?config.humanIndex:-1;unoSkipVisual=false;unoPendingWildCard=null;unoForceAuto=false;unoDirectResultRequested=false;setUnoSpeed(1);
+  unoGameMode=config.mode;unoHumanIndices=config.mode==='manual'?[...(config.humanIndices||[])]:[];unoHumanIndex=unoHumanIndices[0]??-1;unoSkipVisual=false;unoPendingWildCard=null;unoForceAuto=false;unoDirectResultRequested=false;setUnoSpeed(1);
   const skipButton=document.getElementById('unoSkipButton');if(skipButton){skipButton.classList.remove('skip-active');skipButton.textContent='SKIP ANIMASI';}
   const autoButton=document.getElementById('unoAutoButton');if(autoButton){autoButton.classList.remove('active');autoButton.textContent='▶ MAIN OTOMATIS • 100×';}
-  const names=[...peserta],state={deck:unoCreateDeck(),discard:[],players:names.map((name,id)=>({id,name,hand:[],finished:false})),current:0,direction:1,currentColor:null,turns:0,ranking:[],log:[],frames:[],started:Date.now()};unoLiveState=state;
-  document.getElementById('unoOverlay')?.classList.add('aktif');unoStatusText(config.mode==='manual'?'MODE MAIN SENDIRI • GAME BERLANGSUNG':'MODE SEMUA BOT • GAME BERLANGSUNG');
+  const names=[...peserta],gamePlayers=names.map((name,id)=>({id,name,hand:[],finished:false,isParticipant:true}));let botNumber=1;const minimumSeats=4;
+  while(gamePlayers.length<minimumSeats){gamePlayers.push({id:gamePlayers.length,name:`BOT ${botNumber++}`,hand:[],finished:false,isParticipant:false});}
+  const state={deck:unoCreateDeck(gamePlayers.length),discard:[],players:gamePlayers,current:0,direction:1,currentColor:null,turns:0,ranking:[],log:[],frames:[],started:Date.now()};unoLiveState=state;
+  document.getElementById('unoOverlay')?.classList.add('aktif');
+  const modeLabel=config.mode==='manual'?`MULTIPLAYER • ${unoHumanIndices.length} MANUSIA + BOT`:'MODE SEMUA BOT';
+  unoStatusText(modeLabel+' • GAME BERLANGSUNG');
   for(let round=0;round<7;round++)for(let i=0;i<state.players.length;i++)state.players[i].hand.push(state.deck.pop());
   let first=state.deck.pop();while(first?.color==='wild'){state.deck.unshift(first);first=state.deck.pop();}state.discard.push(first);state.currentColor=first.color;
-  unoAddLog(state,'Kartu dibagikan. '+(config.mode==='manual'?`Kamu bermain sebagai ${names[unoHumanIndex]}. Kartu lawan disembunyikan.`:'Semua bot siap bermain.'));
-  unoRenderFrame(unoSnapshot(state,'KARTU DIBAGIKAN • PERMAINAN DIMULAI'),state.players);await unoWait(650);
+  const humanNames=unoHumanIndices.map(i=>names[i]).filter(Boolean);
+  unoAddLog(state,'Kartu dibagikan. '+(config.mode==='manual'?`Pemain manusia: ${humanNames.join(' dan ')}. Kartu pemain lain disembunyikan.`:'Semua peserta dikendalikan BOT.'));
+  unoRenderFrame(unoSnapshot(state,'KARTU DIBAGIKAN • PERMAINAN DIMULAI'),state.players,unoHumanIndices);await unoWait(650);
   const deadline=Date.now()+600000,cap=2400;
   while(state.ranking.length<2&&Date.now()<deadline&&state.turns<cap&&!unoDirectResultRequested){
     const player=state.players[state.current];if(player.finished){state.current=unoNextAlive(state,state.current);continue;}
     const top=state.discard[state.discard.length-1],playable=[];player.hand.forEach((card,index)=>{if(unoPlayable(card,top,state.currentColor,player.hand.filter((_,n)=>n!==index)))playable.push({card,index});});
     let message='',moveAhead=1;
-    if(config.mode==='manual'&&state.current===unoHumanIndex&&!unoForceAuto){
+    if(config.mode==='manual'&&unoHumanIndices.includes(state.current)&&!unoForceAuto){
       const action=await unoWaitForHuman(state,playable);unoHideHumanControls();
       if(action?.type==='direct')break;
       state.turns++;
@@ -3771,19 +3797,24 @@ async function animasiUNO(_schedule,{replay=false}={}){
       state.turns++;
       const result=unoBotMove(state,player,playable);message=result.message;moveAhead=result.moveAhead;
     }
-    unoAddLog(state,message);state.current=unoNextAlive(state,state.current,moveAhead);const frame=unoSnapshot(state,message);state.frames.push(frame);unoRenderFrame(frame,state.players);unoUpdateClock(state.started);await unoWait(message.includes('memainkan')?250:190);
+    unoAddLog(state,message);state.current=unoNextAlive(state,state.current,moveAhead);const frame=unoSnapshot(state,message);state.frames.push(frame);unoRenderFrame(frame,state.players,unoHumanIndices);unoUpdateClock(state.started);await unoWait(message.includes('memainkan')?250:190);
   }
   unoHideHumanControls();const directResult=unoDirectResultRequested;const timeExpired=!directResult&&(Date.now()>=deadline||state.turns>=cap);const notFinished=state.players.filter(p=>!p.finished).sort(directResult?(a,b)=>a.hand.length-b.hand.length||unoScore(a.hand)-unoScore(b.hand):(a,b)=>unoScore(a.hand)-unoScore(b.hand)||a.hand.length-b.hand.length);for(const p of notFinished)state.ranking.push(p.id);
-  const fullRanking=state.ranking.map(id=>state.players[id]),winners=fullRanking.slice(0,2).map(p=>p.name),losers=fullRanking.slice(2).map(p=>p.name);const schedule={senin:winners,selasa:losers};const elapsed=Math.floor((Date.now()-state.started)/1000);
-  const summary={selesai:true,mode:'UNO',gameMode:config.mode,humanIndex:unoHumanIndex,humanName:unoHumanIndex>=0?names[unoHumanIndex]:null,winners,losers,ranking:fullRanking.map(p=>({name:p.name,remaining:p.hand.length,points:unoScore(p.hand)})),turns:state.turns,elapsed,expired:timeExpired,finalMethod:directResult?'direct-count':'completed-game',createdAt:new Date().toISOString(),schedule,frames:state.frames,players:names};
+  const fullRanking=state.ranking.map(id=>state.players[id]),participantRanking=fullRanking.filter(p=>p.isParticipant);
+  let winners=[],losers=[];
+  if(participantRanking.length===1){const person=participantRanking[0],overallPosition=fullRanking.indexOf(person);if(overallPosition<2)winners=[person.name];else losers=[person.name];}
+  else if(participantRanking.length===2){winners=participantRanking.slice(0,1).map(p=>p.name);losers=participantRanking.slice(1).map(p=>p.name);}
+  else{winners=participantRanking.slice(0,2).map(p=>p.name);losers=participantRanking.slice(2).map(p=>p.name);}
+  const schedule={senin:winners,selasa:losers},elapsed=Math.floor((Date.now()-state.started)/1000);
+  const summary={selesai:true,mode:'UNO',gameMode:config.mode,humanIndex:unoHumanIndex,humanIndices:[...unoHumanIndices],humanName:humanNames.join(' & ')||null,winners,losers,ranking:fullRanking.map(p=>({name:p.name,remaining:p.hand.length,points:unoScore(p.hand),bot:!p.isParticipant})),turns:state.turns,elapsed,expired:timeExpired,finalMethod:directResult?'direct-count':'completed-game',createdAt:new Date().toISOString(),schedule,frames:state.frames,players:state.players.map(p=>p.name),participantNames:names};
   const finalMessage=directResult?'HASIL LANGSUNG • DIURUTKAN BERDASARKAN JUMLAH KARTU TERSISA':'PERTANDINGAN SELESAI • URUTAN FINAL DIKUNCI';
   state.frames.push(unoSnapshot(state,finalMessage));summary.frames=state.frames;unoLastResult=summary;simpanHasilUNOTersimpan(summary);
   jadwalAktif=salinJadwal(schedule);hasilFinalTersimpan=salinJadwal(schedule);hasilAnimasiAktif='uno';animasiFinalTersimpan='uno';kombinasiAktif=-1;updateJadwal();
-  const finalFrame=unoSnapshot(state,finalMessage);unoRenderFrame(finalFrame,state.players);unoUpdateClock(state.started);unoAddLog(state,directResult?'Hasil ditetapkan dari jumlah kartu tersisa.':'Dua posisi teratas dan peserta yang kalah telah ditetapkan.');const gameStatus=document.getElementById('unoGameStatus');if(gameStatus)gameStatus.textContent=directResult?'HASIL LANGSUNG DIKUNCI':'GAME SELESAI';const progress=document.getElementById('unoProgressBar');if(progress)progress.style.width='100%';const clock=document.getElementById('unoClock');if(clock)clock.textContent=String(Math.floor(elapsed/60)).padStart(2,'0')+':'+String(elapsed%60).padStart(2,'0');await unoWait(1200);unoHide();unoLiveState=null;bukaHasilUNOTersimpan();return {senin:winners,selasa:losers,meta:summary};
+  const finalFrame=unoSnapshot(state,finalMessage);unoRenderFrame(finalFrame,state.players,unoHumanIndices);unoUpdateClock(state.started);unoAddLog(state,directResult?'Hasil ditetapkan dari jumlah kartu tersisa.':'Urutan pemain telah ditetapkan.');const gameStatus=document.getElementById('unoGameStatus');if(gameStatus)gameStatus.textContent=directResult?'HASIL LANGSUNG DIKUNCI':'GAME SELESAI';const progress=document.getElementById('unoProgressBar');if(progress)progress.style.width='100%';const clock=document.getElementById('unoClock');if(clock)clock.textContent=String(Math.floor(elapsed/60)).padStart(2,'0')+':'+String(elapsed%60).padStart(2,'0');await unoWait(1200);unoHide();unoLiveState=null;bukaHasilUNOTersimpan();return {senin:winners,selasa:losers,meta:summary};
 }
 function unoScore(hand){return hand.reduce((sum,c)=>sum+(c.type==='number'?Number(c.value):c.type==='wild'||c.type==='draw4'?50:c.type==='draw2'?20:20),0);}
-async function replayUNO(result){const players=(result.players||[]).map(name=>({name}));if(!players.length||!result.frames?.length)return null;unoHumanIndex=Number.isInteger(result.humanIndex)?result.humanIndex:-1;unoGameMode=result.gameMode||'bot';unoSkipVisual=false;setUnoSpeed(1);document.getElementById('unoOverlay')?.classList.add('aktif');const start=Date.now();for(const frame of result.frames){unoRenderFrame(frame,players,unoHumanIndex);unoUpdateClock(start);await unoWait(140);}unoHide();return {senin:[...result.winners],selasa:[...result.losers],meta:result};}
-function renderHasilUNO(){const result=hasilUNOTersimpan;if(!result)return;const indoor=document.getElementById('unoIndoorLabel'),outdoor=document.getElementById('unoOutdoorLabel');if(indoor)indoor.textContent=namaAreaTampil('indoor').toUpperCase();if(outdoor)outdoor.textContent=namaAreaTampil('outdoor').toUpperCase();const win=document.getElementById('unoWinnerNames'),lose=document.getElementById('unoLoserNames'),rank=document.getElementById('unoFullRanking');if(win)win.innerHTML=(result.winners||[]).map((n,i)=>`<div class="uno-result-name"><b>${i+1}</b>${escapeHtml(n)}</div>`).join('')||'<div class="uno-result-name">—</div>';if(lose)lose.innerHTML=(result.losers||[]).map((n,i)=>`<div class="uno-result-name"><b>${i+1}</b>${escapeHtml(n)}</div>`).join('')||'<div class="uno-result-name">—</div>';if(rank)rank.innerHTML=(result.ranking||[]).map((x,i)=>`<div class="uno-rank-row"><strong>${i+1}.</strong><span>${escapeHtml(x.name)} <small>• ${x.remaining} kartu tersisa</small></span></div>`).join('');const meta=document.getElementById('unoResultMeta');if(meta){const date=result.createdAt?new Date(result.createdAt).toLocaleString('id-ID'):'—';meta.textContent=`${result.gameMode==='manual'?'Main sendiri: '+(result.humanName||'peserta'):'Semua BOT'} • ${result.finalMethod==='direct-count'?'HASIL LANGSUNG: JUMLAH KARTU TERSISA':'PERTANDINGAN SELESAI'} • ${result.turns||0} giliran • ${Math.floor((result.elapsed||0)/60)}m ${(result.elapsed||0)%60}s • ${date}${result.expired?' • batas waktu tercapai':''}`;}}
+async function replayUNO(result){const players=(result.players||[]).map(name=>({name}));if(!players.length||!result.frames?.length)return null;unoHumanIndices=Array.isArray(result.humanIndices)?[...result.humanIndices]:(Number.isInteger(result.humanIndex)&&result.humanIndex>=0?[result.humanIndex]:[]);unoHumanIndex=unoHumanIndices[0]??-1;unoGameMode=result.gameMode||'bot';unoSkipVisual=false;setUnoSpeed(1);document.getElementById('unoOverlay')?.classList.add('aktif');const start=Date.now();for(const frame of result.frames){unoRenderFrame(frame,players,unoHumanIndices);unoUpdateClock(start);await unoWait(140);}unoHide();return {senin:[...result.winners],selasa:[...result.losers],meta:result};}
+function renderHasilUNO(){const result=hasilUNOTersimpan;if(!result)return;const indoor=document.getElementById('unoIndoorLabel'),outdoor=document.getElementById('unoOutdoorLabel');if(indoor)indoor.textContent=namaAreaTampil('indoor').toUpperCase();if(outdoor)outdoor.textContent=namaAreaTampil('outdoor').toUpperCase();const win=document.getElementById('unoWinnerNames'),lose=document.getElementById('unoLoserNames'),rank=document.getElementById('unoFullRanking');if(win)win.innerHTML=(result.winners||[]).map((n,i)=>`<div class="uno-result-name"><b>${i+1}</b>${escapeHtml(n)}</div>`).join('')||'<div class="uno-result-name">—</div>';if(lose)lose.innerHTML=(result.losers||[]).map((n,i)=>`<div class="uno-result-name"><b>${i+1}</b>${escapeHtml(n)}</div>`).join('')||'<div class="uno-result-name">—</div>';if(rank)rank.innerHTML=(result.ranking||[]).map((x,i)=>`<div class="uno-rank-row"><strong>${i+1}.</strong><span>${escapeHtml(x.name)} <small>• ${x.bot?'BOT • ':''}${x.remaining} kartu tersisa</small></span></div>`).join('');const meta=document.getElementById('unoResultMeta');if(meta){const date=result.createdAt?new Date(result.createdAt).toLocaleString('id-ID'):'—';const mode=result.gameMode==='manual'?(Array.isArray(result.humanIndices)&&result.humanIndices.length>1?'2 pemain manusia: ':'Pemain manusia: ')+(result.humanName||'peserta'):'Semua BOT';meta.textContent=`${mode} • ${result.finalMethod==='direct-count'?'HASIL LANGSUNG: JUMLAH KARTU TERSISA':'PERTANDINGAN SELESAI'} • ${result.turns||0} giliran • ${Math.floor((result.elapsed||0)/60)}m ${(result.elapsed||0)%60}s • ${date}${result.expired?' • batas waktu tercapai':''}`;}}
 function tutupHasilUNO(){document.getElementById('unoResultOverlay')?.classList.remove('aktif');}
 
 async function jalankanAnimasiUntukHasil(hasil,animasi,{replay=false}={}){
